@@ -1,0 +1,110 @@
+<?php
+//$Id$
+/*
+Header
+*/
+/*
+//---------------------------------------------------------------------
+//
+
+//Auteur : sebastien boisvert
+//email : sebhtml@yahoo.ca
+//site web : http://membres.lycos.fr/zs8
+//Projet :inicrond
+//
+//---------------------------------------------------------------------
+Copyright (C) 2004  Sebastien Boisvert
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.*/
+
+//exit();//un outil pour remplacer des string.
+/*
+$dirs = array(
+"includes/modules",
+ "includes/fonctions",
+ "includes/forms",
+ "includes/pageLayout");
+
+*/
+//echo $dossier ;
+
+function modify_stuff($dir)
+{
+
+//global $count;
+/*
+if($count == 2)
+{
+exit();
+}
+*/
+
+echo "opendir $dir"."\n";
+$fp = openDir($dir);
+	echo "readdir $dir"."\n";
+	while($fichier = readDir($fp))
+	{
+	
+		if(is_file($dir."/".$fichier) AND
+		!is_dir($dir."/".$fichier) AND
+		$fichier != "grep_php" AND
+		$fichier != ".." AND
+		$fichier != "." AND
+		$fichier != ".directory" AND
+		fileSize($dir."/".$fichier) != 0
+		  )
+		{
+		echo "opening in r ".$dir."/".$fichier."-"."\n";
+		$fp2 = fopen($dir."/".$fichier, "r");
+	echo "fread ".$dir."/".$fichier."\n";
+		$contenu = fread($fp2, fileSize($dir."/".$fichier));
+		echo "closing ".$dir."/".$fichier."\n";
+		fclose($fp2);
+		
+		////////////////////////////
+	
+		$contenu = preg_replace("/\\\$Header.+\\\$/", "\$Id\$", $contenu);
+	
+		 /////////////////////////////
+		 
+		 
+				
+		echo "opening in w+ ".$dir."/".$fichier."\n";
+		$fp2 = fopen($dir."/".$fichier, "w+");
+		
+		echo "writing ".$dir."/".$fichier."\n";
+		fwrite($fp2, $contenu);
+	echo "closing ".$dir."/".$fichier."\n";
+		fclose($fp2);
+		}
+		elseif(is_dir($dir."/".$fichier ) AND
+		$fichier != ".." AND 
+		$fichier != "." 
+		)
+		{
+		modify_stuff($dir."/".$fichier);//appele récursif...
+		//echo $dir."/".$fichier."\n";
+		}
+	}
+	echo "closing ".$dir."\n";
+closeDir($fp);	
+
+}
+
+
+//$count = 0;
+
+modify_stuff(".")
+?>

@@ -1,0 +1,14 @@
+//Sommaire
+
+1. Prérequis
+2. Installation
+
+
+1. Prérequis
+
+php 4 (apxs, MySQL)
+MySQL
+
+2. Installation
+
+Exécuter le fichier install.php pour installer le site.
