@@ -1,3 +1,0 @@
-# $Id$
-
-DROP TABLE IF EXISTS wiki ;
