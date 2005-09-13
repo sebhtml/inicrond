@@ -1,55 +1,126 @@
 <?php
 //$Id$
-/*
-Header
-*/
+
 /*
 //---------------------------------------------------------------------
 //
 
 //Auteur : sebastien boisvert
-//email : sebhtml@yahoo.ca
-//site web : http://membres.lycos.fr/zs8
-//Projet :inicrond
+//email : admin@oloko.cjb.net
+//site web : http://oloko.cjb.net
+//Projet :new_sebhtml
 //
 //---------------------------------------------------------------------
-Copyright (C) 2004  Sebastien Boisvert
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.*/
-
-//exit();//un outil pour remplacer des string.
-/*
-$dirs = array(
-"includes/modules",
- "includes/fonctions",
- "includes/forms",
- "includes/pageLayout");
-
 */
-//echo $dossier ;
 
-function modify_stuff($dir)
-{
 
-//global $count;
+$words_to_replace = array(
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+
+);
+
 /*
-if($count == 2)
+define('__INICROND_INCLUDED__', TRUE);
+	
+//include all lang files.
+
+include 'src/modules/admin/includes/languages/en-ca/lang.php';
+include 'src/modules/blue_master_clone/includes/languages/en-ca/lang.php';
+include 'src/modules/calendar/includes/languages/en-ca/lang.php';
+include 'src/modules/course_media/includes/languages/en-ca/lang.php';
+include 'src/modules/courses/includes/languages/en-ca/lang.php';
+include 'src/modules/dl_acts_4_courses/includes/languages/en-ca/lang.php';
+include 'src/modules/files_4_courses/includes/languages/en-ca/lang.php';
+include 'src/modules/groups/includes/languages/en-ca/lang.php';
+include 'src/modules/inicrond_x/includes/languages/en-ca/lang.php';
+include 'src/modules/lang_dev/includes/languages/en-ca/lang.php';
+include 'src/modules/marks/includes/languages/en-ca/lang.php';
+include 'src/modules/members/includes/languages/en-ca/lang.php';
+include 'src/modules/mod_forum/includes/languages/en-ca/lang.php';
+include 'src/modules/seSSi/includes/languages/en-ca/lang.php';
+include 'src/modules/tests-php-mysql/includes/languages/en-ca/lang.php';
+include 'src/modules/tests-results/includes/languages/en-ca/lang.php';
+include 'src/modules/user/includes/languages/en-ca/lang.php';
+include 'src/includes/languages/en-ca/lang.php';
+
+foreach($_LANG AS $key => $value)
 {
-exit();
+
+$words_to_replace []= $key;
+
+
+}
+
+//include all options.
+include 'src/includes/etc/ro/db_config_inc.php';
+include 'src/includes/etc/compiled/tables.config.php';
+include 'src/includes/etc/compiled/available_langs.php';
+include 'src/includes/etc/compiled/options_variable.php';
+include 'src/includes/etc/compiled/smarty_cache_config.conf.php';
+include 'src/includes/etc/compiled/themes.php';
+
+
+foreach($_OPTIONS AS $key => $value)
+{
+
+$words_to_replace []= $key;
+
+
+}
+
+foreach($_OPTIONS['tables'] AS $key => $value)
+{
+
+$words_to_replace []= $key;
+
+
+}
+
+foreach($_OPTIONS['languages'] AS $key => $value)
+{
+
+$words_to_replace []= $key;
+
+
+}
+foreach($_OPTIONS['smarty_cache_config'] AS $key => $value)
+{
+
+
+$words_to_replace []= $key;
+
+
+}
+foreach($_OPTIONS['themes'] AS $key => $value)
+{
+
+
+$words_to_replace []= $key;
+
+
 }
 */
+function modify_stuff($dir)
+{
+global $_OPTIONS, $words_to_replace;
 
 echo "opendir $dir"."\n";
 $fp = openDir($dir);
@@ -60,9 +131,17 @@ $fp = openDir($dir);
 		if(is_file($dir."/".$fichier) AND
 		!is_dir($dir."/".$fichier) AND
 		$fichier != "grep_php" AND
+		//$fichier != "options_inc.php" AND
+		
+		//$fichier != "insert.sql" AND
+		//$fichier != "create.sql" AND
+		//$fichier != "drop.sql" AND
+		$fichier != "tables.php" AND
+		
 		$fichier != ".." AND
 		$fichier != "." AND
 		$fichier != ".directory" AND
+		//$fichier != "CVS" AND//I can not edit CVS files.
 		fileSize($dir."/".$fichier) != 0
 		  )
 		{
@@ -73,14 +152,24 @@ $fp = openDir($dir);
 		echo "closing ".$dir."/".$fichier."\n";
 		fclose($fp2);
 		
-		////////////////////////////
-	
-		$contenu = preg_replace("/\\\$Header.+\\\$/", "\$Id\$", $contenu);
-	
-		 /////////////////////////////
+		
 		 
-		 
+		//////////////////////////////////////////////
+
+
+
+foreach($words_to_replace AS $word)
+{
+$contenu = str_replace(
+	"\"$word\"",
+	"'$word'",
+	$contenu);
+
+}
 				
+				
+				/////////////////////////////////////////////
+		
 		echo "opening in w+ ".$dir."/".$fichier."\n";
 		$fp2 = fopen($dir."/".$fichier, "w+");
 		
@@ -106,5 +195,5 @@ closeDir($fp);
 
 //$count = 0;
 
-modify_stuff(".")
+modify_stuff("src")
 ?>
