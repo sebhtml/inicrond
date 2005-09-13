@@ -1,16 +1,17 @@
 <?php
 //$Id$
 
+
 /*
 //---------------------------------------------------------------------
 //
 //
-//Fonction du fichier : l'index du site
+
 //
 //
 //Auteur : sebastien boisvert
-//email : sebhtml@yahoo.ca
-//site web : http://membres.lycos.fr/zs8
+//email : sebhtml@users.sourceforge.net
+//site web : http://inicrond.sourceforge.net/
 //Projet : inicrond
 
 Copyright (C) 2004  Sebastien Boisverthttp://www.gnu.org/copyleft/gpl.html
@@ -32,31 +33,41 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 //
 //---------------------------------------------------------------------
 */
-if(isset($_OPTIONS["INCLUDED"]))
-{
+if(!__INICROND_INCLUDED__){exit();}
 
-include "includes/etc/files.php";
+include __INICROND_INCLUDE_PATH__.$_OPTIONS["file_path"]["db_config"];
+include __INICROND_INCLUDE_PATH__.$_OPTIONS["file_path"]["sql_tables"] ;
+include __INICROND_INCLUDE_PATH__."includes/etc/options_inc.php";
 
-include("includes/class/Connexion_db.class.php");
+$connect_type= $_OPTIONS['sql_server_persistency'] ? "PConnect" : "Connect";
 
-include $_OPTIONS["file_path"]["db_config"];
-
-
-include $_OPTIONS["file_path"]["sql_tables"] ;
-include $_OPTIONS["file_path"]["modules_id"] ;
-include $_OPTIONS["file_path"]["mod_dirs"] ;
-
-//connexion ? la base de donn?es
-$mon_objet = new Connexion_db();
-$mon_objet->set_SGBD($_OPTIONS["SGBD"]);
-
-	$mon_objet->connect($_OPTIONS["sql_server_name"], $_OPTIONS["sql_user_name"], $_OPTIONS["sql_user_password"], FALSE);
-	//choisie la database
-	$mon_objet->select_db($_OPTIONS["sql_database_name"]);
-
-include $_OPTIONS["file_path"]["options"];
+//adodb here...
+/*
+include __INICROND_INCLUDE_PATH__.'libs/adodb/adodb.inc.php';
 
 
-}
+      
+$inicrond_db = &ADONewConnection($_OPTIONS['SGBD']);  # create a connection
+$inicrond_db->$connect_type(
+$_OPTIONS['sql_server_name'],
+$_OPTIONS['sql_user_name'],
+$_OPTIONS['sql_user_password'],
+$_OPTIONS['sql_database_name']
+);
+$inicrond_db->SetFetchMode(ADODB_FETCH_ASSOC);
+
+*/
+//my own class that are mysql only, but faster...
+
+
+include __INICROND_INCLUDE_PATH__.'includes/class/Inicrond_mysql_db.class.php';
+
+$inicrond_db = new Inicrond_mysql_db ;
+$inicrond_db->$connect_type(
+$_OPTIONS['sql_server_name'],
+$_OPTIONS['sql_user_name'],
+$_OPTIONS['sql_user_password'],
+$_OPTIONS['sql_database_name']
+);
 
 ?>

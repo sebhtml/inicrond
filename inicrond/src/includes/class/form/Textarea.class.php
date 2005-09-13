@@ -2,6 +2,7 @@
 //$Id$
 
 
+
 /*
 //---------------------------------------------------------------------
 //
@@ -10,8 +11,8 @@
 //
 //
 //Auteur : sebastien boisvert
-//email : sebhtml@yahoo.ca
-//site web : http://membres.lycos.fr/zs8
+//email : sebhtml@users.sourceforge.net
+//site web : http://inicrond.sourceforge.net/
 //Projet : inicrond
 //
 //---------------------------------------------------------------------
@@ -38,37 +39,71 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-if(isset($_OPTIONS["INCLUDED"]))
+if(__INICROND_INCLUDED__)
 {
-
+        
 	class Textarea extends Base
 	{
-	
-	
-	var $rows;
-	var $cols;
-	
+                
+                
+                var $rows;
+                var $cols;
+                var $style;
+                
+                /**
+                * constructor
+                *
+                * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
+                * @version      1.0.0
+                */
 		function Textarea()
 		{
-		
+                        
 		}
-		
+                /**
+                * setter
+                *
+                * @param        integer  $rows  number of rows
+                * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
+                * @version      1.0.0
+                */		
 		function set_rows($rows)
 		{
-		$this->rows = $rows;
+                        $this->rows = $rows;
 		}
+                /**
+                * setter
+                *
+                * @param        integer  $cols  number of columns
+                * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
+                * @version      1.0.0
+                */
 		function set_cols($cols)
 		{
-		$this->cols = $cols;
+                        $this->cols = $cols;
 		}
+                /**
+                * validate the form object
+                *
+                * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
+                * @version      1.0.0
+                */
 		function validate()
 		{
-		$this->form_o = 
-		"<textarea rows=\"".$this->rows."\" cols=\"".$this->cols."\" name=\"".$this->name."\"
-		>".$this->value."</textarea>";
+                        $this->form_o = 
+                        "<textarea rows=\"".$this->rows."\" style=\"".$this->style."\"  name=\"".$this->name."\" id=\"".$this->name."\"";
+                        
+                        if($this->cols != "")
+                        {
+                                $this->form_o .= " cols=\"".$this->cols."\" ";
+                                
+                        }
+                        
+                        $this->form_o .=" >".$this->value."</textarea>";
+                        
 		}
 		
-			
+                
 	}
 }
 

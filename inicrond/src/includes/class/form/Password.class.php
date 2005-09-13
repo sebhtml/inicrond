@@ -2,6 +2,7 @@
 //$Id$
 
 
+
 /*
 //---------------------------------------------------------------------
 //
@@ -10,8 +11,8 @@
 //
 //
 //Auteur : sebastien boisvert
-//email : sebhtml@yahoo.ca
-//site web : http://membres.lycos.fr/zs8
+//email : sebhtml@users.sourceforge.net
+//site web : http://inicrond.sourceforge.net/
 //Projet : inicrond
 //
 //---------------------------------------------------------------------
@@ -38,32 +39,49 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-if(isset($_OPTIONS["INCLUDED"]))
+if(__INICROND_INCLUDED__)
 {
-
+        
 	class Password extends Base
 	{
-	
-	
-	var $size;
-	
-	
+                
+                
+                var $size;//the length of the password field
+                
+                /**
+                * constructor
+                *
+                * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
+                * @version      1.0.0
+                */	
 		function Password()
 		{
-		
+                        
 		}
-		
+                /**
+                * setter
+                *
+                * @param        integer  $size  the size
+                * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
+                * @version      1.0.0
+                */		
 		function set_size($size)
 		{
-		$this->size = $size;
+                        $this->size = $size;
 		}
+                /**
+                * validate the form object
+                *
+                * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
+                * @version      1.0.0
+                */
 		function validate()
 		{
-		$this->form_o = 
-		"<input type=\"password\" size=\"".$this->size."\" name=\"".$this->name."\" value=\"".$this->value."\" />";
+                        $this->form_o = 
+                        "<input type=\"password\" size=\"".$this->size."\" name=\"".$this->name."\" value=\"".$this->value."\" />";
 		}
 		
-			
+                
 	}
 }
 

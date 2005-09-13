@@ -1,6 +1,7 @@
 <?php
 //$Id$
 
+
 //-----------------------------------
 //Config file...
 //---------------------------
@@ -9,15 +10,16 @@
 //---------------------------------------------------------------------
 //
 //
-//Fonction du fichier : l'index du site
+
 //
 //
 //Auteur : sebastien boisvert
-//email : sebhtml@yahoo.ca
-//site web : http://membres.lycos.fr/zs8
+//email : sebhtml@users.sourceforge.net
+//site web : http://inicrond.sourceforge.net/
 //Projet : inicrond
 
-Copyright (C) 2004  Sebastien Boisverthttp://www.gnu.org/copyleft/gpl.html
+Copyright (C) 2004  Sebastien Boisvert
+http://www.gnu.org/copyleft/gpl.html
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -37,35 +39,25 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 //---------------------------------------------------------------------
 */
 
-if(isset($_OPTIONS["INCLUDED"]))
-{
- $_OPTIONS["file_path"]["opt_in_mysql"] = "includes/etc/perso_opt.php" ;
- $_OPTIONS["file_path"]["options"] = "includes/etc/options_inc.php" ;
+if(!__INICROND_INCLUDED__){exit();}
 
+$_OPTIONS["file_path"]['options'] = "includes/etc/options_inc.php" ;
+$_OPTIONS["file_path"]["date_stuff.inc.php"] = "includes/etc/date_stuff.inc.php" ;
+$_OPTIONS["file_path"]["db_config_no_path"] = "db_config_inc.php" ;
+$_OPTIONS["file_path"]["db_config"] = "includes/etc/ro/".$_OPTIONS["file_path"]["db_config_no_path"] ;
 
-$_OPTIONS["file_path"]["db_config"] = "includes/etc/ro/db_config_inc.php" ;
+$_OPTIONS["file_path"]["sql_tables"] = "includes/etc/compiled/tables.config.php" ;//uploaded file dir
+$_OPTIONS["file_path"]["available_langs.php"] = "includes/etc/compiled/available_langs.php" ;
+$_OPTIONS["file_path"]["themes.php"] = "includes/etc/compiled/themes.php" ;
 
-$_OPTIONS["file_path"]["mod_dirs"] = "includes/etc/ro/modules_dir.config.php" ;
-$_OPTIONS["file_path"]["modules_id"] = "includes/etc/ro/modules.config.php" ;
-$_OPTIONS["file_path"]["sql_tables"] = "includes/etc/ro/tables.config.php" ;//uploaded file dir
+$_OPTIONS["file_path"]['smarty_cache_config'] = __INICROND_INCLUDE_PATH__."includes/etc/compiled/smarty_cache_config.conf.php" ;
+$_OPTIONS["file_path"]["options_variable"] = __INICROND_INCLUDE_PATH__."includes/etc/compiled/options_variable.php" ;
+
 
 //dirs
-$_OPTIONS["file_path"]["mod_dir"] = "modules";
-
-$_OPTIONS["file_path"]["uploaded_files_dir"] = "upload/uploaded_files_dir";
-$_OPTIONS["file_path"]["images_dir"] = "upload/images";
-$_OPTIONS["file_path"]["usrs_pics"] = "upload/usrs_pics";
-$_OPTIONS["file_path"]["repository_dir"] = "upload/repository";
-
-//pour la compatibilité.
-$_OPTIONS["uploaded_files_dir"] = $_OPTIONS["file_path"]["uploaded_files_dir"];
-$_OPTIONS["images_dir"] = $_OPTIONS["file_path"]["images_dir"];
-$_OPTIONS["usrs_pics"] = $_OPTIONS["file_path"]["usrs_pics"];
-$_OPTIONS["repository_dir"] = $_OPTIONS["file_path"]["repository_dir"];
-
-
-}
-
+$_OPTIONS["file_path"]["mod_dir"] = __INICROND_INCLUDE_PATH__."modules/";
+$_OPTIONS["file_path"]["uploads_no_prefix"] = "uploads/";
+$_OPTIONS["file_path"]["uploads"] = __INICROND_INCLUDE_PATH__.$_OPTIONS["file_path"]["uploads_no_prefix"];
 
 
 ?>

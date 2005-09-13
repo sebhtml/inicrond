@@ -2,6 +2,7 @@
 //$Id$
 
 
+
 /*
 //---------------------------------------------------------------------
 //
@@ -10,8 +11,8 @@
 //
 //
 //Auteur : sebastien boisvert
-//email : sebhtml@yahoo.ca
-//site web : http://membres.lycos.fr/zs8
+//email : sebhtml@users.sourceforge.net
+//site web : http://inicrond.sourceforge.net/
 //Projet : inicrond
 //
 //---------------------------------------------------------------------
@@ -38,32 +39,53 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-if(isset($_OPTIONS["INCLUDED"]))
+if(__INICROND_INCLUDED__)
 {
-
+        /**
+        * add a option in the select
+        *
+        * @param        object  $option  an option for the select
+        * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
+        * @version      1.0.0
+        */	
 	class Radio extends Base
 	{
-	
-	
-	var $checked;
-	
+                
+                
+                var $checked;
+                /**
+                * constructor
+                *
+                * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
+                * @version      1.0.0
+                */		
 		function Radio()
 		{
-		
+                        
 		}
-		
+                /**
+                * check the checkbox
+                *
+                * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
+                * @version      1.0.0
+                */			
 		function checked()
 		{
-		$this->checked = "checked";
+                        $this->checked = "checked";
 		}
-		
+                /**
+                * validate the form object
+                *
+                * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
+                * @version      1.0.0
+                */			
 		function validate()
 		{
-		$this->form_o = 
-		"<input type=\"radio\" ".$this->checked." name=\"".$this->name."\" value=\"".$this->value."\" />";
+                        $this->form_o = 
+                        "<input type=\"radio\" ".$this->checked." name=\"".$this->name."\" value=\"".$this->value."\" />";
 		}
 		
-			
+                
 	}
 }
 

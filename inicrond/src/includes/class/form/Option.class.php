@@ -2,6 +2,7 @@
 //$Id$
 
 
+
 /*
 //---------------------------------------------------------------------
 //
@@ -10,8 +11,8 @@
 //
 //
 //Auteur : sebastien boisvert
-//email : sebhtml@yahoo.ca
-//site web : http://membres.lycos.fr/zs8
+//email : sebhtml@users.sourceforge.net
+//site web : http://inicrond.sourceforge.net/
 //Projet : inicrond
 //
 //---------------------------------------------------------------------
@@ -38,42 +39,79 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-if(isset($_OPTIONS["INCLUDED"]))
+if(__INICROND_INCLUDED__)
 {
-
+        
 	class Option
 	{
-	
-	var $value;
-	var $text;
-	var $selected;
-						
+                
+                var $value;//the value that will be sent to server
+                var $text;//the text
+                var $selected;//selected, TRUE OR FALSE
+                /**
+                * getter
+                *
+                * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
+                * @version      1.0.0
+                */						
 		function get_text()
 		{
-		return $this->text;
+                        return $this->text;
 		}
-		
+                /**
+                * getter
+                *
+                * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
+                * @version      1.0.0
+                */			
 		function get_value()
 		{
-		return $this->value;
+                        return $this->value;
 		}
+                /**
+                * getter
+                *
+                * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
+                * @version      1.0.0
+                */	
 		function get_selected()
 		{
-		return $this->selected;
+                        return $this->selected;
 		}
+                
+                /**
+                * select the option
+                *
+                * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
+                * @version      1.0.0
+                */	
 		function selected()
 		{
-		$this->selected = "SELECTED";
+                        $this->selected = "SELECTED";
 		}
+                /**
+                * setter
+                *
+                * @param        string  $text  the text
+                * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
+                * @version      1.0.0
+                */	
 		function set_text($text)
 		{
-		$this->text = $text;
+                        $this->text = $text;
 		}
+                /**
+                * setter
+                *
+                * @param        string  $value  the value
+                * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
+                * @version      1.0.0
+                */	
 		function set_value($value)
 		{
-		$this->value = $value;
+                        $this->value = $value;
 		}
-	
+                
 	}
 }
 

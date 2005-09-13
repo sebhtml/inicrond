@@ -1,16 +1,18 @@
 <?php
+error_reporting(E_ALL^E_NOTICE);
 //$Id$
+ 
+
 /*
 //---------------------------------------------------------------------
 //
 //
-//Fonction du fichier : crÃ©aer le fichier config_inc.php et fait des query sql pour initialiser
-le site
+
 //
 //
 //Auteur : sebastien boisvert
-//email : sebhtml@yahoo.ca
-//site web : http://membres.lycos.fr/zs8
+//email : sebhtml@users.sourceforge.net
+//site web : http://inicrond.sourceforge.net/
 //Projet : inicrond
 //
 //---------------------------------------------------------------------
@@ -33,230 +35,286 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
-$_OPTIONS["INCLUDED"] = 1;
+define('__INICROND_INCLUDED__', TRUE);
+define('__INICROND_INCLUDE_PATH__', "");
 
-include "includes/etc/files.php";
+session_start();
 
-if(!is_file($_OPTIONS["file_path"]["db_config"]) OR TRUE)
+$_SESSION['language'] = 'en-ca';
+
+include __INICROND_INCLUDE_PATH__."modules/admin/includes/languages/".$_SESSION['language'].'/lang.php';//language.
+include __INICROND_INCLUDE_PATH__.'includes/languages/'.$_SESSION['language'].'/lang.php';//language.
+
+
+if(!$_GET['language'])//choose the lamnguage
+{
+include __INICROND_INCLUDE_PATH__."includes/etc/compiled/available_langs.php";
+	
+echo $_LANG['choose_the_language_for_the_installation']."<br />";
+	foreach($_OPTIONS['languages'] AS $language)
+	{
+	echo "<a href=\"?language=$language\">$language</a><br />";
+	}
+}
+else
 {
 
-	
+$_SESSION['language'] = $_GET['language'];
+
+include __INICROND_INCLUDE_PATH__."modules/admin/includes/languages/".$_SESSION['language'].'/lang.php';//language.
+include __INICROND_INCLUDE_PATH__.'includes/languages/'.$_SESSION['language'].'/lang.php';//language.
 
 
 
-//-------------------------
-//demarrage de la session
-//--------------------------
+include __INICROND_INCLUDE_PATH__."includes/etc/files.php";
+
+include __INICROND_INCLUDE_PATH__."includes/functions/file_functions.php";
+
+
+
+
+
+if(is_file($_OPTIONS["file_path"]["db_config"]))
+{
+die($_LANG['already_installed']);
+exit();
+}
 
 //--------------------------------
 // Install
 //-----------------------------------
-$txt_install = array(
-"sql_server_name" => "Serveur",
-"sql_user_name" => "Utilisateur",
-"sql_user_password" => "Mot de passe",
-"sql_database_name" => "Base",
-"table_prefix" => "Pr&eacute;fixe des tables",
-"SGBD" => "SGBD",
-"addr" => "adresse virtuelle"
-);
-
-
+/*
+* add $_OPTIONS["sql_server_port"]
+* add $_OPTIONS['sql_server_persistency']
+*/
 $install_values = array(
-"sql_server_name" => "darkstar",
-"sql_user_name" => "root",
-"sql_user_password" => "",
-"sql_database_name" => "inicrond",
-"table_prefix" => "OOO_",
-"SGBD" => "mysql",
-"addr" => "http://darkstar/html/inicrond-2.19.9"
+'sql_server_name' => ":/var/run/mysql/mysql.sock",
+'sql_user_name' => "sebhtml",
+'sql_user_password' => "sebhtml",
+'sql_database_name' => "inicrond",
+'table_prefix' => "ooo_",
+'SGBD' => "MySQL",
+'sql_server_persistency' => "TRUE",
+'usr_name' => "root",
+'usr_password' => "",
+'usr_email' => "root@localhost.localdomain"
 );
 
 
-if(!isset($_POST["submit"]))
+if(!isset($_POST["submit"]))//show the form
 {
 
+echo "<form method=\"POST\"><p align=\"center\">
+<table border =\"1\" >";
 
-
-
-echo "<form method=\"POST\">
-<table border =\"0\" >
-  <tbody>";
-
-  $keys = array_keys($txt_install);
+  $keys = array_keys($install_values);
 
   $count_keys = count($keys);
 
   	for($i=0;$i< $count_keys;$i++)
   	{
-     echo "<tr> <td >".$txt_install[$keys[$i]]."<td /><td ><input type=\"text\" name=\"$keys[$i]\"  value=\"".$install_values[$keys[$i]]."\" /><td /> </tr>";
+     echo "<tr><td bgcolor=\"#adefbc\"  align=\"center\" >".$_LANG[$keys[$i]]."</td/><td bgcolor=\"#bdefbc\"><input type=\"text\" name=\"".$keys[$i]."\"  value=\"".$install_values[$keys[$i]]."\" /></td></tr>";
 	}
 
-	echo " <tr>
-      <td colspan=\"2\">	  <input type=\"submit\" name=\"submit\"  value=\"ok\" />	  </td>
-	 </tr>
-   </tbody>
-	</table  >
-</form>" ;
+	echo "<tr><td align=\"center\" colspan=\"2\"><input type=\"submit\" name=\"submit\"  value=\"".$_LANG['validate']."\" />	  </td></tr></table></p></form>" ;
 }
 else
 {
+
+echo "<b>".$_LANG['post_installation_message']."</b>";
 //-------------------------
 //variables de session
 //-----------------------
 
+  $keys = array_keys($install_values);
 
 $config_content = "<?php
 
-if(isset(\$_OPTIONS[\"INCLUDED\"]))
+if(__INICROND_INCLUDED__)
 {
 
 ";
 
-$keys = array_keys($txt_install);
 
-  $count_keys = count($keys);
+for($i = 0 ; $i < 6 ; $i ++)//mysql server, mysql user, mysql password, mysql database, mysql prefix, SGBD
+{
 
-  for($i=0;$i< $count_keys;$i++)
-  {
-     $config_content .= "\$_OPTIONS[\"".$keys[$i]."\"] = \"".$_POST[$keys[$i]]."\";
-";
+ $config_content .= "\$_OPTIONS['".$keys[$i]."'] = '".$_POST[$keys[$i]]."';\n";
 }
+for($i = 6 ; $i < 7 ; $i ++)//mysql server, mysql user, mysql password, mysql database, mysql prefix, SGBD
+{
 
-
-
+ $config_content .= "\$_OPTIONS['".$keys[$i]."'] = ".$_POST[$keys[$i]].";\n";
+}
 $config_content .= "
 }
 
 ?>";
 
-
-$fp = fopen($_OPTIONS["file_path"]["db_config"],"w+");
-fwrite($fp, $config_content);
-fclose($fp);
+USER_file_put_contents($_OPTIONS["file_path"]["db_config"], $config_content);
 
 
 //-----------------------------
 //Inclusions
 //------------------------
-include("includes/func/sql_file_parser.function.php");
+include "includes/functions/sql_file_parser.function.php" ;
 
 //--------------------------
 //inclusion
 //----------------------------
 
-include "includes/kernel/update_config.php";//créer les fichiers.
+include "modules/admin/includes/kernel/update_config.php";//crï¿½r les fichiers.
+
+echo $module_content;//contenu.
 
 include "includes/kernel/db_init.php";
 
-$sql_files = array(
+$AVAILABLE_SQL_FILES = array(
 "drop.sql", 
 "create.sql", 
 "insert.sql");
 
-foreach($_OPTIONS["modules_dir"] AS $module_name)
+foreach($AVAILABLE_SQL_FILES AS $file_name)
 {
-echo "<br />";
-echo "<table bgcolor=\"#DFDFFE\" width=\"100%\"><tr><td>";
+echo "<table bgcolor=\"#DFDFFE\" width=\"100%\"><tr><td><br />$file_name<br />";
 
-echo "<table bgcolor=\"#FFDFFF\" width=\"100%\"><tr><td>";
-echo "installing module \"$module_name\" [OK]<br />";
-echo "</td></tr></table>";
+$fp = openDir($_OPTIONS["file_path"]["mod_dir"]);
+
+	while($module_name = readDir($fp))
+	{
+
+echo "<table bgcolor=\"#FEFDEF\" width=\"100%\"><tr><td>";
+
 
 	$module_path = "modules/$module_name";
 	$sql_path = "$module_path/sql";
-	
-echo "<table bgcolor=\"#FEFDEF\" width=\"100%\"><tr><td>";
-	if(is_dir($sql_path))
+
+echo $sql_path."<br />";
+
+	if(is_dir("modules/$module_name") AND
+	is_dir($sql_path))
 	{
+echo "<table bgcolor=\"#ADEFDF\" width=\"100%\"><tr><td>";
 
-	echo "sql files detected... [OK]<br />";
-	
-	echo "loading table names... [OK]<br />";
-		foreach($sql_files AS $file_name)
-		{
-		echo "<br />";
-		echo "<table bgcolor=\"#EEEDEF\" width=\"100%\"><tr><td>";
-		$file_path = "$sql_path/".$_OPTIONS["SGBD"]."/".$file_name;
-		echo "looking for $file_path in the module dir... [OK]<br />";
-		
-			if(is_file($file_path))
+		$file_path = "$sql_path/".$_OPTIONS['SGBD']."/".$file_name;
+
+			if(is_file($file_path) )
+			//droping is not functionnal...
 			{
-
-			echo "$file_path was found... [OK]<br />";
+		echo "<table bgcolor=\"#EEEDEF\" width=\"100%\"><tr><td>";
+			echo sprintf($_LANG["file_path_was_found"], $file_path)."<br />";
 			
-			$fp = fopen($file_path, "r");
-			$sql = fread($fp, 65536);
-			fclose($fp);
+		
+			$sql = USER_file_get_contents($file_path);
+		
 
 
 			$sql = trim($sql);			
 						
-
-
-			foreach($_OPTIONS["tables"] AS $key => $value)
+			foreach($_OPTIONS['tables'] AS $key => $value)
 			{
-			$sql = preg_replace("/CREATE( |\n)+TABLE( |\n)+".$key."( |\n)+/mU",
-			 "CREATE TABLE ".$_OPTIONS["table_prefix"].$value, 
+				
+				if($file_name == "create.sql")
+				{
+			 $sql = preg_replace(
+			"/CREATE( |\n)+TABLE( |\n)+".$key."( |\n)+/m",
+			 "CREATE TABLE ".$_OPTIONS['table_prefix'].$value, 
 			 $sql);
 			 
-			 $sql = preg_replace(
-			 "/DROP( |\n)+TABLE( |\n)+IF( |\n)+EXISTS( |\n)+".$key."( |\n)+/mU",
-			 "DROP TABLE IF EXISTS ".$_OPTIONS["table_prefix"].$value,
-			  $sql);
+			  $sql = preg_replace(
+			"/CREATE( |\n)+TABLE( |\n)+`".$key."`( |\n)+/m",
+			 "CREATE TABLE `".$_OPTIONS['table_prefix'].$value."`", 
+			 $sql);
+			
+			  	}
+				elseif($file_name == "insert.sql")
+				{
 			 
-			 $sql = preg_replace("/INSERT( |\n)+INTO( |\n)+".$key."( |\n)+/mU",
-			 "INSERT INTO ".$_OPTIONS["table_prefix"].$value,
+			 $sql = preg_replace(
+			 "/INSERT( |\n)+INTO( |\n)+".$key."( |\n)+/m",
+			 "INSERT INTO ".$_OPTIONS['table_prefix'].$value,
 			  $sql);
-}
+			  
+			   $sql = preg_replace(
+			 "/INSERT( |\n)+INTO( |\n)+`".$key."`( |\n)+/m",
+			 "INSERT INTO `".$_OPTIONS['table_prefix'].$value."`",
+			  $sql);
+			  	}
+			}
 
+			$sql = preg_replace("/#.{0,}\n/", "", $sql);//remove the remarks
 			$sql = sql_parser_split_queries($sql);
 			
 			
 				foreach($sql AS $query)
 				{
-					
-			echo "<br />";
 			echo "<table bgcolor=\"#ABCDFF\" width=\"100%\"><tr><td>";
-				echo nl2br($query);
 			
-
-			
-				$mon_objet->query($query);
-				echo "</td></tr></table>";	
+			$inicrond_db->Execute($query);
+			echo nl2br($query);
+			echo "</td></tr></table><br />";	
 				}	
 
+			echo "</td></tr></table>";
+			}
 			
-			}
-			else
-			{
-			echo "$file_path was not found... [OK]<br />";
-			}
-			echo "</td></tr></table>";	
+		echo "</td></tr></table>";	
 		}
+		
+	
+echo "</td></tr></table>";
+	}
 	
 	
+closeDir($fp);
 
-	}
-	else
-	{
-	echo "no sql for this module [OK]<br />";
-	}
-	
-	echo "</td></tr></table>";
-echo "module \"$value\" installed [OK]<br />";
 
 echo "</td></tr></table>";
 }
 
+//add the administrator...
+	include __INICROND_INCLUDE_PATH__.$_OPTIONS["file_path"]["sql_tables"] ;
+	//insert l'utilisateur
+	$query = "INSERT INTO
+	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs']." 
+	(
+	usr_name,
+	usr_md5_password,
 
+	usr_add_gmt_timestamp,
+	usr_email,
+	SUID,
+	usr_activation
+	)
+	VALUES
+	(
+	'".$_POST['usr_name']."',
+	'".md5($_POST['usr_password'])."',
+
+	".mktime().",
+	'".$_POST['usr_email']."',
+	'1',
+	'1'
+	)
+	;";
+
+	$inicrond_db->Execute($query);
+
+	
  
  
-echo "installation completed, check for error warnings... [OK]<br />";
+echo $_LANG['installation_completed'] ."<br />";
+
+
+
+
+
 
 
 
 }
 
-}
+}//end of the else for session language checking.
+
+
 ?>
