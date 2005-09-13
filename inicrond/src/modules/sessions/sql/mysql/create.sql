@@ -1,0 +1,52 @@
+# $Id$
+
+#
+# Table structure for table 'sebhtml_sessions'
+#
+
+CREATE TABLE sebhtml_sessions  (
+
+session_id BIGINT UNSIGNED AUTO_INCREMENT,
+PRIMARY KEY (session_id),
+
+usr_id BIGINT UNSIGNED NOT NULL,
+KEY usr_id (usr_id),
+
+php_session_id VARCHAR(255) NOT NULL,
+
+
+HTTP_USER_AGENT VARCHAR(255) NOT NULL,
+
+HTTP_ACCEPT VARCHAR(255) NOT NULL,
+HTTP_ACCEPT_LANGUAGE VARCHAR(255) NOT NULL,
+HTTP_ACCEPT_ENCODING VARCHAR(255) NOT NULL,
+HTTP_ACCEPT_CHARSET VARCHAR(255) NOT NULL,
+
+HTTP_KEEP_ALIVE VARCHAR(32)  NOT NULL,
+
+HTTP_CONNECTION VARCHAR(255) NOT NULL,
+
+#REMOTE_HOST VARCHAR(255) NOT NULL,
+REMOTE_ADDR VARCHAR(32) NOT NULL,
+REMOTE_PORT VARCHAR(32) NOT NULL,
+
+
+
+start_gmt BIGINT UNSIGNED  NOT NULL,
+
+end_gmt BIGINT UNSIGNED  NOT NULL,
+
+dns VARCHAR(255) NOT NULL,
+
+is_online TINYINT UNSIGNED DEFAULT 1
+
+
+)TYPE=MyISAM;
+
+
+
+
+
+
+
+#--------------------------------------------------------------------------------------------------------------
