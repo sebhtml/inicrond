@@ -1,0 +1,113 @@
+/*$Id$*/
+
+BODY
+{
+font-family: Trebuchet MS, Bitstream Vera Sans, Verdana, Arial, Helvetica, sans-serif;
+background-color: rgb(250, 250, 250); 
+margin-top: 5;
+margin-left: 5;
+}
+
+A
+{
+color: 	  rgb(100, 0, 0);
+text-decoration: underline;
+}
+
+A:hover
+{
+text-decoration: none;
+}
+td.table_bg
+{
+background-color :  #f0c040;
+
+}
+tr.first
+{
+background-color : rgb(255, 255, 100);
+}
+
+
+
+tr.by_2
+{
+
+background-color : rgb(255, 255, 150);
+}
+
+tr.not_by_2
+{
+background-color : rgb(255, 255, 200);
+}
+
+td.inode_element
+{
+border-width: 2;
+border-style: dashed;
+border-color :  #f0c040;
+background-color : rgb(255, 255, 200);
+}
+
+td.window_title
+{
+border-left-style: solid;
+border-right-style: solid;
+border-top-style: solid;
+border-left-width: 2;
+border-right-width: 2;
+border-top-width: 2;
+
+border-bottom-width: 0;
+border-bottom-style: dotted;
+border-color :  #f0c040; 
+background-color:  rgb(255, 255, 220);
+}
+
+td.window_content
+{
+border-left-width: 2;
+border-right-width: 2;
+border-top-width: 2;
+border-bottom-width: 2;
+border-style: solid;
+border-color :  #f0c040; 
+background-color:  rgb(255, 255, 220);
+
+}
+
+
+.z_smaller_than_0
+{
+color: 	 red;
+
+}
+.z_0_to_1
+{
+color: 	  brown;
+font-size: medium;
+}
+.z_1_to_2
+{
+color: 	  blue;
+font-size:  large;
+}
+.z_2_to_3
+{
+color: 	  green;
+font-size: x-large;
+}
+.z_bigger_than_3
+{
+color: 	 purple;
+font-size:  xx-large;
+}
+
+
+
+.keyword
+{
+background-color:  rgb(255, 255, 0);
+
+}
+

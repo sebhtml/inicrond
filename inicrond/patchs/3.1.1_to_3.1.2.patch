@@ -1,0 +1,22 @@
+# enable the search engine for all online people.
+# Add REAL_SITE_PATH IN db_config.
+# enable the calendar for everyone.
+
+ALTER TABLE `ooo_sebhtml_options` DROP `redirect_url` ;
+
+
+
+ALTER TABLE `ooo_cours` ADD `enable_RSS` TINYINT UNSIGNED DEFAULT '1' NOT NULL ;
+
+ALTER TABLE `ooo_groups_cours` ADD `course_group_id` BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY ;
+
+
+CREATE TABLE ooo_course_group_in_charge  (
+group_id BIGINT UNSIGNED,
+KEY group_id (group_id),
+
+course_group_id BIGINT UNSIGNED,
+KEY course_group_id (course_group_id)
+);	
+	
+INSERT INTO ooo_groups_actions (group_id, action_id) VALUES (2, 423);#MD_COURSES_VIEW_COURSE_USERS_AS_GROUP_IN_CHARGE

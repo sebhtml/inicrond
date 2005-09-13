@@ -1,0 +1,12 @@
+MySQL  	PostgreSQL
+# MySQL comment 	--ANSI SQL comment
+UNIQUE KEY name (cols) 	UNIQUE (cols)
+PRIMARY KEY (cols) 	the same
+KEY name (cols) 	CREATE INDEX name ON TABLE (cols)
+id int NOT NULL auto_increment 	id SERIAL
+binary 	doesn't exist
+enum 	doesn't exist, convert to varchar
+tinyint(n) or smallint(n) 	smallint
+mediumint(n) or int(n) 	int
+
+from http://etudiant.univ-mlv.fr/~sonet/conversion.php

@@ -1,0 +1,42 @@
+dep_department
+	dep_id
+	name
+	creation_gmt_ts
+
+dep_dep_politics
+	pol_id
+	pol_name
+	pol_info
+
+dep_teachers_infos
+	=> usr_id
+	=> add office, specialty
+	=>special_responsabilities
+=>do a map of 10*5 field for schedule.
+
+dep_courses
+	dep_course_id
+	=>use course table...
+add ponderation in courses...
+
+
+dep_course_items
+	dep_course_id
+	item_str
+#0 : competences_listing
+#1 : dep_competences_statement
+#2 : dep_course_contents
+#3 : dep_course_linguistic_purposes
+#4 : dep_course_general_purposes
+#5 : dep_course_goals
+#6 : dep_course_general_purposes
+#7 : dep_course_general_purposes
+#8 : dep_course_materials
+#9 : dep_course_references
+	item_type
+
+
+
+dep_teacher_course
+	=>use teach_course
+

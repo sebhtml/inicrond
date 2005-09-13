@@ -1,0 +1,1 @@
+The pictures in this directory have been taken from the open source project moodle (moodle.org)

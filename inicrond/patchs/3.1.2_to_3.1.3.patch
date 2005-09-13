@@ -1,0 +1,14 @@
+# 1) enable people to change their groups.
+# 2) run those queries in phpmyadmin, do not forget the prefix to change...
+
+ALTER TABLE `ooo_usrs` ADD `register_random_validation` CHAR( 32 ) NOT NULL ;
+
+ALTER TABLE `ooo_sebhtml_options` ADD `register_validation_mode` ENUM( '0', '1', '2' ) NOT NULL ;
+
+ALTER TABLE `ooo_sebhtml_options` DROP `news_forum_discussion_id` ;
+
+DELETE FROM ooo_sebhtml_blocks WHERE block_alias='admin';
+
+ALTER TABLE `ooo_sebhtml_forum_messages` ADD `forum_message_id_reply_to` BIGINT UNSIGNED NOT NULL ;
+
+ALTER TABLE `ooo_sebhtml_forum_messages` ADD INDEX ( `forum_message_id_reply_to` ) ;

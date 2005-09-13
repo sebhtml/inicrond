@@ -1,0 +1,69 @@
+//$Id$
+
+
+inicrond/docs
+	Those files are for testing purpose only.
+	
+inicrond/img
+	Those pictures might be usefull someday.
+	
+inicrond/patchs
+	The patch for inicrond are there.
+	
+inicrond/src
+	The source code is there.
+
+inicrond/src/cache
+	The cache directory for Smarty is there.
+	
+inicrond/src/configs
+	The configs directory for Smarty is there.
+	
+inicrond/src/templates
+	The templates directory for Smarty is there.
+	
+inicrond/src/templates/inicrond_default
+	inicrond_default is the only template actually available.
+	
+inicrond/src/templates_c
+	The templates_c directory for Smarty is there.
+	
+inicrond/src/includes
+	All the included php scripts are located there.
+	
+inicrond/src/includes/class
+	The php classes are in there.
+		
+inicrond/src/includes/etc
+	The configuration of inicrond is located there.
+	
+inicrond/src/includes/etc/ro
+	This directory holds the installation file.
+	
+inicrond/src/includes/functions
+	Generics functions
+	
+inicrond/src/includes/install_conf
+	Core configuration files.
+	
+inicrond/src/includes/kernel
+	inicrond routines
+	
+inicrond/src/includes/languages
+	human readable languages
+
+inicrond/src/libs
+	external libs written by others programmers, see the used_apps file for more info...
+		
+inicrond/src/modules
+	All the modules.
+	
+inicrond/src/modules/XXXXX/includes
+	php scripts.
+	
+inicrond/src/modules/XXXXX/sql
+	Schemas
+
+inicrond/src/modules/XXXXX/templates
+	Smarty templates
+

@@ -1,0 +1,41 @@
+#$Id$
+
+# . backup your database. 
+# . run those queries. (#change the prefix if it is not ooo_.)
+# test freetype on the production installation.
+# remove the port number in the dbconfig.php.
+# update site options.
+
+DROP TABLE `ooo_sebhtml_blocks`;
+
+DELETE FROM `ooo_smarty_cache_config` WHERE `mod_dir` = 'calendar' AND `tpl_file` = 'calendar_block.tpl';
+
+ALTER TABLE `ooo_views_of_threads` ADD `usr_id` INT UNSIGNED NOT NULL ;
+
+ALTER TABLE `ooo_views_of_threads` ADD INDEX ( `usr_id` ) ;
+
+update ooo_views_of_threads, ooo_online_time set ooo_views_of_threads.usr_id = ooo_online_time.usr_id where ooo_views_of_threads.session_id=ooo_online_time.session_id ;
+
+ALTER TABLE `ooo_views_of_threads`
+  DROP `session_id`;
+  
+  INSERT INTO ooo_sebhtml_options (opt_name, opt_value) VALUES ('usr_pic_max_height', '100');
+INSERT INTO ooo_sebhtml_options (opt_name, opt_value) VALUES ('usr_pic_max_width', '100');
+
+DELETE FROM `ooo_sebhtml_options` WHERE `opt_name` = 'separator' ;
+
+update `ooo_sebhtml_forum_sections` set `order_id`=`forum_section_id` ;
+
+UPDATE `ooo_sebhtml_forum_discussions` SET `order_id` = `forum_discussion_id` ;
+
+update `ooo_answers` set `a_order_id`=`answer_id`;
+
+ALTER TABLE `ooo_answers` DROP `usr_id` ;
+
+ALTER TABLE `ooo_chapitre_media` DROP `usr_id` ;
+ALTER TABLE `ooo_courses_files` DROP `usr_id` ;
+ALTER TABLE `ooo_courses_files` DROP INDEX `chapitre_id` ,
+ADD INDEX `cours_id` ( `cours_id` ) ;
+ALTER TABLE `ooo_questions` DROP `usr_id` ;
+
+ALTER TABLE `ooo_tests` DROP `usr_id` ;

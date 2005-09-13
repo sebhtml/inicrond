@@ -1,0 +1,658 @@
+/************************************************************************************
+ * RIGHT FRAME
+ ************************************************************************************/
+/* Always enabled stylesheets (right frame) */
+body{
+    font-family:      Verdana, Arial, Helvetica, sans-serif;
+    font-size:        10px;
+    color:            #000000;
+    background-color: #ffffff;
+    margin: 5px;
+}
+
+pre, tt, code{
+    font-size:        11px;
+}
+a:link, a:visited, a:active{
+    font-family:      Verdana, Arial, Helvetica, sans-serif;
+    font-size:        10px;
+    text-decoration:  none;
+    color:            #333399;
+
+}
+a:hover{
+    font-family:      Verdana, Arial, Helvetica, sans-serif;
+    font-size:        10px;
+    text-decoration:  underline;
+    color:            #cc0000;
+}
+th{
+    font-family:         Verdana, Arial, Helvetica, sans-serif;
+    font-size:           10px;
+    font-weight:         bold;
+    color:               #000000;
+    background-color:    #ff9900;
+        background-image:    url(../themes/darkblue_orange/img/tbl_th.png);
+    background-repeat:   repeat-x;
+    background-position: top;
+       height:              18px;
+}
+th a:link, th a:active, th a:visited{
+    color:            #000000;
+    text-decoration:  underline;
+}
+
+th a:hover{
+    color:            #666666;
+    text-decoration:  none;
+}
+.tblcomment{
+    font-family:      Verdana, Arial, Helvetica, sans-serif;
+    font-size:        10px;
+    font-weight:      normal;
+    color:            #000099;
+}
+th.td{
+    font-weight: normal;
+    color: transparent;
+    background-color: transparent;
+    background-image: none;
+   
+}
+td{
+    font-family:      Verdana, Arial, Helvetica, sans-serif;
+    font-size:        10px;
+}
+form{
+    font-family:      Verdana, Arial, Helvetica, sans-serif;
+    font-size:        10px;
+    padding:          0px 0px 0px 0px;
+    margin:           0px 0px 0px 0px;
+}
+select, textarea, input {
+    font-family:      Verdana, Arial, Helvetica, sans-serif;
+    font-size:        10px;
+}
+select, textarea{
+    color:            #000000;
+    background-color: #FFFFFF;
+}
+input.textfield{
+    font-family:      Verdana, Arial, Helvetica, sans-serif;
+    font-size:        10px;
+    color:            #000000;
+    /*background-color: #FFFFFF;*/
+}
+
+h1{
+    font-family:      Verdana, Arial, Helvetica, sans-serif;
+    font-size:        18px;
+    font-weight:      bold;
+}
+h2{
+    font-family:      Verdana, Arial, Helvetica, sans-serif;
+    font-size:        13px;
+    font-weight:      bold;
+}
+h3{
+    font-family:      Verdana, Arial, Helvetica, sans-serif;
+    font-size:        12px;
+    font-weight:      bold;
+}
+a.nav:link, a.nav:visited, a.nav:active{
+    font-family:      Verdana, Arial, Helvetica, sans-serif;
+    color:            #000000;
+}
+a.nav:hover{
+    font-family:      Verdana, Arial, Helvetica, sans-serif;
+    color:            #cc0000;
+}
+a.h1:link, a.h1:active, a.h1:visited{
+    font-family:      Verdana, Arial, Helvetica, sans-serif;
+    font-size:        18px;
+    font-weight:      bold;
+    color:            #000000;
+}
+a.h1:hover{
+    font-family:      Verdana, Arial, Helvetica, sans-serif;
+    font-size:        18px;
+    font-weight:      bold;
+    color:            #cc0000;
+}
+a.h2:link, a.h2:active, a.h2:visited{
+    font-family:      Verdana, Arial, Helvetica, sans-serif;
+    font-size:        13px;
+    font-weight:      bold;
+    color:            #000000;
+}
+a.h2:hover{
+    font-family:      Verdana, Arial, Helvetica, sans-serif;
+    font-size:        13px;
+    font-weight:      bold;
+    color:            #cc0000;
+}
+a.drop:link, a.drop:visited, a.drop:active{
+    font-family:      Verdana, Arial, Helvetica, sans-serif;
+    color:            #cc0000;
+}
+a.drop:hover{
+    font-family:      Verdana, Arial, Helvetica, sans-serif;
+    color:            #ffffff;
+    background-color: #cc0000;
+    text-decoration:  none;
+}
+dfn{
+    font-style:       normal;
+}
+dfn:hover{
+    font-style:       normal;
+    cursor:           help;
+}
+.warning{
+    font-family:      Verdana, Arial, Helvetica, sans-serif;
+    font-size:        10px;
+    font-weight:      bold;
+    color:            #cc0000;
+}
+td.topline{
+    font-size:        1px;
+}
+td.tab{
+    border-top:       1px solid #999;
+    border-right:     1px solid #666;
+    border-left:      1px solid #999;
+    border-bottom:    none;
+    border-radius:    2px;
+    -moz-border-radius: 2px;
+}
+table.tabs      {
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    border-bottom: 1px solid #666;
+}
+
+fieldset {
+    border:     #666699 solid 1px;
+    padding:    0.5em;
+}
+fieldset fieldset {
+    margin:     0.8em;
+}
+legend {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    size:        10px;
+    color:       #666699;
+    font-weight: bold;
+    background-color: #ffffff;
+    padding: 2px 2px 2px 2px;
+}
+button.mult_submit {
+    border: none;
+    background-color: transparent;
+}
+
+.pdflayout {
+    overflow:         hidden;
+    clip:             inherit;
+    background-color: #FFFFFF;
+    display:          none;
+    border:           1px solid #000000;
+    position:         relative;
+}
+
+.pdflayout_table {
+    background:       #ff9900;
+    color:            #000000;
+    overflow:         hidden;
+    clip:             inherit;
+    z-index:          2;
+    display:          inline;
+    visibility:       inherit;
+    cursor:           move;
+    position:         absolute;
+    font-size:        11px;
+    border:           1px dashed #000000;
+}
+
+/* Warning showing div with right border and optional icon */
+
+div.warning {
+    border: 1px solid #cc0000;
+/*
+*/
+    background-image: url(../themes/darkblue_orange/img/s_warn.png);
+    background-repeat: no-repeat;
+    background-position: 10px 10px;
+    padding: 10px 10px 10px 36px;
+    margin: 0px;
+/*
+*/
+    width: 90%;
+}
+
+div.error {
+    width: 100%;
+    border: 1px solid #cc0000;
+    background-color: #ffffcc;
+    padding: 0px;
+}
+
+div.error  div.text {
+    padding: 5px;
+}
+
+div.error div.head {
+    background-color: #cc0000;
+    font-weight: bold;
+    color: #ffffff;
+/*
+*/
+    background-image: url(../themes/darkblue_orange/img/s_error.png);
+    background-repeat: no-repeat;
+    background-position: 2px 50%;
+    padding: 2px 2px 2px 30px;
+/*
+*/
+    margin: 0px;
+}
+.print{font-family:arial;font-size:8pt;}
+
+/* MySQL Parser */
+.syntax {font-family: sans-serif; font-size: 10px;}
+.syntax_comment            { padding-left: 4pt; padding-right: 4pt;}
+.syntax_digit              {}
+.syntax_digit_hex          {}
+.syntax_digit_integer      {}
+.syntax_digit_float        {}
+.syntax_punct              {}
+.syntax_alpha              {}
+.syntax_alpha_columnType   {text-transform: uppercase;}
+.syntax_alpha_columnAttrib {text-transform: uppercase;}
+.syntax_alpha_reservedWord {text-transform: uppercase; font-weight: bold;}
+.syntax_alpha_functionName {text-transform: uppercase;}
+.syntax_alpha_identifier   {}
+.syntax_alpha_charset      {}
+.syntax_alpha_variable     {}
+.syntax_quote              {white-space: pre;}
+.syntax_quote_backtick     {}
+
+/* tables */
+.tblError {
+    border:           1px solid #cc0000;
+    background-color: #ffffcc;
+}
+.tblWarn, div.tblWarn {
+    border: 1px solid #cc0000;
+    background-color: #ffffff;
+}
+div.tblWarn {
+    padding: 5px 5px 5px 5px;
+    margin:  2px 0px 2px 0px;
+    width:   100%;
+}
+.tblHeaders{
+    font-weight:         bold;
+    color:               #ffffff;
+    background-color:    #666699;
+        background-image:    url(../themes/darkblue_orange/img/tbl_header.png);
+    background-repeat:   repeat-x;
+    background-position: top;
+        height:              18px;
+}
+.tblHeaders a:link, .tblHeaders a:visited, .tblHeaders a:active, .tblFooters a:link, tblFooters a:visited, tblFooters a:active{
+    color:            #ffffcc;
+    text-decoration:  underline;
+}
+.tblFooters{
+    font-weight:         normal;
+    color:               #ffffff;
+    background-color:    #666699;
+        background-image:    url(../themes/darkblue_orange/img/tbl_header.png);
+    background-repeat:   repeat-x;
+    background-position: top;
+    }
+.tblHeaders a:hover, tblFooters a:hover{
+    text-decoration: none;
+    color:           #ffffff;
+}
+.tblHeadError {
+    font-weight:         bold;
+    color:               #ffffff;
+    background-color:    #cc0000;
+        background-image:    url(../themes/darkblue_orange/img/tbl_error.png);
+    background-repeat:   repeat-x;
+    background-position: top;
+        height:              18px;
+}
+div.errorhead {
+    font-weight: bold;
+    color: #ffffff;
+    text-align: left;
+        background-image: url(../themes/darkblue_orange/img/s_error.png);
+    background-repeat: no-repeat;
+    background-position: 2px 50%;
+    padding: 2px 2px 2px 20px;
+        margin: 0px;
+}
+
+.tblHeadWarn {
+    background-color:    #ffcc00;
+    font-weight:         bold;
+    color:               #000000;
+        background-image:    url(../themes/darkblue_orange/img/tbl_th.png);
+    background-repeat:   repeat-x;
+    background-position: top;
+        height:              18px;
+}
+div.warnhead {
+    font-weight: bold;
+    color: #ffffff;
+    text-align: left;
+        background-image: url(../themes/darkblue_orange/img/s_warn.png);
+    background-repeat: no-repeat;
+    background-position: 2px 50%;
+    padding: 2px 2px 2px 20px;
+        margin: 0px;
+}
+
+/* forbidden, no privilegs */
+.noPrivileges{
+    color:            #cc0000;
+    font-weight:      bold;
+}
+
+/* Heading for server links*/
+
+.serverinfo {
+    font-family:    Verdana, Arial, Helvetica, sans-serif;
+    font-size:      12px;
+    font-weight:    normal;
+    padding: 0px 0px 10px 0px;
+    margin: 0px;
+    white-space:    nowrap;
+    vertical-align: middle;
+}
+.serverinfo a:link, .serverinfo a:active, .serverinfo a:visited {
+    font-family:    Verdana, Arial, Helvetica, sans-serif;
+    font-size:      12px;
+    font-weight:    bolder;
+}
+.serverinfo a img{
+    vertical-align: middle;
+    margin: 0px 1px 0px 1px;
+}
+
+.serverinfo div{
+    background-image:    url(../themes/darkblue_orange/img/item_ltr.png);
+    background-repeat:   no-repeat;
+    background-position: 50% 50%;
+    width: 20px;
+    height: 16px;
+}
+hr{
+    color: #666699; background-color: #6666cc; border: 0; height: 1px;
+}
+
+/* navigation */
+.nav{
+    font-family:         Verdana, Arial, Helvetica, sans-serif;
+    color:               #000000;
+    background-color:    #666699;
+        background-image:    url(../themes/darkblue_orange/img/tbl_header.png);
+    background-repeat:   repeat-x;
+    background-position: top;
+        height:              22px;
+}
+
+.navSpacer{
+    width:            1px;
+    height:           16px;
+    background-color: #ffffff;
+}
+.navNormal {
+    font-family:         Verdana, Arial, Helvetica, sans-serif;
+    font-size:           10px;
+    font-weight:         bold;
+    color:               #000000;
+    background-color:    #666699;
+        background-image:    url(../themes/darkblue_orange/img/tbl_header.png);
+    background-repeat:   repeat-x;
+    background-position: top;
+        height:              20px;
+    padding: 2px 5px 2px 5px;
+}
+.navDrop {
+    font-family:         Verdana, Arial, Helvetica, sans-serif;
+    font-size:           10px;
+    font-weight:         bold;
+    color:               #000000;
+    background-color:    #cc0000;
+        background-image:    url(../themes/darkblue_orange/img/tbl_error.png);
+    background-repeat:   repeat-x;
+    background-position: top;
+        height:              20px;
+    padding: 2px 5px 2px 5px;
+}
+.navActive {
+    font-family:         Verdana, Arial, Helvetica, sans-serif;
+    font-size:           10px;
+    font-weight:         bold;
+    color:               #000000;
+    /*background-color:    #FF9900;
+    background-image:    url(../themes/darkblue_orange/img/tbl_th.png);
+    background-repeat:   repeat-x;
+    background-position: top;*/
+    background-color:    #ffffff;
+    height:              16px;
+    padding: 2px 5px 2px 5px;
+}
+.navNormal a:link,.navNormal a:active,.navNormal a:hover,.navNormal a:visited,.navDrop a:link,.navDrop a:active,.navDrop a:visited,.navDrop a:hover {
+    color:               #FFFFFF;
+}
+.navActive a:link,.navActive a:active,.navActive a:visited,.navActive a:hover {
+    color:               #000000;
+}
+img, input, select, button {
+    vertical-align: middle;
+}
+
+/* disabled text */
+.disabled, .disabled a:link, disabled a:active, .disabled a:visited {
+    font-family:      Verdana, Arial, Helvetica, sans-serif;
+    font-size:        10px;
+    color:            #666666;
+}
+.disabled a:hover {
+    font-family:      Verdana, Arial, Helvetica, sans-serif;
+    font-size:        10px;
+    color:            #666666;
+    text-decoration:  none;
+}
+tr.disabled td, td.disabled {
+    background-color: #cccccc;
+}
+
+/* some styles for IDs: */
+#buttonNo{
+    color:            #CC0000;
+    font-size:        10px;
+    font-weight:      bold;
+    padding:          0px 10px 0px 10px;
+}
+#buttonYes{
+    color:            #006600;
+    font-size:        10px;
+    font-weight:      bold;
+    padding:          0px 10px 0px 10px;
+}
+#buttonGo{
+    color:            #006600;
+    font-size:        10px;
+    font-weight:      bold;
+    padding:          0px 10px 0px 10px;
+}
+
+#listTable{
+    width:            260px;
+}
+
+#textSqlquery{
+    width:            450px;
+}
+#textSQLDUMP {
+   width: 95%;
+   height: 95%;
+   font-family: "Courier New", Courier, mono;
+   font-size:   11px;
+}
+#TooltipContainer {
+    position:   absolute;
+    z-index:    99;
+    width:      250px;
+    height:     50px;
+    overflow:   auto;
+    visibility: hidden;
+    background-color: #ffffcc;
+    color:            #006600;
+    border:           1px solid #000000;
+    padding:          5px;
+    font-family:      Verdana, Arial, Helvetica, sans-serif;
+    font-size:        10px;
+}
+
+.syntax_comment {color: #808000;}
+.syntax_comment_mysql {}
+.syntax_comment_ansi {}
+.syntax_comment_c {}
+.syntax_digit {}
+.syntax_digit_hex {color: teal;}
+.syntax_digit_integer {color: teal;}
+.syntax_digit_float {color: aqua;}
+.syntax_punct {color: fuchsia;}
+.syntax_alpha {}
+.syntax_alpha_columnType {color: #FF9900;}
+.syntax_alpha_columnAttrib {color: #0000FF;}
+.syntax_alpha_reservedWord {color: #990099;}
+.syntax_alpha_functionName {color: #FF0000;}
+.syntax_alpha_identifier {color: black;}
+.syntax_alpha_charset {color: #6495ed;}
+.syntax_alpha_variable {color: #800000;}
+.syntax_quote {color: #008000;}
+.syntax_quote_double {}
+.syntax_quote_single {}
+.syntax_quote_backtick {}
+.syntax_indent0 {margin-left: 0em;}
+.syntax_indent1 {margin-left: 1em;}
+.syntax_indent2 {margin-left: 2em;}
+.syntax_indent3 {margin-left: 3em;}
+.syntax_indent4 {margin-left: 4em;}
+.syntax_indent5 {margin-left: 5em;}
+.syntax_indent6 {margin-left: 6em;}
+.syntax_indent7 {margin-left: 7em;}
+
+/* Calendar */
+table.calendar {
+    width: 100%;
+}
+
+table.calendar td {
+    text-align: center;
+}
+
+table.calendar td a {
+    display: block;
+}
+
+table.calendar td a:hover {
+    background-color: #CCCCFF;
+}
+
+table.calendar th {
+    background-color: #666699;
+}
+
+table.calendar td.selected {
+    background-color: #FFCC99;
+}
+
+img.calendar {
+    border: none;
+}
+
+form.clock {
+    text-align: center;
+}
+
+.nowrap {
+    white-space: nowrap;
+}
+
+div.nowrap {
+    margin: 0px;
+    padding: 0px;
+}
+
+li {
+    padding-bottom: 1em;
+}
+
+li form {
+    display: inline;
+}
+
+ul.main {
+    margin: 0px;
+    padding-left:2em;
+    padding-right:2em;
+}
+
+/* no longer needed
+ul.main li {
+    list-style-image: url(../images/dot_violet.png);
+    padding-bottom: 0.1em;
+}
+*/
+
+button {
+    /* buttons in some browsers (eg. Konqueror) are block elements, this breaks design */
+    display: inline;
+}
+
+/* Tabs */
+
+/* For both light and non light */
+.tab {
+    white-space: nowrap;
+    font-weight: bolder;
+}
+
+/* For non light */
+td.tab {
+    width: 64px;
+    text-align: center;
+    background-color: #dfdfdf;
+}
+
+td.tab a {
+    display: block;
+}
+
+/* For light */
+div.tab { }
+
+/* Highlight active tab */
+td.activetab {
+    background-color: silver;
+}
+
+/* Textarea */
+
+textarea {
+    overflow: auto;
+}
+
+.nospace {
+    margin: 0px;
+    padding: 0px;
+}

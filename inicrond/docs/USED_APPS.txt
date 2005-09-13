@@ -1,0 +1,55 @@
+ADOdb 
+V4.62 2 Apr 2005
+http://adodb.sourceforge.net/
+BSD license and Lesser GPL library license
+(c) 2000-2005 John Lim
+
+HTMLArea
+3.0-RC3
+http://sf.net/projects/itools-htmlarea/
+htmlArea License (based on BSD license)
+Copyright (c) 2002-2004, interactivetools.com, inc.
+Copyright (c) 2003-2005 dynarch.com
+Mihai Bazon
+
+Smarty
+2.6.9
+http://smarty.php.net/
+GNU Lesser General Public
+Andrei Zmievski and Monte Ohrt
+copyright 2001-2005 New Digital Group, Inc
+
+
+PEAR
+http://pear.php.net/
+PHP license
+Sterling Hughes
+Stig Bakken
+Tomas V.V.Cox
+
+Image_Graph (PEAR)
+0.4.0 alpha
+http://pear.php.net/
+GNU Lesser General Public
+@copyright Copyright (C) 2003, 2004 Jesper Veggerby Hansen
+
+Image_Barcode (PEAR)
+
+Image_Color (PEAR)
+0.2
+http://pear.php.net/
+PHP license
+Jason Lotito
+Ulf Wendel
+Sebastian Bergmann
+Laurent Laville
+
+Math_Stats (PEAR)
+http://pear.php.net/
+PHP license
+Jesus M. Castagnetto 
+
+Math_Histogram (PEAR)
+http://pear.php.net/
+PHP license
+Jesus M. Castagnetto 

@@ -1,0 +1,10 @@
+THis is the initial schema.
+
+evaluations
+
+ev_id ev_name ev_weight	group_id	ev_max
+
+
+user_evaluation_scores
+
+usr_id  ev_id  ev_score

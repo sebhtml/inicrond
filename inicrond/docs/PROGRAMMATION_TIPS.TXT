@@ -1,0 +1,11 @@
+
+May 1, 2005
+
+* Do not use magic numbers. Use constants instead.
+
+April 30, 2005
+
+* An abstraction layer is always good to use.
+* Don't duplicate the code, create a class or something like that.
+* Each php script most do the minimum of actions to avoid confusion.
+* Each script must receive the lower amount of GET parameter(s) to avoid too much data validation for security purpose.
