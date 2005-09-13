@@ -1,6 +1,7 @@
 <?php
 //$Id$
 
+
 /*
 //---------------------------------------------------------------------
 //
@@ -9,9 +10,9 @@
 //
 //
 //Auteur : sebastien boisvert
-//email : sebhtml@yahoo.ca
-//site web : http://membres.lycos.fr/zs8
-//Projet : xoool
+//email : sebhtml@users.sourceforge.net
+//site web : http://inicrond.sourceforge.net/
+//Projet : inicrond
 //
 //---------------------------------------------------------------------
 */
@@ -38,10 +39,19 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 
 */
-include "modules/calendar/includes/lang/".$_SESSION["sebhtml"]["usr_communication_language"]."/lang.php";
-if(isset($_OPTIONS["INCLUDED"]))//sécurité.
-{
 
+define('__INICROND_INCLUDED__', TRUE);
+define('__INICROND_INCLUDE_PATH__', '../../');
+include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
+include 'includes/languages/'.$_SESSION['language'].'/lang.php';
+include __INICROND_INCLUDE_PATH__."includes/class/Month_calendar.class.php";//la classe calendrier.	
+
+
+
+//sécurité.
+{
+        
+        
 	if(isset($_GET["year"]) AND
 	$_GET["year"] != "" AND
 	(int) $_GET["year"]
@@ -57,233 +67,159 @@ if(isset($_OPTIONS["INCLUDED"]))//sécurité.
 			(int) $_GET["day"]
 			)//jour
 			{
-			
-								
-			$delta_time = 24*60*60;
-					
+                                
+                                
+                                $delta_time = 24*60*60;
+                                
+                                $module_title = "<a href=\"main_inc.php?&year=".$_GET["year"]."&cours_id=".$_GET['cours_id']."\">".$_GET["year"]."</a>".
+                                "/".
+                                "<a href=\"main_inc.php?&year=".$_GET["year"]."&month=".$_GET["month"]."&cours_id=".$_GET['cours_id']."\">".$_GET["month"]."</a>".
+                                "/".
+                                "<a href=\"main_inc.php?&year=".$_GET["year"]."&month=".$_GET["month"]."&day=".$_GET["day"]."&cours_id=".$_GET['cours_id']."\">".$_GET["day"]."</a>";
 				
 			}
 			else//mois courant
 			{
-		
-		//include "includes/class/Month_calendar.class.php";
-		
-		$calendrier = new Month_calendar($_GET["month"], $_GET["year"], "big", $_LANG["week_days"], $mon_objet);
-		
-		$tableau = $calendrier->get_calendar();
-		
-		//version imprimable du calendrier.
-$module_content .= retournerHref("printable_CAL.php?year=".$_GET["year"]."&month=". $_GET["month"]."", $_LANG["44"]["print"], "_blank");
-$delta_time = $calendrier->days_in_month()*24*60*60;
-
-
+                                
+                                //include "includes/class/Month_calendar.class.php";
+                                
+                                
+                                $calendrier = new Month_calendar;
+                                $calendrier->_LANG = $_LANG;
+                                $calendrier->month = $_GET["month"];
+                                $calendrier->year = $_GET["year"];
+                                $calendrier->type = "big";
+                                $calendrier->_RUN_TIME = &$_RUN_TIME;
+                                $tableau = $calendrier->output();
+                                
+                                $delta_time = $calendrier->nombre_de_jour*24*60*60;
+                                
+                                
+                                $module_title = "<a href=\"main_inc.php?&year=".$_GET["year"]."&cours_id=".$_GET['cours_id']."\">".$_GET["year"]."</a>".
+                                "/".
+                                "<a href=\"main_inc.php?&year=".$_GET["year"]."&month=".$_GET["month"]."\"&cours_id=".$_GET['cours_id'].">".$_GET["month"]."</a>";
+                                
+                                
 			}
 		}
 		else//année courante
 		{
-		
-		$tableau = array();
-			foreach($_LANG["months"] AS $key => $month_name)
+                        
+                        $tableau = array();
+			foreach($_OPTIONS["months"] AS $key )
 			{
-			$tableau []= array(retournerHref(
-			"?module_id=44&year=".$_GET["year"]."&month=$key", $month_name));	
+                                $tableau []= array(retournerHref(
+                                __INICROND_INCLUDE_PATH__."modules/calendar/main_inc.php?year=".$_GET["year"]."&month=$key&cours_id=".$_GET['cours_id']."", $_LANG["month_$key"]));	
 			}
-		
-	$delta_time = 365*24*60*60;
-		
-
+                        
+                        $delta_time = 365*24*60*60;
+                        
+                        $module_title = "<a href=\"main_inc.php?&year=".$_GET["year"]."&cours_id=".$_GET['cours_id']."\">".$_GET["year"]."</a>";
 		}
-
+                
 	}
 	else//toutes les années...
 	{
-	
-$annees = array(2004, 2005, 2006);
-$tableau = array();
-			foreach($annees AS $key)
-			{
+                
+                $annees = array(2004, 2005, 2006, 2007, 2008, 2009, 2010);
+                $tableau = array();
+                foreach($annees AS $key)
+                {
 			$tableau []= array(retournerHref(
-			"?module_id=44&year=$key", $key));	
-			}
-			
-	
-
+			__INICROND_INCLUDE_PATH__."modules/calendar/main_inc.php?year=$key&cours_id=".$_GET['cours_id']."", $key));	
+                }
+                
+                
+                $module_title = $_LANG['calendar'];
 	}
-	
-	
-		
-/*
-$time_stamp = gmmktime( $_GET["hour"],
-$_GET["min"], $_GET["sec"], $_GET["month"], $_GET["day"], $_GET["year"] );//buig ici...
-
-
-$module_content .= format_time_stamp($time_stamp, $_SESSION["sebhtml"]["usr_time_decal"], 
-$_LANG["txt_usr_time_decals"], $_LANG["months"], $_LANG["week_days"]);
-
-*/
-$module_content .= retournerTableauXY($tableau, "", "center");
-
-
-
-//------------
-//toutes les choses de cette date...
-//----------------
-
-
-	
-//$module_content = "";
-
-	$elements_titre = array(retournerHref("?module_id=44",
-	$_LANG["44"]["titre"]));
-	
-	if(isset($_GET["year"]))
-	{
-	$elements_titre []= retournerHref("?module_id=44&year=".$_GET["year"], $_GET["year"]);
-	} 
-	
-	
-	if(isset($_GET["month"]))
-	{
-	$elements_titre []= retournerHref("?module_id=44&year=".$_GET["year"]."&month=".$_GET["month"], $_LANG["months"][$_GET["month"]]);
-	} 
-	
-	if(isset($_GET["day"]))
-	{
-	 $elements_titre []= retournerHref("?module_id=44&year=".$_GET["year"]."&month=".$_GET["month"]."&day=". $_GET["day"], $_GET["day"]);
-	} 
-	
-	if(isset($_GET["hour"]))
-	{
-	$elements_titre []= retournerHref("?module_id=44&year=".$_GET["year"]."&month=".$_GET["month"]."&day=". $_GET["day"]."&hour=".$_GET["hour"], $_GET["hour"]);
-	} 
-	
-	//if(isset($_GET["min"]))
-	
-	
-	
-	if(!isset($_GET["month"]))
-	{
-	$_GET["month"] = 1;
-	}
-	if(!isset($_GET["day"]))
-	{
-	$_GET["day"] = 1;
-	}
-	
-	
-// titre
-$module_title = retourner_titre($elements_titre);
-
-$start = mktime( 0,0, 0, $_GET["month"], $_GET["day"], $_GET["year"] );
-
-//die(date("h:m:s, M:d:Y", $start));
-$start -= $_SESSION["sebhtml"]["usr_time_decal"]*60*60 ;
-
-$end = $start + $delta_time ;
-			
-			$queries[0] =
-			"SELECT
-				uploaded_file_title AS data2, uploaded_file_id AS data1
-		FROM 
-	".$_OPTIONS["table_prefix"].$_OPTIONS["tables"]["sebhtml_uploaded_files"]."
-	WHERE
-	uploaded_file_edit_gmt_timestamp>=$start
-	AND
-	uploaded_file_edit_gmt_timestamp<$end
-	 ";
-			
-			
-			$queries[1] =
-			"SELECT
-				forum_message_titre AS data3, forum_sujet_id AS data1,
-				forum_message_id AS data2
-		FROM 
-	".$_OPTIONS["table_prefix"].$_OPTIONS["tables"]["sebhtml_forum_messages"]."
-	WHERE
-	forum_message_edit_gmt_timestamp>=$start
-	AND
-	forum_message_edit_gmt_timestamp<$end
-	
-	 ";
-						
-			
-			
-			$queries[2] =
-			"SELECT
-			image_id AS data1,	
-image_title AS data2
- 
-		FROM 
-	".$_OPTIONS["table_prefix"].$_OPTIONS["tables"]["sebhtml_images"]."
-	WHERE
-	edit_gmt_timestamp>=$start
-	AND
-	edit_gmt_timestamp<$end
-	 ";
-			
-			
-			
-			$queries[3] =
-			"SELECT
-			wiki_id AS data1,
-			wiki_title  AS data2
-		FROM 
-	".$_OPTIONS["table_prefix"].$_OPTIONS["tables"]["wiki"]."
-	WHERE
-	wiki_ts>=$start
-	AND
-	wiki_ts<$end
-	;";
-		
-			
-			
-			$queries[4] =
-			"SELECT
-			usr_id AS data1,
-			usr_name  AS data2
-		FROM 
-	".$_OPTIONS["table_prefix"].$_OPTIONS["tables"]["sebhtml_usrs"]."
-	WHERE
-	usr_add_gmt_timestamp>=$start
-	AND
-	usr_add_gmt_timestamp<$end
-	;";
-			
-			
-			
-
-			$queries[5] =
-			"SELECT
-			link_id AS data1,
-			link_title  AS data2
-		FROM 
-	 ".$_OPTIONS["table_prefix"].$_OPTIONS["tables"]["links"]."
-	WHERE
-	edit_gmt_timestamp>=$start
-	AND
-	edit_gmt_timestamp<$end
-	;";
-			
-			
-		include "includes/class/Search_layout.class.php";
-
-
-$mon_bobu = new  Search_layout($queries, $_LANG, $mon_objet, $_OPTIONS);
- $module_content .= $mon_bobu->output();
- 	
-		     
-		
-			
-			
-	
+        if(isset($_GET['cours_id']))
+        {
+                $course_infos =  get_cours_infos($_GET['cours_id']);
+                $module_content .= retournerTableauXY($course_infos);
+        }
+        
+        if(isset($tableau))
+        {
+                $module_content .= retournerTableauXY($tableau);
+        }
+        
+        
+        //------------
+        //toutes les choses de cette date...
+        //----------------
+        
+        
+        
 	//
 	//le titre :
 	//
 	
 	
+	
+	
+	
+	
+	
+        
+        
+        
+        //$module_content = "";
+        if(!isset($_GET["month"]))
+        {
+                $_GET["month"] = 1 ;
+        }
+        if(!isset($_GET["day"]))
+        {
+                $_GET["day"] = 1 ;
+        }
+        
+        $start = mktime( 0,0, 0, $_GET["month"], $_GET["day"], $_GET["year"] );
+        
+        //die(date("h:m:s, M:d:Y", $start));
+        //$start -= $_SESSION['usr_time_decal']*60*60 ;
+        
+        //$start = inicrond_get_time_t_from_user_tz($start);
+        
+        $end = $start + $delta_time ;
+        //	$module_content .= "$start<br />$end";		
+        
+        if(isset($_GET["year"]) AND
+        is_in_charge_in_course($_SESSION['usr_id'], $_GET['cours_id'])
+        )
+        {
+                
+                
+                
+                $calendar_look_up = array(
+                array(
+                'QUERY_STRING' => "../../modules/marks/main.php?",
+                "TITLE" => $_LANG['marks']	
+                )
+                
+                , array(
+                'QUERY_STRING' => "../../modules/seSSi/one.php?",
+                "TITLE" => $_LANG['seSSi']	
+                )
+                , array(
+                'QUERY_STRING' => "../../modules/tests-results/results.php?",
+                "TITLE" => $_LANG['tests-results']	
+                )
+                );
+                
+                foreach($calendar_look_up AS  $value)
+                {
+                        
+                        $module_content .= "<a href=\"".
+                        $value['QUERY_STRING']."&start=$start&end=$end&cours_id=".$_GET['cours_id']."\">". 
+                        $value["TITLE"]."</a><br />";
+                        
+                }
+                
+                
+        }
 }
 
-			
-			
-		
+include __INICROND_INCLUDE_PATH__.'includes/kernel/post_modulation.php';
+
+
 ?>

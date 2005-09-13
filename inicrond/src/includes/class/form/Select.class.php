@@ -2,6 +2,7 @@
 //$Id$
 
 
+
 /*
 //---------------------------------------------------------------------
 //
@@ -10,8 +11,8 @@
 //
 //
 //Auteur : sebastien boisvert
-//email : sebhtml@yahoo.ca
-//site web : http://membres.lycos.fr/zs8
+//email : sebhtml@users.sourceforge.net
+//site web : http://inicrond.sourceforge.net/
 //Projet : inicrond
 //
 //---------------------------------------------------------------------
@@ -38,36 +39,52 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 */
 
-if(isset($_OPTIONS["INCLUDED"]))
+if(__INICROND_INCLUDED__)
 {
-
+        
 	class Select extends Base
 	{
-	
-	var $tableau;
-	
+                
+                var $tableau;
+                /**
+                * constructor
+                *
+                * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
+                * @version      1.0.0
+                */	
 		function Select()
 		{
-		$this->tableau = array();
+                        $this->tableau = array();
 		}
-		
+                /**
+                * add a option in the select
+                *
+                * @param        object  $option  an option for the select
+                * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
+                * @version      1.0.0
+                */		
 		function add_option($option)
 		{
-		$this->tableau []= array($option->get_text(), $option->get_value(), $option->get_selected());
+                        $this->tableau []= array($option->get_text(), $option->get_value(), $option->get_selected());
 		}
-		
+                /**
+                * validate the form object
+                *
+                * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
+                * @version      1.0.0
+                */		
 		function validate()
 		{
-		$this->form_o = "<select name=\"".$this->name."\">";
+                        $this->form_o = "<select name=\"".$this->name."\">";
 			foreach($this->tableau AS $objet)
 			{
-			$this->form_o .= "<option ".$objet[2]." value=\"".$objet[1]."\">".$objet[0]."</option>";
+                                $this->form_o .= "<option ".$objet[2]." value=\"".$objet[1]."\">".$objet[0]."</option>";
 			}
-		$this->form_o .= "</select>";
+                        $this->form_o .= "</select>";
 		}
 		
 		
-			
+                
 	}
 }
 
