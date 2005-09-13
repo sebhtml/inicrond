@@ -1,0 +1,22 @@
+This is my release procedure. X
+
+Before tagging the files :  X
+
+* check the patch entry and check if the schema is equal to it. X
+* try a clean install. X
+* publish languages files. X
+* patch a production dataset in local. X
+	source <sql_file> X
+
+After before tagging the files (of course.): X
+
+* update the tag file. X
+* commit with release announcement X
+* tag the files
+	cvs tag <tag_name> *
+	
+* export the files
+	sh export_cvs.sh <tag_name>
+	
+* sourceforge release
+* freshmeat release

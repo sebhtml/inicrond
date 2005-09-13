@@ -1,0 +1,35 @@
+inicrond application programming interface
+
+The following functions provide basic access to the level of security. For further informations, go see the 'includes/functions/' directory in the kernel and for each module.
+
+//////////////////////////
+Groups Functions
+
+is_chef_of_group($usr_id, $group_id)
+
+is_in_charge_of_group($usr_id, $group_id)
+
+is_usr_in_group($usr_id, $group_id)
+
+//////////////////////////
+Members Functions
+
+is_in_charge_of_user($usr_id, $asked_user_id)
+
+//////////////////////////
+Courses Functions
+
+is_student_of_cours($usr_id, $cours_id)
+
+is_teacher_of_cours($usr_id, $cours_id)
+
+is_in_charge_in_course($usr_id, $cours_id)
+
+//////////////////////////
+DB Classes 
+
+$this objects is an instance of a class that is similar to adodb with the methods. On the other hand, this class only support adodb and is optimised for easy-programming and portability because de inside can be edited like an onion. See the 'includes/class' directory for more details.
+
+$rs = $inicrond_db->Execute($query)
+
+$f = $rs->FetchRow()

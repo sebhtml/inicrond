@@ -1,0 +1,115 @@
+# . backup your database.
+# . run those queries. 
+# . Erase includes/etc/ro/options_Variable.php
+# . update the options of the application.
+# . ENlever virtual addr dans db_config.php.
+# . mettre l'option save page view à Off.
+# . mettre save_nobody_sessions à Off.
+# . Vérifier si server_time_zone_adjustment_in_seconds rle dles problèmes de time zone.
+# . try the forgot password module.
+# . try the mass email sender.
+
+DROP TABLE `ooo_sebhtml_mod_conf`;
+
+
+CREATE TABLE ooo_smarty_cache_config  (
+mod_dir VARCHAR (32),
+tpl_file VARCHAR (32),
+#this field is used to order by entries
+cache_lifetime INT UNSIGNED DEFAULT 0
+);
+
+
+INSERT INTO ooo_smarty_cache_config (mod_dir, tpl_file, cache_lifetime) VALUES ('calendar', 'calendar_block.tpl', 60);
+
+INSERT INTO ooo_smarty_cache_config (mod_dir, tpl_file, cache_lifetime) VALUES ('courses', 'inode.tpl', 60);
+
+ALTER TABLE `ooo_sebhtml_options`
+  DROP `auto_disconnect_in_min`,
+  DROP `auto_disconnect_in_min_with_start`;
+  
+  ALTER TABLE `ooo_usrs`
+  DROP `usr_localisation`,
+  DROP `usr_web_site`,
+  DROP `usr_job`,
+  DROP `usr_hobbies`,
+  DROP `usr_status`,
+  DROP `phone_number`,
+  DROP `show_phone_number`,
+  DROP `auto_disconnect_in_min`,
+  DROP `auto_disconnect_in_min_with_start`;
+  
+  ALTER TABLE `ooo_usrs`
+  DROP `results_per_page`;
+  
+  ALTER TABLE `ooo_online_time`
+  DROP `expire_GMT_timestamp`,
+  DROP `re_ask_password_ts_GMT`;
+  
+  
+  ALTER TABLE `ooo_online_time`
+  DROP `HTTP_ACCEPT`,
+  DROP `HTTP_ACCEPT_LANGUAGE`,
+  DROP `HTTP_ACCEPT_ENCODING`,
+  DROP `HTTP_ACCEPT_CHARSET`;
+  
+  DROP TABLE `ooo_sebhtml_options`;
+  
+CREATE TABLE ooo_sebhtml_options (
+opt_name VARCHAR(255),
+opt_value VARCHAR(255)
+);
+
+
+INSERT INTO ooo_sebhtml_options (opt_name, opt_value) VALUES ('register_validation_mode', '0');
+INSERT INTO ooo_sebhtml_options (opt_name, opt_value) VALUES ('preg_file_name', '/^[^ ]+$/');
+INSERT INTO ooo_sebhtml_options (opt_name, opt_value) VALUES ('results_per_page', '30');
+INSERT INTO ooo_sebhtml_options (opt_name, opt_value) VALUES ('debug_mode', '0');
+INSERT INTO ooo_sebhtml_options (opt_name, opt_value) VALUES ('footer', '');
+INSERT INTO ooo_sebhtml_options (opt_name, opt_value) VALUES ('header', '');
+INSERT INTO ooo_sebhtml_options (opt_name, opt_value) VALUES ('separator', '/');
+INSERT INTO ooo_sebhtml_options (opt_name, opt_value) VALUES ('titre', 'Titre');
+INSERT INTO ooo_sebhtml_options (opt_name, opt_value) VALUES ('preg_usr', '/[a-zA-Z0-9_]{4,16}/');
+INSERT INTO ooo_sebhtml_options (opt_name, opt_value) VALUES ('preg_email', '/^[a-zA-Z0-9_.-]{1,}@[a-zA-Z0-9_.-]{1,}[a-zA-Z]$/');
+INSERT INTO ooo_sebhtml_options (opt_name, opt_value) VALUES ('usr_time_decal', '-5');
+INSERT INTO ooo_sebhtml_options (opt_name, opt_value) VALUES ('language', 'fr-ca');
+
+INSERT INTO ooo_sebhtml_options (opt_name, opt_value) VALUES ('virtual_addr', 'http://darkstar/');
+
+INSERT INTO ooo_sebhtml_options (opt_name, opt_value) VALUES ('save_page_view', '0');
+INSERT INTO ooo_sebhtml_options (opt_name, opt_value) VALUES ('save_nobody_sessions', '0');
+
+
+INSERT INTO ooo_smarty_cache_config (mod_dir, tpl_file, cache_lifetime) VALUES ('courses', 'flash.tpl', '60');
+
+INSERT INTO ooo_smarty_cache_config (mod_dir, tpl_file, cache_lifetime) VALUES ('courses', 'flash2.tpl', '60');
+
+INSERT INTO ooo_sebhtml_options (opt_name, opt_value) VALUES ('smarty_use_sub_dirs', '0');
+INSERT INTO ooo_sebhtml_options (opt_name, opt_value) VALUES ('smarty_compile_check', '0');
+INSERT INTO ooo_sebhtml_options (opt_name, opt_value) VALUES ('smarty_force_compile', '0');
+
+
+INSERT INTO ooo_sebhtml_options (opt_name, opt_value) VALUES ('server_time_zone_adjustment_in_seconds', '0');
+
+INSERT INTO ooo_smarty_cache_config (mod_dir, tpl_file, cache_lifetime) VALUES ('mod_forum', 'thread.tpl', '60');
+
+INSERT INTO ooo_smarty_cache_config (mod_dir, tpl_file, cache_lifetime) VALUES ('mod_forum', 'forum_thread_listing.tpl', '60');
+
+INSERT INTO ooo_smarty_cache_config (mod_dir, tpl_file, cache_lifetime) VALUES ('mod_forum', 'main.tpl', '60');
+
+
+INSERT INTO ooo_smarty_cache_config (mod_dir, tpl_file, cache_lifetime) VALUES ('tests-results', 'result.tpl', '60');
+
+DROP TABLE `ooo_new_password_requests`;
+
+ALTER TABLE `ooo_usrs` ADD `new_password_secure_str` CHAR( 32 ) NOT NULL ;
+
+DROP TABLE `ooo_sections_groups_admin`;
+
+ALTER TABLE `ooo_sebhtml_forum_sections` ADD `cours_id` INT NOT NULL DEFAULT 1;
+
+ALTER TABLE `ooo_sebhtml_forum_sections` ADD INDEX ( `cours_id` ) ;
+
+ALTER TABLE `ooo_cours`
+  DROP `news_forum_id`,
+  DROP `enable_RSS`;

@@ -1,0 +1,22 @@
+//$Id$
+
+Dependencies:  
+	Included in inicrond :
+		htmlArea (Default branch) (required)
+		Smarty PHP template engine (Default branch) (required)
+		ADODB (optional) SEE inicrond/src/includes/kernel/db_init.php
+
+	Others :
+		Apache (required)
+		MySQL >=4.0 (required)
+		PHP >=4.3, work with php5 (required)
+			PCRE (required)
+			Freetype (recommended)
+			gd (recommended)
+			zlib (recommended)
+
+
+SEE http://freshmeat.net/inicrond/ for the dependencies
+
+1) copy all the thing from src to your directory
+2) http://path/to/site/install.php
