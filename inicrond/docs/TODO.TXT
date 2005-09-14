@@ -2,3 +2,6 @@ add question in form
 script that autoindent stuff.
 remove all .directory.
 check files to remove.
+create the inicrond_3_3_x branch.
+check if a fisingle file in a dir, the dir is exported if the file is not in the asked rbanch
+changer la couleur.
