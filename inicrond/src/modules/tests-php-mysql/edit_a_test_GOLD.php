@@ -298,17 +298,17 @@ is_teacher_of_cours($_SESSION["usr_id"],test_2_cours($_GET["test_id"]))
                 //questions...
                 $add_qs = array();
                 //ajouter une question choix multiples
-                $add_qs []= array("", retournerHref("../../modules/tests-php-mysql/add_q.php?q_type=0&test_id=".$_GET["test_id"], $_LANG["add_q_0"]));
+                $add_qs []= array("", retournerHref("../../modules/tests-php-mysql/add_q_GOLD.php?q_type=0&test_id=".$_GET["test_id"], $_LANG["add_q_0"]));
                 
-                //ajouter une question réponse courte
-                $add_qs []= array("", retournerHref("../../modules/tests-php-mysql/add_q.php?q_type=1&test_id=".$_GET["test_id"], $_LANG["add_q_1"]));
+                //ajouter une question rÃ©ponse courte
+                $add_qs []= array("", retournerHref("../../modules/tests-php-mysql/add_q_GOLD.php?q_type=1&test_id=".$_GET["test_id"], $_LANG["add_q_1"]));
                 
                 //ajouter une question FLASH
-                $add_qs []= array("", retournerHref("../../modules/tests-php-mysql/add_q.php?q_type=2&test_id=".$_GET["test_id"], $_LANG["add_q_2"]));
+                $add_qs []= array("", retournerHref("../../modules/tests-php-mysql/add_q_GOLD.php?q_type=2&test_id=".$_GET["test_id"], $_LANG["add_q_2"]));
                 
                 
                 //add a multiple short answer question
-                $add_qs []= array("", retournerHref("../../modules/tests-php-mysql/add_q.php?q_type=3&test_id=".$_GET["test_id"], $_LANG["add_q_3"]));
+                $add_qs []= array("", retournerHref("../../modules/tests-php-mysql/add_q_GOLD.php?q_type=3&test_id=".$_GET["test_id"], $_LANG["add_q_3"]));
                 
                 
                 //add a question that already exists
@@ -559,18 +559,18 @@ is_teacher_of_cours($_SESSION["usr_id"],test_2_cours($_GET["test_id"]))
                                 //
                                 
                                 //
-                                //CHOIX DE RÉPONSES
+                                //CHOIX DE RÃ‰PONSES
                                 //
                                 
                                 
                                 
-                                //ajouter une réponse...
+                                //ajouter une rÃ©ponse...
                                 $this_question["add_answer"] = retournerHref("add_a.php?question_id=".$fetch_result["question_id"]."&test_id=".$_GET["test_id"], $_LANG["add_answer"]);
                                 
                                 
                                 
                                 //
-                                //RÉPONSES
+                                //RÃ‰PONSES
                                 //
                                 $query = "SELECT
                                 answer_id,
@@ -589,7 +589,7 @@ is_teacher_of_cours($_SESSION["usr_id"],test_2_cours($_GET["test_id"]))
                                 $query_result_2 = $inicrond_db->Execute($query);	
                                 
                                 
-                                $a_num = 65 ;//la lettre de la réponse...
+                                $a_num = 65 ;//la lettre de la rÃ©ponse...
                                 $this_question["answers"] = array();
                                 
                                 while($fetch_result_2 = $query_result_2->FetchRow())
@@ -601,7 +601,7 @@ is_teacher_of_cours($_SESSION["usr_id"],test_2_cours($_GET["test_id"]))
                                         
                                         $this_answer["id"] = chr($a_num);
                                         //
-                                        //la réponse
+                                        //la rÃ©ponse
                                         //
                                         
                                         
@@ -634,7 +634,7 @@ is_teacher_of_cours($_SESSION["usr_id"],test_2_cours($_GET["test_id"]))
                                         $this_answer["pts_amount_for_bad_answer_form_o"] = $my_text->get_form_o();
                                         
                                         ///
-                                        //LE FLAG BONNE RÉPONSE
+                                        //LE FLAG BONNE RÃ‰PONSE
                                         //
                                         
                                         
@@ -665,7 +665,7 @@ is_teacher_of_cours($_SESSION["usr_id"],test_2_cours($_GET["test_id"]))
                                         $this_answer["is_good_flag"] = $select->get_form_o();
                                         
                                         //
-                                        //FIN DU FLAG BONNE RÉPONSE 
+                                        //FIN DU FLAG BONNE RÃ‰PONSE 
                                         //
                                         
                                         
@@ -673,7 +673,7 @@ is_teacher_of_cours($_SESSION["usr_id"],test_2_cours($_GET["test_id"]))
                                         
                                         
                                         
-                                        //enlever cette réponse
+                                        //enlever cette rÃ©ponse
                                         $this_answer["remove"] =  retournerHref("rm_a.php?answer_id=".$fetch_result_2["answer_id"]."&test_id=".$_GET["test_id"], $_LANG["remove"]);
                                         
                                         //monter
@@ -684,11 +684,11 @@ is_teacher_of_cours($_SESSION["usr_id"],test_2_cours($_GET["test_id"]))
                                         
                                         
                                         
-                                        $a_num++;//incrémente le # de question
+                                        $a_num++;//incrÃ©mente le # de question
                                         
                                         $this_question["answers"] []= $this_answer;	
                                 }
-                        }//fin du if pour les choix de réponses
+                        }//fin du if pour les choix de rÃ©ponses
                         
                         //////////////
                         elseif($fetch_result["q_type"] == 3)
@@ -767,18 +767,18 @@ is_teacher_of_cours($_SESSION["usr_id"],test_2_cours($_GET["test_id"]))
                                 //
                                 
                                 //
-                                //CHOIX DE RÉPONSES
+                                //CHOIX DE RÃ‰PONSES
                                 //
                                 
                                 
                                 
-                                //ajouter une réponse...
+                                //ajouter une rÃ©ponse...
                                 $this_question["add_answer"] = retournerHref("add_short_a.php?question_id=".$fetch_result["question_id"]."&test_id=".$_GET["test_id"], $_LANG["add_answer"]);
                                 
                                 
                                 
                                 //
-                                //RÉPONSES
+                                //RÃ‰PONSES
                                 //
                                 $query = "SELECT
                                 short_answer_id,
@@ -797,7 +797,7 @@ is_teacher_of_cours($_SESSION["usr_id"],test_2_cours($_GET["test_id"]))
                                 $query_result_2 = $inicrond_db->Execute($query);	
                                 
                                 
-                                //$a_num = 65 ;//la lettre de la réponse...
+                                //$a_num = 65 ;//la lettre de la rÃ©ponse...
                                 $this_question["answers"] = array();
                                 
                                 while($fetch_result_2 = $query_result_2->FetchRow())
@@ -809,7 +809,7 @@ is_teacher_of_cours($_SESSION["usr_id"],test_2_cours($_GET["test_id"]))
                                         
                                         //$this_answer["id"] = chr($a_num);
                                         //
-                                        //la réponse
+                                        //la rÃ©ponse
                                         //
                                         
                                         
@@ -842,7 +842,7 @@ is_teacher_of_cours($_SESSION["usr_id"],test_2_cours($_GET["test_id"]))
                                         $this_answer["pts_amount_for_bad_answer_form_o"] = $my_text->get_form_o();
                                         
                                         ///
-                                        //LE FLAG BONNE RÉPONSE
+                                        //LE FLAG BONNE RÃ‰PONSE
                                         //
                                         /*
                                         
@@ -873,7 +873,7 @@ is_teacher_of_cours($_SESSION["usr_id"],test_2_cours($_GET["test_id"]))
                                         $this_answer["is_good_flag"] = $select->get_form_o();
                                         
                                         //
-                                        //FIN DU FLAG BONNE RÉPONSE 
+                                        //FIN DU FLAG BONNE RÃ‰PONSE 
                                         //
                                         */
                                         
@@ -881,15 +881,15 @@ is_teacher_of_cours($_SESSION["usr_id"],test_2_cours($_GET["test_id"]))
                                         
                                         
                                         
-                                        //enlever cette réponse
+                                        //enlever cette rÃ©ponse
                                         $this_answer["remove"] =  retournerHref("rm_short_a.php?short_answer_id=".$fetch_result_2["short_answer_id"]."&test_id=".$_GET["test_id"], $_LANG["remove"]);
                                         
                                         
-                                        //$a_num++;//incrémente le # de question
+                                        //$a_num++;//incrÃ©mente le # de question
                                         
                                         $this_question["answers"] []= $this_answer;	
                                 }
-                        }//fin du if pour les choix de réponses
+                        }//fin du if pour les choix de rÃ©ponses
                         ///////////////////////
                         elseif($fetch_result["q_type"] == 1)
                         {
@@ -927,8 +927,7 @@ is_teacher_of_cours($_SESSION["usr_id"],test_2_cours($_GET["test_id"]))
                                 ".$_OPTIONS["table_prefix"].$_OPTIONS["tables"]["tests"]."
                                 
                                 WHERE 
-                                chapitre_media_type = 1
-                                AND
+                                
                                 ".$_OPTIONS["table_prefix"].$_OPTIONS["tables"]["tests"].".test_id=".$_GET["test_id"]."
                                 
                                 
@@ -958,13 +957,13 @@ is_teacher_of_cours($_SESSION["usr_id"],test_2_cours($_GET["test_id"]))
                                 
                         }
                         //
-                        //FIN DE RÉPONSES
+                        //FIN DE RÃ‰PONSES
                         //
                         
                         
                         
                         
-                        $q_num++;//incrémente le # de question
+                        $q_num++;//incrÃ©mente le # de question
                         $questions []= $this_question;
                 }
                 
@@ -1001,7 +1000,7 @@ is_teacher_of_cours($_SESSION["usr_id"],test_2_cours($_GET["test_id"]))
                 
                 $module_content .= $smarty->fetch($_OPTIONS["theme"]."/edit_a_test_GOLD.tpl");
                 
-        }//fin de la vérificaiton de l'auteur.
+        }//fin de la vÃ©rificaiton de l'auteur.
         
 }
 

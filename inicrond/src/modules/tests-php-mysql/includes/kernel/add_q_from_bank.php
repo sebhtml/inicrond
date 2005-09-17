@@ -53,7 +53,7 @@ if(__INICROND_INCLUDED__)
         
         include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
         
-        js_redir("edit.php?test_id=".$_GET['test_id']);
+        js_redir("edit_a_test_GOLD.php?test_id=".$_GET['test_id']);
         
         
 }

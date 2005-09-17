@@ -15,8 +15,24 @@
 	{/section}
 	</table>
 	</fieldset>
-	{* add a question *}
+		
+		{* add a question *}
 	
+	<fieldset>
+		<legend>{$_LANG.question_adding}</legend>
+	<table cellspacing="5" cellpadding="5"   >
+	{section name=row loop=$add_qs}
+		<tr>
+		{section name=cell loop=$add_qs[row]}
+			<td class="top_menu">{$add_qs[row][cell]}</td>
+		{/section}
+		</tr>
+	{/section}
+	</table>
+	
+	{* add a question from the bank *}
+	
+	</fieldset>
 
 	
 <table cellspacing="5" cellpadding="5"   >
