@@ -1,10 +1,12 @@
-script that autoindent stuff.
-remove all .directory.
-check files to remove.
-create the inicrond_3_3_x branch.
-check if a fisingle file in a dir, the dir is exported if the file is not in the asked rbanch
+* script that autoindent stuff.
+* remove all .directory.
+* check files to remove.
+* create the inicrond_3_3_x branch.
+* check if a fisingle file in a dir, the dir is exported if the file is not in the asked rbanch
 
-	 Query :
+* aucune question dispo :
+
+Query :
 	INSERT INTO
 	ooo_question_linking
 	
@@ -23,3 +25,4 @@ check if a fisingle file in a dir, the dir is exported if the file is not in the
 	Line 58
 	Variables : Array
 
+* enlever le beta dans edit_A_Test_gold et indiquer cela dans le source code...
