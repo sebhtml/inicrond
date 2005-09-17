@@ -1,2 +1,4 @@
 add question in form
 script that autoindent stuff.
+remove all .directory.
+check files to remove.

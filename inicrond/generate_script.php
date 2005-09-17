@@ -16,6 +16,7 @@ perl -p -i -e 's/\. =/ .= /g' *.php #	. = to .=
 rm *~ #remove those ugly files
 }
 
+
 ";
 
 //here I open src and foreach dir that containt .php file, I add a line
