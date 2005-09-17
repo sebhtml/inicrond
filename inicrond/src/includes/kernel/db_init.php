@@ -40,9 +40,9 @@ include __INICROND_INCLUDE_PATH__.$_OPTIONS["file_path"]["sql_tables"] ;
 include __INICROND_INCLUDE_PATH__."includes/etc/options_inc.php";
 
 $connect_type= $_OPTIONS['sql_server_persistency'] ? "PConnect" : "Connect";
-
-//adodb here...
 /*
+//adodb here...
+
 include __INICROND_INCLUDE_PATH__.'libs/adodb/adodb.inc.php';
 
 
@@ -55,8 +55,8 @@ $_OPTIONS['sql_user_password'],
 $_OPTIONS['sql_database_name']
 );
 $inicrond_db->SetFetchMode(ADODB_FETCH_ASSOC);
-
 */
+
 //my own class that are mysql only, but faster...
 
 
