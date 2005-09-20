@@ -26,3 +26,6 @@ Query :
 	Variables : Array
 
 * enlever le beta dans edit_A_Test_gold et indiquer cela dans le source code...
+
+* remove the wiki from inicrond_3_3_x branch
+*use rtag to do the current state of the branch to the inicrond_3_3_1_beta4 tag.
