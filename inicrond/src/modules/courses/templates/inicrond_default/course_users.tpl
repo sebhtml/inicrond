@@ -47,7 +47,7 @@
 <table>
 	{section name=user loop=$big_array.students[group].users}
 <tr><td >
-<a href="{$big_array.students[group].users[user].usr_link}">{$big_array.students[group].users[user].usr_name}</a></td><td >{$big_array.students[group].users[user].usr_nom}</td><td> {$big_array.students[group].users[user].usr_prenom}</td></tr>
+<a href="{$big_array.students[group].users[user].usr_link}">{$big_array.students[group].users[user].usr_name}</a></td><td ><u>{$big_array.students[group].users[user].usr_nom}</u></td><td> {$big_array.students[group].users[user].usr_prenom}</td></tr>
 
 
 
