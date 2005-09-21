@@ -11,7 +11,7 @@
 #
 VERSION=$1
 
-export CVSROOT="/home/sebhtml/cvs" #the root for cvs
+export CVSROOT=":ext:sebhtml@cvs.sf.net:/cvsroot/inicrond" #the root for cvs
 
 CHANGE_LOG_FILE="Changelog.txt" #change log path
 
