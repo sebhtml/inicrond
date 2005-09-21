@@ -1,7 +1,7 @@
 {* Smarty *}
 <p align="center">
 <form method="POST">
-<h1>BETA, based on inicrond 3.2.0</h1>
+
 {* test conf *}
 <fieldset>
 		<legend>{$_LANG.test_configuration}</legend>

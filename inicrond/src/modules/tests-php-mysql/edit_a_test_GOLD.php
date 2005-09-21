@@ -34,8 +34,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 //
 //---------------------------------------------------------------------
 */
+
+//<h1>, based on inicrond 3.2.0</h1>
 define("__INICROND_INCLUDED__", TRUE);
-define("__INICROND_INCLUDE_PATH__", "../../");
+define('__INICROND_INCLUDE_PATH__', "../../");
 include __INICROND_INCLUDE_PATH__."includes/kernel/pre_modulation.php";
 include "includes/languages/".$_SESSION["language"]."/lang.php";
 
