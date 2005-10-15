@@ -64,7 +64,12 @@ is_teacher_of_cours($_SESSION['usr_id'], $_GET['cours_id'])
 //ajouter
 {
         include __INICROND_INCLUDE_PATH__."modules/courses/includes/functions/inode_full_path.php";	
-        $module_content .= inode_full_path($_GET['inode_id_location']);
+        
+    
+  
+    $module_content .= inode_full_path($_GET['inode_id_location'], $_GET['cours_id']);
+        
+  
         
         $module_title =  $_LANG['add'];
         
