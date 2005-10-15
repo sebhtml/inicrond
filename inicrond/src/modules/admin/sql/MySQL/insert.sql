@@ -10,7 +10,7 @@ INSERT INTO sebhtml_options (opt_name, opt_value) VALUES ('footer', '');
 INSERT INTO sebhtml_options (opt_name, opt_value) VALUES ('header', '');
 INSERT INTO sebhtml_options (opt_name, opt_value) VALUES ('separator', '/');
 INSERT INTO sebhtml_options (opt_name, opt_value) VALUES ('titre', 'Titre');
-INSERT INTO sebhtml_options (opt_name, opt_value) VALUES ('preg_usr', '/[a-zA-Z0-9_]{4,16}/');
+INSERT INTO sebhtml_options (opt_name, opt_value) VALUES ('preg_usr', '/^[a-zA-Z0-9_]{4,16}$/');
 INSERT INTO sebhtml_options (opt_name, opt_value) VALUES ('preg_email', '/^[a-zA-Z0-9_.-]{1,}@[a-zA-Z0-9_.-]{1,}[a-zA-Z]$/');
 INSERT INTO sebhtml_options (opt_name, opt_value) VALUES ('usr_time_decal', '-5');
 INSERT INTO sebhtml_options (opt_name, opt_value) VALUES ('language', 'en-ca');
