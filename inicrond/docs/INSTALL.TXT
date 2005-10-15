@@ -16,7 +16,7 @@ Dependencies:
 			zlib (recommended)
 
 
-SEE http://freshmeat.net/inicrond/ for the dependencies
+SEE http://freshmeat.net/projects/inicrond/ for the dependencies
 
 1) copy all the thing from src to your directory
 2) http://path/to/site/install.php

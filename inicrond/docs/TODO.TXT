@@ -1,10 +1,5 @@
 script de maintenance,
 chercher pourquoi le forum se désactive.
-=-------------
-le accents dans les usr names???
- le - dans le user name??
- 
-changer email.
+
 Sigle==
 
-procedures ...
