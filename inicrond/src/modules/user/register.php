@@ -242,6 +242,7 @@ if(!isset($_SESSION['usr_id']))//création de personnages
 	else//on modifie !!!
 	{
                 
+                $module_content .= 'd'.$_OPTIONS['preg_usr'].'D' ;
                 
                 include __INICROND_INCLUDE_PATH__."includes/functions/fonctions_validation.function.php";
                 
