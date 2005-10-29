@@ -1,20 +1,12 @@
 <?php
 //$Id$
 
-
-
-/*
-//---------------------------------------------------------------------
-//
-//
-//Fonction du fichier : l'index du site
-//
-//
 //Auteur : sebastien boisvert
 //email :  sebhtml@users.sourceforge.net
 //site web : http://inicrond.sourceforge.net/
 //Projet : inicrond
 
+/*
 Copyright (C) 2004  Sebastien Boisverthttp://www.gnu.org/copyleft/gpl.html
 
 This program is free software; you can redistribute it and/or
@@ -31,32 +23,13 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-//
-//---------------------------------------------------------------------
 */
+
 define('__INICROND_INCLUDED__', TRUE);
 define('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
-
-/*
-
-foreach( $_OPTIONS['modules'] AS $key => $value)
-{
-        echo "\$contenu = str_replace(
-        \"?module_id=$key\",
-        \"../../$value\",
-        \$contenu);
-        
-        ";
-        
-}
-
-*/
-//-----------------------
-// titre
-//---------------------
 
 
 $module_title =  $_LANG['connexion'];
@@ -65,7 +38,7 @@ $module_title =  $_LANG['connexion'];
 //v?ifie la session
 if(isset($_SESSION['usr_id']) )
 { 
-	$module_content .= $_LANG['connected'] ;
+    $module_content .= $_LANG['connected'] ;
 }
 
 else
@@ -200,10 +173,13 @@ else
                                 }
                                 
                         }
+                        else //do a redirection
+                        {
                         
                         include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
                         js_redir($_OPTIONS["log_in_redirection"]);
-                        //exit();//va aux ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours']."
+    
+                        }   
 		}
 		
 		elseif(isset($r["usr_activation"]) AND
