@@ -110,18 +110,19 @@ if($_SESSION['SUID'])
                         ";
                         
                         $rs2 = $inicrond_db->Execute($query);
-                        $output = "<?php
-                        
-                        // lang_file : ".$fetch_result['lang_file']."
-                        // language : $language
-                        // ".date("r")."
-                        
-                        ";
+                        $output = 
+"<?php
+
+// lang_file : ".$fetch_result['lang_file']."
+// language : $language
+// ".date("r")."
+
+";
                         while($fetch_result2 = $rs2->FetchRow())//foreach langfile.
                         {
                                 
                                 $output .= '$_LANG[\''.$fetch_result2['string'].'\'] = \''.str_replace('\'', '\\\'', $fetch_result2['content']).'\';
-                                ';  
+';  
                         }
                         
                         $output .= "

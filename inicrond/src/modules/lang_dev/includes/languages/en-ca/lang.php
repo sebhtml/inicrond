@@ -2,7 +2,7 @@
 
 // lang_file : modules/lang_dev/includes/languages/en-ca/lang.php
 // language : en-ca
-// Fri,  9 Sep 2005 19:12:41 +0000
+// Fri, 28 Oct 2005 21:01:52 -0400
 
 $_LANG['add_lang'] = 'Add a new lang , based on all en-ca strings';
 $_LANG['add_lang_file'] = 'Add a language file (write a en-ca adress and the other will be like this one)';
@@ -31,4 +31,4 @@ $_LANG['the_string_have_been_inserted'] = 'The string have been inserted.';
 $_LANG['the_string_is_different'] = 'The content of %s is different in %s (%s), the current content is %s and the database content is %s.';
 $_LANG['write_lang_files'] = 'Write language files for a language';
 
-?>
+                        ?>
