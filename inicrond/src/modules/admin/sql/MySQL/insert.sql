@@ -15,7 +15,7 @@ INSERT INTO sebhtml_options (opt_name, opt_value) VALUES ('preg_email', '/^[a-zA
 INSERT INTO sebhtml_options (opt_name, opt_value) VALUES ('usr_time_decal', '-5');
 INSERT INTO sebhtml_options (opt_name, opt_value) VALUES ('language', 'en-ca');
 
-INSERT INTO sebhtml_options (opt_name, opt_value) VALUES ('virtual_addr', 'http://darkstar/');
+INSERT INTO sebhtml_options (opt_name, opt_value) VALUES ('virtual_addr', 'http://127.0.0.1/~sebhtml/inicrond/src/');
 
 INSERT INTO sebhtml_options (opt_name, opt_value) VALUES ('save_page_view', '0');
 INSERT INTO sebhtml_options (opt_name, opt_value) VALUES ('save_nobody_sessions', '0');
