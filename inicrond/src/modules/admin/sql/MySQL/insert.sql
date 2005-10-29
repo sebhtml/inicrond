@@ -27,4 +27,5 @@ INSERT INTO sebhtml_options (opt_name, opt_value) VALUES ('smarty_force_compile'
 INSERT INTO sebhtml_options (opt_name, opt_value) VALUES ('admin_usr_id', '2');
 INSERT INTO sebhtml_options (opt_name, opt_value) VALUES ('theme', 'inicrond_default');
 
+INSERT INTO sebhtml_options (opt_name, opt_value) VALUES ('html_output_on_one_line', '1');
 
