@@ -2,7 +2,7 @@
 
 // lang_file : modules/tests-php-mysql/includes/languages/en-ca/lang.php
 // language : en-ca
-// Fri,  9 Sep 2005 19:12:41 +0000
+// Fri, 28 Oct 2005 21:01:52 -0400
 
 $_LANG['add_answer'] = 'Add an answer';
 $_LANG['add_q'] = 'Add a question';
@@ -33,4 +33,4 @@ $_LANG['q_type'] = 'Question type';
 $_LANG['result_in'] = 'Your test is finished, the corrected sheet will be available shortly.';
 $_LANG['single_answer_question'] = 'Short answer question';
 
-?>
+                        ?>

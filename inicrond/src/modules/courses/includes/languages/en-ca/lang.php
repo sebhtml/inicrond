@@ -2,7 +2,7 @@
 
 // lang_file : modules/courses/includes/languages/en-ca/lang.php
 // language : en-ca
-// Fri,  9 Sep 2005 19:12:41 +0000
+// Fri, 28 Oct 2005 21:01:52 -0400
 
 $_LANG['add_course'] = 'Add a course';
 $_LANG['administrators'] = 'Teachers';
@@ -46,4 +46,4 @@ $_LANG['tests_results'] = 'Tests results';
 $_LANG['there_are_the_activities_report'] = 'Here the report';
 $_LANG['this_directory_is_not_empty'] = 'The directory is not empty.';
 
-?>
+                        ?>

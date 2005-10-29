@@ -2,7 +2,7 @@
 
 // lang_file : modules/inicrond_x/includes/languages/en-ca/lang.php
 // language : en-ca
-// Fri,  9 Sep 2005 19:12:41 +0000
+// Fri, 28 Oct 2005 21:01:52 -0400
 
 $_LANG['absdev'] = 'Absolute deviation';
 $_LANG['coeff_of_variation'] = 'Coefficient of variation';
@@ -40,4 +40,4 @@ $_LANG['tests_scores_time_mean'] = 'Average of test time length (hh:mm:ss)';
 $_LANG['tests_scores_time_sum'] = 'Sum of test time length (hh:mm:ss)';
 $_LANG['variance'] = 'Variance';
 
-?>
+                        ?>

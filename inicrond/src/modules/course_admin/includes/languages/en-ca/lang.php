@@ -2,7 +2,7 @@
 
 // lang_file : modules/course_admin/includes/languages/en-ca/lang.php
 // language : en-ca
-// Fri,  9 Sep 2005 19:12:41 +0000
+// Fri, 28 Oct 2005 21:01:52 -0400
 
 $_LANG['allow_all_inodes'] = 'Activate all content';
 $_LANG['bdcf008ac5fd7b4a21b0ca57b1cfaa36'] = '';
@@ -23,4 +23,4 @@ $_LANG['list_tests'] = 'Tests';
 $_LANG['list_texts'] = 'Texts';
 $_LANG['mass_rights_manager'] = 'Rights manager';
 
-?>
+                        ?>

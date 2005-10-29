@@ -126,7 +126,8 @@ $_SESSION['SUID']
         'smarty_force_compile',
         'smarty_compile_check',
         'smarty_use_sub_dirs',
-        'save_nobody_sessions'
+        'save_nobody_sessions',
+        'html_output_on_one_line'
         );
         include __INICROND_INCLUDE_PATH__."includes/class/form/Base.class.php";
         include __INICROND_INCLUDE_PATH__."includes/class/form/Select.class.php";

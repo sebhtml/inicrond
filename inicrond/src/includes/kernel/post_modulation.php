@@ -165,14 +165,22 @@ $smarty->assign('admin_menu',  retournerHref("../../modules/admin/admin_menu.php
 header("Content-Type: text/html");
 $smarty->template_dir = __INICROND_INCLUDE_PATH__."".'templates/';
    
-$output = $smarty->display($_OPTIONS['theme']."/index.tpl");
-/*	 
-$output = $smarty->fetch($_OPTIONS['theme']."/index.tpl");
 
-$output = str_replace("\n",'',$output);
-$output = str_replace("\t",'',$output);
-$output = str_replace("\r",'',$output);
+if ($_OPTIONS['html_output_on_one_line'] == '1')
+{
+	 
+    $output = $smarty->fetch($_OPTIONS['theme']."/index.tpl");
+    
+    $output = str_replace("\n",'',$output);
+    $output = str_replace("\t",'',$output);
+    $output = str_replace("\r",'',$output);
+    echo $output;
 
-echo $output;
-*/
+
+}
+else
+{
+    $smarty->display($_OPTIONS['theme']."/index.tpl");
+}
+
 ?>

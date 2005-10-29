@@ -2,7 +2,7 @@
 
 // lang_file : modules/mod_forum/includes/languages/en-ca/lang.php
 // language : en-ca
-// Fri,  9 Sep 2005 19:12:41 +0000
+// Fri, 28 Oct 2005 21:01:52 -0400
 
 $_LANG['by'] = 'by';
 $_LANG['closed'] = 'Closed';
@@ -35,4 +35,4 @@ $_LANG['this_section_contains_forums'] = 'This section contains forum.';
 $_LANG['thread'] = 'Thread';
 $_LANG['thread_destination'] = 'Move the threads to this forum';
 
-?>
+                        ?>

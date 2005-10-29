@@ -2,7 +2,7 @@
 
 // lang_file : modules/groups/includes/languages/en-ca/lang.php
 // language : en-ca
-// Fri,  9 Sep 2005 19:12:41 +0000
+// Fri, 28 Oct 2005 21:01:52 -0400
 
 $_LANG['add_a_group'] = 'Add a group';
 $_LANG['default_pending'] = 'Do you want to close the inscriptions for this group?';
@@ -15,4 +15,4 @@ $_LANG['pending'] = 'Pending queries';
 $_LANG['remove_group'] = 'Remove this group';
 $_LANG['update_group_password'] = 'Update group password';
 
-?>
+                        ?>

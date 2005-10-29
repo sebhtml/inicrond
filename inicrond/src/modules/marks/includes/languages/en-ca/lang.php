@@ -2,7 +2,7 @@
 
 // lang_file : modules/marks/includes/languages/en-ca/lang.php
 // language : en-ca
-// Fri,  9 Sep 2005 19:12:41 +0000
+// Fri, 28 Oct 2005 21:01:52 -0400
 
 $_LANG['chapitre_media_id'] = 'Media ID';
 $_LANG['chapitre_media_title'] = 'Media title';
@@ -19,4 +19,4 @@ $_LANG['points_obtenu/points_max*100'] = 'Percentage';
 $_LANG['score_id'] = 'Score ID';
 $_LANG['swf_marks_graphics'] = 'Flash marks graphics';
 
-?>
+                        ?>

@@ -2,7 +2,7 @@
 
 // lang_file : modules/seSSi/includes/languages/en-ca/lang.php
 // language : en-ca
-// Fri,  9 Sep 2005 19:12:41 +0000
+// Fri, 28 Oct 2005 21:01:52 -0400
 
 $_LANG['all'] = 'all';
 $_LANG['distribution_of_session_length'] = 'Distribution of visits length';
@@ -17,4 +17,4 @@ $_LANG['REMOTE_ADDR'] = 'IP';
 $_LANG['session_id'] = 'Visit ID';
 $_LANG['start_gmt_timestamp'] = 'Start date';
 
-?>
+                        ?>

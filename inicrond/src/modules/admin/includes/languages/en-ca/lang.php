@@ -2,7 +2,7 @@
 
 // lang_file : modules/admin/includes/languages/en-ca/lang.php
 // language : en-ca
-// Fri,  9 Sep 2005 19:12:41 +0000
+// Fri, 28 Oct 2005 21:01:52 -0400
 
 $_LANG['0_sec'] = '0 second';
 $_LANG['activate'] = 'Activate';
@@ -55,4 +55,4 @@ $_LANG['UtilisateurExistePas'] = 'Invalid user';
 $_LANG['virtual_addr'] = 'Web adress';
 $_LANG['weeks'] = 'weeks';
 
-?>
+                        ?>

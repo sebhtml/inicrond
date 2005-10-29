@@ -2,7 +2,7 @@
 
 // lang_file : modules/tests-results/includes/languages/en-ca/lang.php
 // language : en-ca
-// Fri,  9 Sep 2005 19:12:41 +0000
+// Fri, 28 Oct 2005 21:01:52 -0400
 
 $_LANG['does_this_members_did_the_test'] = 'Does this person did this test?';
 $_LANG['msg_all_result_for_this_test'] = 'Here all results for this test.';
@@ -21,4 +21,4 @@ $_LANG['the_good_answer'] = 'The good answer';
 $_LANG['waiting_to_get_result'] = 'Not available';
 $_LANG['your_answer'] = 'Your answer';
 
-?>
+                        ?>

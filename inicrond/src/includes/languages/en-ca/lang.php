@@ -2,7 +2,7 @@
 
 // lang_file : includes/languages/en-ca/lang.php
 // language : en-ca
-// Fri,  9 Sep 2005 19:12:41 +0000
+// Fri, 28 Oct 2005 21:01:52 -0400
 
 $_LANG['actions_amount'] = 'Count';
 $_LANG['add'] = 'Add';
@@ -70,6 +70,7 @@ $_LANG['inode_id_location'] = 'Place';
 $_LANG['language'] = 'Language';
 $_LANG['languages'] = 'Languages';
 $_LANG['log_out'] = 'Log out';
+$_LANG['maintenance_set_sessions_offline'] = 'The old sessions have been set offline';
 $_LANG['marks'] = 'Flash scores';
 $_LANG['members'] = 'Members';
 $_LANG['modules'] = 'Modules';
@@ -183,4 +184,4 @@ $_LANG['week_day_5'] = 'Friday';
 $_LANG['week_day_6'] = 'Saturday';
 $_LANG['yes'] = 'Yes';
 
-?>
+                        ?>
