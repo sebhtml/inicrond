@@ -2,7 +2,7 @@
 
 // lang_file : modules/course_admin/includes/languages/fr-ca/lang.php
 // language : fr-ca
-// Fri, 28 Oct 2005 21:01:48 -0400
+// Tue, 15 Nov 2005 20:44:15 -0500
 
 $_LANG['allow_all_inodes'] = 'Activer tout le contenu';
 $_LANG['bdcf008ac5fd7b4a21b0ca57b1cfaa36'] = '';

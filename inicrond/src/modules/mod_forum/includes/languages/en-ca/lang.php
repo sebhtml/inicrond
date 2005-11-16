@@ -2,7 +2,7 @@
 
 // lang_file : modules/mod_forum/includes/languages/en-ca/lang.php
 // language : en-ca
-// Fri, 28 Oct 2005 21:01:52 -0400
+// Tue, 15 Nov 2005 20:44:19 -0500
 
 $_LANG['by'] = 'by';
 $_LANG['closed'] = 'Closed';

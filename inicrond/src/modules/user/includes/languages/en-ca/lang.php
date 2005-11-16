@@ -2,7 +2,7 @@
 
 // lang_file : modules/user/includes/languages/en-ca/lang.php
 // language : en-ca
-// Fri, 28 Oct 2005 21:01:52 -0400
+// Tue, 15 Nov 2005 20:44:19 -0500
 
 $_LANG['AccesDenied'] = 'Access denied. Possible reasons : the user name does not exists or the password is wrong';
 $_LANG['account_information'] = 'Your account on \'%s\'.';

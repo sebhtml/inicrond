@@ -104,6 +104,7 @@ $is_in_charge_of_group=is_in_charge_of_group($_SESSION['usr_id'], $_GET['group_i
         )//echef du groupe seulement
         {
                 $group['edit'] = retournerHref("edit_a_group.php?group_id=".$_GET['group_id'], $_LANG['edit']);
+                $group['divide_a_group'] = retournerHref("divide_a_group.php?group_id=".$_GET['group_id'], $_LANG['divide_a_group']);
                 
                 $group['remove_group'] = retournerHref("remove_a_group.php?group_id=".$_GET['group_id'],
 		$_LANG['remove_group']);

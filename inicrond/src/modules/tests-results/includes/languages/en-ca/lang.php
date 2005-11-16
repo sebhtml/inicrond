@@ -2,7 +2,7 @@
 
 // lang_file : modules/tests-results/includes/languages/en-ca/lang.php
 // language : en-ca
-// Fri, 28 Oct 2005 21:01:52 -0400
+// Tue, 15 Nov 2005 20:44:19 -0500
 
 $_LANG['does_this_members_did_the_test'] = 'Does this person did this test?';
 $_LANG['msg_all_result_for_this_test'] = 'Here all results for this test.';

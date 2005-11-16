@@ -2,7 +2,7 @@
 
 // lang_file : modules/lang_dev/includes/languages/en-ca/lang.php
 // language : en-ca
-// Fri, 28 Oct 2005 21:01:52 -0400
+// Tue, 15 Nov 2005 20:44:19 -0500
 
 $_LANG['add_lang'] = 'Add a new lang , based on all en-ca strings';
 $_LANG['add_lang_file'] = 'Add a language file (write a en-ca adress and the other will be like this one)';

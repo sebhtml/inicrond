@@ -2,7 +2,7 @@
 
 // lang_file : modules/marks/includes/languages/fr-ca/lang.php
 // language : fr-ca
-// Fri, 28 Oct 2005 21:01:48 -0400
+// Tue, 15 Nov 2005 20:44:15 -0500
 
 $_LANG['chapitre_media_id'] = 'ID de l\'élément';
 $_LANG['chapitre_media_title'] = 'Titre de l\'élément';

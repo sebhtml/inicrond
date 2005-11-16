@@ -2,7 +2,7 @@
 
 // lang_file : modules/members/includes/languages/fr-ca/lang.php
 // language : fr-ca
-// Fri, 28 Oct 2005 21:01:48 -0400
+// Tue, 15 Nov 2005 20:44:15 -0500
 
 $_LANG['courses_list_for_a_user'] = 'Liste des cours pour une personne';
 $_LANG['login_as'] = 'Se connecter avec cette identit&eacute;';

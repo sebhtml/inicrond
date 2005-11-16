@@ -12,7 +12,7 @@
 {$group.get_group_emails}, {$group.seSSi}, {$group.marks}, {$group.tests_results}, {$group.dl_acts_4_courses}, {$group.graphics_for_a_group} <br />
 
 <h3>{$_LANG.admin}</h3>
-{$group.edit}, {$group.remove_group}, {$group.update_group_password}, {$group.course_groups_listing}<br />
+{$group.edit}, {$group.remove_group}, {$group.update_group_password}, {$group.course_groups_listing}, {$group.divide_a_group}<br />
 
 <h3>{$_LANG.group_users}</h3>
 

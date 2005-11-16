@@ -2,7 +2,7 @@
 
 // lang_file : modules/blue_master_clone/includes/languages/fr-ca/lang.php
 // language : fr-ca
-// Fri, 28 Oct 2005 21:01:48 -0400
+// Tue, 15 Nov 2005 20:44:15 -0500
 
 $_LANG['add_evaluation'] = 'Ajouter une évaluation';
 $_LANG['available'] = 'Disponible';

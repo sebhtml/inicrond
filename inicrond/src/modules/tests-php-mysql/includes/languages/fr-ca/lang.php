@@ -2,7 +2,7 @@
 
 // lang_file : modules/tests-php-mysql/includes/languages/fr-ca/lang.php
 // language : fr-ca
-// Fri, 28 Oct 2005 21:01:48 -0400
+// Tue, 15 Nov 2005 20:44:15 -0500
 
 $_LANG['add_answer'] = 'Ajouter une réponse';
 $_LANG['add_q'] = 'Ajouter une question';

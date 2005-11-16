@@ -2,7 +2,7 @@
 
 // lang_file : modules/dl_acts_4_courses/includes/languages/fr-ca/lang.php
 // language : fr-ca
-// Fri, 28 Oct 2005 21:01:48 -0400
+// Tue, 15 Nov 2005 20:44:15 -0500
 
 $_LANG['does_this_members_dl_the_file'] = 'Est-ce que ce membre a t&eacute;l&eacute;charg&eacute; le fichier?';
 $_LANG['downloads_graphic'] = 'Téléchargements en graphique';
