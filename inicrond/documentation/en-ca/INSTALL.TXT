@@ -8,7 +8,7 @@ Dependencies:
 
 	Others :
 		Apache (required)
-		MySQL >=4.0 (required)
+		MySQL >=4.1 (required)
 		PHP >=4.3, work with php5 (required)
 			PCRE (required)
 			Freetype (recommended)
