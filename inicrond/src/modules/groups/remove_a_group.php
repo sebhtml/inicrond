@@ -21,14 +21,16 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -----------------------------------------------------------------------*/
+
 define('__INICROND_INCLUDED__', TRUE);//security
 define('__INICROND_INCLUDE_PATH__', '../../');//path
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';//init inicrond kernel
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';//include lang file.
-//the lang file is no included in the pre_modulation script because script such as download.php does not 
-//require lang variables.
+
+include 'includes/functions/remove_a_group.php' ;
 
 include __INICROND_INCLUDE_PATH__."modules/groups/includes/functions/group_id_to_cours_id.php";
+
 if(
 isset($_GET['group_id']) && 
 $_GET['group_id'] != "" &&
@@ -46,33 +48,7 @@ is_chef_of_group($_SESSION['usr_id'], $_GET['group_id'])
 	
         if(isset($_GET["ok"]))
         {
-                
-		$tables_to_delete = array(
-		'evaluations',
-		'sections_groups_view',
-		'forums_groups_reply',
-		'forums_groups_start',
-		'forums_groups_view',
-		'sebhtml_moderators',
-		'course_group_in_charge',
-		'inode_groups',
-		'groups_usrs',
-		'groups');
-                
-		foreach($tables_to_delete AS $t_name)
-		{	
-                        $query = "DELETE FROM
-                        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables'][$t_name]."
-                        WHERE
-                        group_id=".$_GET['group_id']."
-                        ";
-                        
-                        $inicrond_db->Execute($query);
-		}
-                
-                
-                
-		
+		remove_a_group ($_GET['group_id'], $inicrond_db, $_OPTIONS) ;  
         }
         else
         {
