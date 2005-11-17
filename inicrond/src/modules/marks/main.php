@@ -55,43 +55,15 @@ $_GET['session_id'] != "" AND
         include __INICROND_INCLUDE_PATH__."includes/functions/is_author_of_session_id.php";//session function
 }
 
-function is_chapitre_media_id($is_chapitre_media_id, $useless = "")
 
+
+if(isset($_SESSION['usr_id']) AND __INICROND_INCLUDED__)
 {
-        global $_OPTIONS, $_RUN_TIME, $inicrond_db;
-        $query = "SELECT chapitre_media_id
-        FROM
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media']."
-        WHERE
-        
-        chapitre_media_id=".$is_chapitre_media_id."
-        AND
-        chapitre_media_type=1
-        ;";
-        
-        $rs = $inicrond_db->Execute($query);
-        $fetch_result = $rs->FetchRow();
-        
-        
-        return isset($fetch_result['chapitre_media_id']);
-}
-
-
-if(isset($_SESSION['usr_id']) AND
-__INICROND_INCLUDED__
-
-//son propre profil.
-
-)
-
-{
-	$base = "../../modules/marks/main.php?";
+	$base = __INICROND_INCLUDE_PATH__."modules/marks/main.php?";
 	
 	$SELECT_WHAT = "SELECT
 	cours_name,
 	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].".cours_id,
-        
-        
 	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id,
 	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].".usr_id,
 	usr_name,
@@ -116,12 +88,16 @@ __INICROND_INCLUDED__
 	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].",
         
 	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].",
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media']."
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].",
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
         ";
 	
         $WHERE_CLAUSE = "	WHERE
-        
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".cours_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].".cours_id
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = '3'
+        and
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id
+        and
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].".cours_id
         AND
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".usr_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id
         AND
@@ -136,7 +112,7 @@ __INICROND_INCLUDED__
 	
 	$it_is_ok = FALSE;
 	
-	//en fonction de l'étudiant.
+	//en fonction de l'ï¿½udiant.
 	if(
 	isset($_GET['usr_id']) AND
 	$_GET['usr_id'] != "" AND
@@ -227,7 +203,7 @@ __INICROND_INCLUDED__
                         (int) $_GET['cours_id']
                         )
                         {
-                                $query .= " AND ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".cours_id=".$_GET['cours_id'];
+                                $query .= " AND ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=".$_GET['cours_id'];
                                 
                         }
                         
@@ -422,7 +398,7 @@ is_in_charge_of_user($_SESSION['usr_id'], session_id_to_usr($_GET['session_id'])
                 AND
                 time_stamp_start<".$_GET["end"]."
                 AND
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".cours_id=".$_GET['cours_id']."";
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=".$_GET['cours_id']."";
                 
                 $module_title =  $_LANG['marks'];
                 

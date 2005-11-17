@@ -8,16 +8,14 @@ CREATE TABLE tests (
   test_id int(10) unsigned NOT NULL auto_increment,
   test_name varchar(128) default NULL,
   test_info varchar(255) default NULL,
-  cours_id int(10) unsigned NOT NULL default '0',
   available_results char(1) NOT NULL default '0',
   available_sheet char(1) NOT NULL default '0',
   q_rand_flag char(1) NOT NULL default '1',
   do_you_show_good_answers char(1) NOT NULL default '0',
   time_GMT_add int(10) unsigned NOT NULL default '0',
   time_GMT_edit int(10) unsigned NOT NULL default '0',
-  PRIMARY KEY  (test_id),
-  KEY chapitre_id (cours_id)
-) TYPE=MyISAM;
+  PRIMARY KEY  (test_id)
+  ) TYPE=MyISAM;
 
 -- --------------------------------------------------------
 

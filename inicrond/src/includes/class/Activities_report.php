@@ -41,6 +41,7 @@ class Activities_report
         var $module_name;
         var $detail_php_script_path;
         var $extra_where_clause_for_check;
+        var $content_type ;
         
         
         function Execute()
@@ -70,12 +71,16 @@ class Activities_report
                         
                         FROM
                         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].",
-                        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables'][$this->elements_table_name]."
+                        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables'][$this->elements_table_name].",
+                        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
                         WHERE
-                        ".$this->field_id_name."=".$_GET[$this->field_id_name]."
+                        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = '".$this->content_type."'
+                        and
+                        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = 
+                        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables'][$this->elements_table_name].".".$this->field_name_name."
                         
                         AND
-                        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables'][$this->elements_table_name].".cours_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].".cours_id
+                        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].".cours_id
                         ";
                         
                         $query_result = $inicrond_db->Execute($query);

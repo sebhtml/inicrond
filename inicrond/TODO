@@ -1,0 +1,20 @@
+try a clean install
+try patcing the spockcorgis database.
+
+debug those things : (grep cours_id -Rn . | less)
+
+
+course_admin
+course_media
+courses
+dl_acts_4_courses
+files_4_courses
+groups
+inicrond_x
+members
+seSSi
+tests-php-mysql
+tests-results
+user
+
+include of inicornd

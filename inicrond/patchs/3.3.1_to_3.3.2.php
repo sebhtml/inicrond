@@ -19,5 +19,47 @@ $sql = "INSERT INTO
 
 $inicrond_db->Execute($sql);
 
+$sql = "ALTER TABLE 
+".$_OPTIONS["table_prefix"].$_OPTIONS['tables']['chapitre_media']."
+  DROP `cours_id`;";
+
+
+$inicrond_db->Execute($sql);
+
+$sql = "ALTER TABLE 
+".$_OPTIONS["table_prefix"].$_OPTIONS['tables']['inicrond_images']."
+  DROP `cours_id`;";
+  
+
+$inicrond_db->Execute($sql);
+
+
+  
+$sql = "ALTER TABLE 
+".$_OPTIONS["table_prefix"].$_OPTIONS['tables']['tests']."
+  DROP `cours_id`;";
+  
+
+$inicrond_db->Execute($sql);
+
+
+
+
+
+$sql = "ALTER TABLE 
+".$_OPTIONS["table_prefix"].$_OPTIONS['tables']['inicrond_texts']."
+  DROP `cours_id`;";
+  
+
+$inicrond_db->Execute($sql);
+
+
+$sql = "ALTER TABLE 
+".$_OPTIONS["table_prefix"].$_OPTIONS['tables']['courses_files']."
+  DROP `cours_id`;";
+  
+
+$inicrond_db->Execute($sql);
+
 
 ?>

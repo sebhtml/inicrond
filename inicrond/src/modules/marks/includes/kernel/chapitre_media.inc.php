@@ -28,7 +28,7 @@ $sql_base .= $add;
 
 
 
-//fin de la sélection
+//fin de la sï¿½ection
 //-----------------------
 // titre
 //---------------------
@@ -43,13 +43,17 @@ cours_name
 FROM
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].",
 
-".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours']."
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].",
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
 WHERE
-
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = '3' 
+and
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id
+and
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id=".$_GET['chapitre_media_id']."
 
 AND
-".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".cours_id=  ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].".cours_id
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=  ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].".cours_id
 
 ;";
 

@@ -68,6 +68,8 @@ $my_Activities_report->cours_id=$cours_id;
 $my_Activities_report->_OPTIONS=$_OPTIONS;
 $my_Activities_report->module_name='group_downloads_reporting';
 $my_Activities_report->detail_php_script_path="../../modules/dl_acts_4_courses/show_dl_acts.mo.php";
+$my_Activities_report->content_type = '1' ;
+
 $module_content .= $my_Activities_report->Execute();
 
 

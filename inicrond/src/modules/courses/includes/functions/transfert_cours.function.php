@@ -55,8 +55,11 @@ function chapitre_media_to_cours($chapitre_media_id)
         SELECT 
         cours_id
         FROM
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media']."
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].",
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
         WHERE
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id
+        and
         chapitre_media_id=$chapitre_media_id
         ";
         

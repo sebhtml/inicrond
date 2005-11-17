@@ -17,8 +17,13 @@ $query = "SELECT
 time_stamp_end-time_stamp_start AS value
 FROM
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].",
-".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media']."
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].",
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
 WHERE 
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = '3'
+and
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id
+and
 time_stamp_end>time_stamp_start
 AND
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".chapitre_media_id
@@ -129,9 +134,14 @@ is_in_charge_of_group($_SESSION['usr_id'], $_GET['group_id'])
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].",
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].",
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs'].",
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups']."
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups'].",
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
         WHERE
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".cours_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups'].".cours_id
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = '3' 
+        and
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id
+        and
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups'].".cours_id
         AND
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs'].".usr_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".usr_id
         AND

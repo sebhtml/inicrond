@@ -69,6 +69,7 @@ $my_Activities_report->_OPTIONS=$_OPTIONS;
 $my_Activities_report->module_name='flash_activities_report';
 $my_Activities_report->detail_php_script_path="../../modules/marks/main.php";
 $my_Activities_report->extra_where_clause_for_check=" time_stamp_start < time_stamp_end ";
+$my_Activities_report->content_type = '3' ;
 
 $module_content .= $my_Activities_report->Execute();
 
