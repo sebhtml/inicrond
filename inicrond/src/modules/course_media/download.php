@@ -75,24 +75,10 @@ is_in_inode_group($_SESSION['usr_id'], chapitre_media_id_2_inode_id($_GET['chapi
         $file_path = $_OPTIONS["file_path"]["uploads"]."/".$fetch_result["HEXA_TAG"];
 	
         
-	/*//debug...
-	//if( $fetch_result["HEXA_TAG"] == "ed792510b9101fc99c08a2295c84c10e8bb")
-	{
-                echo $fetch_result["HEXA_TAG"];
-                echo "<br />";
-                echo "ed792510b9101fc99c08a2295c84c10e8bb";
-		echo "<br />";
-                echo strlen("ed792510b9101fc99c08a2295c84c10e8bb");
-	}
-	*/
-	
+
         if(is_file($file_path) ) //erreur ?
         {
-                //die($_OPTIONS["uploaded_files_dir"]."/".$_GET["uploaded_file_id"]);
-                //header("Content-type: application/x-shockwave-flash");
-                
-                //header("Content-type: application/force-download");
-                
+        
                 header("Content-Disposition: attachment; filename=".$fetch_result['file_name']);
                 header("Content-Type: application/force-download");
                 header("Content-Transfer-Encoding: application/octet-stream\n"); // Surtout ne pas enlever le \n
@@ -113,8 +99,5 @@ is_in_inode_group($_SESSION['usr_id'], chapitre_media_id_2_inode_id($_GET['chapi
 	
 	
 }
-
-
-
 
 ?>

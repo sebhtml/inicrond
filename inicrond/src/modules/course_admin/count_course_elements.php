@@ -327,8 +327,13 @@ is_teacher_of_cours($_SESSION['usr_id'], $_GET['cours_id'])
 	
 	FROM
 	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].",
-	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files']."
+	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].",
+	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
 	WHERE
+	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = '1'
+	and
+	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".file_id
+	and
 	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".file_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].".file_id
 	AND
 	cours_id=".$_GET['cours_id']."    
@@ -342,8 +347,13 @@ is_teacher_of_cours($_SESSION['usr_id'], $_GET['cours_id'])
 	
 	FROM
 	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].",
-	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media']."
+	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].",
+	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
 	WHERE
+	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = '3'
+	and
+	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id
+	and
 	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".chapitre_media_id
 	AND
 	cours_id=".$_GET['cours_id']."    
@@ -357,8 +367,13 @@ is_teacher_of_cours($_SESSION['usr_id'], $_GET['cours_id'])
 	
 	FROM
 	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].",
-	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests']."
+	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].",
+	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
 	WHERE
+	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = '2'
+	and
+	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".test_id
+	and
 	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".test_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".test_id
 	AND
 	cours_id=".$_GET['cours_id']."    

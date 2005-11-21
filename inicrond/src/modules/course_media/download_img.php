@@ -1,27 +1,7 @@
 <?php
 //$Id$
-/*
-//---------------------------------------------------------------------
-//
-//
-//Fonction du fichier :
-//----------------------------
-// module de téléchargement
-// recoit un id et permet de downloader ce fichier avec la database
-//-------------------------
-//
-//
-//Auteur : sebastien boisvert
-//email : sebhtml@users.sourceforge.net
-//site web : http://inicrond.sourceforge.net/
-//Projet : inicrond
-//
-//---------------------------------------------------------------------
-*/
-/*
-inicrond
-Copyright (C) 2004  Sebastien Boisvert
 
+/****************************************************************
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
 as published by the Free Software Foundation; either version 2
@@ -35,7 +15,10 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-*/
+****************************************************************/
+
+
+
 define(__INICROND_INCLUDED__, TRUE);
 define(__INICROND_INCLUDE_PATH__, '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
@@ -51,9 +34,7 @@ is_in_inode_group($_SESSION['usr_id'], img_id_2_inode_id($_GET["img_id"]))
 )
 {
 	
-	//$_OPTIONS["uploaded_files_dir"] = "docs/uploaded_files_dir";
-	$query = "SELECT 
-        
+	$query = "SELECT         
         img_file_name,
         img_hexa_path
         FROM 
@@ -67,18 +48,11 @@ is_in_inode_group($_SESSION['usr_id'], img_id_2_inode_id($_GET["img_id"]))
         $rs = $inicrond_db->Execute($query);
         
         $fetch_result = $rs->FetchRow();
-        
-        
-        
-        $file_path = $_OPTIONS["file_path"]["uploads"]."/".$fetch_result["img_hexa_path"];
+	$file_path = $_OPTIONS["file_path"]["uploads"]."/".$fetch_result["img_hexa_path"];
 	
 	
-        if(is_file($file_path) ) //erreur ?
+        if(is_file($file_path)) 
         {
-                //die($_OPTIONS["uploaded_files_dir"]."/".$_GET["uploaded_file_id"]);
-                //header("Content-type: application/x-shockwave-flash");
-                
-                //header("Content-type: application/force-download");
                 
                 header("Content-Disposition: attachment; filename=".$fetch_result['img_file_name']);
                 header("Content-Type: application/force-download");
@@ -104,8 +78,5 @@ else
 {
 	echo "access denied";
 }
-
-
-
 
 ?>

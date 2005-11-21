@@ -1,20 +1,9 @@
 <?php
 //$Id$
 
-
 /*
-//---------------------------------------------------------------------
-//
-//
-//Fonction du fichier : l'index du site
-//
-//
-//Auteur : sebastien boisvert
-//email : sebhtml@users.sourceforge.net
-//site web : http://inicrond.sourceforge.net/
-//Projet : inicrond
 
-Copyright (C) 2004  Sebastien Boisverthttp://www.gnu.org/copyleft/gpl.html
+http://www.gnu.org/copyleft/gpl.html
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -30,22 +19,22 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-//
-//---------------------------------------------------------------------
+
 */
-define('__INICROND_INCLUDED__', TRUE);
+
+define('__INICROND_INCLUDED__', true);
 define('__INICROND_INCLUDE_PATH__', '../../');
+
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
 include __INICROND_INCLUDE_PATH__."modules/marks/includes/languages/".$_SESSION['language'].'/lang.php';
 include "includes/functions/text_id_2_cours_id.php";//transfer IDs
 
-if(
+if (
 is_numeric($_GET["text_id"]) AND
 is_teacher_of_cours($_SESSION['usr_id'],  text_id_2_cours_id($_GET["text_id"]))
 )
-
 {
 	
 	include __INICROND_INCLUDE_PATH__.'modules/courses/includes/functions/inode_full_path.php';
@@ -62,8 +51,6 @@ is_teacher_of_cours($_SESSION['usr_id'],  text_id_2_cours_id($_GET["text_id"]))
         
 	text_title,
 	text_description
-        
-        
 	FROM
 	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inicrond_texts']."
         
@@ -74,10 +61,7 @@ is_teacher_of_cours($_SESSION['usr_id'],  text_id_2_cours_id($_GET["text_id"]))
 	$rs = $inicrond_db->Execute($query);
   	$fetch_result = $rs->FetchRow();
 	
-        
-        
-        
-        if(!isset($_POST['text_title']))
+	if(!isset($_POST['text_title']))
         {
 		
                 
@@ -87,9 +71,7 @@ is_teacher_of_cours($_SESSION['usr_id'],  text_id_2_cours_id($_GET["text_id"]))
                 
                 $module_content .= $smarty->fetch($_OPTIONS['theme']."/text_form.tpl");
 		
-                
-                
-        }
+	}
         else // il y a eu envoi de données
         {
                 
@@ -105,12 +87,6 @@ is_teacher_of_cours($_SESSION['usr_id'],  text_id_2_cours_id($_GET["text_id"]))
                         //echo "3";		
                         
                         include __INICROND_INCLUDE_PATH__."includes/functions/fonctions_validation.function.php";
-			
-                        
-                        
-                        
-                        
-                        
 			$query = "
                         UPDATE
                         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inicrond_texts']."
@@ -127,10 +103,7 @@ is_teacher_of_cours($_SESSION['usr_id'],  text_id_2_cours_id($_GET["text_id"]))
                         
 			$inicrond_db->Execute($query);
                         
-                        
-                        
-                        
-                        include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";
+			include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";
                         
                         $query = "SELECT
                         inode_id_location,
@@ -139,28 +112,20 @@ is_teacher_of_cours($_SESSION['usr_id'],  text_id_2_cours_id($_GET["text_id"]))
                         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
                         WHERE 
                         content_id=".$_GET["text_id"]."
-                        
-                        AND
+			AND
                         content_type='5'
                         ";
                         
                         $rs = $inicrond_db->Execute($query);
                         $fetch_result = $rs->FetchRow();
                         
-                        
-                        
-                        
-                        js_redir(__INICROND_INCLUDE_PATH__."modules/courses/inode.php?inode_id_location=".$fetch_result['inode_id_location']."&cours_id=".$fetch_result['cours_id']);						
+			js_redir(__INICROND_INCLUDE_PATH__."modules/courses/inode.php?inode_id_location=".$fetch_result['inode_id_location']."&cours_id=".$fetch_result['cours_id']);						
                         
                         
                 }
         }
-	
-        
-	
+
 }
-
-
 
 include __INICROND_INCLUDE_PATH__.'includes/kernel/post_modulation.php'; 
 

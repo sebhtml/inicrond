@@ -65,9 +65,14 @@ if (isset ($_GET['cours_id']) AND $_GET['cours_id'] != "" AND (int) $_GET['cours
 		md5_path
                 
                 FROM 
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files']." 
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].",
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
                 
                 WHERE
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = '1'
+                and
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".file_id
+                and
 		cours_id=".$_GET['cours_id']."
                 
                 ";
@@ -87,9 +92,14 @@ if (isset ($_GET['cours_id']) AND $_GET['cours_id'] != "" AND (int) $_GET['cours
 		HEXA_TAG
                 
                 FROM 
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media']." 
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].",
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
                 
                 WHERE
+                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = '3'
+                and
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id
+                and
 		cours_id=".$_GET['cours_id']."
                 
                 ";
@@ -110,9 +120,14 @@ if (isset ($_GET['cours_id']) AND $_GET['cours_id'] != "" AND (int) $_GET['cours
 		img_hexa_path
                 
                 FROM 
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inicrond_images']." 
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inicrond_images']." ,
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
                 
                 WHERE
+                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = '4'
+                and
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inicrond_images'].".img_id
+                and
 		cours_id=".$_GET['cours_id']."
                 
                 ";
@@ -156,11 +171,15 @@ if (isset ($_GET['cours_id']) AND $_GET['cours_id'] != "" AND (int) $_GET['cours
 		test_id
                 
                 FROM 
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests']." 
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests']." ,
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
                 
                 WHERE
-		cours_id=".$_GET['cours_id']."
-                
+                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = '2'
+                 and
+                  ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id =  ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".test_id
+                  and
+		cours_id=".$_GET['cours_id']."                
                 ";
 
 
@@ -168,6 +187,7 @@ if (isset ($_GET['cours_id']) AND $_GET['cours_id'] != "" AND (int) $_GET['cours
 	  "modules/tests-php-mysql/includes/functions/delete_test.php";
 
 	$rs = $inicrond_db->Execute ($query);
+	
 	while ($fetch_result = $rs->FetchRow ())
 	  {
 
@@ -273,9 +293,14 @@ if (isset ($_GET['cours_id']) AND $_GET['cours_id'] != "" AND (int) $_GET['cours
 		file_id
                 
                 FROM 
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files']." 
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].",
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']." 
                 
                 WHERE
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = '1'
+                and
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".file_id
+                and
 		cours_id=".$_GET['cours_id']."
                 
                 ";
@@ -299,45 +324,21 @@ if (isset ($_GET['cours_id']) AND $_GET['cours_id'] != "" AND (int) $_GET['cours
 	  }
 
 
-	//get all files.
-
-	$query = "SELECT 
-		file_id
-                
-                FROM 
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files']." 
-                
-                WHERE
-		cours_id=".$_GET['cours_id']."
-                
-                ";
-
-
-
-	$rs = $inicrond_db->Execute ($query);
-	while ($fetch_result = $rs->FetchRow ())
-	  {
-
-	    $query = "DELETE FROM
-                        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading']."
-                        WHERE
-                        file_id=".$fetch_result['file_id']."";
-
-
-	    $inicrond_db->Execute ($query);
-
-
-
-	  }
+	
 	//get all flashes.
 
 	$query = "SELECT 
 		chapitre_media_id
                 
                 FROM 
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media']." 
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media']." ,
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']." 
                 
                 WHERE
+                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = '3'
+                 and
+                  ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id =  ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".chapitre_media_id
+                  and
 		cours_id=".$_GET['cours_id']."
                 
                 ";
@@ -496,4 +497,5 @@ if (isset ($_GET['cours_id']) AND $_GET['cours_id'] != "" AND (int) $_GET['cours
   }
 
 include "../../includes/kernel/post_modulation.php";
+
 ?>

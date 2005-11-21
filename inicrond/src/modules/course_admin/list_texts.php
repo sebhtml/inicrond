@@ -27,9 +27,9 @@ define(__INICROND_INCLUDE_PATH__, '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
-if(isset($_GET['cours_id']) AND
-$_GET['cours_id'] != "" AND
-(int) $_GET['cours_id'] AND
+if(isset($_GET['cours_id']) &&
+$_GET['cours_id'] != "" &&
+(int) $_GET['cours_id'] &&
 is_teacher_of_cours($_SESSION['usr_id'], $_GET['cours_id'])
 )//check if the get is ok to understand.
 {

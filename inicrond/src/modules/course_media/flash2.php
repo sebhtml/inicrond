@@ -1,21 +1,10 @@
 <?php
 //$Id$
-//error_reporting(E_ALL^E_NOTICE);
-
 
 /*
-//---------------------------------------------------------------------
-//
-//
-//Fonction du fichier : l'index du site
-//
-//
-//Auteur : sebastien boisvert
-//email : sebhtml@users.sourceforge.net
-//site web : http://inicrond.sourceforge.net/
-//Projet : inicrond
 
-Copyright (C) 2004  Sebastien Boisverthttp://www.gnu.org/copyleft/gpl.html
+
+http://www.gnu.org/copyleft/gpl.html
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -31,8 +20,6 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-//
-//---------------------------------------------------------------------
 */
 
 define(__INICROND_INCLUDED__, TRUE);
@@ -43,6 +30,7 @@ include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
 include __INICROND_INCLUDE_PATH__."modules/courses/includes/functions/is_in_inode_group.php";//transfer IDs
 include __INICROND_INCLUDE_PATH__."modules/courses/includes/functions/chapitre_media_id_2_inode_id.php";//transfer IDs
+
 if(isset($_SESSION['usr_id']) && //session
 isset($_GET['chapitre_media_id']) && //demande quelque chose ??
 $_GET['chapitre_media_id'] != "" && //pas de chaine vide
@@ -51,16 +39,14 @@ $_GET['chapitre_media_id'] != "" && //pas de chaine vide
 is_in_inode_group($_SESSION['usr_id'], chapitre_media_id_2_inode_id($_GET['chapitre_media_id']))
 )
 {
-        
-        
-        
-        
-        if($_OPTIONS['smarty_cache_config']['course_media']["flash2.tpl"])// != 0
+
+        if($_OPTIONS['smarty_cache_config']['course_media']["flash2.tpl"] != 0)// != 0
         {
                 $smarty->caching = 1;
                 $smarty->cache_lifetime = $_OPTIONS['smarty_cache_config']['course_media']["flash2.tpl"];
         }
         $cache_id = md5($_SESSION['language'].$_GET['chapitre_media_id']) ;
+        
         if(!$smarty->is_cached($_OPTIONS['theme']."/flash2.tpl", $cache_id))
         {
                 
@@ -78,11 +64,7 @@ is_in_inode_group($_SESSION['usr_id'], chapitre_media_id_2_inode_id($_GET['chapi
                 $rs = $inicrond_db->Execute($query);
                 
                 $fetch_result = $rs->FetchRow();//résultat
-                //fermeture de la demande
-                
-                
-                
-                
+
                 $smarty->assign('chapitre_media_id', $_GET['chapitre_media_id']);
                 $smarty->assign('chapitre_media_height', $fetch_result["chapitre_media_height"]);
                 $smarty->assign('chapitre_media_width', $fetch_result["chapitre_media_width"]);
@@ -94,9 +76,7 @@ is_in_inode_group($_SESSION['usr_id'], chapitre_media_id_2_inode_id($_GET['chapi
         
         $smarty->display($_OPTIONS['theme']."/flash2.tpl", $cache_id);
         $smarty->caching = 0;
-        
-        
-        
+
 }
 
 

@@ -125,8 +125,7 @@ is_teacher_of_cours($_SESSION['usr_id'], $_GET['cours_id'])
 			img_title,
 			img_description,
 			edit_time_t,
-			add_time_t,
-			cours_id,
+			add_time_t
 			img_file_name,
 			img_hexa_path
                         
@@ -138,8 +137,7 @@ is_teacher_of_cours($_SESSION['usr_id'], $_GET['cours_id'])
 			'".filter($_POST['img_title'])."',
 			'".filter($_POST['img_description'])."',
 			$time_t,
-			$time_t,
-			".$_GET['cours_id'].",
+			$time_t
 			'".filter($_FILES['img_file_name']['name'])."',
 			'".$HEXA_TAG."'
 			)
@@ -147,16 +145,9 @@ is_teacher_of_cours($_SESSION['usr_id'], $_GET['cours_id'])
                         
 			$inicrond_db->Execute($query);
 			$img_id = $inicrond_db->Insert_ID();
-                        
-                        
-			
-			
-			
-                        
-                        
-                        
-                        if(!copy($_FILES['img_file_name']['tmp_name'], 
-			$_OPTIONS["file_path"]["uploads"]."/".$HEXA_TAG))
+
+
+			if(!copy($_FILES['img_file_name']['tmp_name'], $_OPTIONS["file_path"]["uploads"]."/".$HEXA_TAG))
 			{
                                 die($_LANG['error_file']);
 			}
@@ -173,7 +164,7 @@ is_teacher_of_cours($_SESSION['usr_id'], $_GET['cours_id'])
                         
                         $inicrond_db->Execute($query);
                         
-                        $order_id=$inicrond_db->Insert_ID();
+                        $order_id = $inicrond_db->Insert_ID();
                         
                         $query = "UPDATE
                         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
@@ -195,8 +186,6 @@ is_teacher_of_cours($_SESSION['usr_id'], $_GET['cours_id'])
         
 	
 }
-
-
 
 include __INICROND_INCLUDE_PATH__.'includes/kernel/post_modulation.php'; 
 

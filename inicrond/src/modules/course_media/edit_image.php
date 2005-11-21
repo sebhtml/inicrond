@@ -3,18 +3,8 @@
 
 
 /*
-//---------------------------------------------------------------------
-//
-//
-//Fonction du fichier : l'index du site
-//
-//
-//Auteur : sebastien boisvert
-//email : sebhtml@users.sourceforge.net
-//site web : http://inicrond.sourceforge.net/
-//Projet : inicrond
 
-Copyright (C) 2004  Sebastien Boisverthttp://www.gnu.org/copyleft/gpl.html
+http://www.gnu.org/copyleft/gpl.html
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -30,11 +20,11 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-//
-//---------------------------------------------------------------------
 */
+
 define('__INICROND_INCLUDED__', TRUE);
 define('__INICROND_INCLUDE_PATH__', '../../');
+
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
@@ -45,7 +35,6 @@ if(
 is_numeric($_GET["img_id"]) AND
 is_teacher_of_cours($_SESSION['usr_id'],  img_id_2_cours_id($_GET["img_id"]))
 )
-
 {
 	
         

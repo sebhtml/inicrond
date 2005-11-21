@@ -84,6 +84,7 @@ is_teacher_of_cours($_SESSION['usr_id'], $_GET['cours_id'])
 				
 				//get all inodes
 	$rs2 = $inicrond_db->Execute("SELECT inode_id FROM ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']." WHERE cours_id=".$_GET['cours_id']."");
+	
 		while($fr2 = $rs2->FetchRow())
 		
 				{

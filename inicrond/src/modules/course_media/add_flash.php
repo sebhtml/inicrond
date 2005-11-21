@@ -64,29 +64,18 @@ is_teacher_of_cours($_SESSION['usr_id'], $_GET['cours_id'])
 //ajouter
 {
         include __INICROND_INCLUDE_PATH__."modules/courses/includes/functions/inode_full_path.php";	
-        
-    
-  
-    $module_content .= inode_full_path($_GET['inode_id_location'], $_GET['cours_id']);
-        
-  
-        
-        $module_title =  $_LANG['add'];
-        
-        
-	
-        $chapitre_id = $_GET["chapitre_id"];
+
+	$module_content .= inode_full_path($_GET['inode_id_location'], $_GET['cours_id']);
+	$module_title =  $_LANG['add'];
+	$chapitre_id = $_GET["chapitre_id"];
         
         
         
         if(!isset($_POST['chapitre_media_title']))
         {
                 $smarty->assign("_LANG", $_LANG);
-                
                 $module_content .= $smarty->fetch($_OPTIONS['theme']."/flash_form.tpl");
-		
-                
-                
+
         }
         else // il y a eu envoi de données
         {
@@ -105,7 +94,6 @@ is_teacher_of_cours($_SESSION['usr_id'], $_GET['cours_id'])
                 }
                 else
                 {
-                        //echo "3";		
                         
                         include __INICROND_INCLUDE_PATH__."includes/functions/fonctions_validation.function.php";
 			
@@ -130,13 +118,9 @@ is_teacher_of_cours($_SESSION['usr_id'], $_GET['cours_id'])
 			chapitre_media_title,
 			chapitre_media_description,
 			chapitre_media_edit_gmt_timestamp,
-			chapitre_media_add_gmt_timestamp,
-			cours_id,
-                        
+			chapitre_media_add_gmt_timestamp                        
 			file_name,
-			HEXA_TAG,
-                        
-                        
+			HEXA_TAG,                        
 			chapitre_media_width,
 			chapitre_media_height
 			
@@ -146,8 +130,7 @@ is_teacher_of_cours($_SESSION['usr_id'], $_GET['cours_id'])
 			'".filter($_POST['chapitre_media_title'])."',
 			'".filter($_POST['chapitre_media_description'])."',
 			$time_t,
-			$time_t,
-			".$_GET['cours_id'].",
+			$time_t
 			'".filter($_FILES['file_name']['name'])."',
 			'".$HEXA_TAG."',
                         
@@ -160,14 +143,7 @@ is_teacher_of_cours($_SESSION['usr_id'], $_GET['cours_id'])
 			$chapitre_media_id = $inicrond_db->Insert_ID();
                         
                         
-			
-			
-			
-                        
-                        
-                        
-                        if(!copy($_FILES['file_name']['tmp_name'], 
-			$_OPTIONS["file_path"]["uploads"]."/".$HEXA_TAG))
+			if(!copy($_FILES['file_name']['tmp_name'], $_OPTIONS["file_path"]["uploads"]."/".$HEXA_TAG))
 			{
                                 die($_LANG['error_file']);
 			}
@@ -206,8 +182,6 @@ is_teacher_of_cours($_SESSION['usr_id'], $_GET['cours_id'])
         
 	
 }
-
-
 
 include __INICROND_INCLUDE_PATH__.'includes/kernel/post_modulation.php'; 
 

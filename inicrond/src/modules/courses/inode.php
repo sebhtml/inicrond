@@ -232,6 +232,7 @@ if ($ok AND
 			      $_GET['inode_id_location'] != "" AND
 			      (int) $_GET['inode_id_location']) ?
 	  $_GET['inode_id_location'] : 0;
+	  
 	if ($is_teacher_of_cours)
 	  {
 

@@ -4,12 +4,7 @@
 //---------------------------------------------------------------------
 //
 //
-//Fonction du fichier :
-//----------------------------
-// module de téléchargement
-// recoit un id et permet de downloader ce fichier avec la database
-//-------------------------
-//
+
 //
 //Auteur : sebastien boisvert
 //email : sebhtml@users.sourceforge.net

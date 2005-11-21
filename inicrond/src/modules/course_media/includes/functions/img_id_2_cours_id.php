@@ -36,10 +36,11 @@ function img_id_2_cours_id($img_id)
         SELECT 
         cours_id
         FROM
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inicrond_images']."
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
         WHERE
-        img_id=$img_id
-        
+        content_id =$img_id
+        and
+        content_type = '4'
         ";
         
         $rs = $inicrond_db->Execute($query);

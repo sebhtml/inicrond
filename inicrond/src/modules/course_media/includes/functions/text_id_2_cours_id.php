@@ -36,9 +36,11 @@ function text_id_2_cours_id($text_id)
         SELECT 
         cours_id
         FROM
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inicrond_texts']."
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
         WHERE
-        text_id=$text_id
+        content_id =$text_id
+        and
+        content_type = '5'
         
         ";
         
