@@ -29,8 +29,9 @@ if(!__INICROND_INCLUDED__){ exit();}//security check...
 //$module_content .= "SCID =  ".$_SESSION['cours_id']." ";
 //echo $_SESSION['cours_id'];
 if(
-isset($_SESSION['usr_id']) AND//is there a session?
-is_numeric($_GET['cours_id']) AND
+isset($_SESSION['usr_id']) &&//is there a session?
+isset ($_GET['cours_id']) &&
+is_numeric($_GET['cours_id']) &&
 !isset($_SESSION['cours_id']) //not yet set in the database...AND
 
 

@@ -149,7 +149,8 @@ if ($ok AND
 
 
 	$cours_name = $fetch_result['cours_name'];
-	//if(isset($_GET['inode_id_location']) AND $_GET['inode_id_location'] != 0)
+	
+	if(isset($_GET['inode_id_location']))
 	{
 	  $smarty->assign ('requested_path',
 			   inode_full_path ($_GET['inode_id_location'],
@@ -1206,7 +1207,7 @@ if ($ok AND
     //echo $is_teacher_of_cours?"1":"0";
 
 
-    $module_content .= 
+    $module_content = 
       $smarty->fetch ($_OPTIONS['theme']."/inode.tpl", $cache_id);
     $smarty->caching = 0;
 

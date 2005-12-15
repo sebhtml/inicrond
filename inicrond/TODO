@@ -2,16 +2,18 @@ try a clean install
 try patching the spockcorgis database.
 essayer tous les modules php. (les tester avec dual head)
 
+/****************************************
+à finir pour le cours_id :
 
+	members
+	seSSi
+	tests-php-mysql
+	tests-results
+	user
 
-dl_acts_4_courses
-files_4_courses
-groups
-inicrond_x
-members
-seSSi
-tests-php-mysql
-tests-results
-user
+	include of inicornd
+	includes de tous les modules
+*******************************************/
 
-include of inicornd
+* add a table to validate the new sign in
+* add a new table for those whom ask for a new password

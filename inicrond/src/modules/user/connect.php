@@ -34,7 +34,7 @@ include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
 
 $module_title =  $_LANG['connexion'];
-
+$module_content = '' ;
 
 //v?ifie la session
 if(isset($_SESSION['usr_id']) )

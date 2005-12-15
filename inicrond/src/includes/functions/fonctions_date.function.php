@@ -126,6 +126,11 @@ function format_time_length($time)//en secondes
 $hours = 0;
 $minutes = 0;
 
+	if (!is_numeric ($time))
+	{
+		return false ;
+	}
+	
 	if($time >= 60 * 60)
 	{
 	$reste_pour_minutes = $time % (60 * 60);

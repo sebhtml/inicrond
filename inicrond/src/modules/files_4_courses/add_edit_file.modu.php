@@ -135,7 +135,6 @@ is_teacher_of_cours($_SESSION['usr_id'], $_GET['cours_id'])
                 file_infos,
                 
                 file_title,
-                cours_id,
                 md5_sum,
                 md5_path,
                 
@@ -150,7 +149,6 @@ is_teacher_of_cours($_SESSION['usr_id'], $_GET['cours_id'])
                 '".filter($_POST["file_infos"])."',
                 
                 '".filter($_POST['file_title'])."',
-                ".$_GET['cours_id'].",
                 '".md5_file($_FILES['uploaded_file']['tmp_name'])."',
                 '".$md5_path."',
                 
@@ -221,12 +219,17 @@ is_teacher_of_cours($_SESSION['usr_id'],file_2_cours($_GET['file_id']))
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".cours_id
         FROM
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].",
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files']."
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].",
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
         
         WHERE 
+         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = '1'
+         and
+          ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id =  ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".file_id
+          and
         file_id=".$_GET['file_id']."
         AND
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].".cours_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".cours_id
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].".cours_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id
         
         ";
         
@@ -249,13 +252,18 @@ is_teacher_of_cours($_SESSION['usr_id'],file_2_cours($_GET['file_id']))
         md5_path
         FROM
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].",
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].",
         
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files']."
         WHERE 
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = '1'
+        and
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".file_id 
+        and
         file_id=".$_GET['file_id']."
         
         AND
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".cours_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].".cours_id
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].".cours_id
         ";
         
         $rs = $inicrond_db->Execute($query);
@@ -271,7 +279,7 @@ is_teacher_of_cours($_SESSION['usr_id'],file_2_cours($_GET['file_id']))
                 
                 include __INICROND_INCLUDE_PATH__."modules/courses/includes/languages/".$_SESSION['language'].'/lang.php';
                 
-                $module_content .= inode_full_path(file_id_2_inode_id($_GET['file_id']));
+                $module_content .= inode_full_path (file_id_2_inode_id($_GET['file_id']));
                 include "includes/forms/file.form.php";
 	}
 	elseif(is_file($_FILES['uploaded_file']['tmp_name']) AND
@@ -283,12 +291,7 @@ is_teacher_of_cours($_SESSION['usr_id'],file_2_cours($_GET['file_id']))
 	else//update and redirect.
 	{//beginning of the insert new file
                 
-                
-                
-                /*
-                $uploaded_file_id = isset($uploaded_file_id)	?
-                $uploaded_file_id : 0;//pour image et flash
-                */
+
                 include __INICROND_INCLUDE_PATH__."includes/functions/fonctions_validation.function.php";
                 $query = "
                 UPDATE
@@ -298,8 +301,7 @@ is_teacher_of_cours($_SESSION['usr_id'],file_2_cours($_GET['file_id']))
                 file_title='".filter($_POST['file_title'])."',
                 
                 edit_gmt=".inicrond_mktime()."
-                
-                WHERE
+		WHERE
                 file_id=".$_GET['file_id']."
                 ";
                 
@@ -347,7 +349,7 @@ is_teacher_of_cours($_SESSION['usr_id'],file_2_cours($_GET['file_id']))
                 content_id=".$_GET['file_id']."
                 
                 AND
-                content_type=1
+                content_type= '1'
                 ";
                 
                 $rs = $inicrond_db->Execute($query);

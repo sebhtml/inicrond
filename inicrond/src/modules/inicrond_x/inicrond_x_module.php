@@ -1,6 +1,5 @@
 <?php
-/*---------------------------------------------------------------------
-
+/*
 $Id$
 
 sebastien boisvert <sebhtml at yahoo dot ca> <http://inicrond.sourceforge.net/>
@@ -20,27 +19,20 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
------------------------------------------------------------------------*/
-define('__INICROND_INCLUDED__', TRUE);
+
+*/
+
+define('__INICROND_INCLUDED__', true);
 define('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
-
 include __INICROND_INCLUDE_PATH__."modules/groups/includes/functions/group_id_to_cours_id.php";
-
 include __INICROND_INCLUDE_PATH__."modules/blue_master_clone/includes/functions/z_with_color.php";
 include __INICROND_INCLUDE_PATH__.'modules/groups/includes/functions/access.inc.php';
 
-if(isset($_GET['group_id']) AND//analysis all groups querys.
-$_GET['group_id'] != "" 
-)
-//AND
-//(int) $_GET['group_id'] AND
-// $cours_id = group_id_to_cours_id($_GET['group_id']) AND
-//is_in_charge_in_course($_SESSION['usr_id'], $cours_id)
-//)
+if(isset($_GET['group_id']) && //analysis all groups querys.
+$_GET['group_id'] != "")
 {
-        
         //function to get only 2 digits.
         
         function get_2_digits($float_number)
@@ -89,7 +81,6 @@ $_GET['group_id'] != ""
                 group_name	
                 FROM 
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups']."
-                
                 WHERE
                 $groups_clause	";
                 
@@ -213,13 +204,16 @@ $_GET['group_id'] != ""
                 COUNT(".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".usr_id)  AS stat_value 
                 FROM
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].",
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media']."
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].",
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
                 WHERE
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = 3 and
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id and
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
                 AND
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".chapitre_media_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id
                 AND
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".cours_id=$cours_id
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=$cours_id
                 AND
                 time_stamp_end>time_stamp_start \";
                 ",
@@ -231,13 +225,16 @@ $_GET['group_id'] != ""
                 SUM(points_obtenu/points_max*100)/COUNT(".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".usr_id) AS stat_value
                 FROM
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].",
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media']."
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].",
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
                 WHERE
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = 3 and
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id and
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
                 AND
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".chapitre_media_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id
                 AND
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".cours_id=$cours_id
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=$cours_id
                 AND
                 time_stamp_end>time_stamp_start \";
                 ",
@@ -249,13 +246,15 @@ $_GET['group_id'] != ""
                 SUM(points_obtenu/points_max*100) AS stat_value
                 FROM
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].",
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media']."
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].",
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
                 WHERE
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = 3 and
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id and ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
                 AND
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".chapitre_media_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id
                 AND
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".cours_id=$cours_id
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=$cours_id
                 AND
                 time_stamp_end>time_stamp_start \";
                 ",
@@ -267,13 +266,16 @@ $_GET['group_id'] != ""
                 SUM(time_stamp_end-time_stamp_start)/COUNT(".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".usr_id) AS stat_value
                 FROM
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].",
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media']."
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].",
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
                 WHERE
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = 3 and
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id and
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
                 AND
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".chapitre_media_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id
                 AND
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".cours_id=$cours_id
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=$cours_id
                 AND
                 time_stamp_end>time_stamp_start \";
                 ",
@@ -285,13 +287,16 @@ $_GET['group_id'] != ""
                 SUM(time_stamp_end-time_stamp_start) AS stat_value
                 FROM
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].",
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media']."
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].",
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
                 WHERE
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = 3 and
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id and
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
                 AND
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".chapitre_media_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id
                 AND
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".cours_id=$cours_id
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=$cours_id
                 AND
                 time_stamp_end>time_stamp_start \";
                 ",
@@ -306,13 +311,16 @@ $_GET['group_id'] != ""
                 COUNT(".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".usr_id)  AS stat_value 
                 FROM
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].",
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests']."
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].",
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
                 WHERE
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = 2 and
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".test_id and
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
                 AND
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".test_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".test_id
                 AND
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".cours_id=$cours_id
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=$cours_id
                 AND
                 time_GMT_end>time_GMT_start \";
                 ",
@@ -324,13 +332,16 @@ $_GET['group_id'] != ""
                 SUM(your_points/max_points*100)/COUNT(".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".usr_id) AS stat_value
                 FROM
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].",
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests']."
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].",
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
                 WHERE
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = 2 and
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".test_id and
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
                 AND
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".test_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".test_id
                 AND
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".cours_id=$cours_id
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=$cours_id
                 AND
                 time_GMT_end>time_GMT_start \";
                 ",
@@ -342,13 +353,16 @@ $_GET['group_id'] != ""
                 SUM(your_points/max_points*100) AS stat_value
                 FROM
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].",
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests']."
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].",
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
                 WHERE
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = 2 and
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".test_id and
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
                 AND
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".test_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".test_id
                 AND
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".cours_id=$cours_id
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=$cours_id
                 AND
                 time_GMT_end>time_GMT_start \";
                 ",
@@ -360,13 +374,15 @@ $_GET['group_id'] != ""
                 SUM(time_GMT_end-time_GMT_start)/COUNT(".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".usr_id) AS stat_value
                 FROM
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].",
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests']."
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].",
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
                 WHERE
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = 2 and
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".test_id and ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
                 AND
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".test_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".test_id
                 AND
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".cours_id=$cours_id
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=$cours_id
                 AND
                 time_GMT_end>time_GMT_start \";
                 ",
@@ -378,13 +394,15 @@ $_GET['group_id'] != ""
                 SUM(time_GMT_end-time_GMT_start) AS stat_value
                 FROM
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].",
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests']."
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].",
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
                 WHERE
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = 2 and
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".test_id and ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
                 AND
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".test_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".test_id
                 AND
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".cours_id=$cours_id
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=$cours_id
                 AND
                 time_GMT_end>time_GMT_start \";
                 ",
@@ -398,13 +416,16 @@ $_GET['group_id'] != ""
                 COUNT(".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].".usr_id)  AS stat_value 
                 FROM
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].",
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files']."
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].",
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
                 WHERE
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = 1 and
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".file_id and
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
                 AND
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].".file_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".file_id
                 AND
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".cours_id=$cours_id
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=$cours_id
                 \";
                 ",
                 "preprocessor" => ""
@@ -421,17 +442,17 @@ $_GET['group_id'] != ""
                 'count' => false,
                 'mean' => true,
                 'median' => true,
-                //'mode' => true,
+                'mode' => true,
                 'midrange' => true,
-                //'geometric_mean' => true,
-                //'harmonic_mean' => true,
+                'geometric_mean' => true,
+                'harmonic_mean' => true,
                 'stdev' => true,
-                //'absdev' => true,
-                //'variance' => true,
+                'absdev' => true,
+                'variance' => true,
                 'range' => true,
-                //'std_error_of_mean' => true,
-                //'skewness' => false,
-                //'kurtosis' => false,
+                'std_error_of_mean' => true,
+                'skewness' => false,
+                'kurtosis' => false,
                 'coeff_of_variation' => false
                 ); 
                 
@@ -512,7 +533,11 @@ $_GET['group_id'] != ""
                 foreach($check_those_things AS $a_thing)
                 {
                         //column, compute the statistics as a row.
-                        $s->setData($data[$a_thing["name"]], STATS_DATA_SIMPLE);
+                        if (isset ($a_thing["name"]) && isset ($data[$a_thing["name"]]))
+                        {
+                        	$s->setData($data[$a_thing["name"]], STATS_DATA_SIMPLE);
+                        }
+                        
                         $stats = $s->calcFull();
                         foreach($parameters AS $parameter => $processing)
                         {          
@@ -548,12 +573,30 @@ $_GET['group_id'] != ""
                                 }
                                 else
                                 {
-                                        $usrs_statistics[$i][$a_thing["name"]] .=  ($value)."<br />";
+                                	if (!isset ($usrs_statistics[$i][$a_thing["name"]]))
+                                	{
+                                        	$usrs_statistics[$i][$a_thing["name"]] =  ($value)."<br />";
+                                        }
+                                        else
+                                        {
+                                        	$usrs_statistics[$i][$a_thing["name"]] .=  ($value)."<br />";
+                                        }
                                 }
                                 
                                 if($stats['sum'])
                                 {
-                                        $usrs_statistics[$i][$a_thing["name"]] .=  get_2_digits(($value/$stats['sum']*100))."&nbsp;%<br />";
+                                	
+                                	if (DEBUG)
+                                	{
+                                		echo '$value '.$value.'<br />' ;
+                                		echo "\$stats['sum'] ".$stats['sum'].'<br />' ;
+                                	}
+                                	
+                                	
+                                        
+                                        $usrs_statistics[$i][$a_thing["name"]] .= 
+                                         get_2_digits(($value/$stats['sum']*100))."&nbsp;%<br />";
+                                         
                                 }
                                 $i++;
                         }
@@ -568,12 +611,32 @@ $_GET['group_id'] != ""
                         //update the Z quotes of students...
                         
                         
+                        $inicrond_x = array () ;
                         
                         foreach($t AS $key => $value)
                         {
+                        	if (!$usrs_statistics[$i])
+                        	{
+                                	$usrs_statistics[$i][$a_thing["name"]] = z_with_color($value);
+                                }
+                                else
+                                {
+                                	$usrs_statistics[$i][$a_thing["name"]] .= z_with_color($value);
+                                }
                                 
-                                $usrs_statistics[$i][$a_thing["name"]] .= z_with_color($value);
-                                $inicrond_x[$i] += 5*(4+$value);
+                                if (!isset ($inicrond_x[$i]))
+                                {                                	
+					$inicrond_x[$i] = 5*(4+$value);
+                                }
+                                else
+                                {
+                                	$inicrond_x[$i] += 5*(4+$value);
+                                }
+                               
+				if (DEBUG)
+                                {
+                                	echo '$inicrond_x[$i] '.$inicrond_x[$i].'<br />' ;
+                                }
                                 
                                 //increment the student .
                                 $i++;
@@ -646,7 +709,7 @@ $_GET['group_id'] != ""
                 //echo nl2br(print_r($courses, TRUE));
                 $smarty->assign('groups_listing', $groups_listing);
                 
-                $module_content .=  $smarty->fetch($_OPTIONS['theme']."/inicrond_x_module.tpl");
+                $module_content =  $smarty->fetch($_OPTIONS['theme']."/inicrond_x_module.tpl");
                 
                 
                 

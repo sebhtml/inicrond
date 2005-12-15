@@ -39,6 +39,7 @@ if (!isset($_SESSION['usr_id']))// you have to be loggued to see this page
 }
 
 $module_title = $_LANG['courses'];
+$module_content = '' ;
 
 if ($_SESSION['SUID']) //admin can add a course
 {

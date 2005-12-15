@@ -62,7 +62,7 @@ is_in_charge_in_course($_SESSION['usr_id'], $_GET['cours_id'])
                         name=\"group_id=".$fetch_result['group_id']."\" value=\"group_id=".$fetch_result['group_id']."\" >");	
 		}
                 $smarty->assign('form_elements', $form_elements);
-                $module_content .=  $smarty->fetch($_OPTIONS['theme']."/inicrond_x_groups_selection.tpl");
+                $module_content =  $smarty->fetch($_OPTIONS['theme']."/inicrond_x_groups_selection.tpl");
 		
 	}
 	else//redirect to this very script with the group_id

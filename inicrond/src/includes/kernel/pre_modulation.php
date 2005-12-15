@@ -109,4 +109,14 @@ include __INICROND_INCLUDE_PATH__."includes/kernel/course_session_update.kernel.
 
 include __INICROND_INCLUDE_PATH__."modules/members/includes/functions/is_teacher_of_at_least_one_course.php";
 //print_r($_RUN_TIME);
+
+if ($_OPTIONS['debug_mode'] == '1')
+{
+	define ('DEBUG', true) ;
+}
+else
+{
+	define ('DEBUG', false) ;
+}
+
 ?>

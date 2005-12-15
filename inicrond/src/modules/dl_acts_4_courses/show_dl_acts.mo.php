@@ -83,14 +83,17 @@ FROM
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].",
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].",
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].",
-
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].",
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].",
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files']."";
 
 
 $WHERE_CLAUSE = "
 WHERE
-
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = '1'
+and
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".file_id
+and
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".cours_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].".cours_id
 AND
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].".session_id

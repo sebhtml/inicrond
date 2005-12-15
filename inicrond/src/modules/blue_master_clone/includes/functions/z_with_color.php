@@ -56,7 +56,14 @@ function z_with_color($value)
                 //$tag_type= "i";
                 $span_class="z_smaller_than_0";
         }
-        
-        return "<span class=\"$span_class\">"."Z&nbsp;".substr($value, 0, 4)."</span";
+
+	if (!is_array ($value))
+	{
+        	return "<span class=\"$span_class\">"."Z&nbsp;".substr($value, 0, 4)."</span";
+        }
+        else
+        {
+        	return '?' ;
+        }
 }
 ?>

@@ -21,6 +21,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 -----------------------------------------------------------------------*/
+
 define('__INICROND_INCLUDED__', TRUE);//security
 define('__INICROND_INCLUDE_PATH__', '../../');//path
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';//init inicrond kernel
@@ -29,16 +30,15 @@ include 'includes/languages/'.$_SESSION['language'].'/lang.php';//include lang f
 //require lang variables.
 include __INICROND_INCLUDE_PATH__.'modules/groups/includes/functions/access.inc.php';
 if(
-isset($_GET['group_id']) AND
-$_GET['group_id'] != "" AND
-(int) $_GET['group_id'] AND
+isset($_GET['group_id']) &&
+$_GET['group_id'] != "" &&
+(int) $_GET['group_id'] &&
 is_in_charge_of_group($_SESSION['usr_id'], $_GET['group_id']) 
 )
 {
         
         $module_title = $_LANG['graphics_for_a_group'];
-        
-        
+
         /////////////////////////////////
         //get the group name, group id cours_id cours_name cours_code, every persons in the group.
         //show some informations.

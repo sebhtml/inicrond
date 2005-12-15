@@ -13,10 +13,16 @@ $_GET['image'] = $_LANG['attempts_graphic'];
 
 $ok = FALSE;
 
-$query = "SELECT gmt_ts AS time_t FROM
+$query = "SELECT gmt_ts AS time_t 
+FROM
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading']." AS t1,
-".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files']." AS t2
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files']." AS t2,
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
 WHERE
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].".content_type = '1'
+and
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].".content_id =".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".file_id_2_inode_id
+and
 t1.file_id=t2.file_id
 ";
 
@@ -82,9 +88,14 @@ is_in_charge_of_group($_SESSION['usr_id'], $_GET['group_id'])
         $query = "SELECT gmt_ts AS time_t FROM
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].",
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].",
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].",
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs'].",
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups']."
         WHERE
+         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_type = '1'
+         and
+          ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id =  ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".file_id
+          and
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].".file_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".file_id
         AND
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs'].".group_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups'].".group_id

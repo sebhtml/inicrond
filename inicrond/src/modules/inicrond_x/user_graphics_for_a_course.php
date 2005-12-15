@@ -82,7 +82,6 @@ $_GET['cours_id'] != "" AND
         
         $module_content .= $_LANG['cours_id']." : ".$fetch_result['cours_id']."<br />";
         $module_content .= $_LANG['cours_name']." : ".$fetch_result['cours_name']."<br />";
-        
         $module_content .= $_LANG['cours_code']." : ".$fetch_result['cours_code']."<br />";
         
         
@@ -154,9 +153,6 @@ $_GET['cours_id'] != "" AND
         $module_content .= "<a href=\"".__INICROND_INCLUDE_PATH__."modules/dl_acts_4_courses/show_dl_acts.mo.php?usr_id=".$_GET['usr_id']."&cours_id=".$_GET['cours_id']."\"><h2>".$_LANG['dl_acts_4_courses']."</h2></a><br /><br />";
         
         $module_content .= "<img src=\"".__INICROND_INCLUDE_PATH__."modules/dl_acts_4_courses/downloads_graphic.php?usr_id=".$_GET['usr_id']."&cours_id=".$_GET['cours_id']."\"><br /><br />";
-        
-        
-        
 }
 
 include "../../includes/kernel/post_modulation.php";

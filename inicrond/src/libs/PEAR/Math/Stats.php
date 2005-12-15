@@ -777,7 +777,7 @@ class Math_Stats {/*{{{*/
     function absDev() {/*{{{*/
         if (!array_key_exists('absDev', $this->_calculatedValues)) {
             $absDev = $this->__calcAbsoluteDeviation();
-            if (PEAR::isError($absdev)) {
+            if (isset ($absdev) && PEAR::isError($absdev)) {
                 return $absdev;
             }
             $this->_calculatedValues['absDev'] = $absDev;
@@ -1218,7 +1218,13 @@ class Math_Stats {/*{{{*/
                 $freq = $this->_data;
             } else {
                 $freq = array();
+                
                 foreach ($this->_data as $val) {
+                
+                	if (!isset ($freq["$val"]))
+                	{
+                		$freq["$val"] = 0 ;
+                	}
                     $freq["$val"]++;
                 }
                 ksort($freq);

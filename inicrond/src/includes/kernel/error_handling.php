@@ -4,45 +4,28 @@
 
 function userErrorHandler($errno, $errmsg, $filename, $linenum, $vars)
 {
-global $_RUN_TIME;
-
-    $errors[1] = "E_ERROR";
-  $errors[2] = "E_WARNING";
-   $errors[4] = "E_PARSE";
-    $errors[8] = "E_NOTICE";
-     $errors[16] = "E_CORE_ERROR";
-  $errors[32] = "E_CORE_WARNING";
-   $errors[64] = "E_COMPILE_ERROR";
-$errors[128] = "E_COMPILE_WARNING";
-    $errors[256] = "E_USER_WARNING";
-     $errors[512] = "E_USER_ERROR";
-      $errors[1024] = "E_USER_NOTICE";   
-       $errors[2047] = "E_ALL";
-   $errors[2048] = "E_STRICT";
-
- 
-   
-   if($errno != 2048//E_STRICT
-    AND $errno != 8//E_NOTICE
-    )
-   {
-
-echo "
-Error type : ".$errors[$errno]."<br />
-Error # : $errno<br />
-Error msg : $errmsg<br />
-File : $filename<br />
-Line $linenum<br />
-Variables : $vars<br />
-<hr />";
-
-
-/*
- error_log($err, 3, __INICROND_INCLUDE_PATH__."php_errors/".date("Y-m-d_H:i:s_(T)").md5(rand(0, 1000)).".log");
-   */   
-   
-       }
-
+	$errors[E_ERROR] = "E_ERROR";
+	$errors[E_WARNING] = "E_WARNING";
+	$errors[E_PARSE] = "E_PARSE";
+	$errors[E_NOTICE] = "E_NOTICE";
+	$errors[E_CORE_ERROR] = "E_CORE_ERROR";
+	$errors[E_CORE_WARNING] = "E_CORE_WARNING";
+	$errors[E_COMPILE_ERROR] = "E_COMPILE_ERROR";
+	$errors[E_COMPILE_WARNING] = "E_COMPILE_WARNING";
+	$errors[E_USER_WARNING] = "E_USER_WARNING";
+	$errors[E_USER_ERROR] = "E_USER_ERROR";
+	$errors[E_USER_NOTICE] = "E_USER_NOTICE";   
+	$errors[E_ALL] = "E_ALL";
+	//$errors[E_STRICT] = "E_STRICT";
+	
+	echo "
+	Error type : ".$errors[$errno]."<br />
+	Error # : $errno<br />
+	Error msg : $errmsg<br />
+	File : $filename<br />
+	Line $linenum<br />
+	Variables : $vars<br />
+	<hr />";
 }
 
 $old_error_handler = set_error_handler("userErrorHandler");
