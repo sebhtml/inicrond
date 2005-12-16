@@ -1,30 +1,37 @@
 <?php
-/*---------------------------------------------------------------------
+/*
+    $Id$
 
-$Id$
+    Inicrond : Network of Interactive Courses Registred On a Net Domain
+    Copyright (C) 2004, 2005  Sébastien Boisvert
 
-sebastien boisvert <sebhtml at yahoo dot ca> <http://inicrond.sourceforge.net/>
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
 
-inicrond Copyright (C) 2004-2005  Sebastien Boisvert
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+/*
+Changes :
 
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
------------------------------------------------------------------------*/
+december 15, 2005
+	I formated the code correctly.
+	
+		--sebhtml
+
+*/
 
 class Activities_report 
 {
-        
         var $inicrond_db;
         var $init_report_selection_msg_str;
         var $the_question_str;
@@ -43,23 +50,14 @@ class Activities_report
         var $extra_where_clause_for_check;
         var $content_type ;
         
-        
-        function Execute()
+        function Execute ()
         {
-                
                 $module_content = "";
                 
-                if(isset($_GET[$this->field_id_name]) AND
-                $_GET[$this->field_id_name] != "" AND
-                (int) $_GET[$this->field_id_name] AND
-                
-                is_in_charge_in_course($_SESSION['usr_id'], $this->cours_id)
-                
-                
-                )
-                
-                
-                
+                if(isset($_GET[$this->field_id_name]) &&
+                $_GET[$this->field_id_name] != "" &&
+                (int) $_GET[$this->field_id_name] &&                
+                is_in_charge_in_course($_SESSION['usr_id'], $this->cours_id))
                 {
                         $inicrond_db = $this->inicrond_db;
                         $_OPTIONS = $this->_OPTIONS;
@@ -67,8 +65,7 @@ class Activities_report
                         
                         $query = "SELECT
                         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].".cours_id,
-                        ".$this->field_name_name."
-                        
+                        ".$this->field_name_name."                        
                         FROM
                         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].",
                         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables'][$this->elements_table_name].",
@@ -78,14 +75,11 @@ class Activities_report
                         and
                         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".content_id = 
                         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables'][$this->elements_table_name].".".$this->field_name_name."
-                        
                         AND
                         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].".cours_id
                         ";
                         
                         $query_result = $inicrond_db->Execute($query);
-                        
-                        
                         
                         $fetch_result = $query_result->FetchRow();
                         $cours_infos = get_cours_infos($fetch_result['cours_id']);
@@ -94,44 +88,33 @@ class Activities_report
                         
                         $module_content .= $_LANG[$this->field_name_name]." : ".$fetch_result[$this->field_name_name];
                         
-                        
-                        
-                        if(!(isset($_GET['group_id']) AND
-                        $_GET['group_id'] != "" AND
+                        if(!(isset($_GET['group_id']) &&
+                        $_GET['group_id'] != "" &&
                         (int) $_GET['group_id']
                         ))//show the actual report...
                         {//select a group dude.
-                                
                                 $module_content .= "<br />".$_LANG[$this->init_report_selection_msg_str]."<br />";
-                                
-                                
                                 
                                 //$rs = $inicrond_db->Execute($query);
                                 $query = "SELECT 
                                 group_id,
                                 group_name,
                                 default_pending
-                                
                                 FROM 
                                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups']." 
-                                
                                 WHERE
                                 cours_id=".$this->cours_id."
-                                
                                 ";
+                                
                                 $query_result = $inicrond_db->Execute($query);
+                                
                                 while($fetch_result = $query_result->FetchRow())
                                 {
-                                        //;
                                         $module_content .= retournerHref(
                                         "".$this->script_name."?group_id=".$fetch_result['group_id']."&".$this->field_id_name."=".$_GET[$this->field_id_name],
                                         $fetch_result['group_name']
                                         )."<br />";
                                 }
-                                
-                                
-                                
-                                
                         }
                         else
                         {
@@ -157,8 +140,6 @@ class Activities_report
                                 
                                 while($fetch_result =$query_result->FetchRow())
                                 {
-                                        
-                                        
                                         $query = "SELECT
                                         count(usr_id) AS actions_amount
                                         FROM
@@ -189,8 +170,6 @@ class Activities_report
                                         "<a href=\"".$this->detail_php_script_path."?&usr_id=".$fetch_result['usr_id']."&".$this->field_id_name."=".$_GET[$this->field_id_name]."&join\">".$_LANG['details']."</a>");
                                 }
                                 
-                                
-                                
                                 $query = "SELECT
                                 group_name
                                 FROM
@@ -204,7 +183,6 @@ class Activities_report
                                 
                                 $module_content .= "<br />".$_LANG['a_group']." : ".retournerHref("../../modules/groups/grp.php?group_id=".$_GET['group_id'], $fetch_result['group_name'])."<br />";
                                 
-                                
                                 $query = "SELECT
                                 ".$this->field_name_name."
                                 FROM
@@ -216,16 +194,10 @@ class Activities_report
                                 $query_result = $inicrond_db->Execute($query);
                                 $fetch_result = $query_result->FetchRow();
                                 
-                                
-                                
                                 $module_content .= $_LANG[$this->report_presentation_msg_str]."<br /><br />";
                                 
-                                
                                 $module_content .= retournerTableauXY($tableau);
-                                
                         }
-                        
-                        
                         
                         return $module_content;
                         

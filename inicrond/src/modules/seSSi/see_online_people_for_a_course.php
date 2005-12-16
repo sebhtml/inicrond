@@ -1,43 +1,41 @@
 <?php
-/*---------------------------------------------------------------------
+/*
+    $Id$
 
-$Id$
+    Inicrond : Network of Interactive Courses Registred On a Net Domain
+    Copyright (C) 2004, 2005  SÃ©bastien Boisvert
 
-sebastien boisvert <sebhtml at yahoo dot ca> <http://inicrond.sourceforge.net/>
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
 
-inicrond Copyright (C) 2004-2005  Sebastien Boisvert
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
------------------------------------------------------------------------*/
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
 
 define('__INICROND_INCLUDED__', TRUE);
 define('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
-if(
-isset($_GET['cours_id']) AND
-$_GET['cours_id'] != "" AND
-(int)$_GET['cours_id'] AND
-is_in_charge_in_course($_SESSION['usr_id'], $_GET['cours_id'])
-)
+$module_content = '' ;
+
+if(isset($_GET['cours_id']) &&
+$_GET['cours_id'] != "" &&
+(int)$_GET['cours_id'] &&
+is_in_charge_in_course($_SESSION['usr_id'], $_GET['cours_id']))
 {
         $now = inicrond_mktime();
 	
         $query = 
-        //requête pour toutes les sessions...
+        //requï¿½e pour toutes les sessions...
         "
         SELECT 
         usr_nom,
@@ -69,10 +67,10 @@ is_in_charge_in_course($_SESSION['usr_id'], $_GET['cours_id'])
         );
         
         
-        while($f = $rs->FetchRow())
+        while ($f = $rs->FetchRow ())
 	{
                 $query = 
-                //requête pour toutes les sessions...
+                //requÃªte pour toutes les sessions...
                 "
                 SELECT 
                 requested_url,
@@ -86,7 +84,7 @@ is_in_charge_in_course($_SESSION['usr_id'], $_GET['cours_id'])
                 
                 
                 
-                $rs2 = $inicrond_db->Execute($query);
+                $rs2 = $inicrond_db->Execute ($query);
                 $fetch_result = $rs2->FetchRow();
                 
                 $online_ppl []= array(
@@ -118,4 +116,5 @@ is_in_charge_in_course($_SESSION['usr_id'], $_GET['cours_id'])
 }
 
 include __INICROND_INCLUDE_PATH__.'includes/kernel/post_modulation.php';
+
 ?>

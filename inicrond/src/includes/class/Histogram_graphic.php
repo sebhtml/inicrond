@@ -1,26 +1,34 @@
 <?php
-/*---------------------------------------------------------------------
+/*
+    $Id$
 
-$Id$
+    Inicrond : Network of Interactive Courses Registred On a Net Domain
+    Copyright (C) 2004, 2005  Sébastien Boisvert
 
-sebastien boisvert <sebhtml at yahoo dot ca> <http://inicrond.sourceforge.net/>
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
 
-inicrond Copyright (C) 2004-2005  Sebastien Boisvert
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+/*
+Changes :
 
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
------------------------------------------------------------------------*/
+december 15, 2005
+	I formated the code correctly.
+	
+		--sebhtml
+
+*/
 /*
 visits length
 marks length
@@ -30,6 +38,7 @@ tests scores.
 blue_master_clone stuff.
 
 */
+
 include PEAR_PATH."Image/Graph.php";
 include PEAR_PATH."Image/Graph/Dataset/Trivial.php";
 include PEAR_PATH."Image/Graph/Plot/Bar.php";
@@ -46,7 +55,6 @@ function X_func($value)
 
 class Histogram_graphic//class of result set.
 {//start of class.
-        
         var $inicrond_db;
         var $title;
         var $query;
@@ -55,7 +63,6 @@ class Histogram_graphic//class of result set.
         
         function render()
         {
-                
                 if(!isset($this->vals))
                 {
                         $vals = array();
@@ -67,15 +74,12 @@ class Histogram_graphic//class of result set.
                                 $count++;
                                 $vals []=  $f["value"];//by day.
                         }
-                        
-                        
                 }
                 else
                 {
                         $vals = $this->vals;
                         $count=count($vals);
                 }
-                
                 
                 // create an instance 
                 $h = new Math_Histogram();
@@ -85,14 +89,7 @@ class Histogram_graphic//class of result set.
                 $h->setData($vals);
                 $h->calculate();
                 $t = $h->getHistogramInfo();
-                
-                //print_r($t["bins"]);
-                
-                
-                
-                
-                
-                
+
                 $Dataset = new Image_Graph_Dataset_Trivial();
                 
                 $xs = array();
@@ -104,14 +101,7 @@ class Histogram_graphic//class of result set.
                         $xs []= $value["mid"];
                 }
                 
-                
-                
                 $Plot = new Image_Graph_Plot_Bar($Dataset );
-                /* $Fillstyle = new Image_Graph_Fill_Gradient ( (IMAGE_GRAPH_GRAD_VERTICAL),  0xAAEEFF, 0xFFDDEE);
-                // create the fill style as a solid fill with the newly created color
-                
-                $Plot->setFillStyle($Fillstyle);
-                */
                 
                 $Graph = new Image_Graph(800, 600);                // create the graph
                 // set a line color

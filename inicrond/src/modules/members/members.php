@@ -3,18 +3,11 @@
 
 
 /*
-//---------------------------------------------------------------------
-//
-//
 
-//
-//
-//Auteur : sebastien boisvert
-//email : sebhtml@users.sourceforge.net
-//site web : http://inicrond.sourceforge.net/
-//Projet : inicrond
 
-Copyright (C) 2004  Sebastien Boisverthttp://www.gnu.org/copyleft/gpl.html
+Copyright (C) 2004, 2005  Sebastien Boisvert
+
+http://www.gnu.org/copyleft/gpl.html
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -30,10 +23,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
-//
-//---------------------------------------------------------------------
 */
-define('__INICROND_INCLUDED__', TRUE);
+
+define('__INICROND_INCLUDED__', true);
 define('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
@@ -48,11 +40,14 @@ FROM
 WHERE 
 usr_activation=1
 ";
+
 $base = __INICROND_INCLUDE_PATH__."modules/members/members.php?";
 
-if(!isset($_GET['start'])  AND
-$_SESSION['SUID']
-) //ensei
+$it_is_ok = false ;
+
+$module_content = '' ;
+
+if (!isset($_GET['start']) && $_SESSION['SUID'])
 {
         $module_content .= "<h2><a href=\"".__INICROND_INCLUDE_PATH__."modules/admin/admin_menu.php\">".$_LANG['admin']."</a></h2>";
         
@@ -63,8 +58,6 @@ $_SESSION['SUID']
         $module_content .= retournerHref(__INICROND_INCLUDE_PATH__."modules/seSSi/one.php", $_LANG['seSSi']);//
         $module_content .=  " ] ";
         
-        
-        
 	$module_content .=  " [ ";
         $module_content .= retournerHref(__INICROND_INCLUDE_PATH__."modules/marks/main.php", $_LANG['marks']);//
         $module_content .=  " ] ";
@@ -73,16 +66,11 @@ $_SESSION['SUID']
         $module_content .= retournerHref(__INICROND_INCLUDE_PATH__."modules/tests-results/results.php", $_LANG['tests-results']);//
         $module_content .=  " ] ";
         
-        
-        
-        
-        
-        $it_is_ok = TRUE;
+        $it_is_ok = true;
 }
 
 
-
-if(!$it_is_ok)
+if ($it_is_ok == false)
 {
         exit();
 }
@@ -113,7 +101,8 @@ $fields = array(
 
 include __INICROND_INCLUDE_PATH__."includes/class/Table_columnS.class.php";
 include __INICROND_INCLUDE_PATH__."includes/functions/usr_scored.function.php";
-$mon_tableau = new Table_columnS;
+
+$mon_tableau = new Table_columnS ();
 
 $mon_tableau->sql_base = $query;//la requete de base
 $mon_tableau->cols = $fields;//les colonnes

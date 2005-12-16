@@ -1,6 +1,24 @@
 <?php
-//$Id$
+/*
+    $Id$
 
+    Inicrond : Network of Interactive Courses Registred On a Net Domain
+    Copyright (C) 2004, 2005  Sébastien Boisvert
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
 
 define('__INICROND_INCLUDED__', TRUE);
 define('__INICROND_INCLUDE_PATH__', '../../');
@@ -20,11 +38,10 @@ $query = "SELECT end_gmt_timestamp-start_gmt_timestamp AS value FROM
 //validation
 $ok = FALSE;
 
-if(isset($_GET['usr_id']) AND
-$_GET['usr_id'] != "" AND
-(int) $_GET['usr_id'] AND
-is_in_charge_of_user($_SESSION['usr_id'], $_GET['usr_id'])
-)
+if(isset($_GET['usr_id']) &&
+$_GET['usr_id'] != "" &&
+(int) $_GET['usr_id'] &&
+is_in_charge_of_user($_SESSION['usr_id'], $_GET['usr_id']))
 {
         $query2 = "SELECT
         usr_name
@@ -40,30 +57,22 @@ is_in_charge_of_user($_SESSION['usr_id'], $_GET['usr_id'])
         
         $ok = TRUE;
         $query .= " WHERE usr_id=".$_GET['usr_id']."";
-        
-        
 }
-elseif($_SESSION['SUID'])
+elseif ($_SESSION['SUID'])
 {
         $ok = TRUE;
         $_GET["image"] .= "_".$_LANG['all'];//the file name...
+        
         $query .= " WHERE 1";
 }
 
-if(
-isset($_GET['cours_id']) AND//add cours_id clause.
-$_GET['cours_id'] != "" AND
-(int) $_GET['cours_id']
-
-)
+if(isset($_GET['cours_id']) &&//add cours_id clause.
+$_GET['cours_id'] != "" &&
+(int) $_GET['cours_id'])
 {
-        
         $query .= " AND cours_id=".$_GET['cours_id']."";
 }
-
-elseif(is_numeric($_GET['group_id']) AND
-is_in_charge_of_group($_SESSION['usr_id'], $_GET['group_id']) 
-)
+elseif(is_numeric($_GET['group_id']) && is_in_charge_of_group($_SESSION['usr_id'], $_GET['group_id']))
 {
         $ok = 1 ;
         //////////////////
@@ -85,19 +94,18 @@ is_in_charge_of_group($_SESSION['usr_id'], $_GET['group_id'])
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs'].".group_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups'].".group_id
         AND
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs'].".group_id = ".$_GET['group_id']."
-        
-        
         ";
-        
 }
+
 $_GET["image"].= ".png";
 
-if(!$ok)//access denied
+if (!$ok)//access denied
 {
         exit();
 }
 
 include __INICROND_INCLUDE_PATH__."includes/class/Histogram_graphic.php";
+
 $Histogram_graphic = new Histogram_graphic;
 $Histogram_graphic->inicrond_db = &$inicrond_db;
 $Histogram_graphic->title = &$_LANG['GD_distribution_of_session_length'];

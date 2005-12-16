@@ -1,38 +1,25 @@
 <?php
-//$Id$
-
-
 /*
-//---------------------------------------------------------------------
-//
-//
+    $Id$
 
-//
-//
-//Auteur : sebastien boisvert
-//email : sebhtml@users.sourceforge.net
-//site web : http://inicrond.sourceforge.net/
-//Projet : inicrond
+    Inicrond : Network of Interactive Courses Registred On a Net Domain
+    Copyright (C) 2004, 2005  Sébastien Boisvert
 
-Copyright (C) 2004  Sebastien Boisverthttp://www.gnu.org/copyleft/gpl.html
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a  copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-
-//
-//---------------------------------------------------------------------
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
+
 define('__INICROND_INCLUDED__', TRUE);
 define('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
@@ -208,8 +195,6 @@ $_GET['usr_id'] == $_SESSION['usr_id']
                 
                 while($r = $rs->FetchRow())
                 {
-                        
-                        
                         //check if he is already in this group
                         $query = "SELECT
                         usr_id
@@ -224,28 +209,17 @@ $_GET['usr_id'] == $_SESSION['usr_id']
                         
                         $rs2 = $inicrond_db->Execute($query);
                         $fetch_result=  $rs2->FetchRow();
+                        
                         if(isset($fetch_result['usr_id']))//he/she is already in this group
                         {
                                 continue;
                         }
                         
-                        
                         $module_content .= "<option value=\"".$r['group_id']."\">".
                         $r['group_name']." "." ".$r['cours_code']." ".$r['cours_name']." "
-                        ."</option>"; 	
-                        
-                        
-                        
-                        
+                        ."</option>";
                 }//while , it is the end of while.
-                
-		
-		
-                
-                
-                
-                
-                
+
                 $module_content .=  "</select><br />".$_LANG['md5_pw_to_join']." :
                 <input type=\"password\" name=\"md5_pw_to_join\"  /><br />
                 <input type=\"submit\"   />
@@ -255,11 +229,9 @@ $_GET['usr_id'] == $_SESSION['usr_id']
 	}//end of do I show the select?
 	
 	else//show an error that says that no group can be joined.
-	
 	{
                 $module_content .= $_LANG['no_group_have_open_signin'];
 	}
-        
         
         //list the courses of the user.
         
@@ -278,11 +250,7 @@ $_GET['usr_id'] == $_SESSION['usr_id']
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups'].".group_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs'].".group_id
         
         ";
-        
-        
-        
-        
-        
+
         $rs = $inicrond_db->Execute($query);
         
         $module_content .= "<br /><br />";
@@ -290,12 +258,8 @@ $_GET['usr_id'] == $_SESSION['usr_id']
 	while($fetch_result = $rs->FetchRow())
 	{
                 $module_content .= "<a href=\"?usr_id=".$_GET['usr_id']."&cours_id=".$fetch_result['cours_id']."\""."<b>".$fetch_result['cours_code']."</b> <i>".$fetch_result['cours_name']."</i>"." (".$fetch_result['group_name'].")"."</a><br />";
-                
-        }	
-        
-        
+        }
 }	
 include __INICROND_INCLUDE_PATH__.'includes/kernel/post_modulation.php';
+
 ?>
-
-

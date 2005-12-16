@@ -3,19 +3,6 @@
 
 
 /*
-//---------------------------------------------------------------------
-// 
-//
-
-//
-//
-//Auteur : sebastien boisvert
-//email : sebhtml@users.sourceforge.net
-//site web : http://inicrond.sourceforge.net/
-//Projet : inicrond
-
-
-Copyright (C) 2004  Sebastien Boisverthttp://www.gnu.org/copyleft/gpl.html
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -32,35 +19,26 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 
-//
-//---------------------------------------------------------------------
 */
 
-define('__INICROND_INCLUDED__', TRUE);
-define('__INICROND_INCLUDE_PATH__', '../../');
+define ('__INICROND_INCLUDED__', true);
+define ('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
-include "includes/functions/access.inc.php";
-include "includes/functions/do_user_know_user.php";
+include 'includes/functions/access.inc.php';
+include 'includes/functions/do_user_know_user.php';
 
 
 
-if(isset($_SESSION['usr_id']) && 
-isset($_GET['usr_id']) AND
-$_GET['usr_id'] != "" AND
-(int) $_GET['usr_id'] AND 
-do_user_know_user($_SESSION['usr_id'], $_GET['usr_id'])
-)
+if (isset($_SESSION['usr_id']) && 
+isset($_GET['usr_id']) &&
+$_GET['usr_id'] != "" &&
+(int) $_GET['usr_id'] && 
+do_user_know_user($_SESSION['usr_id'], $_GET['usr_id']))
 {
-        
-	
-        
-        $is_in_charge_of_user=is_in_charge_of_user($_SESSION['usr_id'], $_GET['usr_id']);
-        
-        
-        
-        
+        $is_in_charge_of_user = is_in_charge_of_user($_SESSION['usr_id'], $_GET['usr_id']);
+
         $query = "SELECT
         usr_id,
         usr_name,
@@ -78,10 +56,7 @@ do_user_know_user($_SESSION['usr_id'], $_GET['usr_id'])
         
         $rs = $inicrond_db->Execute($query);
         $fetch_result = $rs->FetchRow();
-        
-        
-        
-        
+
         $usr['usr_id'] = $fetch_result['usr_id'];
         $usr['usr_name'] = $fetch_result['usr_name'];
         $usr['usr_nom'] = $fetch_result['usr_nom'];
@@ -95,20 +70,14 @@ do_user_know_user($_SESSION['usr_id'], $_GET['usr_id'])
         
         
         
-        if(
-        $is_in_charge_of_user OR
-        $fetch_result['show_email']
-        )
+        if($is_in_charge_of_user || $fetch_result['show_email'] == '1')
         {
                 $usr['usr_email'] = $fetch_result['usr_email'];
         }
         
-        if(
-        $is_in_charge_of_user
-        )
+        if($is_in_charge_of_user)
         {
-                
-                $usr['usr_number'] = $fetch_result['usr_number'];
+		$usr['usr_number'] = $fetch_result['usr_number'];
         }
         
         
@@ -119,13 +88,8 @@ do_user_know_user($_SESSION['usr_id'], $_GET['usr_id'])
         
         if(is_in_charge_of_user($_SESSION['usr_id'], $_GET['usr_id']))
         {
-                
-                if(isset($_GET['cours_id']) AND
-                $_GET['cours_id'] != "" AND
-                (int) $_GET['cours_id'] 
-                )
+                if(isset($_GET['cours_id']) && $_GET['cours_id'] != "" && (int) $_GET['cours_id'])
                 {
-                        
                         $cours_id = $_GET['cours_id'] ;
                         
                         $usr['seSSi'] = retournerHref("".__INICROND_INCLUDE_PATH__."modules/seSSi/one.php?usr_id=".$_GET['usr_id']."&cours_id=".$_GET['cours_id']."", $_LANG['seSSi']) ;
@@ -140,9 +104,6 @@ do_user_know_user($_SESSION['usr_id'], $_GET['usr_id'])
                         
                         
                         $usr['user_graphics_for_a_course'] = "<a href=\"".__INICROND_INCLUDE_PATH__."modules/inicrond_x/user_graphics_for_a_course.php?usr_id=".$_GET['usr_id']."&cours_id=".$_GET['cours_id']."\">".$_LANG['user_graphics_for_a_course']."</a>";
-                        
-                        
-                        
                 }
                 else
                 {
@@ -158,20 +119,7 @@ do_user_know_user($_SESSION['usr_id'], $_GET['usr_id'])
                         $usr['dl_acts_4_courses'] = 				
                         retournerHref("".__INICROND_INCLUDE_PATH__."modules/dl_acts_4_courses/show_dl_acts.mo.php?usr_id=".$_GET['usr_id']."",$_LANG['dl_acts_4_courses']);
                 }
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
+
                 
                 //list the courses of the user.
                 
@@ -190,11 +138,7 @@ do_user_know_user($_SESSION['usr_id'], $_GET['usr_id'])
                 T_groups.group_id=T_group_user.group_id
                 GROUP BY T_courses.cours_id
                 ";
-                
-                
-                
-                
-                
+
                 $rs = $inicrond_db->Execute($query);
                 
                 $usr['courses_list_for_a_user'] = array();
@@ -202,13 +146,8 @@ do_user_know_user($_SESSION['usr_id'], $_GET['usr_id'])
                 while($fetch_result = $rs->FetchRow())
                 {
                         $usr['courses_list_for_a_user']  []= "<a href=\"?usr_id=".$_GET['usr_id']."&cours_id=".$fetch_result['cours_id']."\""."<b>".$fetch_result['cours_code']."</b> <i>".$fetch_result['cours_name']."</i>"."</a>";
-                        
                 }
-                
-                
-                
-                
-                
+
         }//end of he is charge.
         
         if($_SESSION['SUID'])
@@ -221,21 +160,12 @@ do_user_know_user($_SESSION['usr_id'], $_GET['usr_id'])
                 
                 
         }
-        
-        /*
-        
-        
-        courses_list_for_a_user
-        
-        */
-        
+
+        //courses_list_for_a_user        
         $smarty->assign("usr", $usr);
         $smarty->assign("_LANG", $_LANG);
         $module_content .= $smarty->fetch($_OPTIONS['theme']."/user_informations.tpl");
-        
-        
-        
-}//end of security check.
+} // end of security check.
 
 
 include __INICROND_INCLUDE_PATH__.'includes/kernel/post_modulation.php'; 

@@ -1,40 +1,25 @@
 <?php
-//$Id$
-
-
 /*
-//---------------------------------------------------------------------
-//
-//
+    $Id$
 
-//
-//
-//Auteur : sebastien boisvert
-//email : sebhtml@users.sourceforge.net
-//site web : http://inicrond.sourceforge.net/
-//Projet : inicrond
+    Inicrond : Network of Interactive Courses Registred On a Net Domain
+    Copyright (C) 2004, 2005  Sébastien Boisvert
 
-Copyright (C) 2004  Sebastien Boisvert
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
 
-http://www.gnu.org/copyleft/gpl.html
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-
-//
-//---------------------------------------------------------------------
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
+
 define('__INICROND_INCLUDED__', TRUE);
 define('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
@@ -42,21 +27,16 @@ include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
 include __INICROND_INCLUDE_PATH__."includes/functions/hex.function.php";
 
-if(isset($_GET['usr_id']) AND
-$_GET['usr_id'] != "" AND
-(int) $_GET['usr_id'] AND
-$_GET['usr_id'] == $_SESSION['usr_id']
-) 
+if(isset($_GET['usr_id']) &&
+$_GET['usr_id'] != "" &&
+(int) $_GET['usr_id'] &&
+$_GET['usr_id'] == $_SESSION['usr_id']) 
 {
-        
-        
         $module_title = $_LANG['edit_my_profil'];
 	
 	//afficher profile modifier
 	if(!isset($_POST['usr_nom']))
-        
 	{
-                
                 $query = "
                 SELECT 
                 usr_name,
@@ -76,13 +56,9 @@ $_GET['usr_id'] == $_SESSION['usr_id']
                 
                 $rs = $inicrond_db->Execute($query);
                 $fetch_result = $rs->FetchRow();
-                
-                
-                
+
                 $module_content .= "<form method=\"POST\" enctype=\"multipart/form-data\">";
-                
-                
-                
+
                 //email.
                 $module_content .= $_LANG['usr_email']." : "."<input type=\"text\" name=\"usr_email\" value=\"". $fetch_result['usr_email']."\" /><br />";
                 
@@ -117,6 +93,7 @@ $_GET['usr_id'] == $_SESSION['usr_id']
                 {
                         $module_content .= "<option ".($value == $fetch_result['usr_time_decal'] ? "SELECTED" : "")." value=\"$value\">".$_LANG["txt_usr_time_decal_$value"]."</option>";      
                 }
+                
                 $module_content .= "</select>";
                 
                 $module_content .= "<br />";
@@ -127,6 +104,7 @@ $_GET['usr_id'] == $_SESSION['usr_id']
                 {
                         $module_content .= "<option ".($value == $fetch_result['language'] ? "SELECTED" : "")." value=\"$value\">$value</option>";      
                 }
+                
                 $module_content .= "</select>";
                 
                 $module_content .= "<br />";
@@ -145,23 +123,15 @@ $_GET['usr_id'] == $_SESSION['usr_id']
                 $module_content .= "<br />";
                 
                 $module_content .= "<input type=\"submit\"></form>";
-                
-                
-                
 	}
-	
-	
-	elseif(!preg_match($_OPTIONS['preg_email'], $_POST['usr_email'] ) )
+
+	elseif (!preg_match($_OPTIONS['preg_email'], $_POST['usr_email']))
 	{
                 $module_content .=  $_LANG['error_email'];
 	}
 	else//on modifie !!!
 	{
-                
-                
-                
                 include __INICROND_INCLUDE_PATH__."includes/functions/fonctions_validation.function.php";
-                
                 
                 $query = "UPDATE 
                 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs']." 
@@ -199,20 +169,16 @@ $_GET['usr_id'] == $_SESSION['usr_id']
                 $fetch_result = $rs->FetchRow();
                 
                 
-                if(isset($_FILES['usr_picture']["tmp_name"]) AND
-                $info = getimagesize($_FILES['usr_picture']['tmp_name']) AND
-                
-                $info[0] <= $_OPTIONS['usr_pic_max_width'] AND //dimensions
-                $info[1] <= $_OPTIONS['usr_pic_max_height'] 
-                )//remove the picture and add a new one...
+                if(isset($_FILES['usr_picture']["tmp_name"]) &&
+                $info = getimagesize($_FILES['usr_picture']['tmp_name']) &&
+                $info[0] <= $_OPTIONS['usr_pic_max_width'] && //dimensions
+                $info[1] <= $_OPTIONS['usr_pic_max_height'])//remove the picture and add a new one...
                 {
-                        if($fetch_result["usr_picture_file_name"] != "default1" AND
-                        is_file($_OPTIONS["file_path"]["uploads"]."/".$fetch_result["usr_picture_file_name"])
-                        )//remove the old file
+                        if($fetch_result["usr_picture_file_name"] != "default1" &&
+                        is_file($_OPTIONS["file_path"]["uploads"]."/".$fetch_result["usr_picture_file_name"]))//remove the old file
                         {
                                 unlink($_OPTIONS["file_path"]["uploads"]."/".$fetch_result["usr_picture_file_name"]);
                         }
-                        
                         
                         $HEXA_TAG = hex_gen_32();//hexadecimal string
                         
@@ -227,18 +193,17 @@ $_GET['usr_id'] == $_SESSION['usr_id']
                         $inicrond_db->Execute($query);
                         
                         copy($_FILES['usr_picture']["tmp_name"], $_OPTIONS["file_path"]["uploads"]."/".$HEXA_TAG);
-                        
                 }
                 
-                
-                if(isset($_POST['remove_picture']))//remove the picture
+                if (isset($_POST['remove_picture']))//remove the picture
                 {
-                        if($fetch_result["usr_picture_file_name"] != "default1" AND
+                        if ($fetch_result["usr_picture_file_name"] != "default1" AND
                         is_file($_OPTIONS["file_path"]["uploads"]."/".$fetch_result["usr_picture_file_name"])
-                        )//
+                        )
                         {
                                 unlink($_OPTIONS["file_path"]["uploads"]."/".$fetch_result["usr_picture_file_name"]);
                         }
+                        
                         $query = "UPDATE 
                         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs']." 
                         SET
@@ -248,13 +213,10 @@ $_GET['usr_id'] == $_SESSION['usr_id']
                         ";
                         
                         $inicrond_db->Execute($query);
-                        
                 }
                 
                 $module_content .=  $_LANG['profileModified' ];
-                
 	}
-        
 }
 
 include __INICROND_INCLUDE_PATH__.'includes/kernel/post_modulation.php'; 

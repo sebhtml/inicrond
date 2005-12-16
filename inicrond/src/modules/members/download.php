@@ -1,26 +1,8 @@
 <?php
 //$Id$
+
 /*
-//---------------------------------------------------------------------
-//
-//
-//Fonction du fichier :
-//----------------------------
-// module de téléchargement
-// recoit un id et permet de downloader ce fichier avec la database
-//-------------------------
-//
-//
-//Auteur : sebastien boisvert
-//email : sebhtml@users.sourceforge.net
-//site web : http://inicrond.sourceforge.net/
-//Projet : inicrond
-//
-//---------------------------------------------------------------------
-*/
-/*
-inicrond
-Copyright (C) 2004  Sebastien Boisvert
+Copyright (C) 2004, 2005  Sebastien Boisvert
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -37,6 +19,7 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+/* Download a user picture */
 
 
 define('__INICROND_INCLUDED__', TRUE);
@@ -44,18 +27,8 @@ define('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 //include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
-
-
-if(
-isset($_GET['usr_id']) &&
-$_GET['usr_id'] != "" &&
-(int) $_GET['usr_id']
-)
+if (isset($_GET['usr_id']) && $_GET['usr_id'] != "" && (int) $_GET['usr_id'])
 {
-        
-	//here I check if the person can do this 
-        
-	
 	$query = "SELECT 
         
         usr_picture_file_name
@@ -72,10 +45,8 @@ $_GET['usr_id'] != "" &&
         
         
         $file_path = $_OPTIONS["file_path"]["uploads"]."/".$fetch_result["usr_picture_file_name"];
-	
-	
-	
-        if(is_file($file_path) ) //erreur ?
+
+	if (is_file($file_path) ) 
         {
                 
                 //header("Content-Disposition: attachment; filename=img.ext");
@@ -86,19 +57,8 @@ $_GET['usr_id'] != "" &&
                 header("Cache-Control: must-revalidate, post-check=0, pre-check=0, public");
                 header("Expires: 0"); 		
                 
-                
                 readfile($file_path);//cotnenu du fichier
-                
-                
-                
         }
-	
-	
-	
-	
-	
-        
-        
 }
 
 ?>

@@ -1,26 +1,34 @@
 <?php
-/*---------------------------------------------------------------------
+/*
+    $Id$
 
-$Id$
+    Inicrond : Network of Interactive Courses Registred On a Net Domain
+    Copyright (C) 2004, 2005  Sébastien Boisvert
 
-sebastien boisvert <sebhtml at yahoo dot ca> <http://inicrond.sourceforge.net/>
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
 
-inicrond Copyright (C) 2004-2005  Sebastien Boisvert
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ */
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+/*
+Changes :
 
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
------------------------------------------------------------------------*/
+december 15, 2005
+	I formated the code correctly.
+	
+		--sebhtml
+
+    */
 /*
 this file contains the definition of the following classes :
 
@@ -48,9 +56,9 @@ class Inicrond_mysql_results_set//class of result set.
                 else//no more rows.
                 {
                         mysql_free_result($this->result_id);//free_the_result.
-                        return FALSE;//no more row.
+                        
+			return FALSE;//no more row.
                 }
-                
 	}
 }//end of class
 
@@ -87,6 +95,7 @@ class Inicrond_mysql_db//a abstration class, mysql only, call it like adodb.
                         //output an red error message that is big and ugly.
                         echo "<table bgcolor=\"black\"><tr><td><span style=\"color: red; \">
                         <i>Query</i> : <br />".nl2br($query)."<br /><br /><i>Error message</i> : <br /> ".mysql_error()."</span></td></tr></table><br />";
+                        
                         return FALSE;//an error occured.
                 }
                 //if the ressource is a ressource and not a boolean

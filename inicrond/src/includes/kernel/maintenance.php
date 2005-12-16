@@ -1,41 +1,35 @@
 <?php
-
-// $Id$
-
-// <http://inicrond.sourceforge.net/>
-
-//inicrond Copyright (C) 2004-2005  Sebastien Boisvert
 /*
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
+    $Id$
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+    Inicrond : Network of Interactive Courses Registred On a Net Domain
+    Copyright (C) 2004, 2005  Sébastien Boisvert
 
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-/*
-This script update sessions, X
-delete score where begin equal end and score is -10 on 0 or something like that., X
-delete tests results delete those with begin equal end. X
-delete users pending for one week. X
-optimize all tables. X
-
-*/
 /*
 
 FILE LOG
 friday, october 28, 2005 - sebhtml
     I checked this file for stuff that sould not be there.
 
-
+december 15, 2005
+	I formated the code correctly.
+	
+		--sebhtml
 
 */
 
@@ -62,13 +56,6 @@ $query =        'UPDATE
 $inicrond_db->Execute ($query);
 
 $module_content .= $_LANG['maintenance_set_sessions_offline'].'<br />';
-
-
-
-
-
-
-
 
 /////////////////
 //delete score with point max equal 0 and start equal end and old for 1 week. //////////////////////////////////////
@@ -110,7 +97,7 @@ include __INICROND_INCLUDE_PATH__.'modules/tests-results/includes/functions/dele
 
 while($fetch_result = $rs->FetchRow())
 {
-    delete_result_id($fetch_result['result_id']);
+	delete_result_id($fetch_result['result_id']);
 }
 		
 $module_content .= $_LANG['delete_old_useless_test_results'].'<br />';
@@ -135,11 +122,11 @@ $module_content .= $_LANG['maintenance_delete_old_not_activated_accounts'].'<br 
  
 foreach($_OPTIONS['tables'] AS $table)//for each table
 {
- //optimize the table.
-    $query = "OPTIMIZE TABLE ".$_OPTIONS['table_prefix'].$_OPTIONS['tables'][$table]." ";
+	//optimize the table.
+	$query = "OPTIMIZE TABLE ".$_OPTIONS['table_prefix'].$_OPTIONS['tables'][$table]." ";
 		
-    $inicrond_db->Execute($query);
-    $module_content .= $_OPTIONS['table_prefix'].$_OPTIONS['tables'][$table].'<br />' ;
+	$inicrond_db->Execute($query);
+	$module_content .= $_OPTIONS['table_prefix'].$_OPTIONS['tables'][$table].'<br />' ;
 
 }
 

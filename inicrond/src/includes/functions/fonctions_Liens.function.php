@@ -1,45 +1,36 @@
 <?php
-//$Id$
-
-
 /*
-//---------------------------------------------------------------------
-//
-//
+    $Id$
 
-//
-//
-//Auteur : sebastien boisvert
-//email : sebhtml@users.sourceforge.net
-//site web : http://inicrond.sourceforge.net/
-//Projet : inicrond
+    Inicrond : Network of Interactive Courses Registred On a Net Domain
+    Copyright (C) 2004, 2005  Sébastien Boisvert
 
-Copyright (C) 2004  Sebastien Boisvert
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
 
-http://www.gnu.org/copyleft/gpl.html
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-
-//
-//---------------------------------------------------------------------
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
+/*
+Changes :
 
+december 15, 2005
+	I formated the code correctly.
+	
+		--sebhtml
 
+*/
 if(!__INICROND_INCLUDED__)
 {
-die("hacking attempt!!");
+	die("hacking attempt!!");
 }
 
 /**
@@ -55,7 +46,7 @@ die("hacking attempt!!");
  */
 function echoHref($lelien, $letexte, $lacible="_top", $laclasse="", $title="")
 {
-echo retournerHref($lelien,$letexte,$lacible,$laclasse,$title) ;
+	echo retournerHref($lelien,$letexte,$lacible,$laclasse,$title) ;
 }
 
 /**
@@ -71,7 +62,7 @@ echo retournerHref($lelien,$letexte,$lacible,$laclasse,$title) ;
  */
 function retournerHref($lelien,$letexte,$lacible="_top",$laclasse="", $title="")
 {
-return "<a href=\"$lelien\">$letexte</a>";
+	return "<a href=\"$lelien\">$letexte</a>";
 }
 
 

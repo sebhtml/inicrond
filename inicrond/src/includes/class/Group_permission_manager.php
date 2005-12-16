@@ -1,38 +1,40 @@
 <?php
-/*---------------------------------------------------------------------
+/*
+    $Id$
 
-$Id$
+    Inicrond : Network of Interactive Courses Registred On a Net Domain
+    Copyright (C) 2004, 2005  Sébastien Boisvert
 
-sebastien boisvert <sebhtml at yahoo dot ca> <http://inicrond.sourceforge.net/>
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
 
-inicrond Copyright (C) 2004-2005  Sebastien Boisvert
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
+/*
+Changes :
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+december 15, 2005
+	I formated the code correctly.
+	
+		--sebhtml
 
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
------------------------------------------------------------------------*/
+*/
 
 class Group_permission_manager
 {
-        //reference on addr...
         var $inicrond_db;
         var $_OPTIONS;
-        
         var $_LANG;
-        
-        //real variables.
         var $cours_id;
-        
         var $group_elm_table;
         var $elm_field_name;
         
@@ -51,8 +53,6 @@ class Group_permission_manager
                 
                 if(isset($_POST["envoi"]))//update the database if there is a submission
                 {
-                        
-                        
                         $module_content .= "<h3><span style=\"color: #ff0000 ;\">".$_LANG['the_database_has_been_updated']."</span></h3>";
                         //delete all row concerning the inode...
                         $query = "DELETE FROM
@@ -64,11 +64,9 @@ class Group_permission_manager
                         
                         foreach($_POST AS $key => $value)
                         {
-                                
                                 if(preg_match("/group_id=(.+)/", $key, $tokens) )
                                 //les txt pour questions
                                 {
-                                        
                                         //check if the group is part of this course...
                                         $query = "SELECT
                                         group_id 
@@ -83,7 +81,6 @@ class Group_permission_manager
                                         
                                         $fetch_result = $rs->FetchRow();
                                         
-                                        
                                         if(isset($fetch_result['group_id']))//access granted...
                                         {
                                                 $query = "INSERT INTO 
@@ -95,8 +92,6 @@ class Group_permission_manager
                                                 
                                                 $inicrond_db->Execute($query);	//insert the inode_group into inode_groups...
                                         }
-                                        
-                                        
                                 }
                         }
                 }
@@ -135,13 +130,12 @@ class Group_permission_manager
                         
                         $module_content .= "<tr><td><input  $checked  type=\"checkbox\"  name=\"group_id=".$fetch_result['group_id']."\" value=\"".$fetch_result['group_id']."\"  /></td><td>".$fetch_result['group_name']."</td></tr>";
                 }
+                
                 $module_content .= "</table><input type=\"submit\" name=\"envoi\"/></form>";
                 
                 
                 return $module_content;
-                
         }
-        
 }
 
 ?>

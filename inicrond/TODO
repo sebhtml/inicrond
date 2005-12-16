@@ -5,15 +5,36 @@ essayer tous les modules php. (les tester avec dual head)
 /****************************************
 à finir pour le cours_id :
 
-	members
-	seSSi
-	tests-php-mysql
-	tests-results
-	user
+	modules :
+		tests-php-mysql
+		tests-results
 
-	include of inicornd
-	includes de tous les modules
+	includes :
+		admin
+		blue_master_clone
+		calendar
+		course_admin
+		course_media
+		courses
+		CVS
+		dl_acts_4_courses
+		files_4_courses
+		groups
+		index.html
+		inicrond_x
+		lang_dev
+		marks
+		members
+		mod_forum
+		modules
+		README
+		seSSi
+		tests-php-mysql
+		tests-results
+
 *******************************************/
 
 * add a table to validate the new sign in
 * add a new table for those whom ask for a new password
+
+* sourceforge todo..
