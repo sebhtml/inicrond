@@ -38,3 +38,8 @@ essayer tous les modules php. (les tester avec dual head)
 * add a new table for those whom ask for a new password
 
 * sourceforge todo..
+
+* remove usr_id from page_views
+* remove usr_id from results
+* remove usr_id from scores
+* remove usr_id from act of downloading
