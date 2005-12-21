@@ -28,6 +28,7 @@ december 15, 2005
 		--sebhtml
 
 */
+
 if(!__INICROND_INCLUDED__)
 {
 	exit();
@@ -39,8 +40,6 @@ if(!isset($_SESSION['usr_id']))//default values...
 	$_SESSION['usr_time_decal'] = $_OPTIONS['usr_time_decal'] ;//pouir le cégep
 	$_SESSION['language'] = $_OPTIONS['language'] ;//pouir le cégep
 	$_SESSION['SUID'] = 0 ;
-	
-	//	echo "you are nobody<br />";
 }
 
 $_RUN_TIME['results_per_page'] = $_OPTIONS['results_per_page'] ;
@@ -48,15 +47,13 @@ $_RUN_TIME['debug_mode'] = $_OPTIONS['debug_mode'];
 
 //get the HTMLArea_language
 
-switch ($_SESSION['language'])
+if ($_SESSION['language'] == 'fr-ca')
 {
-	case 'fr-ca' ://french language
-		$_RUN_TIME['HTMLArea_language'] = 'fr';
-		break;
-	
-	default ://default language
-		$_RUN_TIME['HTMLArea_language'] = 'en';
-		break;
+	$_RUN_TIME['HTMLArea_language'] = 'fr';
+}
+else
+{
+	$_RUN_TIME['HTMLArea_language'] = 'en';
 }
 
 ?>

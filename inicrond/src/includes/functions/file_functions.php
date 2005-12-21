@@ -43,9 +43,9 @@ if(!__INICROND_INCLUDED__)
  */
 function USER_file_get_contents($file)
 {
-	$fp = fopen($file, "r");
+	$fp = fopen($file, 'r');
 	
-	$size = fileSize($file) ? fileSize($file) : 999999;//bug at cegep, fileSize returns 0
+	$size = fileSize($file) ? fileSize($file) : 999999;//bug at cegep de Lévis-Lauzon, fileSize returns 0
 	
 	$output = fread($fp, $size);
 	
@@ -64,7 +64,7 @@ function USER_file_get_contents($file)
  */
 function USER_file_put_contents($file, $content)
 {
-	$fp = fopen($file, "w+");
+	$fp = fopen($file, 'w+');
 	
 	fwrite($fp, $content);
 	

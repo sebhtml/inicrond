@@ -291,21 +291,24 @@ function is_author_of_result($usr_id, $result_id)
 
 	$query = "
 	SELECT 
-	usr_id AS x_boxiy
+	usr_id
 	
 	FROM
-	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results']."
+	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].",
+	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
 	WHERE
+	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".session_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id
+	and
 	usr_id=".$usr_id."
 	AND
 	result_id=".$result_id."
 	LIMIT 1
-	;";
+	";
 
  	$rs = $inicrond_db->Execute($query);
   	$fetch_result = $rs->FetchRow();
   
-	return (isset($fetch_result["x_boxiy"]));
+	return (isset($fetch_result["usr_id"]));
 }
 
 ?>

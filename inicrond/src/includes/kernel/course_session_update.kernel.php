@@ -34,9 +34,7 @@ if(!__INICROND_INCLUDED__)//security check...
 	exit();
 }
 
-
-if(
-isset($_SESSION['usr_id']) &&//is there a session?
+if(isset($_SESSION['usr_id']) &&//is there a session?
 isset ($_GET['cours_id']) &&
 is_numeric($_GET['cours_id']) &&
 !isset($_SESSION['cours_id'])) //not yet set in the database...AND

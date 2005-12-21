@@ -48,8 +48,6 @@ $smarty->config_dir = __INICROND_INCLUDE_PATH__.'configs/';
 $smarty->cache_dir = __INICROND_INCLUDE_PATH__.'cache/';
 $smarty->php_handling = SMARTY_PHP_PASSTHRU ;
 
-//include __INICROND_INCLUDE_PATH__.'includes/functions/smarty_reduce_html_size.php';
-//$smarty->register_prefilter('smarty_reduce_html_size');
 $smarty->register_function('smarty_array_to_html_function', 'smarty_array_to_html_function');
 
 ?>

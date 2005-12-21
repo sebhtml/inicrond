@@ -32,7 +32,7 @@ function inicrond_mail($to, $subject, $message)
 {
 	global $_OPTIONS, $_RUN_TIME, $inicrond_db;
 	
-	if(!isset($_RUN_TIME["inicrond_mail"]['usr_email']))//arent in cache yet.
+	if(!isset($_RUN_TIME['inicrond_mail']['usr_email']))//arent in cache yet.
 	{
 	
 		if(isset($_SESSION['usr_id']))//get this email and this signature for sending tghe email.
@@ -56,8 +56,8 @@ function inicrond_mail($to, $subject, $message)
 		
 		$fetch_result = $rs->FetchRow();
 		
-		$_RUN_TIME["inicrond_mail"]['usr_email'] = $fetch_result['usr_email'];
-		$_RUN_TIME["inicrond_mail"]['usr_signature'] = BBcode_parser($fetch_result['usr_signature']);
+		$_RUN_TIME['inicrond_mail']['usr_email'] = $fetch_result['usr_email'];
+		$_RUN_TIME['inicrond_mail']['usr_signature'] = BBcode_parser($fetch_result['usr_signature']);
 	}
 	
 	$headers  = "MIME-Version: 1.0\r\n";
@@ -70,7 +70,7 @@ function inicrond_mail($to, $subject, $message)
 	$headers .= "Reply-To: ".$_RUN_TIME["inicrond_mail"]['usr_email']."\r\n";
 	$headers .= "Return-Path: ".$_RUN_TIME["inicrond_mail"]['usr_email']."\r\n";
 	
-	$message = $message."<br />".$_RUN_TIME["inicrond_mail"]['usr_signature'];
+	$message = $message."<br />".$_RUN_TIME['inicrond_mail']['usr_signature'];
 	
 	//echo $message;
 	mail($to, $subject, $message, $headers);

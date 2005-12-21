@@ -30,7 +30,7 @@ december 15, 2005
 */
 if(!__INICROND_INCLUDED__)
 {
-die("hacking attempt!!");
+	die();
 }
 
 
@@ -46,7 +46,7 @@ function filter($string)
 	global $_OPTIONS;
 
 
-	if($_OPTIONS["htmlEntities"])
+	if($_OPTIONS['htmlEntities'])
 	{
 		$string = htmlEntities($string) ;
 	}
@@ -76,26 +76,12 @@ function filter_html_preserve($string)
 
 	foreach($tmp AS $key => $value)
 	{ 
-		if(
-		$value != "&quot;" AND
-		$value != "&lt;" AND
-		$value != "&gt;" AND
-		$value != "&amp;" 
-		)
+		if($value != '&quot;' && $value != '&lt;' && $value != '&gt;' && $value != '&amp;')
 		{
-		$tmp2[$key] = $value;
-		
+			$tmp2[$key] = $value;
 		}
 	}
-	
-	/*
-		if($_OPTIONS["htmlEntities"])
-		{
-		$string = htmlEntities($string) ;
-		$string = str_replace("&lt;", "<", $string);
-		$string = str_replace("&gt;", ">", $string);
-		}
-	*/
+
 	
 	if(!get_magic_quotes_gpc())//MAGIC QUOTES
 	{

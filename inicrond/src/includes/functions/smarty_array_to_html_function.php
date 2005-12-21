@@ -31,15 +31,14 @@ december 15, 2005
 
 function smarty_array_to_html_function($params)
 {
-	
 	global $smarty, $_OPTIONS;
-	$smarty->assign("params", $params);
+	$smarty->assign('params', $params);
 	
-	$tmp["template_dir"] = $smarty->template_dir;
+	$tmp['template_dir'] = $smarty->template_dir;
 	$smarty->template_dir = __INICROND_INCLUDE_PATH__.'templates/';
 	
-	$out = $smarty->fetch($_OPTIONS['theme']."/smarty_array_to_html_function.tpl");
-	$smarty->template_dir = $tmp["template_dir"];
+	$out = $smarty->fetch($_OPTIONS['theme'].'/smarty_array_to_html_function.tpl');
+	$smarty->template_dir = $tmp['template_dir'];
 	return $out;
 }
 

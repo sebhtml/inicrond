@@ -31,7 +31,7 @@ december 15, 2005
 
 if(!__INICROND_INCLUDED__)
 {
-die("hacking attempt!!");
+	die();
 }
 
 /**
@@ -41,20 +41,20 @@ die("hacking attempt!!");
  * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
  * @version      1.0.0
  */
-function  js_redir($url, $redir_body_msg = "")
+function  js_redir($url, $redir_body_msg = '')
 {
 	global $_OPTIONS, $smarty;
 	
 	header("Location: $url");//with http headers.
 	
-	$smarty->template_dir = __INICROND_INCLUDE_PATH__."/".'templates/';
+	$smarty->template_dir = __INICROND_INCLUDE_PATH__.'templates/';
 	
 	$smarty->assign('redir_body_msg', $redir_body_msg);
 	$smarty->assign('redir_url', $url);
 	$smarty->assign('redir_msg', $_LANG['redir_msg']);
 	$smarty->assign('redir_here', $_LANG['redir_here']);
 	
-	echo $smarty->fetch($_OPTIONS['theme']."/js_redir.tpl");
+	echo $smarty->fetch($_OPTIONS['theme'].'/js_redir.tpl');
 	exit();
 }
 

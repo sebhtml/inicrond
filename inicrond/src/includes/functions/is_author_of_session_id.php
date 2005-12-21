@@ -45,7 +45,7 @@ function is_author_of_session_id($usr_id, $session_id)
 {
 	global $_OPTIONS, $_RUN_TIME, $inicrond_db;
 	$query = "SELECT
-	session_id AS OKI	
+	session_id	
 	FROM 
 	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
 	WHERE
@@ -59,7 +59,7 @@ function is_author_of_session_id($usr_id, $session_id)
 	$r = $rs->FetchRow();
 		
 	
-	return isset($r["OKI"]);
+	return isset($r['session_id']);
 }
 
 

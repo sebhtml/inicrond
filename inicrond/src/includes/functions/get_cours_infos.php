@@ -34,9 +34,10 @@ function get_cours_infos($cours_id)
 
 	if(!isset($cours_id))
 	{
-		echo "cours_id is not set in get_cours_infos<br />";
-		return NULL;
+		echo "[DEBUG] cours_id is not set in get_cours_infos<br />";
+		return FALSE;
 	}
+	
 	//get the cours infos.
       	$query = "SELECT 
       	cours_id,

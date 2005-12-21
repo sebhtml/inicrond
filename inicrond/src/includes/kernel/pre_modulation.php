@@ -37,7 +37,7 @@ if(!__INICROND_INCLUDED__)
 //version constants.
 include __INICROND_INCLUDE_PATH__."includes/constants/version.inc.php";
 
-session_set_cookie_params ( 0, '/',  NULL,  0 );
+session_set_cookie_params ( 0, '/',  NULL,  0);
 session_name (md5(APPLICATION_UNIX_NAME));
 session_start();//
 

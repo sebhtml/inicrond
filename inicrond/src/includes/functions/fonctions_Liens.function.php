@@ -30,7 +30,7 @@ december 15, 2005
 */
 if(!__INICROND_INCLUDED__)
 {
-	die("hacking attempt!!");
+	die();
 }
 
 /**
@@ -44,7 +44,7 @@ if(!__INICROND_INCLUDED__)
  * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
  * @version      1.0.0
  */
-function echoHref($lelien, $letexte, $lacible="_top", $laclasse="", $title="")
+function echoHref($lelien, $letexte, $lacible='_top', $laclasse='', $title='')
 {
 	echo retournerHref($lelien,$letexte,$lacible,$laclasse,$title) ;
 }
@@ -60,7 +60,7 @@ function echoHref($lelien, $letexte, $lacible="_top", $laclasse="", $title="")
  * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
  * @version      1.0.0
  */
-function retournerHref($lelien,$letexte,$lacible="_top",$laclasse="", $title="")
+function retournerHref($lelien,$letexte,$lacible='_top',$laclasse='', $title='')
 {
 	return "<a href=\"$lelien\">$letexte</a>";
 }

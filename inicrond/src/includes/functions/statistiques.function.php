@@ -30,7 +30,7 @@ december 15, 2005
 */
 if(!__INICROND_INCLUDED__)
 {
-	die("hacking attempt!!");
+	die();
 }
 
 /**

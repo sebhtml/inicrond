@@ -52,7 +52,6 @@ if($_OPTIONS['save_page_view'])//save it of not...
 	$query = 	"INSERT INTO
 			".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['page_views']."
 			(
-			usr_id, 
 			session_id,
 			REMOTE_PORT,
 			gmt_timestamp,
@@ -64,7 +63,6 @@ if($_OPTIONS['save_page_view'])//save it of not...
 			)
 			VALUES
 			(
-			$usr_id,
 			".$_SESSION['session_id'].",
 			'".$_SERVER['REMOTE_PORT']."',
 			".inicrond_mktime().",

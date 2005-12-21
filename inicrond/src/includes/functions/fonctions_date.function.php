@@ -30,7 +30,7 @@ december 15, 2005
 */
 if(!__INICROND_INCLUDED__)
 {
-	die("hacking attempt!!");
+	die () ;
 }
 
 /**
@@ -52,12 +52,12 @@ function format_time_stamp($gm_timestamp)
 	
 	//$gm_timestamp+=$_OPTIONS["server_time_zone_adjustment_in_seconds"];
 	
-	$wday = gmdate("w", $gm_timestamp);
-	$month_id = gmdate("n", $gm_timestamp) ;
-	$year_id = gmdate("Y", $gm_timestamp) ;
-	$mday = gmdate("j", $gm_timestamp) ;
+	$wday = gmdate('w', $gm_timestamp);
+	$month_id = gmdate('n', $gm_timestamp) ;
+	$year_id = gmdate('Y', $gm_timestamp) ;
+	$mday = gmdate('j', $gm_timestamp) ;
 	
-	$date .= $_LANG["week_day_".$wday];
+	$date .= $_LANG['week_day_'.$wday];
 	//$date .= $tableau["wday"];
 	
 	$date .= ", ";
@@ -75,20 +75,20 @@ function format_time_stamp($gm_timestamp)
 	else//english by default
 	{
 		$date .= $_LANG['month_'.$month_id];
-		$date .= " ";
+		$date .= ' ';
 		$date .=  $mday;
 		$date .= ', ';
 	}
 		
-	$date .= " ";
+	$date .= ' ';
 	$date .=  $year_id;
-	$date .= " ";
+	$date .= ' ';
 	
 	//debug
 	
-	$date .=  gmdate("H:i:s", $gm_timestamp) ;//heure:minutesL:secondes
+	$date .=  gmdate('H:i:s', $gm_timestamp) ;//heure:minutesL:secondes
 	
-	return "".$date." ".$_LANG["txt_usr_time_decal_".$_SESSION['usr_time_decal']]."" ;//output...
+	return $date.' '.$_LANG['txt_usr_time_decal_'.$_SESSION['usr_time_decal']] ;//output...
 }
 
 /**
@@ -133,11 +133,11 @@ function format_time_length($time)//en secondes
 	$minutes = (integer) $minutes;
 	$secondes = (integer) $reste_pour_secondes ;
 
-	$hours = strlen($hours) == 1 ? "0".$hours : $hours;
-	$minutes = strlen($minutes) == 1 ? "0".$minutes : $minutes;
-	$secondes = strlen($secondes) == 1 ? "0".$secondes : $secondes;
+	$hours = strlen($hours) == 1 ? '0'.$hours : $hours;
+	$minutes = strlen($minutes) == 1 ? '0'.$minutes : $minutes;
+	$secondes = strlen($secondes) == 1 ? '0'.$secondes : $secondes;
 
-	return $hours.":".$minutes.":".$secondes;
+	return $hours.':'.$minutes.':'.$secondes;
 }
 
 ?>

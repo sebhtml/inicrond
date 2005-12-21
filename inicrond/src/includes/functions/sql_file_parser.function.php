@@ -30,7 +30,7 @@ december 15, 2005
 */
 if(!__INICROND_INCLUDED__)
 {
-	die("hacking attempt!!");
+	die();
 }
 
 /**
@@ -72,7 +72,7 @@ function count_unescaped_single_quotes($string)
 function sql_parser_split_queries($sql)
 {
 	//split le fichier en pseudo query
-	$pseudo_queries = explode(";", $sql);
+	$pseudo_queries = explode(';', $sql);
 	
 	//compte les pseudo requètes
 	$nb_pseudo_queries = count($pseudo_queries);
@@ -92,16 +92,16 @@ function sql_parser_split_queries($sql)
 			if(($nb_unescaped_single_quote % 2) == 0)
 			{
 				//ajoute la query
-				$query[] = $pseudo_queries[$i].";";
+				$query[] = $pseudo_queries[$i].';';
 			}
 			else
 			{
 				//add what we got to the next
-				$pseudo_queries[$i+1] = $pseudo_queries[$i].";".$pseudo_queries[$i+1];
+				$pseudo_queries[$i+1] = $pseudo_queries[$i].';'.$pseudo_queries[$i+1];
 			}
 			
 			//sauve de la memoire
-			$pseudo_queries[$i] = "";
+			$pseudo_queries[$i] = '';
 		}		
 	}
 	

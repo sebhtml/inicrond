@@ -43,14 +43,16 @@ function is_scored($usr_id)
 
 	$query = "SELECT chapitre_media_id
 	FROM
-	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores']."
+	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].",
+	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
 	WHERE
 	usr_id=".$usr_id."
-	;";
+	and
+	".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".session_id
+	";
 	
 	$r = $inicrond_db->Execute($query);
 	$f = $_RUN_TIME["db"]->fetch_assoc($r);
-
 
 	return isset($f['chapitre_media_id']);
 }
@@ -122,11 +124,13 @@ function info_links($usr_id)
 		count(".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".session_id) AS the_count
 			FROM
 		".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].",
-		".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media']."
+		".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].",
+		".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
 	
 		WHERE
-		".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".usr_id=".$usr_id."
-	
+		".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id=".$usr_id."
+		and
+		".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".session_id
 		AND
 		time_stamp_start<time_stamp_end	
 		AND
@@ -154,9 +158,12 @@ function info_links($usr_id)
 		count(".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".usr_id) AS the_count
 			FROM
 		".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].",
-		".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests']."
+		".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].",
+		".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
 		WHERE
-		".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".usr_id=".$usr_id."
+		".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id=".$usr_id."
+		AND
+		".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".session_id
 		AND
 		".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".test_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".test_id
 		AND 
@@ -180,11 +187,13 @@ function info_links($usr_id)
 		//check if he/she has a or many tests results
 		$query = "SELECT 
 		count(usr_id)
-			FROM
-		".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading']."
-			WHERE
-			usr_id=".$usr_id."
-			
+		FROM
+		".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].",
+		".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
+		WHERE
+		usr_id=".$usr_id."
+		AND
+		".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].".session_id
 		";
 			
 			$rs = $inicrond_db->Execute($query);
@@ -201,6 +210,5 @@ function info_links($usr_id)
 	
 	return $output;//return the output.
 }
-
 
 ?>

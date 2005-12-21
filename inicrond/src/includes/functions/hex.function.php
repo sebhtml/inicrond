@@ -39,7 +39,7 @@ december 15, 2005
 function hex_gen_32()
 {
 	$i = 32;//number of digit
-	$out = "";
+	$out = '';
 	
 	while($i)
 	{	

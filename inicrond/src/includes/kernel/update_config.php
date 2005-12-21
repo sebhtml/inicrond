@@ -29,7 +29,7 @@ december 15, 2005
 
 */
 
-if(isset($_OPTIONS["INCLUDED"]))
+if(__INICROND_INCLUDED__)
 {
 	echo "<table border=\"0\" cellpadding=\"5\" bgcolor=\"#FEFADB\" width=\"100%\"><tr><td>";
 	$_OPTIONS["modules_dir"] = array();

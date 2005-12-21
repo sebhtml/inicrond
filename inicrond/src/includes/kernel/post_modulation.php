@@ -65,8 +65,8 @@ if (isset ($_SESSION['usr_id']) && is_teacher_of_at_least_one_course($_SESSION['
 	$smarty->assign("print_link", "<a href=\"?".$_SERVER['QUERY_STRING']."&print\" target=\"_blank\">".$_LANG['printable_format']."</a>");
 }
       
-	$smarty->assign('footer', $_OPTIONS['footer']);   
-	$smarty->assign('header', BBcode_parser($_OPTIONS['header']));   
+$smarty->assign('footer', $_OPTIONS['footer']);   
+$smarty->assign('header', BBcode_parser($_OPTIONS['header']));   
 
 
 if ($_OPTIONS['debug_mode'] && $_SESSION['SUID'])
@@ -85,11 +85,9 @@ if (isset($extra_js))
 {
 	$smarty->assign('extra_js', $extra_js);
 }
-	
 
 $smarty->assign('_LANG', $_LANG);
 
-	
 if(isset($_SESSION['usr_id']))
 {
 	$smarty->assign('usr_cp',  retournerHref("".__INICROND_INCLUDE_PATH__."modules/members/one.php?usr_id=".$_SESSION['usr_id'], $_LANG['usr_cp']));
@@ -100,23 +98,18 @@ if(isset($_SESSION['usr_id']))
 
 	$smarty->assign('change_password',  retournerHref("".__INICROND_INCLUDE_PATH__."modules/user/change_password.php?usr_id=".$_SESSION['usr_id']."", $_LANG['change_password']));
 
-
 	$smarty->assign('my_groups',  retournerHref("".__INICROND_INCLUDE_PATH__."modules/user/my_groups.php?usr_id=".$_SESSION['usr_id']."", $_LANG['my_groups']));
 
 	//cours
 	$smarty->assign('courses',  retournerHref("".__INICROND_INCLUDE_PATH__."modules/courses/courses.php", $_LANG['courses']));	
-	
 }
 else
 {
 	$smarty->assign('connect',  retournerHref("".__INICROND_INCLUDE_PATH__."modules/user/connect.php", $_LANG['connect']));
 	//connection
 	
-	
 	$smarty->assign('register',  retournerHref("".__INICROND_INCLUDE_PATH__."modules/user/register.php", $_LANG['register']));
-	//inscription
-	
-	
+		
 	$smarty->assign('forgot_password',  retournerHref("".__INICROND_INCLUDE_PATH__."modules/user/forgot_password.php", $_LANG['forgot_password']));
 	//mot de passe oublié
 }
@@ -126,17 +119,12 @@ if ($_SESSION['SUID'])
 	$smarty->assign('admin_menu',  retournerHref("../../modules/admin/admin_menu.php", $_LANG['admin_menu']));	
 }	
 
-
-	
-	//////////////////////////////////
-//ob_clean();//clean the output buffer.
 header("Content-Type: text/html");
 $smarty->template_dir = __INICROND_INCLUDE_PATH__."".'templates/';
-   
 
 if ($_OPTIONS['html_output_on_one_line'] == '1')
 {
-	$output = $smarty->fetch($_OPTIONS['theme']."/index.tpl");
+	$output = $smarty->fetch($_OPTIONS['theme'].'/index.tpl');
 	$output = str_replace("\n",'',$output);
 	$output = str_replace("\t",'',$output);
 	$output = str_replace("\r",'',$output);
@@ -145,7 +133,7 @@ if ($_OPTIONS['html_output_on_one_line'] == '1')
 }
 else
 {
-	$smarty->display($_OPTIONS['theme']."/index.tpl");
+	$smarty->display($_OPTIONS['theme'].'/index.tpl');
 }
 
 ?>
