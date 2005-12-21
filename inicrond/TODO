@@ -1,6 +1,7 @@
 //DONE for 3.3.2 : patch a 3.3.1 is done
+* try a clean install [done]
 
-* debug all script
+* debug all script (see the scripts file in src..)
 * essayer tous les modules php. (les tester avec dual head)
 	* add a table to validate the new sign in [done]
 	* add a new table for those whom ask for a new password [done]
@@ -21,5 +22,5 @@
 	* remove content_id, content_type from inode_elements [done]
 
 * sourceforge todo..
-* try a clean install
+
 

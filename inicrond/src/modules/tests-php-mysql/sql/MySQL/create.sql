@@ -14,7 +14,9 @@ CREATE TABLE tests (
   do_you_show_good_answers char(1) NOT NULL default '0',
   time_GMT_add int(10) unsigned NOT NULL default '0',
   time_GMT_edit int(10) unsigned NOT NULL default '0',
-  PRIMARY KEY  (test_id)
+  PRIMARY KEY  (test_id),
+  inode_id int unsigned,
+  key inode_id (inode_id)
   ) TYPE=MyISAM;
 
 -- --------------------------------------------------------

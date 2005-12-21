@@ -14,7 +14,9 @@ CREATE TABLE chapitre_media (
   chapitre_media_edit_gmt_timestamp int(10) unsigned NOT NULL default '0',
   file_name varchar(255) default NULL,
   HEXA_TAG varchar(32) default NULL,
-  PRIMARY KEY  (chapitre_media_id)
+  PRIMARY KEY  (chapitre_media_id),
+  inode_id int unsigned,
+  key inode_id (inode_id)
 ) TYPE=MyISAM ;
         
 -- 
@@ -29,7 +31,9 @@ CREATE TABLE inicrond_images (
   img_description text NOT NULL,
   add_time_t int(10) unsigned NOT NULL default '0',
   edit_time_t int(10) unsigned NOT NULL default '0',
-  PRIMARY KEY  (img_id)
+  PRIMARY KEY  (img_id),
+  inode_id int unsigned,
+  key inode_id (inode_id)
 ) TYPE=MyISAM;
 
 -- 
@@ -42,5 +46,7 @@ CREATE TABLE inicrond_texts (
   text_description text NOT NULL,
   add_time_t int(10) unsigned NOT NULL default '0',
   edit_time_t int(10) unsigned NOT NULL default '0',
-  PRIMARY KEY  (text_id)
+  PRIMARY KEY  (text_id),
+  inode_id int unsigned,
+  key inode_id (inode_id)
 ) TYPE=MyISAM;

@@ -14,7 +14,9 @@ CREATE TABLE courses_files (
   md5_path varchar(32) default NULL,
   add_gmt int(10) unsigned default NULL,
   edit_gmt int(10) unsigned default NULL,
-  PRIMARY KEY  (file_id)
+  PRIMARY KEY  (file_id),
+  inode_id int unsigned,
+  key inode_id (inode_id)
 ) TYPE=MyISAM;
 
 -- --------------------------------------------------------
