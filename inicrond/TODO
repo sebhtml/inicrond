@@ -22,3 +22,8 @@
 	* remove content_id, content_type from inode_elements [done]
 
 * sourceforge todo..
+* answer_ordering_id necessary??? (answer_ordering)
+* dir_id necessary ??? virtual_directories
+* short_answer_id necessary in multiple_short_answer ??
+* text_id necessary in inicrond_texts ??
+* img_id necessary in inicrond_images ???
