@@ -1,45 +1,25 @@
-try a clean install
-try patching the spockcorgis database.
-essayer tous les modules php. (les tester avec dual head)
+//DONE for 3.3.2 : patch a 3.3.1 is done
 
-/****************************************
-à finir pour le cours_id :
-
-	modules :
-		tests-php-mysql
-		tests-results
-
-	includes :
-		admin
-		blue_master_clone
-		calendar
-		course_admin
-		course_media
-		courses
-		CVS
-		dl_acts_4_courses
-		files_4_courses
-		groups
-		index.html
-		inicrond_x
-		lang_dev
-		marks
-		members
-		mod_forum
-		modules
-		README
-		seSSi
-		tests-php-mysql
-		tests-results
-
-*******************************************/
-
-* add a table to validate the new sign in
-* add a new table for those whom ask for a new password
+* debug all script
+* essayer tous les modules php. (les tester avec dual head)
+	* add a table to validate the new sign in [done]
+	* add a new table for those whom ask for a new password [done]
+	
+	* remove usr_id from page_views [done]
+	* remove usr_id from results [done]
+	* remove usr_id from scores [done]
+	* remove usr_id from act of downloading [done]
+	
+	* add inode_id to
+		//chapitre_media [done]
+		//inicrond_images [done]	
+		// tests	 [done]
+		// inicrond_texts [done]	
+		// courses_files [done]
+		virtual_directories [done]
+	
+	* remove content_id, content_type from inode_elements [done]
 
 * sourceforge todo..
+* try a clean install
 
-* remove usr_id from page_views
-* remove usr_id from results
-* remove usr_id from scores
-* remove usr_id from act of downloading

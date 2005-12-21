@@ -57,7 +57,7 @@ include __INICROND_INCLUDE_PATH__."includes/functions/fonctions_access.function.
 include __INICROND_INCLUDE_PATH__."includes/functions/fonctions_autres.function.php";//function like echTableauXY
 include __INICROND_INCLUDE_PATH__."includes/kernel/db_init.php";//database init
 include __INICROND_INCLUDE_PATH__."includes/kernel/options_init.php";//options init.
-include __INICROND_INCLUDE_PATH__."includes/kernel/sesson_start.php";//start the session.
+include __INICROND_INCLUDE_PATH__."includes/kernel/session_start.php";//start the session.
 include __INICROND_INCLUDE_PATH__.$_OPTIONS["file_path"]["available_langs.php"];//languages stuff.//get the avaliable languages. fr-ca en-ca
 include __INICROND_INCLUDE_PATH__.$_OPTIONS["file_path"]["themes.php"];//get the avaliable themes
 include __INICROND_INCLUDE_PATH__."includes/functions/smarty_array_to_html_function.php";//Smarty plugin home-made.
