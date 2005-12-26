@@ -1,6 +1,16 @@
-0 : directory
-1 : file
-2 : test
-3 : flash
-4 : image 
-5 : text
+
+Inicrond 3.2.2 as of december 24, 2005
+
+    The inodes types are defined in each table that include an inode_id field that refers to a row in the inode_elements
+
+
+Inicrond 3.2.1 and before
+
+    In Inicrond 3.2.1 and before, there was an content_id and content_type in the inode_elements table. Those were removed beause it was not correct..
+
+    0 : directory
+    1 : file
+    2 : test
+    3 : flash
+    4 : image
+    5 : text

@@ -24,9 +24,9 @@
 Changes :
 
 december 15, 2005
-	I formated the code correctly.
-	
-		--sebhtml
+        I formated the code correctly.
+
+                --sebhtml
 
 */
 
@@ -49,13 +49,13 @@ function Y_func($value)
 
 class Correlation_plot//class of result set.
 {//start of class.
-        
+
         var $inicrond_db;
         var $title;
         var $query;
         var $x_preprocessor;
         var $y_preprocessor;
-        
+
         function render()
         {
                 $data = array ();
@@ -64,48 +64,48 @@ class Correlation_plot//class of result set.
                 $r = $this->inicrond_db->Execute($this->query);
                 //$i = 0 ;
                 //$x_data = array();//this array will hold the X values.
-                
+
                 while($f = $r->FetchRow())
                 {
                         //$i++;
                         $data []= array( 'x' => $f['x_val'], 'y' => $f['y_val']);//by day.
-                        
+
                         //$x_data []= $key;//add the X point.
                         $X []= $f['x_val'];
                         $Y []= $f['y_val'];
                 }
-                
+
 
                 $Dataset = new Image_Graph_Dataset_Trivial;
-                
+
                 foreach($data AS $value)
                 {
-                        $Dataset->addPoint($value['x'], $value['y']); 
+                        $Dataset->addPoint($value['x'], $value['y']);
                 }
-                
+
                 $Plot = new Image_Graph_Plot_Dot($Dataset );
-                
+
                 $marker = new Image_Graph_Marker_Triangle;
-                
+
                 $Plot->setMarker( $marker);
                 $Graph = new Image_Graph(800, 600);                // create the graph
-                
+
                 // add a TrueType font
                 $Arial =& $Graph->setFont(new Image_Graph_Font_TTF(PEAR_PATH."Image/Graph/Fonts/arial.ttf"));
-                
+
                 $Plotarea = new Image_Graph_Plotarea("axis", "axis");
 
                 $AxisX =& $Plotarea->getAxis(IMAGE_GRAPH_AXIS_X);
                 $AxisX->setDataPreprocessor(new Image_Graph_DataPreprocessor_Function($this->x_preprocessor));
-                
+
                 $AxisY =& $Plotarea->getAxis(IMAGE_GRAPH_AXIS_Y);
                 $AxisY->setDataPreprocessor(new Image_Graph_DataPreprocessor_Function($this->y_preprocessor));
-                
+
                 $Plotarea->add($Plot);
                 $Plotarea->_padding = 15;
                 //add the regression line...
                 // instantiating a Math_Stats object
-                
+
                 /////////////////////////////////////////////////////
                 //trace the correlation line :.
                 $SimpleLinearRegression= new SimpleLinearRegression($X, $Y, $ConfidenceInterval);
@@ -116,34 +116,34 @@ class Correlation_plot//class of result set.
                 //the last predicted point.
                 max($X) => max($X)*$SimpleLinearRegression->Slope+$SimpleLinearRegression->YInt
                 );
-                
+
                 //create the dataset.
                 $Dataset2 = new Image_Graph_Dataset_Trivial;
-                
+
                 foreach($correlation_line_points AS $key => $value)
                 {
-                        $Dataset2->addPoint($key, $value); 
+                        $Dataset2->addPoint($key, $value);
                 }
-                
+
                 $Plot2 =& $Plotarea->addNew('line', &$Dataset2);
-                
+
                 // set a line color
-                $Plot2->setLineColor('red'); 
-                
+                $Plot2->setLineColor('red');
+
                 //////////////////////
                 //put the clope, the Yint r and r2 and count. on the graphic. in the title.
-                
+
                 $Graph->add(new Image_Graph_Title($this->title." [ ".
-                "y = ".sprintf(__SPRINTF_SIGNIFICANTS_DIGITS_FORMAT__,$SimpleLinearRegression->Slope)." * x + ".sprintf(__SPRINTF_SIGNIFICANTS_DIGITS_FORMAT__,$SimpleLinearRegression->YInt).", r = ".sprintf(__SPRINTF_SIGNIFICANTS_DIGITS_FORMAT__, $SimpleLinearRegression->R).", r^2 = ".sprintf(__SPRINTF_SIGNIFICANTS_DIGITS_FORMAT__,$SimpleLinearRegression->RSquared).", n = ".$SimpleLinearRegression->n."  ]", 
+                "y = ".sprintf(__SPRINTF_SIGNIFICANTS_DIGITS_FORMAT__,$SimpleLinearRegression->Slope)." * x + ".sprintf(__SPRINTF_SIGNIFICANTS_DIGITS_FORMAT__,$SimpleLinearRegression->YInt).", r = ".sprintf(__SPRINTF_SIGNIFICANTS_DIGITS_FORMAT__, $SimpleLinearRegression->R).", r^2 = ".sprintf(__SPRINTF_SIGNIFICANTS_DIGITS_FORMAT__,$SimpleLinearRegression->RSquared).", n = ".$SimpleLinearRegression->n."  ]",
                 $Arial));
-                
+
                 $Graph->add($Plotarea);
-                
+
                 $Graph->_showTime = TRUE;
-                
+
                 $Graph->_hideLogo = TRUE ;
                 //$Graph->_showTime = TRUE;
-                
+
                 //ob_clean();
                 $Graph->Done(IMG_PNG);
         }//end of render.

@@ -24,9 +24,9 @@
 Changes :
 
 december 15, 2005
-	I formated the code correctly.
-	
-		--sebhtml
+        I formated the code correctly.
+
+                --sebhtml
 
 */
 /*
@@ -61,11 +61,11 @@ function format_date($value)
 
 class Peaks_graphic//class of result set.
 {//start of class.
-        
+
         var $inicrond_db;
         var $title;
         var $query;
-        
+
         function render()
         {
                 $data = array ();
@@ -76,24 +76,24 @@ class Peaks_graphic//class of result set.
                         $count++;
                         $data []=  round(inicrond_convert_time_t_to_user_tz($f["time_t"])/(60*60*24));//by day.
                 }
-                
+
                 // instantiating a Math_Stats object
                 $s = new Math_Stats();
-                
+
                 $s->setData($data);
-                
+
                 //print_r($s->calcBasic());
-                
+
                 $t = $s->calcFull();
-                
+
                 $X_values = array_keys($t["frequency"]);
-                
+
                 $min_x = min($X_values);
                 $max_x = max($X_values);
-                
+
                 //echo $min_x." max<br />";
                 //echo $max_x." min<br />";
-                
+
                 for($i = $min_x ; $i < $max_x ; $i += 1)
                 {
                         if(!isset($t["frequency"][$i]))
@@ -101,23 +101,23 @@ class Peaks_graphic//class of result set.
                                 $t["frequency"][$i] = 0 ;
                         }
                 }
-                
+
                 //exit();
                 ksort($t["frequency"]);
-                
+
                 $Dataset =& new Image_Graph_Dataset_Trivial();
                 foreach($t["frequency"] AS $key => $value)
                 {
                         $Dataset->addPoint($key, $value);
                 }
-                
+
                 $Plot = new Image_Graph_Plot_Line($Dataset );
-                
+
                 /*$Fillstyle = new Image_Graph_Fill_Gradient ( (IMAGE_GRAPH_GRAD_VERTICAL),  0xAAEEFF, 0xFFDDEE);
                 // create the fill style as a solid fill with the newly created color
-                
+
                 $Plot->setFillStyle($Fillstyle);*/
-                
+
                 $Graph =& new Image_Graph(800, 600);                // create the graph
                 //styles.
                 // add a TrueType font
@@ -125,25 +125,25 @@ class Peaks_graphic//class of result set.
                 // set the font size to 15 pixels
                 //$Arial->setSize(11);
                 // add a title using the created font
-                $Graph->add(new Image_Graph_Title($this->title." [ n = $count ]", $Arial, 10)) ;                
-                
+                $Graph->add(new Image_Graph_Title($this->title." [ n = $count ]", $Arial, 10)) ;
+
                 $Plotarea = new Image_Graph_Plotarea("axis", "axis");
-                
+
                 $AxisX =& $Plotarea->getAxis(IMAGE_GRAPH_AXIS_X);
                 $AxisX->setDataPreprocessor(new Image_Graph_DataPreprocessor_Function("format_date"));
-            
+
                 $Plotarea->add($Plot);
                 $Plotarea->_padding = 15;
-                
+
                 $Graph->add($Plotarea);        // create the plotarea
-                
+
                 $Graph->_hideLogo = TRUE ;
-                
+
                 $Graph->_showTime = TRUE;
-                
+
                 ob_clean();
                 header("Content-Type: application/force-download");
-                $Graph->Done(IMG_PNG); 
+                $Graph->Done(IMG_PNG);
         }//end of render.
 }//end of class
 

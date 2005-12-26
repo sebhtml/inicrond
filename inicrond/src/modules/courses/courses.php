@@ -40,36 +40,38 @@ if ($_SESSION['SUID']) //admin can add a course
     $module_content .= retournerHref ('../../modules/courses/add_edit_course.php', $_LANG['add_course']);
     $module_content .= '<br />';
 
-    $query = '  SELECT 
-	        cours_id,
-                cours_name,
-                cours_code
-                FROM
-	'.$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].' AS t1
-	';
+    $query = '
+    SELECT
+    cours_id,
+    cours_name,
+    cours_code
+    FROM
+    '.$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].' AS t1
+    ';
 
 }
 //get all the course with only one query!!!!!!!!!!.
-else		//not suid
+else            //not suid
 {
-    $query = 'SELECT 
-	DISTINCT 
-	t1.cours_id AS cours_id,
-        cours_name,
-        cours_code
-	FROM
-	'.$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].' AS t1,
-	'.$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs'].' AS t2,
-	'.$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups'].' AS t3
-	WHERE
-	usr_id = '.$_SESSION['usr_id'].'
-	AND
-	t3.cours_id = t1.cours_id
-	AND
-	t3.group_id = t2.group_id
-	AND
-	(is_teacher_group = \'1\' OR is_student_group = \'1\')
-	';
+    $query = '
+    SELECT
+    DISTINCT
+    t1.cours_id AS cours_id,
+    cours_name,
+    cours_code
+    FROM
+    '.$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].' AS t1,
+    '.$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs'].' AS t2,
+    '.$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups'].' AS t3
+    WHERE
+    usr_id = '.$_SESSION['usr_id'].'
+    AND
+    t3.cours_id = t1.cours_id
+    AND
+    t3.group_id = t2.group_id
+    AND
+    (is_teacher_group = \'1\' OR is_student_group = \'1\')
+    ';
 }
 
 $rs = $inicrond_db->Execute ($query);
@@ -81,14 +83,10 @@ while ($fetch_result = $rs->FetchRow ())
     $course = array ();
 
     $course['cours_code'] = $fetch_result['cours_code'];
-    $course['cours_name'] =
-      retournerHref (__INICROND_INCLUDE_PATH__.'modules/courses/inode.php?cours_id='.
-		     $fetch_result['cours_id']."",
-		     $fetch_result['cours_name']);
-    
+    $course['cours_name'] =  retournerHref (__INICROND_INCLUDE_PATH__.'modules/courses/inode.php?cours_id='.
+                     $fetch_result['cours_id']."", $fetch_result['cours_name']);
+
     $courses[] = $course;
-
-
 }
 
 $smarty->assign ('courses', $courses);

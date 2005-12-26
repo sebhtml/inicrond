@@ -24,9 +24,9 @@
 Changes :
 
 december 15, 2005
-	I formated the code correctly.
-	
-		--sebhtml
+        I formated the code correctly.
+
+                --sebhtml
 
 */
 /*
@@ -60,13 +60,13 @@ class Histogram_graphic//class of result set.
         var $query;
         var $preprocessor;
         var $vals;
-        
+
         function render()
         {
                 if(!isset($this->vals))
                 {
                         $vals = array();
-                        
+
                         $r = $this->inicrond_db->Execute($this->query);
                         $count=0;
                         while($f = $r->FetchRow())
@@ -80,10 +80,10 @@ class Histogram_graphic//class of result set.
                         $vals = $this->vals;
                         $count=count($vals);
                 }
-                
-                // create an instance 
+
+                // create an instance
                 $h = new Math_Histogram();
-                
+
                 // let's do a cummulative histogram
                 $h->setType(HISTOGRAM_CUMULATIVE, 10, min($vals), max($vals));
                 $h->setData($vals);
@@ -91,43 +91,43 @@ class Histogram_graphic//class of result set.
                 $t = $h->getHistogramInfo();
 
                 $Dataset = new Image_Graph_Dataset_Trivial();
-                
+
                 $xs = array();
-                
+
                 foreach($t["bins"] AS $key => $value)
                 {
-                        $Dataset->addPoint($value["mid"], $value['count']);         
-                        
+                        $Dataset->addPoint($value["mid"], $value['count']);
+
                         $xs []= $value["mid"];
                 }
-                
+
                 $Plot = new Image_Graph_Plot_Bar($Dataset );
-                
+
                 $Graph = new Image_Graph(800, 600);                // create the graph
                 // set a line color
-                
+
                 // add a TrueType font
                 $Arial =& $Graph->setFont(new Image_Graph_Font_TTF(PEAR_PATH."Image/Graph/Fonts/arial.ttf"));
                 // set the font size to 15 pixels
                 // $Arial->setSize(11);
                 // add a title using the created font
                 $Graph->add(new Image_Graph_Title($this->title." [ n = $count ]", $Arial));
-                
+
                 $Plotarea = new Image_Graph_Plotarea();
-                
+
                 $Plotarea->add($Plot);
                 $Plotarea->_padding = 15;
                 $AxisX =& $Plotarea->getAxis(IMAGE_GRAPH_AXIS_X);
                 $AxisX->setDataPreprocessor(new Image_Graph_DataPreprocessor_Function($this->preprocessor));
-                
+
                 $Graph->add($Plotarea);
-                
+
                 $Graph->_hideLogo = TRUE ;
                 //$Graph->_showTime = TRUE;
                 $Graph->_showTime = TRUE;
                 //ob_clean();
                 //header("Content-Type: application/force-download");
-                $Graph->Done(IMG_PNG); 
+                $Graph->Done(IMG_PNG);
         }//end of render.
 }//end of class
 
