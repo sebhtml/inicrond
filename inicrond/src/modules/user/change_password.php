@@ -25,74 +25,71 @@ define('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
-if(isset($_GET['usr_id']) &&
-$_GET['usr_id'] != "" &&
-(int) $_GET['usr_id'] &&
-$_GET['usr_id'] == $_SESSION['usr_id'])
+if(isset($_GET['usr_id']) && $_GET['usr_id'] != "" && (int) $_GET['usr_id']
+&& $_GET['usr_id'] == $_SESSION['usr_id'])
 {
-        $module_title = $_LANG['change_password'];
-        
-        if(!isset($_POST['old_password']))//show the form.
+    $module_title = $_LANG['change_password'];
+
+    if(!isset($_POST['old_password']))//show the form.
+    {
+        $module_content .= "<form method=\"POST\">
+        ".$_LANG['old_password'].": <input type=\"password\" name=\"old_password\" /><br />
+        ".$_LANG['new_password'].": <input type=\"password\" name=\"new_password\" /><br />
+        ".$_LANG['new_password_confirm'].": <input type=\"password\" name=\"new_password_confirm\" /><br />
+        <input type=\"submit\">
+        </form>
+        ";
+    }
+    else//update the database.
+    {
+        $query = "
+        SELECT
+        usr_id
+        FROM
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs']."
+        WHERE
+        usr_id=".$_GET['usr_id']."
+        AND
+        usr_md5_password='".md5($_POST['old_password'])."'
+        LIMIT 1
+        ";
+
+        $rs = $inicrond_db->Execute($query);
+        $fetch_result = $rs->FetchRow();
+
+        //check if the current is ok.
+        if (!isset($fetch_result['usr_id']))
         {
-                
-                $module_content .= "<form method=\"POST\">
-                ".$_LANG['old_password'].": <input type=\"password\" name=\"old_password\" /><br />
-                ".$_LANG['new_password'].": <input type=\"password\" name=\"new_password\" /><br />
-                ".$_LANG['new_password_confirm'].": <input type=\"password\" name=\"new_password_confirm\" /><br />
-                <input type=\"submit\">
-                </form>
-                ";
+            $module_content .= $_LANG['the_old_password_is_incorrect'];
+        }
+        //check if the two new password are the same
+        elseif ($_POST['new_password'] != $_POST['new_password_confirm'])
+        {
+            $module_content .= $_LANG['the_two_password_dont_match'];
+        }
+        //check if the new one is preged correctly.
+        elseif (!preg_match($_OPTIONS['preg_usr'],  $_POST['new_password']))
+        {
+            $module_content .= $_LANG['the_password_is_too_short_or_contains_invalid_characters']."<br /><br />".$_OPTIONS['preg_usr'];
         }
         else//update the database.
         {
-                $query = "SELECT
-                usr_id	
-                FROM 
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs']."
-                WHERE
-                usr_id=".$_GET['usr_id']."
-                AND
-                usr_md5_password='".md5($_POST['old_password'])."'
-                LIMIT 1
-                ";
-                
-                $rs = $inicrond_db->Execute($query);
-                $fetch_result = $rs->FetchRow();
-                
-                //check if the current is ok.
-                if (!isset($fetch_result['usr_id']))
-                {
-                        $module_content .= $_LANG['the_old_password_is_incorrect'];
-                }
-                //check if the two new password are the same
-                elseif ($_POST['new_password'] != $_POST['new_password_confirm'])
-                {
-                        $module_content .= $_LANG['the_two_password_dont_match'];
-                }
-                
-                //check if the new one is preged correctly.
-                elseif (!preg_match($_OPTIONS['preg_usr'],  $_POST['new_password']))
-                {
-                        $module_content .= $_LANG['the_password_is_too_short_or_contains_invalid_characters']."<br /><br />".$_OPTIONS['preg_usr'];
-                }
-                
-                else//update the database.
-                {
-                        $query = "UPDATE
-                        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs']."
-                        SET
-                        usr_md5_password='".md5($_POST['new_password'])."'
-                        WHERE
-                        usr_md5_password='".md5($_POST['old_password'])."'
-                        AND
-                        usr_id=".$_GET['usr_id']."
-                        LIMIT 1
-                        ";
-                        
-                        $inicrond_db->Execute($query);
-                        $module_content .= $_LANG['the_password_have_been_updated'];
-                }
+            $query = "
+            UPDATE
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs']."
+            SET
+            usr_md5_password='".md5($_POST['new_password'])."'
+            WHERE
+            usr_md5_password='".md5($_POST['old_password'])."'
+            AND
+            usr_id=".$_GET['usr_id']."
+            LIMIT 1
+            ";
+
+            $inicrond_db->Execute($query);
+            $module_content .= $_LANG['the_password_have_been_updated'];
         }
+    }
 }
 
 include __INICROND_INCLUDE_PATH__.'includes/kernel/post_modulation.php';

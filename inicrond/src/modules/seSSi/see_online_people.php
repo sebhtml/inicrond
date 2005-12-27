@@ -27,84 +27,75 @@ include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
 if($_SESSION['SUID'])
 {
-        $now = inicrond_mktime();
-	
-        $query = 
+    $now = inicrond_mktime();
+
+    $query =
+    //requ�e pour toutes les sessions...
+    "
+    SELECT
+    usr_name,
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].".usr_id,
+    $now-end_gmt_timestamp,
+    HTTP_USER_AGENT,
+    REMOTE_ADDR,
+    dns,
+    end_gmt_timestamp,
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id,
+    cours_id
+    FROM
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].",
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs']."
+    WHERE
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].".usr_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id
+    AND
+    is_online='1'
+    ORDER BY end_gmt_timestamp DESC
+    ";
+
+    $rs = $inicrond_db->Execute($query);
+
+    $online_ppl = array(array($_LANG['usr_name'], $_LANG['date'], $_LANG['dns'], $_LANG['usr_page_title']));
+
+    while ($f = $rs->FetchRow())
+    {
+        $query =
         //requ�e pour toutes les sessions...
         "
-        SELECT 
-        usr_name,
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].".usr_id,
-        $now-end_gmt_timestamp,
-        HTTP_USER_AGENT,
-        REMOTE_ADDR,
-        dns,
-        end_gmt_timestamp,
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id,
-        cours_id
+        SELECT
+        requested_url,
+        usr_page_title
         FROM
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].",
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs']."
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['page_views']."
         WHERE
-        
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].".usr_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id
-        AND
-        is_online='1'
-        
-        
-        ORDER BY end_gmt_timestamp DESC
+        session_id=".$f['session_id']."
+        ORDER BY page_id DESC
         ";
-        $rs = $inicrond_db->Execute($query);
-        
-        $online_ppl = array(
-        array($_LANG['usr_name'], $_LANG['date'], $_LANG['dns'], $_LANG['usr_page_title'])
-        );
-        
-        
-        while ($f = $rs->FetchRow())
-	{
-                $query = 
-                //requ�e pour toutes les sessions...
-                "
-                SELECT 
-                requested_url,
-                usr_page_title
-                FROM
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['page_views']."
-                WHERE
-                session_id=".$f['session_id']."
-                ORDER BY page_id DESC
-                ";
 
-                $rs2 = $inicrond_db->Execute($query);
-                $fetch_result = $rs2->FetchRow();
-                
-                $online_ppl []= array(
-                
-                "<small>
-                <a href=\""."../../modules/members/one.php?usr_id=".$f['usr_id']."\">".$f['usr_name']."</a>
-                </small>",
-                "<small>
-                ".format_time_stamp($f['end_gmt_timestamp'])." (-".format_time_length($f["$now-end_gmt_timestamp"]).")
-                </small>",
-                "<small>
-                <a href=\""."../../modules/seSSi/one_session_page_views.php?session_id=".$f['session_id']."\"> ".$f['dns']." (".$f['REMOTE_ADDR'].") ".$f['HTTP_USER_AGENT']."</a>
-                </small>",			
-                "<small>
-                ".$f['cours_id'].' '.$fetch_result['usr_page_title']."
-                </small>"
-                
-                );
-        }
-        
-        
-        
-        $module_title = $_LANG['see_online_people'];
-        $module_content .= "<h2><a href=\"../../modules/admin/admin_menu.php\">".$_LANG['admin']."</a></h2>";
-        
-        $smarty->assign('online_ppl', $online_ppl);
-        $module_content .=  $smarty->fetch($_OPTIONS['theme']."/see_online_people.tpl");
-        
+        $rs2 = $inicrond_db->Execute($query);
+        $fetch_result = $rs2->FetchRow();
+
+        $online_ppl []= array(
+
+        "<small>
+        <a href=\""."../../modules/members/one.php?usr_id=".$f['usr_id']."\">".$f['usr_name']."</a>
+        </small>",
+        "<small>
+        ".format_time_stamp($f['end_gmt_timestamp'])." (-".format_time_length($f["$now-end_gmt_timestamp"]).")
+        </small>",
+        "<small>
+        <a href=\""."../../modules/seSSi/one_session_page_views.php?session_id=".$f['session_id']."\"> ".$f['dns']." (".$f['REMOTE_ADDR'].") ".$f['HTTP_USER_AGENT']."</a>
+        </small>",
+        "<small>
+        ".$f['cours_id'].' '.$fetch_result['usr_page_title']."
+        </small>"
+        );
+    }
+
+    $module_title = $_LANG['see_online_people'];
+    $module_content .= "<h2><a href=\"../../modules/admin/admin_menu.php\">".$_LANG['admin']."</a></h2>";
+
+    $smarty->assign('online_ppl', $online_ppl);
+    $module_content .=  $smarty->fetch($_OPTIONS['theme']."/see_online_people.tpl");
 }
 
 include __INICROND_INCLUDE_PATH__.'includes/kernel/post_modulation.php';

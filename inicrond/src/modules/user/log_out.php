@@ -25,42 +25,43 @@ define('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
-
-
 //-----------------------
 // titre
 //---------------------
 
 $module_title =   $_LANG['disconnect'];
 
-
 //v�ifie si il y a une session valide
 if (isset($_SESSION['usr_id']))
 {
-        $query = "UPDATE
-        
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
-        SET
-        is_online='0'
-        WHERE
-        session_id=".$_SESSION['session_id']."
-	AND
-	is_online='1'
-        ";
-        
-        $inicrond_db->Execute($query);
-        
-        $_SESSION = NULL ; //destroy the session.
-        
-        session_destroy(); // kill -9 session (lol)
-        
-	include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
-        js_redir($_OPTIONS["log_out_redirection"]);
+    $query = "
+    UPDATE
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
+    SET
+    is_online='0'
+    WHERE
+    session_id=".$_SESSION['session_id']."
+    AND
+    is_online='1'
+    ";
+
+    $inicrond_db->Execute($query);
+
+    $_SESSION = NULL ; //destroy the session.
+
+    session_destroy(); // kill -9 session (lol)
+
+    /*
+        This is a Unix joke..
+    */
+
+    include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
+    js_redir($_OPTIONS["log_out_redirection"]);
 }
 else
 {
-        //affiche la déconnexion
-        $module_content .=  $_LANG['deconnected'];
+    //affiche la déconnexion
+    $module_content .=  $_LANG['deconnected'];
 }
 
 include __INICROND_INCLUDE_PATH__.'includes/kernel/post_modulation.php';

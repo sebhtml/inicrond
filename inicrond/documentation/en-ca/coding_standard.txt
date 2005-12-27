@@ -1,6 +1,34 @@
-The language kjeywords in lowercase
-Use ===
-Use $array[] = $var instead of $array []= $var
-concatenate string and avoid using dynamic variable interpolation
-	use 'hello '.$you instead of "hello $you"
-use 'array_key' instead of "array_key"
+php specific stuff
+
+    The language keywords in lowercase.
+    Use $array[] = $var instead of $array []= $var because it's more readable.
+    Concatenate string and avoid using dynamic variable interpolation, i.e. :
+    use 'hello '.$you instead of "hello $you".
+    Use 'array_key' instead of "array_key", i.e. single quotes.
+
+Coding standard
+
+    The coding standard is the GNU coding standard (I know that some portion of the code is not conform to it..)
+
+    The code is indented with 4 spaces.
+    When a logic expression cannot fit on one line, split it before a logic binary operator.
+
+        if ($foo
+        && $bar)
+
+        instead of
+
+        if ($foo &&
+        $bar)
+
+    Put a space before an opening parenthesis for if (), while (), elseif (), etc ...
+
+    The kate editor can remove trailing spaces on save time!!
+
+    Put a space before a semi-colon
+
+        $i ++ ; instead of $i ++;
+
+    Use the variable name $query to hold a sql query.
+
+    The function name in its definition must start in column 0.
