@@ -20,8 +20,8 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-define(__INICROND_INCLUDED__, TRUE);
-define(__INICROND_INCLUDE_PATH__, '../../');
+define('__INICROND_INCLUDED__', TRUE);
+define('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
@@ -35,8 +35,14 @@ include "includes/functions/conversion.function.php";//conversions
 include __INICROND_INCLUDE_PATH__."modules/tests-php-mysql/includes/functions/conversion.function.php";
 include __INICROND_INCLUDE_PATH__.'modules/members/includes/functions/access.inc.php';
 
-$is_in_charge_of_user=is_in_charge_of_user($_SESSION['usr_id'], $_GET['usr_id']);
-$is_in_charge_of_group=is_in_charge_of_group($_SESSION['usr_id'], $_GET['group_id']);
+if (isset ($_SESSION['usr_id']) && isset ($_GET['usr_id']))
+{
+    $is_in_charge_of_user=is_in_charge_of_user($_SESSION['usr_id'], $_GET['usr_id']);
+}
+elseif (isset ($_SESSION['usr_id']) && isset ($_GET['group_id']))
+{
+    $is_in_charge_of_group=is_in_charge_of_group($_SESSION['usr_id'], $_GET['group_id']);
+}
 
 if(isset($_GET['session_id']) && $_GET['session_id'] != "" && (int) $_GET['session_id'])
 {
@@ -50,8 +56,14 @@ if(isset($_GET['test_id']) && $_GET['test_id'] != "" && (int) $_GET['test_id'])
     $is_teacher_of_cours_real = is_teacher_of_cours($_SESSION['usr_id'],test_2_cours($_GET['test_id'])) ;
 }
 
-$is_teacher_of_cours = $is_teacher_of_cours_real ? "TRUE":"FALSE";
-
+if (isset ($is_teacher_of_cours_real))
+{
+    $is_teacher_of_cours = $is_teacher_of_cours_real ? "TRUE":"FALSE";
+}
+else
+{
+    $is_teacher_of_cours = false ;
+}
 
 $SELECT_WHAT = "
 SELECT
@@ -87,7 +99,7 @@ $WHERE_CLAUSE = "
 WHERE
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id
 and
-".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".cours_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].".cours_id
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].".cours_id
 AND
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".session_id
 AND
@@ -106,11 +118,8 @@ $it_is_ok = FALSE;
 if(isset($_GET['test_id']) && isset($_GET['test_id']) && $_GET['test_id'] != "" && (int)  $_GET['test_id']
 &&  ($is_in_charge_of_user
     || //group leader
-    (isset($_GET['group_id']) AND
-    $_GET['group_id'] != ""AND
-    (int) $_GET['group_id'] AND
-    isset($_GET['join']) AND
-    $is_in_charge_of_group)
+    (isset($_GET['group_id']) && $_GET['group_id'] != "" && (int) $_GET['group_id']
+    && isset($_GET['join']) && $is_in_charge_of_group)
     ||
     $is_teacher_of_cours_real
     ))
@@ -241,6 +250,7 @@ elseif(isset($_GET['group_id']) && $_GET['group_id'] != "" && (int) $_GET['group
 {
     $it_is_ok = TRUE;
 
+    $base .= '&group_id='.$_GET['group_id'] ;
     //
     //START OF  : tests results for a test and a group at the same time...
     //

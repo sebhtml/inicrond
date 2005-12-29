@@ -76,7 +76,7 @@ if(!isset($_SESSION['usr_id']))//création de personnages
 
         $my_option = new Option();
 
-        if($fetch_result['show_email'] == 0)
+        if(isset ($fetch_result['show_email']) and $fetch_result['show_email'] == 0)
         {
             $my_option->selected();//SELECTED
         }
@@ -87,7 +87,7 @@ if(!isset($_SESSION['usr_id']))//création de personnages
 
         $my_option = new Option();
 
-        if($fetch_result['show_email'] == 1)
+        if(isset ($fetch_result['show_email']) and $fetch_result['show_email'] == 1)
         {
             $my_option->selected();//SELECTED
         }
@@ -98,7 +98,7 @@ if(!isset($_SESSION['usr_id']))//création de personnages
 
         $select->validate();
 
-        $email_field = "<input type=\"text\" name=\"usr_email\" value=\"".$fetch_result['usr_email']."\" />";
+        $email_field = "<input type=\"text\" name=\"usr_email\" value=\"\" />";
 
         $module_content .=  "  <tr>
         <td  valign=\"top\">".$_LANG['usr_email']."<br /><b><span style=\"color: red;\"></span></b></td>
@@ -118,7 +118,7 @@ if(!isset($_SESSION['usr_id']))//création de personnages
         <tr>
         <td >".$_LANG['usr_nom']."
         </td>
-        <td><input type=\"text\" name=\"usr_nom\" value=\"".$fetch_result['usr_nom']."\" />
+        <td><input type=\"text\" name=\"usr_nom\" value=\"\" />
         </td>
         <td >
 
@@ -127,7 +127,7 @@ if(!isset($_SESSION['usr_id']))//création de personnages
         <tr>
         <td >".$_LANG['usr_prenom']."</td>
         <td >
-        <input type=\"text\" name=\"usr_prenom\" value=\"".$fetch_result['usr_prenom']."\" />
+        <input type=\"text\" name=\"usr_prenom\" value=\"\" />
         </td>
         <td >
         </td>
@@ -254,6 +254,14 @@ if(!isset($_SESSION['usr_id']))//création de personnages
                 usr_activation=0
                 WHERE
                 usr_id=$usr_id";
+
+                $query = '
+                insert into
+                '.$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].'
+                (usr_id, register_random_validation)
+                values
+                ('.$usr_id.', \''.$register_random_validation.'\')
+                ' ;
 
                 $inicrond_db->Execute($query);
 

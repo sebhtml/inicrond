@@ -2,7 +2,7 @@
 
 <form method="POST">
 
-{if $message != ""}
+{if isset($message)}
 <span style="color: red;">{$message}</span>
 {/if}
 

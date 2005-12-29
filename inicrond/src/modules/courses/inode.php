@@ -25,7 +25,6 @@ define ('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
-include "includes/functions/access.fun.php";    //function for access...
 include "includes/functions/transfert_cours.function.php";      //transfer IDs
 include "includes/functions/inode_full_path.php";       //transfer IDs
 
@@ -176,7 +175,7 @@ if ($ok && $is_student_of_cours = is_student_of_cours ($_SESSION['usr_id'], $cou
 
             $query = "
             SELECT
-            inode_id,
+            T1.inode_id,
             dir_name,
             order_id
             FROM
@@ -263,7 +262,7 @@ if ($ok && $is_student_of_cours = is_student_of_cours ($_SESSION['usr_id'], $cou
             SELECT
             file_id,
             file_name,
-            inode_id,
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id as inode_id,
             file_infos,
             file_title,
             filesize,
@@ -528,7 +527,7 @@ if ($ok && $is_student_of_cours = is_student_of_cours ($_SESSION['usr_id'], $cou
             SELECT
             chapitre_media_id,
             chapitre_media_title,
-            inode_id,
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id as inode_id,
             file_name,
             chapitre_media_edit_gmt_timestamp,
             chapitre_media_add_gmt_timestamp,
@@ -633,7 +632,7 @@ if ($ok && $is_student_of_cours = is_student_of_cours ($_SESSION['usr_id'], $cou
             SELECT
             img_id,
             img_title,
-            inode_id,
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id as inode_id,
             img_file_name,
             add_time_t,
             edit_time_t,
@@ -730,7 +729,7 @@ if ($ok && $is_student_of_cours = is_student_of_cours ($_SESSION['usr_id'], $cou
             SELECT
             text_id,
             text_title,
-            inode_id,
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id as inode_id,
             add_time_t,
             edit_time_t,
             text_description
@@ -810,7 +809,7 @@ if ($ok && $is_student_of_cours = is_student_of_cours ($_SESSION['usr_id'], $cou
             $texts[] = $anim;
         }
 
-        if (!$_GET['inode_id_location'])        //show those thing only for inode 0
+        if (!isset ($_GET['inode_id_location']) || $_GET['inode_id_location'] == 0)        //show those thing only for inode 0
         {
 
             if ($_SESSION['SUID'])//enlever
@@ -829,7 +828,7 @@ if ($ok && $is_student_of_cours = is_student_of_cours ($_SESSION['usr_id'], $cou
 
         if ($is_teacher_of_cours)
         {
-            $smarty->assign ('course_admin_menu', "<a href=\"../../modules/course_admin/course_admin_menu.php?cours_id=$cours_id\">".
+            $smarty->assign ('course_admin_menu', "<a href=\"".__INICROND_INCLUDE_PATH__."modules/course_admin/course_admin_menu.php?cours_id=$cours_id\">".
                             $_LANG['course_admin_menu']."</a>");
         }
 

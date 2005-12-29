@@ -49,10 +49,14 @@ can_usr_check_result($usr_id, $result_id)
     $query = "
     SELECT
     available_results,
-    cours_id
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id as cours_id
     FROM
-    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].", ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results']."
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].", ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].", ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].", ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
     WHERE
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id
+    and
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".session_id
+    and
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".test_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".test_id
     AND
     result_id=$result_id

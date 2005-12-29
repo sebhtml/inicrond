@@ -5,28 +5,30 @@
 
 {smarty_array_to_html_function php_array=$course_infos}
 
-<h3>{$requested_path}</h3><br />
+{if isset ($requested_path)}
+    <h3>{$requested_path}</h3><br />
+{/if}
 
-{if $parent_dir eq ""}
-	
-{$course.cours_description}<br />		
+{if !isset ($parent_dir)}
+
+{$course.cours_description}<br />
 
 
- 
+
  {if $calendar != ""}
  {$calendar}<br />
  {/if}
- 
+
  {if $course.inicrond_x_module != ""}
  {$course.inicrond_x_module}<br />
  {/if}
- 		
+
  {if $course.see_online_people_for_a_course!=""}
- {$course.see_online_people_for_a_course}<br />		
+ {$course.see_online_people_for_a_course}<br />
 {/if}
 
  {if $course_admin_menu !=""}
- {$course_admin_menu}<br />		
+ {$course_admin_menu}<br />
 {/if}
 
 {$blue_master_clone}<br />
@@ -41,13 +43,17 @@
 {$course_users}<br />
 {/if}
 
-{if $course_groups_listing != ""}
+{if isset ($course_groups_listing)}
 {$course_groups_listing}<br />
 {/if}
 
-{$course.edit}	<br />
-{$course.drop}	
+{if isset ($course.edit)}
+    {$course.edit}  <br />
+{/if}
 
+{if isset ($course.drop)}
+    {$course.drop}
+{/if}
 
 {/if}
 
@@ -67,7 +73,7 @@
 
 {* parent dir link *}
 
-{if $parent_dir != ""}
+{if isset ($parent_dir)}
 <a href="{$parent_dir}"><img  border="0" src="templates/inicrond_default/images/parent.gif" /></a><br />
 
 {/if}
@@ -113,16 +119,16 @@
 {section name=file loop=$mod_files}
 
 <table width="100%"><tr><td class="inode_element">
-{* a file template *} 
+{* a file template *}
 <table><tr><td>
 <img  border="0" src="templates/inicrond_default/images/enregistrer.gif" />
- 
+
  </td><td>
 
 
-<table>	 
+<table>
 
-<tr><td><b>{$_LANG.title}</b></td><td> {$mod_files[file].link} 
+<tr><td><b>{$_LANG.title}</b></td><td> {$mod_files[file].link}
 
 {if $mod_files[file].edit != ""}
 <a href="{$mod_files[file].edit}"><img  border="0"  title="{$_LANG.edit}" src="templates/inicrond_default/images/b_edit.png" /></a>
@@ -143,7 +149,7 @@
 
 
 
-	  
+
 {if $mod_files[file].inode_up != ""}
 <a href="{$mod_files[file].inode_up}" ><img  border="0" title="{$_LANG.inode_up}" src="templates/inicrond_default/images/inode_up.png" /></a>
 {/if}
@@ -239,7 +245,7 @@
 {$_LANG.test_info} : {$tests[test].test_info}<br />
 {$_LANG.add_gmt} : {$tests[test].time_GMT_add}<br />
 {$_LANG.edit_gmt} : {$tests[test].time_GMT_edit}<br />
-	  
+
 
 
 
@@ -267,7 +273,7 @@
 
 
 
-	 
+
 {if $anims[anim].edit != ""}
 <a href="{$anims[anim].edit}" ><img  border="0" title="{$_LANG.edit}" src="templates/inicrond_default/images/b_edit.png" /></a>
 {/if}
@@ -293,7 +299,7 @@
 {/if}
 
  {if $course_admin_menu !=""}
- 
+
 <a href="inode_groups.php?&inode_id={$anims[anim].inode_id}" ><img  border="0" title="{$_LANG.authorized_groups}" src="templates/inicrond_default/images/group.gif" /></a>
 
 <a href="inode_location.php?&inode_id={$anims[anim].inode_id}" ><img  border="0" title="{$_LANG.inode_location}" src="templates/inicrond_default/images/inode_location.gif" /></a>
@@ -311,7 +317,7 @@
 
 {$_LANG.add_gmt} : {$anims[anim].chapitre_media_add_gmt_timestamp}<br />
 {$_LANG.edit_gmt} : {$anims[anim].chapitre_media_edit_gmt_timestamp}<br />
-	  
+
 
 
 </td></tr></table><br />
@@ -334,7 +340,7 @@
 
 <img  border="0" src="templates/inicrond_default/images/preview.gif" />
 
-{$images[one].title} 
+{$images[one].title}
 
 {if $images[one].edit != ""}
 <a href="{$images[one].edit}" ><img  border="0" title="{$_LANG.edit}" src="templates/inicrond_default/images/b_edit.png" /></a>
@@ -362,13 +368,13 @@
 
 <table>
 <tr>
-	<td valign="top">
-	<img src="{$images[one].img_url}"><br />
+        <td valign="top">
+        <img src="{$images[one].img_url}"><br />
 
-	</td>
-	<td valign="top">
-	<table>
-	
+        </td>
+        <td valign="top">
+        <table>
+
 <tr><td>{$_LANG.file_name}</td><td>{$images[one].file_name}</tr>
 <tr><td>{$_LANG.description}</td><td>{$images[one].chapitre_media_description}</tr>
 
@@ -376,7 +382,7 @@
 
 <tr><td>{$_LANG.add_gmt}</td><td>{$images[one].chapitre_media_add_gmt_timestamp}</tr>
 <tr><td>{$_LANG.edit_gmt}</td><td>{$images[one].chapitre_media_edit_gmt_timestamp}</tr>
-	 </table> </td></tr></table>
+         </table> </td></tr></table>
 
 </td></tr></table><br />
 {/section}
@@ -429,7 +435,7 @@
 
 {$_LANG.add_gmt} : {$texts[one].chapitre_media_add_gmt_timestamp}<br />
 {$_LANG.edit_gmt} : {$texts[one].chapitre_media_edit_gmt_timestamp}<br />
-	  
+
 
 </td></tr></table><br />
 {/section}

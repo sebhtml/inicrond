@@ -43,23 +43,23 @@ if(isset($_GET['cours_id']) && $_GET['cours_id'] != "" && (int) $_GET['cours_id'
     }
     else
     {
-        $_POST['md5_pw_to_join'] = md5($_POST['md5_pw_to_join']);
+        $add_time_t = inicrond_mktime () ;
 
         $query = "
         INSERT INTO
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups']."
-        (group_name, cours_id, default_pending, md5_pw_to_join)
+        (group_name, cours_id, default_pending, md5_pw_to_join, add_time_t)
         VALUES
         ('".$_POST['group_name']."',
         ".$_GET['cours_id'].",
         '1',
-        '".md5('')."' )
+        '".md5('')."' , ".$add_time_t.")
         ;";
 
         $inicrond_db->Execute($query);
 
         include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
-        js_redir("course_groups_listing.php?cours_id=".$_GET['cours_id']);
+        //js_redir("course_groups_listing.php?cours_id=".$_GET['cours_id']);
     }
 }
 

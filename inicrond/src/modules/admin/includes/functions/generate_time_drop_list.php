@@ -21,48 +21,49 @@
 */
 
 /**
-* 
 *
-* @param        integer  $default_value    
+*
+* @param        integer  $default_value
 * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
 * @version      1.0.0
-*/	
+*/
 function generate_time_drop_list($name, $default_value, $lang_str_for_zereo = 'no_cache')
 {
-        global $_LANG;
-        
-        $elements = array(2 ,4, 8, 16 ,32); 
-        
-        $multiplicators = array(
-        'secs' => 1,
-        'mins' => 60,
-        'hours' => 60*60,
-        'days' => 60*60*24,
-        'weeks' => 60*60*24*7
-        );
-        
-        $return = "<select name=\"$name\">";
-        
-        $number_of_secs = 0 ;
-        
-        $return .= "<option $selected value=\"$number_of_secs\">".$_LANG[$lang_str_for_zereo]." (0)</option>";
-        
-        $selected = $number_of_secs == $default_value ? 'SELECTED' : '';
-        
-	foreach($multiplicators AS $key => $multiplicator)
-	{
-		foreach($elements AS $value)
-		{
-                        $number_of_secs = $value*$multiplicator ;
-                        $selected = $number_of_secs == $default_value ? 'SELECTED' : '';
-                        
-                        $return .= "<option $selected value=\"$number_of_secs\">".$value." ".$_LANG[$key]." ($number_of_secs)</option>";
-		}
-	}
-	
-        $return .= "</select>";
-        
-        return $return;
+    global $_LANG;
+
+    $elements = array(2 ,4, 8, 16 ,32);
+
+    $multiplicators = array(
+    'secs' => 1,
+    'mins' => 60,
+    'hours' => 60*60,
+    'days' => 60*60*24,
+    'weeks' => 60*60*24*7
+    );
+
+    $return = "<select name=\"$name\">";
+
+    $number_of_secs = 0 ;
+
+    $selected = $number_of_secs == $default_value ? 'SELECTED' : '';
+
+    $return .= "<option $selected value=\"$number_of_secs\">".$_LANG[$lang_str_for_zereo]." (0)</option>";
+
+
+    foreach($multiplicators AS $key => $multiplicator)
+    {
+        foreach($elements AS $value)
+        {
+            $number_of_secs = $value*$multiplicator ;
+            $selected = $number_of_secs == $default_value ? 'SELECTED' : '';
+
+            $return .= "<option $selected value=\"$number_of_secs\">".$value." ".$_LANG[$key]." ($number_of_secs)</option>";
+        }
+    }
+
+    $return .= "</select>";
+
+    return $return;
 }
 
 ?>

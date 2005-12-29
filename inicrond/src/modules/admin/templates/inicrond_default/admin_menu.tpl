@@ -19,16 +19,11 @@
 {$MD_SESS_SEE_ONLINE_PEOPLE_MODULE}<br />
 {/if}
 
-{if $MOD_ADMIN_CAN_CHANGE_BLOCKS_POSITION != ""}
-{$MOD_ADMIN_CAN_CHANGE_BLOCKS_POSITION}<br />
-{/if}
-
-
 <a href="{$list_user_in_0_group}">{$_LANG.list_user_in_0_group}</a><br />
 
 {$lang_dev}<br />
 
-	
+
 {if $CAN_SEE_GRPS != ""}
 {$CAN_SEE_GRPS}<br />
 {/if}

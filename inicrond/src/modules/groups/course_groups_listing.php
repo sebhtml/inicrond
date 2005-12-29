@@ -20,8 +20,8 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-define(__INICROND_INCLUDED__, TRUE);
-define(__INICROND_INCLUDE_PATH__, '../../');
+define('__INICROND_INCLUDED__', TRUE);
+define('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
@@ -32,9 +32,6 @@ if(isset($_GET['cours_id']) && $_GET['cours_id'] != "" && (int) $_GET['cours_id'
     $module_title = $_LANG['course_groups_listing'];
 
     $course_infos =  get_cours_infos($_GET['cours_id']);
-    $cours_id = $fetch_result['cours_id'];
-
-    //$course_groups list the groups : group_id, group_name, default_pending
 
     $course_groups = array(
     array( $_LANG['group_name'], $_LANG['default_pending'], $_LANG['edit']));
@@ -48,6 +45,7 @@ if(isset($_GET['cours_id']) && $_GET['cours_id'] != "" && (int) $_GET['cours_id'
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups']."
     WHERE
     cours_id=".$_GET['cours_id']."
+    order by add_time_t desc
     ";
 
     $rs = $inicrond_db->Execute($query);

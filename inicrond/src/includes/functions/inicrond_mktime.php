@@ -23,14 +23,16 @@
 Changes :
 
 december 15, 2005
-	I formated the code correctly.
-	
-		--sebhtml
+        I formated the code correctly.
+
+                --sebhtml
 
 */
-function inicrond_mktime()
+
+function
+inicrond_mktime()
 {
-	return mktime();
+        return mktime();
 }
 
 ?>

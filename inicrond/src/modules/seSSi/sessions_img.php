@@ -68,7 +68,7 @@ if(isset($_GET['cours_id']) && $_GET['cours_id'] != "" && (int) $_GET['cours_id'
     $query .= " AND cours_id=".$_GET['cours_id'].""; //add cours_id clause.
 }
 
-if(is_numeric($_GET['group_id']) && is_in_charge_of_group($_SESSION['usr_id'], $_GET['group_id']))
+if(isset ($_GET['group_id']) && is_numeric($_GET['group_id']) && is_in_charge_of_group($_SESSION['usr_id'], $_GET['group_id']))
 {
     //////////////////
     //get the cours id for this group.

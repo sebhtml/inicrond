@@ -27,46 +27,36 @@ include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
 include "includes/functions/conversion.function.php";
 
-if(
-isset($_GET["question_id"]) AND
-$_GET["question_id"] != "" AND
-(int) $_GET["question_id"] AND
-is_teacher_of_cours($_SESSION['usr_id'],question_2_cours($_GET["question_id"])))
-
-
+if(isset($_GET["question_id"]) && $_GET["question_id"] != "" && (int) $_GET["question_id"]
+&& is_teacher_of_cours($_SESSION['usr_id'],question_2_cours($_GET["question_id"])))
 {
+    $query = "
+    INSERT INTO
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['multiple_short_answers']."
+    (
+    short_answer_name,
+    question_id
+    )
+    VALUES
+    (
+    \"\",
+    ".$_GET["question_id"]."
+    )
+    ";
 
-        $query = "INSERT INTO
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['multiple_short_answers']."
-        (
-        short_answer_name,
-        question_id
-        )
-        VALUES
-        (
-        \"\",
-        ".$_GET["question_id"]."
-        )
+    $inicrond_db->Execute($query);
 
-        ";
+    if(isset($_GET['test_id']))//GOLD FORM
+    {
+        include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
+        js_redir("edit_a_test_GOLD.php?test_id=".$_GET['test_id']);
+    }
+    else
+    {
+        include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
+        js_redir("edit_a_question.php?question_id=".$_GET["question_id"]);
 
-
-        $inicrond_db->Execute($query);
-
-
-
-
-        if(isset($_GET['test_id']))//GOLD FORM
-        {
-                include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
-                js_redir("edit_a_test_GOLD.php?test_id=".$_GET['test_id']);
-        }
-        else
-        {
-
-                include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
-                js_redir("edit_a_question.php?question_id=".$_GET["question_id"]);
-
-        }
+    }
 }
+
 ?>

@@ -23,15 +23,15 @@
 Changes :
 
 december 15, 2005
-	I formated the code correctly.
-	
-		--sebhtml
+        I formated the code correctly.
+
+                --sebhtml
 
 */
 
 if(!__INICROND_INCLUDED__)
 {
-	exit();
+        exit();
 }
 
 //version constants.
@@ -75,11 +75,16 @@ include __INICROND_INCLUDE_PATH__."modules/members/includes/functions/is_teacher
 
 if ($_OPTIONS['debug_mode'] == '1')
 {
-	define ('DEBUG', true) ;
+    define ('DEBUG', true) ;
 }
 else
 {
-	define ('DEBUG', false) ;
+    define ('DEBUG', false) ;
 }
+
+// those two variables will be populated during modulation!
+
+$module_title = '' ;
+$module_content = '' ;
 
 ?>

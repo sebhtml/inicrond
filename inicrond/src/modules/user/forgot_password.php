@@ -36,7 +36,7 @@ if (isset($_GET["new_password_secure_str"]))//to get a new password.
 {
     $query = "
     SELECT
-    usr_id,
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].".usr_id,
     usr_email,
     usr_name
     FROM

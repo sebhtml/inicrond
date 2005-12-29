@@ -46,7 +46,8 @@ if ($_SESSION['SUID']) //admin can add a course
     cours_name,
     cours_code
     FROM
-    '.$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].' AS t1
+    '.$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].'
+    order by cours_name asc
     ';
 
 }
@@ -71,6 +72,7 @@ else            //not suid
     t3.group_id = t2.group_id
     AND
     (is_teacher_group = \'1\' OR is_student_group = \'1\')
+    order by cours_name asc
     ';
 }
 

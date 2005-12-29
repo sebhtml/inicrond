@@ -36,7 +36,7 @@ if (isset($_SESSION['usr_id']))
 else
 {
     //analyse la soumission
-    if (isset($_POST["soumission"]))
+    if (isset($_POST["usr_name"]))
     {
         $usr_name = $_POST['usr_name'];
         $usr_md5_password = md5($_POST['usr_password']);
@@ -61,39 +61,51 @@ else
         $rs = $inicrond_db->Execute($query);
         $fetch_result = $rs->FetchRow();
 
+        $usr_id = $fetch_result['usr_id'] ;
+
         //trouve le user et vérifie le pass
-        if (( isset($fetch_result["usr_activation"]) && $fetch_result["usr_activation"] == '1'))
+        if ((isset($fetch_result["usr_activation"]) && $fetch_result["usr_activation"] == 1))
         {
             $start_gmt_timestamp = inicrond_mktime();
             $end_gmt_timestamp = $start_gmt_timestamp;
 
-            //remove the nobody session.
-            $query = "
-            UPDATE
-            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
-            SET
-            end_gmt_timestamp=".inicrond_mktime().",
-            is_online='0'
-            WHERE
-            session_id='".$_SESSION['session_id'] ."'
-            AND
-            is_online='1'
-            ";
+            if (isset ($_SESSION['session_id']))
+            {
+                //remove the nobody session.
+                $query = "
+                UPDATE
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
+                SET
+                end_gmt_timestamp=".inicrond_mktime().",
+                is_online='0'
+                WHERE
+                session_id='".$_SESSION['session_id'] ."'
+                AND
+                is_online='1'
+                ";
 
-            $inicrond_db->Execute($query);
+                $inicrond_db->Execute($query);
+            }
+
 
             //remove his/her old session if he she dont disconnect his/her sessions.
 
             //update the string for security...
+
             $query = "
-            UPDATE
-            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs']."
-            SET
-            register_random_validation=NULL,
-            new_password_secure_str=NULL
-            WHERE
-            usr_id=".$fetch_result['usr_id']."
-            ";
+            delete from
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['register_random_validation']."
+            where
+            usr_id=$usr_id
+            " ;
+
+            $inicrond_db->Execute($query);
+
+            $query = "delete from
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['new_password_secure_str']."
+            where
+            usr_id=$usr_id
+            " ;
 
             $inicrond_db->Execute($query);
 
@@ -110,11 +122,11 @@ else
             )
             VALUES
             (
-            ".$fetch_result['usr_id'].",
+            $usr_id,
             $start_gmt_timestamp,
             $start_gmt_timestamp,
             '".$_SERVER['REMOTE_ADDR']."',
-            '".gethostbyaddr($_SERVER['REMOTE_ADDR'])."',
+            '".($_SERVER['REMOTE_ADDR'])."',
             '".$_SERVER['HTTP_USER_AGENT']."'
             )
             ";
@@ -136,7 +148,6 @@ else
             {
                 if(is_teacher_of_at_least_one_course($_SESSION['usr_id']))//most be teacher not to run this too much.
                 {
-
                     /*
                         I would prefer to run this script in a crontab ...
                     */
@@ -168,7 +179,7 @@ else
         <form method=\"POST\">
         ".  $_LANG['usr_name']." : <input type=\"text\" name=\"usr_name\"  />
         ".  $_LANG['usr_password']." <input type=\"password\" name=\"usr_password\"  />
-        <input type=\"submit\" name=\"soumission\"   />
+        <input type=\"submit\"  />
         </form>" ;
     }
 }

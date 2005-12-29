@@ -29,9 +29,16 @@ include __INICROND_INCLUDE_PATH__.'modules/groups/includes/functions/access.inc.
 include __INICROND_INCLUDE_PATH__.'modules/members/includes/functions/access.inc.php';
 include __INICROND_INCLUDE_PATH__."modules/courses/includes/functions/transfert_cours.function.php";
 
-$is_in_charge_of_user=is_in_charge_of_user($_SESSION['usr_id'], $_GET['usr_id']) ;
 
-$is_in_charge_of_group=is_in_charge_of_group($_SESSION['usr_id'], $_GET['group_id']);
+if (isset ($_GET['usr_id']) && isset ($_SESSION['usr_id']))
+{
+    $is_in_charge_of_user=is_in_charge_of_user($_SESSION['usr_id'], $_GET['usr_id']) ;
+}
+
+if (isset ($_GET['group_id']) && isset ($_SESSION['usr_id']))
+{
+    $is_in_charge_of_group=is_in_charge_of_group($_SESSION['usr_id'], $_GET['group_id']);
+}
 
 if(isset($_GET['session_id']) && $_GET['session_id'] != "" && (int) $_GET['session_id'])
 {
@@ -233,6 +240,8 @@ if(isset($_SESSION['usr_id']))
     {
         $it_is_ok = TRUE;
 
+        $base .= '&group_id='.$_GET['group_id'] ;
+
         $query = "
         SELECT
         chapitre_media_title,
@@ -252,7 +261,7 @@ if(isset($_SESSION['usr_id']))
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".chapitre_media_id
         ";
 
-        $tableX = array(array($_LANG["anim_name"]));
+        $tableX = array(array(''));
 
         $already_there = array();
 
@@ -262,7 +271,7 @@ if(isset($_SESSION['usr_id']))
         {
             if(!isset($already_there[$f['chapitre_media_id']]))
             {
-                $tableX []= array(retournerHref("../../modules/marks/main.php?group_id=".$_GET['group_id']."&chapitre_media_id=".$f['chapitre_media_id']."&join",
+                $tableX []= array(retournerHref("".__INICROND_INCLUDE_PATH__."modules/marks/main.php?group_id=".$_GET['group_id']."&chapitre_media_id=".$f['chapitre_media_id']."&join",
                 $f['chapitre_media_title']));
 
                 $already_there[$f['chapitre_media_id']] = $f['chapitre_media_id'] ;//don't put it again later..
@@ -351,7 +360,7 @@ if(isset($_SESSION['usr_id']))
 
     'usr_name' => array(
     "col_title" => $_LANG['usr_name'],
-    "col_data" => "\$unit  = retournerHref(\"../../modules/members/one.php?usr_id=\".\$f[\"usr_id\"], \$f[\"usr_name\"]);"
+    "col_data" => "\$unit  = retournerHref(\"".__INICROND_INCLUDE_PATH__."modules/members/one.php?usr_id=\".\$f[\"usr_id\"], \$f[\"usr_name\"]);"
     ),
 
     'cours_name' => array(

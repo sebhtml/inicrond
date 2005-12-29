@@ -27,148 +27,120 @@ include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
 include "includes/functions/conversion.function.php";
 
-if(
-isset($_GET["answer_id"]) AND
-$_GET["answer_id"] != "" AND
-(int) $_GET["answer_id"] AND
-is_teacher_of_cours($_SESSION['usr_id'],answer_2_cours($_GET["answer_id"])))
-
-
-
+if(isset($_GET["answer_id"]) && $_GET["answer_id"] != "" && (int) $_GET["answer_id"]
+&& is_teacher_of_cours($_SESSION['usr_id'],answer_2_cours($_GET["answer_id"])))
 {
+    //------------
+    //on trouve dans quelle section est la discussion demandée.
+    //----------
 
+    //obtention du test_id
 
-        //------------
-        //on trouve dans quelle section est la discussion demandée.
-        //----------
+    $query = "
+    SELECT
+    question_id
+    FROM
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['answers']."
+    WHERE
+    answer_id=".$_GET["answer_id"].//celui que l'on veut monter
+    "
+    ";
 
+    $rs = $inicrond_db->Execute($query);
+    $fetch_result = $rs->FetchRow();
 
-        //obtention du test_id
+    $question_id = $fetch_result["question_id"];
+
+    $query = "
+    SELECT
+    a_order_id
+    FROM
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['answers']."
+    WHERE
+    answer_id=".$_GET["answer_id"].//celui que l'on veut descendre
+    "
+    ";
+
+    $rs = $inicrond_db->Execute($query);
+    $fetch_result = $rs->FetchRow();
+
+    $order_id_present = $fetch_result["a_order_id"];//le order id pr�ent...
+
+    $query = "
+    SELECT
+    MIN(a_order_id)
+    FROM
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['answers']."
+    WHERE
+    a_order_id>".$order_id_present.//celui qui est avant
+    "
+    AND
+    question_id=".$question_id."
+    ";
+
+    $rs = $inicrond_db->Execute($query);
+    $fetch_result = $rs->FetchRow();
+
+    $order_id_avant = $fetch_result["MIN(a_order_id)"];
+
+    if(isset($fetch_result["MIN(a_order_id)"]))//est-ce qu'il y a quelque chose avant.
+    {
+        //on va chercher la question avant.
+
         $query = "
         SELECT
-        question_id
+        answer_id
         FROM
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['answers']."
         WHERE
-        answer_id=".$_GET["answer_id"].//celui que l'on veut monter
-        "
-
-        ";
-
-
-        $rs = $inicrond_db->Execute($query);
-        $fetch_result = $rs->FetchRow();
-
-
-        $question_id = $fetch_result["question_id"];
-
-        $query = "
-        SELECT
-        a_order_id
-        FROM
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['answers']."
-        WHERE
-        answer_id=".$_GET["answer_id"].//celui que l'on veut descendre
-        "
-
-        ";
-
-        $rs = $inicrond_db->Execute($query);
-        $fetch_result = $rs->FetchRow();
-
-
-        /*
-        print_r($fetch_result);
-        exit();
-        */
-
-        $order_id_present = $fetch_result["a_order_id"];//le order id pr�ent...
-
-
-        $query = "
-        SELECT
-        MIN(a_order_id)
-        FROM
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['answers']."
-        WHERE
-        a_order_id>".$order_id_present.//celui qui est avant
+        a_order_id=".$order_id_avant.//celui qui est avant
         "
         AND
         question_id=".$question_id."
         ";
 
-
         $rs = $inicrond_db->Execute($query);
         $fetch_result = $rs->FetchRow();
 
-        $order_id_avant = $fetch_result["MIN(a_order_id)"];
+        $forum_discussion_id_avant = $fetch_result["answer_id"];
 
-        if(isset($fetch_result["MIN(a_order_id)"]))//est-ce qu'il y a quelque chose avant.
-        {
+        $query = //on met le order id du présent à celui avant.
+        "
+        UPDATE
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['answers']."
+        SET
+        a_order_id=".$order_id_avant."
+        WHERE
+        answer_id=".$_GET["answer_id"].//celui qui est avant
+        "
+        ";
 
-                //on va chercher la question avant.
-                $query = "
-                SELECT
-                answer_id
-                FROM
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['answers']."
-                WHERE
-                a_order_id=".$order_id_avant.//celui qui est avant
-                "
-                AND
-                question_id=".$question_id."
-                ";
+        $inicrond_db->Execute($query);
 
+        $query = //celui qui est en haut descend
+        "
+        UPDATE
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['answers']."
+        SET
+        a_order_id=".$order_id_present."
+        WHERE
+        answer_id=".$forum_discussion_id_avant."
+        ";
 
-                $rs = $inicrond_db->Execute($query);
-                $fetch_result = $rs->FetchRow();
+        $inicrond_db->Execute($query);
+    }
 
-                $forum_discussion_id_avant = $fetch_result["answer_id"];
-
-
-                $query = //on met le order id du présent à celui avant.
-                "
-                UPDATE
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['answers']."
-                SET
-                a_order_id=".$order_id_avant."
-                WHERE
-                answer_id=".$_GET["answer_id"].//celui qui est avant
-                "
-                ";
-
-                $inicrond_db->Execute($query);
-
-
-
-
-                $query = //celui qui est en haut descend
-                "
-                UPDATE
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['answers']."
-                SET
-                a_order_id=".$order_id_present."
-                WHERE
-                answer_id=".$forum_discussion_id_avant."
-
-                ";
-
-                $inicrond_db->Execute($query);
-
-
-        }
-
-
-        if(isset($_GET['test_id']))//GOLD FORM
-        {
-                include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
-                js_redir("edit_a_test_GOLD.php?test_id=".$_GET['test_id']);
-        }
-        else
-        {
-                include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
-                js_redir("edit_a_question.php?question_id=".$question_id);
-        }
+    if(isset($_GET['test_id']))//GOLD FORM
+    {
+        include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
+        js_redir("edit_a_test_GOLD.php?test_id=".$_GET['test_id']);
+    }
+    else
+    {
+        include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
+        js_redir("edit_a_question.php?question_id=".$question_id);
+    }
 
 }
+
 ?>

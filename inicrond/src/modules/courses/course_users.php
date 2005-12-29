@@ -176,7 +176,7 @@ if (isset ($_SESSION['usr_id']) && isset ($_GET['cours_id']) &&  (int) $_GET['co
 
         $count = 0;
 
-        while (!$rs2->EOF AND $fetch_result = $rs2->FetchRow ())
+        while ($fetch_result = $rs2->FetchRow ())
         {
             $count++;
             $big_array['students'][$i]["users"][$j]['usr_name'] = $fetch_result['usr_name'];

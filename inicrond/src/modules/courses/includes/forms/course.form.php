@@ -25,6 +25,9 @@ if(!__INICROND_INCLUDED__)
     die("hacking attempt!!");
 }
 
+$fetch_result['cours_code'] = isset ($fetch_result['cours_code']) ? $fetch_result['cours_code'] : '' ;
+$fetch_result['cours_name'] = isset ($fetch_result['cours_name']) ? $fetch_result['cours_name'] : '' ;
+$fetch_result['cours_description'] = isset ($fetch_result['cours_description']) ? $fetch_result['cours_description'] : '' ;
 
 $module_content .=  "<form  method=\"POST\">
 <table border =\"0\" >

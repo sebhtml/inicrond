@@ -1,0 +1,9 @@
+All the source code is encoded in utf8. (I can put some accents in the comments ;P)
+
+All the languages file are encoded in ISO-8859-1 because php does not yet support utf8.
+
+My MySQL Collation is utf8_general_ci.
+
+I use the default_charset (iso-8859-1) in my php.ini.
+
+I *think* that fwrite save as iso-8859-1, but I am not sure at all.

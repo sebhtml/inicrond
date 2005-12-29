@@ -30,53 +30,41 @@ include "includes/languages/".$_SESSION["language"]."/lang.php";//include lang f
 $module_title = $_LANG['remove'];
 $module_content = "";
 
-//INSERT CODE HERE.
 $granted_questions = array();
 $granted_answers = array();
 $granted_short_answers = array();
-
 
 include 'includes/functions/check_question_granted.php';
 include 'includes/functions/check_answer_granted.php';
 include 'includes/functions/check_short_answer_granted.php';
 
-
-
-
 if(check_question_granted($_SESSION['usr_id'], $_GET["question_id"]))
 {
-        //get the cours_id.
-        $query = "SELECT
-        cours_id
+    //get the cours_id.
+    $query = "
+    SELECT
+    cours_id
+    FROM
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['questions']."
+    WHERE
+    question_id=".$_GET['question_id']."
+    ";
 
-        FROM
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['questions']."
+    $rs = $inicrond_db->Execute($query);
+    $fetch_result = $rs->FetchRow();
 
-        WHERE
-        question_id=".$_GET['question_id']."
+    $cours_id = $fetch_result['cours_id'];
 
-        ";
+    include 'includes/functions/drop_question.php';
 
+    drop_question( $_GET["question_id"]);
 
+    include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
 
-        $rs = $inicrond_db->Execute($query);
-        $fetch_result = $rs->FetchRow();
-
-        $cours_id = $fetch_result['cours_id'];
-
-        include 'includes/functions/drop_question.php';
-
-
-        drop_question( $_GET["question_id"]);
-
-
-        include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
-
-        js_redir(__INICROND_INCLUDE_PATH__."modules/course_admin/list_questions.php?cours_id=$cours_id");
-
-
+    js_redir(__INICROND_INCLUDE_PATH__."modules/course_admin/list_questions.php?cours_id=$cours_id");
 
 }//end of check if can edit the question...
 
 include "".__INICROND_INCLUDE_PATH__."includes/kernel/post_modulation.php";
+
 ?>

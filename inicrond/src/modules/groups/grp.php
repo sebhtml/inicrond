@@ -42,7 +42,8 @@ if(isset($_GET['group_id']) && $_GET['group_id'] != "" && (int) $_GET['group_id'
     group_id,
     group_name,
     cours_id,
-    default_pending
+    default_pending,
+    add_time_t
     FROM
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups']."
     WHERE
@@ -55,7 +56,7 @@ if(isset($_GET['group_id']) && $_GET['group_id'] != "" && (int) $_GET['group_id'
     $cours_id = $fetch_result['cours_id'] ;
 
     $group['group_name'] = $fetch_result['group_name'];
-
+    $group['add_time_t'] = format_time_stamp($fetch_result['add_time_t']);
     $group['group_id'] = $fetch_result['group_id'];
 
     $group['default_pending'] = $fetch_result['default_pending'] ? $_LANG['yes'] : $_LANG['no'];

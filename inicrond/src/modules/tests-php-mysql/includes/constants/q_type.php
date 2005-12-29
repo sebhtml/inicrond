@@ -20,26 +20,9 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-/*
-Changes :
-
-december 15, 2005
-        I formated the code correctly.
-
-                --sebhtml
-
-*/
-
-if(!__INICROND_INCLUDED__)
-{
-    exit();
-}
-
-if (DEBUG)
-{
-    $debug_mod_content = "=== \$_RUN_TIME ===<br />";
-    $debug_mod_content .=  nl2br(print_r($_RUN_TIME, TRUE));
-    $debug_mod_content .=  "=== ===<br />";
-}
+define ('MODULE_TEST_PHP_MYSQL_Q_TYPE_MULTIPLE_CHOICES_QUESTION', 0) ;
+define ('MODULE_TEST_PHP_MYSQL_Q_TYPE_SHORT_ANSWER_QUESTION', 1) ;
+define ('MODULE_TEST_PHP_MYSQL_Q_TYPE_MEDIA_QUESTION', 2) ;
+define ('MODULE_TEST_PHP_MYSQL_Q_TYPE_MULTIPLE_SHORT_ANSWERS_QUESTION', 3) ;
 
 ?>
