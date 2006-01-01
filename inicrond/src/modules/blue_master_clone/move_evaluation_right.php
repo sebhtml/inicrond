@@ -29,12 +29,13 @@ include 'includes/languages/'.$_SESSION['language'].'/lang.php';//include lang f
 include __INICROND_INCLUDE_PATH__."modules/blue_master_clone/includes/functions/ev_id_to_cours_id.php";//init inicrond kernel
 
 
-if(isset($_GET['ev_id']) &&//list all groups for a course.
-$_GET['ev_id'] != "" &&
-(int) $_GET['ev_id'] &&
-$cours_id = ev_id_to_cours_id($_GET['ev_id']) &&
-is_teacher_of_cours($_SESSION['usr_id'], $cours_id))//a teacher only can see this very page.
+if(isset($_GET['ev_id']) //list all groups for a course.
+&& $_GET['ev_id'] != ""
+&& (int) $_GET['ev_id']
+&& is_teacher_of_cours($_SESSION['usr_id'], ev_id_to_cours_id($_GET['ev_id'])))//a teacher only can see this very page.
 {
+    $cours_id = ev_id_to_cours_id($_GET['ev_id']) ;
+
     $query = "
     SELECT
     group_id,

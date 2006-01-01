@@ -20,8 +20,8 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-define(__INICROND_INCLUDED__, TRUE);
-define(__INICROND_INCLUDE_PATH__, '../../');
+define('__INICROND_INCLUDED__', TRUE);
+define('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
@@ -55,14 +55,12 @@ if(isset($_GET['file_id']) && $_GET['file_id'] != "" && (int) $_GET['file_id'])
         INSERT INTO
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading']."
         (
-        usr_id,
         session_id,
         file_id,
         gmt_ts
         )
         VALUES
         (
-        ".$_SESSION['usr_id'].",
         ".$_SESSION['session_id'].",
         ".$_GET['file_id'].",
         ".inicrond_mktime()."

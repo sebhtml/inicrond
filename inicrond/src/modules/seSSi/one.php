@@ -141,9 +141,11 @@ elseif(isset($_GET['group_id']) && $_GET['group_id'] != "" && (int) $_GET['group
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs']."";//table groups_usrs
     $base .= "?group_id=".$_GET['group_id']."";
 }
-elseif (isset($_GET['start']) && $_GET['start'] != "" && (int) $_GET['start'] && isset($_GET["end"])
+
+if (isset($_GET['start']) && $_GET['start'] != "" && (int) $_GET['start'] && isset($_GET["end"])
 && $_GET["end"] != "" && (int) $_GET["end"] && is_numeric($_GET['cours_id'])
-&& is_in_charge_in_course($_SESSION['usr_id'], $_GET['cours_id']))//par date
+&&  (is_in_charge_in_course($_SESSION['usr_id'], $_GET['cours_id'])
+    || (isset ($_GET['usr_id']) && ($_SESSION['usr_id'] == $_GET['usr_id']))))//par date
 {
     $it_is_ok = TRUE;
     $base .= "?start=".$_GET['start']."&end=".$_GET["end"]."&cours_id=".$_GET['cours_id'];
@@ -163,9 +165,9 @@ elseif (isset($_GET['start']) && $_GET['start'] != "" && (int) $_GET['start'] &&
 }
 elseif ($_SESSION['SUID'])//tous les membres
 {
-    $module_content .= "<a href=\"../../modules/seSSi/sessions_img.php\" >".$_LANG['GD_sessions_for_ppl']."</a><br />";
+    $module_content .= "<a href=\"".__INICROND_INCLUDE_PATH__."modules/seSSi/sessions_img.php\" >".$_LANG['GD_sessions_for_ppl']."</a><br />";
 
-    $module_content .= "<a href=\"../../modules/seSSi/normal_dist_time_img.php\" >".$_LANG['distribution_of_session_length']."</a><br />";
+    $module_content .= "<a href=\"".__INICROND_INCLUDE_PATH__."modules/seSSi/normal_dist_time_img.php\" >".$_LANG['distribution_of_session_length']."</a><br />";
 
     $module_title =  $_LANG['seSSi'];
 

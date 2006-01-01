@@ -24,7 +24,7 @@ define ('__INICROND_INCLUDED__', TRUE);
 define ('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
-include __INICROND_INCLUDE_PATH__."modules/courses/includes/functions/access.fun.php";  //function for access...
+
 include __INICROND_INCLUDE_PATH__."modules/courses/includes/functions/transfert_cours.function.php";    //function for access...
 
 if (isset ($_GET['inode_id']) && $_GET['inode_id'] != "" && (int) $_GET['inode_id']
@@ -53,7 +53,7 @@ if (isset ($_GET['inode_id']) && $_GET['inode_id'] != "" && (int) $_GET['inode_i
         {
             $query = "
             select
-            count (inode_id) as count_inode_id
+            count(inode_id) as count_inode_id
             from
             ".$_OPTIONS['table_prefix'].$_OPTIONS['tables'][$relation_to_search_in[$i]]."
             where
@@ -74,7 +74,7 @@ if (isset ($_GET['inode_id']) && $_GET['inode_id'] != "" && (int) $_GET['inode_i
         $query = "
         SELECT
         inode_id_location,
-        cours_id,
+        cours_id
         FROM
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
         WHERE

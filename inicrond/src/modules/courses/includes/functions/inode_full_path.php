@@ -28,7 +28,9 @@
 * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
 * @version      1.0.0
 */
-function inode_full_path($inode_id, $cours_id = NULL)
+
+function
+inode_full_path($inode_id, $cours_id = NULL)
 {
     global $_OPTIONS, $inicrond_db;
 
@@ -72,7 +74,7 @@ function inode_full_path($inode_id, $cours_id = NULL)
         $inode_id_location = $fetch_result['inode_id_location'] ;
 
         /*
-        We first have to find if it is a directory, flash, text, test, file
+            We first have to find if it is a directory, flash, text, test, file
         */
 
         $relation_to_search_in = array ('virtual_directories', 'courses_files', 'tests', 'chapitre_media', 'inicrond_images', 'inicrond_texts') ;
@@ -80,11 +82,11 @@ function inode_full_path($inode_id, $cours_id = NULL)
         $relation_that_refer_to_the_current_inode = '' ;
         $the_row_have_been_found = false ;
 
-        for ($i = 0 ; ($i <= 5) && $the_row_have_been_found == false ; $i ++)
+        for ($i = 0 ; ($i <= 5) && ($the_row_have_been_found == false) ; $i ++)
         {
             $query = "
             select
-            count (inode_id) as count_inode_id
+            count(inode_id) as count_inode_id
             from
             ".$_OPTIONS['table_prefix'].$_OPTIONS['tables'][$relation_to_search_in[$i]]."
             where
@@ -107,7 +109,7 @@ function inode_full_path($inode_id, $cours_id = NULL)
         {
             $query = "
             SELECT
-            dir_name
+            dir_name as NAME
             FROM
             ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['virtual_directories']."
             WHERE
@@ -170,18 +172,19 @@ function inode_full_path($inode_id, $cours_id = NULL)
             ";
         }
 
+        //get the content_name.
+        $rs = $inicrond_db->Execute($query);
+        $fetch_result = $rs->FetchRow();
+        $NAME = $fetch_result['NAME'];
+
         if($relation_that_refer_to_the_current_inode != 'virtual_directories')//  is not a directory.
         {
-            //get the content_name.
-            $rs2 = $inicrond_db->Execute($query);
-            $fetch_result2 = $rs2->FetchRow();
-            $NAME=  $fetch_result2["NAME"];
             $full_path = "".$NAME."";
         }
         else //is a directory, show the link...
         {
             $full_path = "<a href=\"".__INICROND_INCLUDE_PATH__.
-                "modules/courses/inode.php?&inode_id_location=".$fetch_result['inode_id']."\">".$NAME."</a>";
+                "modules/courses/inode.php?&inode_id_location=".$inode_id."\">".$NAME."</a>";
         }
 
         if ($inode_id_location == 0)//bang the root...

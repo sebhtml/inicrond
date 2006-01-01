@@ -97,7 +97,7 @@ class Image_Graph_Dataset
     /**
      * Image_Graph_Dataset [Constructor]
      */
-    function &Image_Graph_Dataset()
+    function Image_Graph_Dataset()
     {
     }
 
@@ -257,7 +257,7 @@ class Image_Graph_Dataset
     {
         return array('X' => $this->maximumX(), 'Y' => $this->maximumY());
     }
-    
+
     /**
      * The minimum X value
      *

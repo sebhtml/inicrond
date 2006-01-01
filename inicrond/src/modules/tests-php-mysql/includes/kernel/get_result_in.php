@@ -85,9 +85,12 @@ if(__INICROND_INCLUDED__ && isset($_GET['test_id']))
     SELECT
     usr_id
     FROM
-    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results']."
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].",
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
     WHERE
     result_id=".$_POST['result_id']."
+    and
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".session_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id
     ";
 
     $rs = $inicrond_db->Execute($query);

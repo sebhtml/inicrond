@@ -176,8 +176,11 @@ elseif(isset($_GET['usr_id']) && $_GET['usr_id'] != "" && (int) $_GET['usr_id'] 
     FROM
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].",
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].",
-    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].",
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
     WHERE
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".inode_id
+    and
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".session_id
     and
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id=".$_GET['usr_id']."
@@ -325,9 +328,10 @@ elseif(isset($_GET['group_id']) && $_GET['group_id'] != "" && (int) $_GET['group
 }
 
 //par date, avec un intervalle
-if(isset($_GET['start']) && $_GET['start'] != "" && (int) $_GET['start'] && isset($_GET["end"])
+if (isset($_GET['start']) && $_GET['start'] != "" && (int) $_GET['start'] && isset($_GET["end"])
 && $_GET["end"] != "" && (int) $_GET["end"] && is_numeric($_GET['cours_id'])
-&& is_in_charge_in_course($_SESSION['usr_id'], $_GET['cours_id']))//par date
+&& (is_in_charge_in_course($_SESSION['usr_id'], $_GET['cours_id'])
+    || (isset ($_GET['usr_id']) && ($_SESSION['usr_id'] == $_GET['usr_id']))))//par date
 {
     $module_content .= "<br /><br />".$_LANG['start_date']." : ".format_time_stamp($_GET['start']);
 

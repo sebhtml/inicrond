@@ -76,7 +76,6 @@ if(isset($_SESSION['usr_id']))
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].",
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].",
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].",
-
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].",
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].",
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
@@ -108,7 +107,7 @@ if(isset($_SESSION['usr_id']))
         (int) $_GET['cours_id']
         )
         {
-            $WHERE_CLAUSE .= " AND ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".cours_id=".$_GET['cours_id'];
+            $WHERE_CLAUSE .= " AND ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=".$_GET['cours_id'];
         }
 
         $module_content .= "<a href=\"".__INICROND_INCLUDE_PATH__."modules/marks/time_vs_score_img.php?usr_id=".$_GET['usr_id']."\" >".$_LANG['correlation_between_time_and_score']."</a><br />";
@@ -137,7 +136,7 @@ if(isset($_SESSION['usr_id']))
 
         $module_title = $_LANG['marks'];
 
-        $WHERE_CLAUSE .= " AND ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".usr_id=".$_GET['usr_id']."
+        $WHERE_CLAUSE .= " AND ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id=".$_GET['usr_id']."
         ";
 
         if($is_in_charge_of_user)
@@ -153,7 +152,8 @@ if(isset($_SESSION['usr_id']))
             FROM
             ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].",
             ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].",
-            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].",
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
             WHERE
             ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".session_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id
             and
@@ -308,8 +308,10 @@ if(isset($_SESSION['usr_id']))
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs']."";
     }
     //par date
-    elseif(isset($_GET['start']) && isset($_GET["end"]) && is_numeric($_GET['cours_id'])
-    && is_in_charge_in_course($_SESSION['usr_id'], $_GET['cours_id']))//par date
+
+    if(isset($_GET['start']) && isset($_GET["end"]) && is_numeric($_GET['cours_id'])
+    &&  (is_in_charge_in_course($_SESSION['usr_id'], $_GET['cours_id'])
+        || (isset ($_GET['usr_id']) && ($_GET['usr_id'] == $_SESSION['usr_id']))))//par date
     {
         $it_is_ok = TRUE;
         $base .= "&start=".$_GET['start']."&end=".$_GET["end"]."&cours_id=".$_GET['cours_id'];

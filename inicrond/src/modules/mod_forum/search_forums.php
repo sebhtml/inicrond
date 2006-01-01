@@ -46,39 +46,45 @@ if(is_numeric($_GET['cours_id']) && is_student_of_cours($_SESSION['usr_id'], $_G
         //from the table.
 
         $query = "
-        SELECT DISTINCT
+        SELECT
+        DISTINCT
         forum_message_id,
         forum_message_titre,
         forum_message_contenu,
-        forum_sujet_id,
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sujets'].".forum_sujet_id as forum_sujet_id,
         forum_message_add_gmt_timestamp,
         forum_discussion_name,
         forum_section_name,
-        t2.forum_discussion_id AS forum_discussion_id,
-        t6.usr_id AS usr_id,
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_discussions'].".forum_discussion_id AS forum_discussion_id,
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].".usr_id AS usr_id,
         usr_nom,
         usr_name,
         usr_prenom,
         usr_signature
         FROM
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_messages']." AS t1,
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_discussions']." AS t2,
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sections']." AS t3,
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['forums_groups_view']." AS t4,
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs']." AS t5,
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs']." AS t6
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_messages'].",
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_discussions'].",
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sections'].",
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['forums_groups_view'].",
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs'].",
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].",
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sujets']."
         WHERE
-        t5.usr_id = ".$_SESSION['usr_id']."
-        AND
-        t3.cours_id = ".$_GET['cours_id']."
-        AND
-        t3.forum_section_id = t2.forum_section_id
-        AND
-        t4.group_id = t5.group_id
-        AND
-        t4.forum_discussion_id = t2.forum_discussion_id
-        AND
-        t6.usr_id = t1.usr_id
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs'].".usr_id = ".$_SESSION['usr_id']."
+        and
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['forums_groups_view'].".group_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs'].".group_id
+        and
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_discussions'].".forum_discussion_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['forums_groups_view'].".forum_discussion_id
+        and
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sections'].".cours_id = ".$_GET['cours_id']."
+        and
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sections'].".forum_section_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_discussions'].".forum_section_id
+        and
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sujets'].".forum_discussion_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_discussions'].".forum_discussion_id
+        and
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_messages'].".forum_sujet_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sujets'].".forum_sujet_id
+        and
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_messages'].".usr_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].".usr_id
         ";
 
         //split the string_to_search in words.
@@ -90,7 +96,7 @@ if(is_numeric($_GET['cours_id']) && is_student_of_cours($_SESSION['usr_id'], $_G
         $i = 1;
         foreach($keywords AS $keyword)
         {
-            $query .= " t1.forum_message_titre LIKE '%$keyword%' OR t1.forum_message_contenu LIKE '%$keyword%' ";
+            $query .= " forum_message_titre LIKE '%$keyword%' OR forum_message_contenu LIKE '%$keyword%' ";
 
             if($i != $count_keywords)//do I add the OR
             {

@@ -28,11 +28,13 @@
 * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
 * @version      1.0.0
 */
-function file_2_cours($file_id)
+
+function
+file_2_cours($file_id)
 {
     if(!isset($file_id))
     {
-            return FALSE;
+        return FALSE;
     }
 
     global $_OPTIONS;
@@ -42,8 +44,11 @@ function file_2_cours($file_id)
     SELECT
     cours_id
     FROM
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].",
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files']."
     WHERE
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id
+    and
     file_id=$file_id
     ";
 

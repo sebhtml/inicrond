@@ -25,7 +25,6 @@ define ('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
-include "includes/functions/access.fun.php";    //function for access...
 include "includes/functions/transfert_cours.function.php";      //transfer IDs
 
 if (is_teacher_of_cours ($_SESSION['usr_id'], inode_to_course ($_GET['inode_id'])))
@@ -44,7 +43,7 @@ if (is_teacher_of_cours ($_SESSION['usr_id'], inode_to_course ($_GET['inode_id']
     {
         $query = "
         select
-        count (inode_id) as count_inode_id
+        count(inode_id) as count_inode_id
         from
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables'][$relation_to_search_in[$i]]."
         where
@@ -68,7 +67,7 @@ if (is_teacher_of_cours ($_SESSION['usr_id'], inode_to_course ($_GET['inode_id']
 
     $query = "
     SELECT
-    cours_id, inode_id_location, order_id, content_type
+    cours_id, inode_id_location, order_id
     FROM
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
     WHERE

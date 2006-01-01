@@ -44,7 +44,7 @@ $SELECT_WHAT = "
 SELECT
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].".cours_id,
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id,
-".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].".usr_id,
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id,
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".file_id,
 file_name,
 gmt_ts,
@@ -69,9 +69,7 @@ $WHERE_CLAUSE = "
 WHERE
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".inode_id
 and
-".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".cours_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].".cours_id
-AND
-".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].".session_id
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].".cours_id
 AND
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].".usr_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id
 AND

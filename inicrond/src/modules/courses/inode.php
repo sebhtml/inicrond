@@ -373,12 +373,12 @@ if ($ok && $is_student_of_cours = is_student_of_cours ($_SESSION['usr_id'], $cou
                 $file['drop'] =__INICROND_INCLUDE_PATH__."modules/courses/drop_inode.php?inode_id=".$fetch_result['inode_id']."";
             }
 
-            if ($dl_acts)
+            if (isset ($dl_acts) && $dl_acts)
             {
                 $file["dl_acts"] =__INICROND_INCLUDE_PATH__."modules/dl_acts_4_courses/show_dl_acts.mo.php?file_id=".$fetch_result['file_id']."";
             }
 
-            if ($dl_report)
+            if (isset ($dl_report) && $dl_report)
             {
                 $file["dl_report"] =__INICROND_INCLUDE_PATH__."modules/dl_acts_4_courses/group_downloads_reporting.php?file_id=".$fetch_result['file_id']."";
             }
@@ -604,8 +604,16 @@ if ($ok && $is_student_of_cours = is_student_of_cours ($_SESSION['usr_id'], $cou
             $anim['chapitre_media_description'] =BBcode_parser ($fetch_result['chapitre_media_description']);
             $anim['chapitre_media_add_gmt_timestamp'] =format_time_stamp ($fetch_result['chapitre_media_add_gmt_timestamp']);
 
-            $anim["link"] =retournerHref ("javascript:popup('../../modules/course_media/flash.php?chapitre_media_id=".
-                $fetch_result['chapitre_media_id']."&question_ordering_id=".$question_ordering_id."', 790, 590)", $fetch_result['chapitre_media_title']);
+            if (isset ($question_ordering_id))
+            {
+               $anim["link"] =retournerHref ("javascript:popup('".__INICROND_INCLUDE_PATH__."modules/course_media/flash.php?chapitre_media_id=".
+                $fetch_result['chapitre_media_id']."&question_ordering_id=".$question_ordering_id."', 790, 590)", $fetch_result['chapitre_media_title']) ;
+            }
+            else
+            {
+                $anim["link"] =retournerHref ("javascript:popup('".__INICROND_INCLUDE_PATH__."modules/course_media/flash.php?chapitre_media_id=".
+                $fetch_result['chapitre_media_id']."', 790, 590)", $fetch_result['chapitre_media_title']) ;
+            }
 
             if ($is_teacher_of_cours)
             {
@@ -697,20 +705,20 @@ if ($ok && $is_student_of_cours = is_student_of_cours ($_SESSION['usr_id'], $cou
             $anim['chapitre_media_description'] = nl2br ($fetch_result['img_description']);
             $anim['chapitre_media_add_gmt_timestamp'] = format_time_stamp ($fetch_result["add_time_t"]);
 
-            if ($can_up)
+            if (isset ($can_up) && $can_up)
             {
                 $anim['inode_up'] = __INICROND_INCLUDE_PATH__. "modules/courses/inode_up.php?inode_id=". $fetch_result['inode_id']."";
             }
-            if ($can_down)
+            if (isset ($can_down) && $can_down)
             {
                 $anim['inode_down'] = __INICROND_INCLUDE_PATH__. "modules/courses/inode_down.php?inode_id=". $fetch_result['inode_id']."";
             }
 
-            if ($edit_swf)
+            if (isset ($edit_swf) && $edit_swf)
             {
                 $anim['edit'] = __INICROND_INCLUDE_PATH__. "modules/course_media/edit_image.php?img_id=". $fetch_result["img_id"];
             }
-            if ($can_drop)
+            if (isset ($can_drop) && $can_drop)
             {
                 $anim['drop'] = __INICROND_INCLUDE_PATH__. "modules/courses/drop_inode.php?inode_id=". $fetch_result['inode_id']."";
             }
@@ -841,8 +849,13 @@ if ($ok && $is_student_of_cours = is_student_of_cours ($_SESSION['usr_id'], $cou
         $smarty->assign ('images', $images);
         $smarty->assign ('texts', $texts);
         $smarty->assign ('mod_files', $mod_files);
+
+        if (isset ($_GET['cours_id']))
+        {
         $smarty->assign ('blue_master_clone', "<a href=\"".__INICROND_INCLUDE_PATH__. "modules/blue_master_clone/blue_master_clone.php?cours_id=".
                         $_GET['cours_id']."\">".$_LANG['blue_master_clone']. "</a>");
+        }
+
         $smarty->assign ('tests', $tests);
         $smarty->assign ('anims', $anims);
 
@@ -854,7 +867,10 @@ if ($ok && $is_student_of_cours = is_student_of_cours ($_SESSION['usr_id'], $cou
 
         $smarty->assign ('calendar', "<a href=\"".__INICROND_INCLUDE_PATH__. "modules/calendar/main_inc.php?&cours_id=$cours_id\">". $_LANG['calendar']."</a>");
 
-        $smarty->assign ('course', $course);
+        if (isset ($course))
+        {
+            $smarty->assign ('course', $course);
+        }
     }
 
     $module_content = $smarty->fetch ($_OPTIONS['theme']."/inode.tpl", $cache_id);

@@ -27,10 +27,12 @@ include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
 include __INICROND_INCLUDE_PATH__."modules/groups/includes/functions/group_id_to_cours_id.php";
 
-if (isset ($_GET['group_id']) && $_GET['group_id'] != "" && (int) $_GET['group_id'] && $cours_id = group_id_to_cours_id ($_GET['group_id'])
-    && is_teacher_of_cours ($_SESSION['usr_id'], $cours_id))
+if (isset ($_GET['group_id']) && $_GET['group_id'] != "" && (int) $_GET['group_id']
+    && is_teacher_of_cours ($_SESSION['usr_id'], group_id_to_cours_id ($_GET['group_id'])))
 {
     $module_title = $_LANG['groups_in_charge_for_course_group'];
+
+    $cours_id = group_id_to_cours_id ($_GET['group_id']) ;
 
     //show some informations.
     $query = "
@@ -52,7 +54,7 @@ if (isset ($_GET['group_id']) && $_GET['group_id'] != "" && (int) $_GET['group_i
     $rs = $inicrond_db->Execute ($query);
     $fetch_result = $rs->FetchRow ();
 
-    foreach ($fetch_result AS $key = >$value)
+    foreach ($fetch_result AS $key => $value)
     {
         $module_content .=  $_LANG[$key]." : ".$value."<br />";
     }
@@ -74,7 +76,7 @@ if (isset ($_GET['group_id']) && $_GET['group_id'] != "" && (int) $_GET['group_i
 
         $inicrond_db->Execute ($query);
 
-        foreach ($_POST AS $key = >$value)
+        foreach ($_POST AS $key => $value)
         {
             if (preg_match ("/group_in_charge_group_id=(.+)/", $key, $tokens))
             //les txt pour les answer.

@@ -34,10 +34,10 @@ include 'includes/etc/final_mark_formula.php';//init inicrond kernel
 include __INICROND_INCLUDE_PATH__.'modules/blue_master_clone/includes/functions/inicrond_compute_final_mark.php';
 include __INICROND_INCLUDE_PATH__.'modules/members/includes/functions/access.inc.php';
 
-if(isset($_GET['group_id']) && //always with the get group _id.
-$_GET['group_id'] != "" &&
-(int) $_GET['group_id'] &&
-$cours_id = group_id_to_cours_id($_GET['group_id']) &&
+if(isset($_GET['group_id'])  //always with the get group _id.
+&& $_GET['group_id'] != ""
+&& (int) $_GET['group_id']
+&&
     (
         (
             //one student at the same time.
@@ -47,10 +47,12 @@ $cours_id = group_id_to_cours_id($_GET['group_id']) &&
             is_in_charge_of_user($_SESSION['usr_id'], $_GET['usr_id'])
         ) ||
         //the etacher see a lot of stuff.
-        is_teacher_of_cours($_SESSION['usr_id'], $cours_id)//a teacher only can see this very page.
+        is_teacher_of_cours($_SESSION['usr_id'], group_id_to_cours_id($_GET['group_id']))//a teacher only can see this very page.
     )
 )
 {
+    $cours_id = group_id_to_cours_id($_GET['group_id']) ;
+
     //show some informations.
 
     $query = "SELECT
@@ -297,7 +299,9 @@ $cours_id = group_id_to_cours_id($_GET['group_id']) &&
 
     foreach($parameters AS $parameter => $processing)
     {
-        $statistics[$parameter] = array('', '<b>'.$_LANG[$parameter].'</b>');
+        $text = isset ($_LANG[$parameter]) ? $_LANG[$parameter] : '' ;
+
+        $statistics[$parameter] = array('', '<b>'.$text.'</b>');
     }
 
     //////////////////////////////////////////////

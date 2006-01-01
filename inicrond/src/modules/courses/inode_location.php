@@ -20,8 +20,8 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-define (__INICROND_INCLUDED__, TRUE);
-define (__INICROND_INCLUDE_PATH__, '../../');
+define ('__INICROND_INCLUDED__', TRUE);
+define ('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
@@ -72,12 +72,12 @@ if (isset ($_GET['inode_id']) && $_GET['inode_id'] != "" && (int) $_GET['inode_i
         dir_name,
         inode_id_location
         FROM
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']." AS T1,
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['virtual_directories']." AS T2
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].",
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['virtual_directories']."
         WHERE
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id=".$_GET['inode_id']."
         AND
-        T1.inode_id = T2.inode_id
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['virtual_directories'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id
         ";
 
         $rs = $inicrond_db->Execute ($query);

@@ -30,12 +30,13 @@ include 'includes/languages/'.$_SESSION['language'].'/lang.php';//include lang f
 include 'includes/etc/final_mark_formula.php';//init inicrond kernel
 include __INICROND_INCLUDE_PATH__.'modules/groups/includes/functions/group_id_to_cours_id.php';//init inicrond kernel
 
-if(isset($_GET['group_id']) &&//list all groups for a course.
-$_GET['group_id'] != "" &&
-(int) $_GET['group_id'] &&
-$cours_id = group_id_to_cours_id($_GET['group_id']) &&
-is_teacher_of_cours($_SESSION['usr_id'], $cours_id))//a teacher only can see this very page.
+if (isset($_GET['group_id']) //list all groups for a course.
+&& $_GET['group_id'] != ""
+&& (int) $_GET['group_id']
+&& is_teacher_of_cours($_SESSION['usr_id'], group_id_to_cours_id($_GET['group_id'])))//a teacher only can see this very page.
 {
+    $cours_id = group_id_to_cours_id($_GET['group_id']) ;
+
     include __INICROND_INCLUDE_PATH__.'modules/blue_master_clone/includes/functions/inicrond_compute_final_mark.php';
 
     $module_title = $_LANG['final_mark_output'];

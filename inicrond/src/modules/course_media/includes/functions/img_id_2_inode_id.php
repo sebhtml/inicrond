@@ -26,7 +26,9 @@
 * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
 * @version      1.0.0
 */
-function img_id_2_inode_id ($img_id)
+
+function
+img_id_2_inode_id ($img_id)
 {
     global $_OPTIONS, $inicrond_db;
 
@@ -34,12 +36,9 @@ function img_id_2_inode_id ($img_id)
     SELECT
     inode_id
     FROM
-    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].",
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inicrond_images']."
     WHERE
     img_id=$img_id
-    AND
-    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inicrond_images'].".inode_id
     ";
 
     $rs = $inicrond_db->Execute($query);

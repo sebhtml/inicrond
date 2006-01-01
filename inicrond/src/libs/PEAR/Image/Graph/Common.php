@@ -96,7 +96,7 @@ class Image_Graph_Common
     /**
      * Constructor [Image_Graph_Common]
      */
-    function &Image_Graph_Common()
+    function Image_Graph_Common()
     {
     }
 
@@ -145,7 +145,7 @@ class Image_Graph_Common
      * @access private
      */
     function &_getDriver()
-    { 
+    {
         if (($this->_driver !== null) || ($this->_driver !== false)) {
             return $this->_driver;
         } elseif (is_a($this->_parent, 'Image_Graph_Common')) {

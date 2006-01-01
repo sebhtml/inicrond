@@ -27,7 +27,7 @@ $query = "
 SELECT
 file_name,
 cours_name,
-".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".cours_id AS cours_id
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id AS cours_id
 FROM
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].",
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].",
@@ -41,6 +41,7 @@ and
 ";
 
 $rs = $inicrond_db->Execute($query);
+
 $fetch_result = $rs->FetchRow();
 
 $cours_id = $fetch_result['cours_id'];

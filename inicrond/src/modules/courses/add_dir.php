@@ -24,7 +24,6 @@ define ('__INICROND_INCLUDED__', TRUE);
 define ('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
-include __INICROND_INCLUDE_PATH__."modules/courses/includes/functions/access.fun.php";  //function for access...
 
 if (is_teacher_of_cours ($_SESSION['usr_id'], $_GET['cours_id']))
 {

@@ -378,17 +378,33 @@ if (isset ($_GET['cours_id']) && $_GET['cours_id'] != "" && (int) $_GET['cours_i
             }
         }
 
+
+        $tables_to_look = array ('chapitre_media',
+                                'inicrond_images',
+                                'inicrond_texts',
+                                'courses_files',
+                                'tests') ;
+
+        foreach ($tables_to_look AS $table)
+        {
+            $query = "
+            DELETE FROM
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables'][$table].",
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
+            WHERE
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables'][$table].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id
+            and
+            cours_id=".$_GET['cours_id']."
+            ";
+
+            $inicrond_db->Execute ($query);
+        }
+
         //easy to remove...
         $tables_to_look = array (
                                 'cours',
-                                'chapitre_media',
-                                'inicrond_images',
-                                'inicrond_texts',
                                 'groups',
-                                'courses_files',
-                                'inode_elements',
                                 'sebhtml_forum_sections',
-                                'tests',
                                 'online_time',
                                 'questions'
                                 );

@@ -207,6 +207,8 @@ if (isset ($_SESSION['usr_id']) && isset ($_GET['cours_id']) &&  (int) $_GET['co
 
         $rs3 = $inicrond_db->Execute ($query);
 
+        $big_array['students'][$i]['groups_in_charge'] = array () ;
+
         while ($fetch_result = $rs3->FetchRow ())
         {
             $big_array['students'][$i]['groups_in_charge'][$k]['group_name'] =

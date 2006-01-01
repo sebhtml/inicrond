@@ -26,7 +26,9 @@
 * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
 * @version      1.0.0
 */
-function text_id_2_inode_id ($text_id)
+
+function
+text_id_2_inode_id ($text_id)
 {
     global $_OPTIONS, $inicrond_db;
 
@@ -34,12 +36,9 @@ function text_id_2_inode_id ($text_id)
     SELECT
     inode_id
     FROM
-    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].",
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inicrond_texts']."
     WHERE
     text_id = $text_id
-    AND
-    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inicrond_texts'].".inode_id
     ";
 
     $rs = $inicrond_db->Execute ($query);

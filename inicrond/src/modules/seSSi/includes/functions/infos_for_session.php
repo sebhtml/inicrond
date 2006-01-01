@@ -101,9 +101,12 @@ function infos_for_session($session_id, $show_scores, $show_results, $show_dl_ac
         SELECT
         count(usr_id)
         FROM
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading']."
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].",
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
         WHERE
-        session_id=".$session_id."
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id=".$session_id."
+        and
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].".session_id
         ";
 
         $rs = $inicrond_db->Execute($query);

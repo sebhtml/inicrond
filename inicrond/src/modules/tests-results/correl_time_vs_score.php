@@ -39,11 +39,17 @@ time_GMT_end-time_GMT_start AS x_val,
 your_points/max_points*100 AS y_val
 FROM
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].",
-".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].",
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].",
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
 WHERE
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".test_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".test_id
+and
 time_GMT_end>time_GMT_start
 and
-".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id
+and
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".session_id
 ";
 $ok = FALSE;
 
@@ -70,7 +76,7 @@ if(isset($_GET['usr_id']) && $_GET['usr_id'] != "" && (int) $_GET['usr_id']
     $_GET["image"] .= "_".$fetch_result['usr_name'];//the file name...
 
     $ok = TRUE;
-    $query .= " AND usr_id=".$_GET['usr_id']."";
+    $query .= " AND ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id=".$_GET['usr_id']."";
 }
 
 //can he see a usr and a test at the same time ?
@@ -92,7 +98,7 @@ if(isset($_GET['test_id']) && $_GET['test_id'] != "" && (int) $_GET['test_id']
     $_GET["image"] .= "_".str_replace(" ", "_", $fetch_result['test_name']);//the file name...
 
     $ok = TRUE;
-    $query .= " AND test_id=".$_GET['test_id']."";
+    $query .= " AND ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".test_id=".$_GET['test_id']."";
 }
 
 elseif(is_numeric($_GET['group_id']) && is_in_charge_of_group($_SESSION['usr_id'], $_GET['group_id']))

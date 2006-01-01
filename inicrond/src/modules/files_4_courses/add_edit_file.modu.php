@@ -20,8 +20,8 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-define(__INICROND_INCLUDED__, TRUE);
-define(__INICROND_INCLUDE_PATH__, '../../');
+define('__INICROND_INCLUDED__', TRUE);
+define('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
@@ -153,7 +153,7 @@ elseif(isset($_GET['file_id']) && $_GET['file_id'] != "" && (int) $_GET['file_id
     $query = "SELECT
     file_name,
     cours_name,
-    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".cours_id
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id
     FROM
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].",
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].",
@@ -175,7 +175,7 @@ elseif(isset($_GET['file_id']) && $_GET['file_id'] != "" && (int) $_GET['file_id
     $query = "
     SELECT
     cours_name,
-    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".cours_id,
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id,
     file_title,
     file_infos,
     md5_path

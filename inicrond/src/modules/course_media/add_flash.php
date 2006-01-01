@@ -66,6 +66,11 @@ if (isset($_GET['cours_id']) && $_GET['cours_id'] != "" && (int) $_GET['cours_id
 
             $chapitre_media_width = $infos["0"];//pour flash
 
+            if (!isset ($infos[0]))
+            {
+                die () ;
+            }
+
             $chapitre_media_height = $infos["1"];//pour flash
 
             $HEXA_TAG = hex_gen_32();
@@ -74,9 +79,9 @@ if (isset($_GET['cours_id']) && $_GET['cours_id'] != "" && (int) $_GET['cours_id
             $query = "
             INSERT INTO
             ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
-            (inode_id_location, content_type, content_id, cours_id)
+            (inode_id_location, cours_id)
             VALUES
-            (".$_GET['inode_id_location'].", '3', ".$chapitre_media_id.", ".$_GET['cours_id'].")
+            (".$_GET['inode_id_location'].", ".$_GET['cours_id'].")
             " ;
 
             $inicrond_db->Execute($query);
@@ -103,7 +108,7 @@ if (isset($_GET['cours_id']) && $_GET['cours_id'] != "" && (int) $_GET['cours_id
             chapitre_media_title,
             chapitre_media_description,
             chapitre_media_edit_gmt_timestamp,
-            chapitre_media_add_gmt_timestamp
+            chapitre_media_add_gmt_timestamp,
             file_name,
             HEXA_TAG,
             chapitre_media_width,
@@ -115,7 +120,7 @@ if (isset($_GET['cours_id']) && $_GET['cours_id'] != "" && (int) $_GET['cours_id
             '".filter($_POST['chapitre_media_title'])."',
             '".filter($_POST['chapitre_media_description'])."',
             $time_t,
-            $time_t
+            $time_t,
             '".filter($_FILES['file_name']['name'])."',
             '".$HEXA_TAG."',
             $chapitre_media_width,

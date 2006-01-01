@@ -20,8 +20,8 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-define(__INICROND_INCLUDED__, TRUE);
-define(__INICROND_INCLUDE_PATH__, '../../');
+define('__INICROND_INCLUDED__', TRUE);
+define('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
@@ -29,7 +29,7 @@ include __INICROND_INCLUDE_PATH__."modules/courses/includes/functions/is_in_inod
 include "includes/functions/img_id_2_inode_id.php";//transfer IDs
 
 if (isset($_SESSION['usr_id']) && /* session */ is_numeric($_GET["img_id"])
-&& is_in_inode_group($_SESSION['usr_id'], img_id_2_inode_id($_GET["img_id"]))
+&& is_in_inode_group($_SESSION['usr_id'], img_id_2_inode_id($_GET["img_id"])))
 {
     $query = "
     SELECT

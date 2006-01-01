@@ -61,7 +61,7 @@ class Image_Graph_Dataset_Trivial extends Image_Graph_Dataset
      * Pass an associated array ($data[$x] = $y) to the constructor for easy
      * data addition. Alternatively (if multiple entries with same x value is
      * required) pass an array with (x, y) values: $data[$id] = array('x' => $x,
-     * 'y' => $y); 
+     * 'y' => $y);
      *
      * NB! If passing the 1st type array at this point, the x-values will also
      * be used for ID tags, i.e. when using {@link Image_Graph_Fill_Array}. In
@@ -70,7 +70,7 @@ class Image_Graph_Dataset_Trivial extends Image_Graph_Dataset
      *
      * @param array $dataArray An associated array with values to the dataset
      */
-    function &Image_Graph_Dataset_Trivial($dataArray = false)
+    function Image_Graph_Dataset_Trivial($dataArray = false)
     {
         parent::Image_Graph_Dataset();
         $this->_data = array ();

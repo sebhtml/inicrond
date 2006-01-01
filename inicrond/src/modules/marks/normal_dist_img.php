@@ -79,7 +79,7 @@ elseif($_SESSION['SUID'])
 //add cours_id clause.
 if(isset($_GET['cours_id']) && $_GET['cours_id'] != "" && (int) $_GET['cours_id'])
 {
-    $query .= " AND cours_id=".$_GET['cours_id']."";
+    $query .= " AND ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=".$_GET['cours_id']."";
 }
 
 if(isset($_GET['chapitre_media_id']) && $_GET['chapitre_media_id'] != ""

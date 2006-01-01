@@ -31,12 +31,13 @@ include __INICROND_INCLUDE_PATH__.'modules/groups/includes/functions/group_id_to
 
 include 'includes/etc/final_mark_formula.php'; //init inicrond kernel
 
-if(isset($_GET['group_id']) && //list all groups for a course.
-$_GET['group_id'] != "" &&
-(int) $_GET['group_id'] &&
-$cours_id = group_id_to_cours_id($_GET['group_id']) &&
-is_teacher_of_cours($_SESSION['usr_id'], $cours_id))//a teacher only can see this very page.
+if(isset($_GET['group_id']) //list all groups for a course.
+&& $_GET['group_id'] != ""
+&& (int) $_GET['group_id']
+&& is_teacher_of_cours($_SESSION['usr_id'], group_id_to_cours_id($_GET['group_id'])))//a teacher only can see this very page.
 {
+    $cours_id = group_id_to_cours_id($_GET['group_id']) ;
+
     $module_title = $_LANG['edit_final_mark_formula'];
 
     if(isset($_POST['final_mark_formula']))//upodate the formula...

@@ -39,7 +39,7 @@ function drop_down_list_dirs($cours_id, $inode_id_location, $inode_id = -1)
 
     $query = "
     SELECT
-    inode_id
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id
     FROM
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].",
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['virtual_directories']."

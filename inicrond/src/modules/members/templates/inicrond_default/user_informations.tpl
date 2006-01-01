@@ -28,7 +28,7 @@
 {$usr.seSSi}, {$usr.marks}, {$usr.tests_results}, {$usr.dl_acts_4_courses}
 {/if}
 
-{if $usr.user_graphics_for_a_course != ""}
+{if isset ($usr.user_graphics_for_a_course)}
 , {$usr.user_graphics_for_a_course}
 {/if}
 <br />
@@ -47,7 +47,7 @@
 
 {/if}
 
-{if $usr.change_grps_for_usr != ""}
+{if isset ($usr.change_grps_for_usr)}
 <h3>{$_LANG.admin}</h3>
 {$usr.change_grps_for_usr}<br />
 

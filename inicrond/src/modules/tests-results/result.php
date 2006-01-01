@@ -55,7 +55,7 @@ if($is_in_charge_of_user && can_usr_check_sheet($_SESSION['usr_id'], $_GET['resu
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].",
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
         WHERE
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."inode_id
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id
         and
         result_id=".$_GET['result_id']."
         AND
@@ -73,7 +73,7 @@ if($is_in_charge_of_user && can_usr_check_sheet($_SESSION['usr_id'], $_GET['resu
         include __INICROND_INCLUDE_PATH__."modules/tests-php-mysql/includes/functions/conversion.function.php";
 
         $show_good_answers = (is_teacher_of_cours($_SESSION['usr_id'], result_2_cours($_GET['result_id']))
-        || ($fetch_result['do_you_show_good_answers'] == 1) ;
+        || ($fetch_result['do_you_show_good_answers'] == 1)) ;
 
         if($_OPTIONS['smarty_cache_config']['tests-results']["result.tpl"] != 0)
         {
@@ -90,7 +90,7 @@ if($is_in_charge_of_user && can_usr_check_sheet($_SESSION['usr_id'], $_GET['resu
             //
             $query = "
             SELECT
-            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".usr_id AS usr_id,
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id AS usr_id,
             usr_name,
             test_name,
             time_GMT_start,
@@ -109,7 +109,6 @@ if($is_in_charge_of_user && can_usr_check_sheet($_SESSION['usr_id'], $_GET['resu
             AND
             ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".test_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".test_id
             AND
-
             ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].".usr_id
             ";
 

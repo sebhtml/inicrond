@@ -23,15 +23,15 @@
 Changes :
 
 december 15, 2005
-	I formated the code correctly.
-	
-		--sebhtml
+        I formated the code correctly.
+
+                --sebhtml
 
 */
 
 if(!__INICROND_INCLUDED__)
 {
-	die();
+        die();
 }
 
 /**
@@ -43,20 +43,20 @@ if(!__INICROND_INCLUDED__)
  */
 function  js_redir($url, $redir_body_msg = '')
 {
-	global $_OPTIONS, $smarty;
-	
-	header("Location: $url");//with http headers.
-	
-	$smarty->template_dir = __INICROND_INCLUDE_PATH__.'templates/';
-	
-	$smarty->assign('redir_body_msg', $redir_body_msg);
-	$smarty->assign('redir_url', $url);
-	$smarty->assign('redir_msg', $_LANG['redir_msg']);
-	$smarty->assign('redir_here', $_LANG['redir_here']);
-	
-	echo $smarty->fetch($_OPTIONS['theme'].'/js_redir.tpl');
-	exit();
+        global $_OPTIONS, $smarty, $_LANG;
+
+        header("Location: $url");//with http headers.
+
+        $smarty->template_dir = __INICROND_INCLUDE_PATH__.'templates/';
+
+        $smarty->assign('redir_body_msg', $redir_body_msg);
+        $smarty->assign('redir_url', $url);
+        $smarty->assign('redir_msg', $_LANG['redir_msg']);
+        $smarty->assign('redir_here', $_LANG['redir_here']);
+
+        echo $smarty->fetch($_OPTIONS['theme'].'/js_redir.tpl');
+        exit();
 }
 
-		
+
 ?>

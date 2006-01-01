@@ -38,9 +38,16 @@ SELECT
 your_points/max_points*100 AS value
 FROM
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].",
-".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].",
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].",
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests']."
 WHERE
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".test_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".test_id
+and
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".inode_id
+and
 time_GMT_end>time_GMT_start
+and
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".session_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id
 ";
 

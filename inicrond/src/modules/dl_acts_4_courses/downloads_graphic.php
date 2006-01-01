@@ -36,10 +36,13 @@ $ok = FALSE;
 $query = "
 SELECT gmt_ts AS time_t
 FROM
-".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading']."
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].",
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].",
-".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].",
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
 WHERE
+".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].".session_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id
+and
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".inode_id
 and
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".file_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].".file_id
@@ -77,7 +80,7 @@ if(isset($_GET['file_id']) && $_GET['file_id'] != "" && (int) $_GET['file_id']
 if(isset($_GET['cours_id']) && $_GET['cours_id'] != "" && (int) $_GET['cours_id'])
 {
     //add cours_id clause.
-    $query .= " AND cours_id=".$_GET['cours_id']."";
+    $query .= " AND ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=".$_GET['cours_id']."";
 }
 elseif(is_numeric($_GET['group_id']) && is_in_charge_of_group($_SESSION['usr_id'], $_GET['group_id']))
 {

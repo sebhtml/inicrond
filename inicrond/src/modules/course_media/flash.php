@@ -20,9 +20,8 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-define(__INICROND_INCLUDED__, TRUE);
-define(__INICROND_INCLUDE_PATH__, '../../');
-
+define('__INICROND_INCLUDED__', TRUE);
+define('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
@@ -56,7 +55,6 @@ is_in_inode_group($_SESSION['usr_id'], chapitre_media_id_2_inode_id($_GET['chapi
     INSERT INTO
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores']."
     (
-    usr_id,
     session_id,
     chapitre_media_id,
     time_stamp_start,
@@ -65,7 +63,6 @@ is_in_inode_group($_SESSION['usr_id'], chapitre_media_id_2_inode_id($_GET['chapi
     )
     VALUES
     (
-    ".$_SESSION['usr_id'].",
     ".$_SESSION['session_id'].",
     ".$_GET['chapitre_media_id'].",
     ".$inicrond_mktime.",

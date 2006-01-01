@@ -5,4 +5,5 @@
 * patch a 3.2.1 installation to 3.2.2
 
 * test all as teacher
-* test all as student
+
+* remove lang from calendar

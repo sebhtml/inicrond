@@ -91,7 +91,7 @@ if(isset($_GET['join']) )//join the query with a usr or a group...
 
         //end of : the name of the usr that you want...
 
-        $WHERE_CLAUSE .= " AND ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".usr_id=".$_GET['usr_id']."
+        $WHERE_CLAUSE .= " AND ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id=".$_GET['usr_id']."
         ";
     }
     elseif(isset($_GET['group_id']) && $_GET['group_id'] != "" && (int) $_GET['group_id']

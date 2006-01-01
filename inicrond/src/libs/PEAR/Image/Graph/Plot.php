@@ -114,7 +114,7 @@ class Image_Graph_Plot extends Image_Graph_Plotarea_Element
      * @param string $title The title of the plot (used for legends,
      *   {@link Image_Graph_Legend})
      */
-    function &Image_Graph_Plot(& $dataset, $multiType = 'normal', $title = '')
+    function Image_Graph_Plot(& $dataset, $multiType = 'normal', $title = '')
     {
         if (!is_a($dataset, 'Image_Graph_Dataset')) {
             if (is_array($dataset)) {
@@ -352,10 +352,10 @@ class Image_Graph_Plot extends Image_Graph_Plotarea_Element
      * @access private
      */
     function _drawMarker()
-    {        
+    {
         if (($this->_marker) && (is_array($this->_dataset))) {
             $this->_driver->startGroup(get_class($this) . '_marker');
-            
+
             $totals = $this->_getTotals();
             $totals['WIDTH'] = $this->width() / ($this->_maximumX() + 2) / 2;
 
@@ -406,7 +406,7 @@ class Image_Graph_Plot extends Image_Graph_Plotarea_Element
             }
             unset($keys);
             $this->_driver->endGroup();
-        }              
+        }
     }
 
     /**
@@ -736,7 +736,7 @@ class Image_Graph_Plot extends Image_Graph_Plotarea_Element
         }
         unset($keys);
     }
-    
+
 }
 
 ?>

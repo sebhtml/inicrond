@@ -77,7 +77,7 @@ if(isset($_GET['usr_id']) && $_GET['usr_id'] != "" && (int) $_GET['usr_id']
 if(isset($_GET['cours_id']) && $_GET['cours_id'] != "" && (int) $_GET['cours_id'])
 {
 
-        $query .= " AND cours_id=".$_GET['cours_id']."";
+        $query .= " AND ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=".$_GET['cours_id']."";
 }
 
 //can he see a usr and a test at the same time ?

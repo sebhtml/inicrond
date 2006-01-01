@@ -47,16 +47,19 @@ user_error_handler ($errno, $errmsg, $filename, $linenum, $vars)
     $errors[E_ALL] = "E_ALL";
     //$errors[E_STRICT] = "E_STRICT";
 
-    echo "
-    <span style=\"color: red;\">
-    <h1>Error type : ".$errors[$errno]." (".$errno.")</h1>
-    Error # : $errno<br />
-    <i>Error msg : $errmsg</i><br />
-    File : $filename<br />
-    Line $linenum<br />
-    Variables : $vars<br />
-    </span>
-    <hr />";
+    if ($errno != E_NOTICE)
+    {
+        echo "
+        <span style=\"color: red;\">
+        <h1>Error type : ".$errors[$errno]." (".$errno.")</h1>
+        Error # : $errno<br />
+        <i>Error msg : $errmsg</i><br />
+        File : $filename<br />
+        Line $linenum<br />
+        Variables : $vars<br />
+        </span>
+        <hr />";
+    }
 }
 
 $old_error_handler = set_error_handler("user_error_handler");

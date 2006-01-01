@@ -110,33 +110,57 @@ include __INICROND_INCLUDE_PATH__."includes/class/Month_calendar.class.php";//la
         $_GET['day'] = 1 ;
     }
 
-    $start = mktime( 0,0, 0, $_GET['month'], $_GET['day'], $_GET['year'] );
+    if (isset ($_GET['year']))
+    {
+        $year = $_GET['year'] ;
+    }
+    else
+    {
+        $year = 0 ;
+    }
+
+    $start = mktime( 0,0, 0, $_GET['month'], $_GET['day'], $year);
+
+    if (!isset ($delta_time))
+    {
+        $delta_time = 0 ;
+    }
 
     $end = $start + $delta_time ;
-    //      $module_content .= "$start<br />$end";
 
-    if(isset($_GET['year']) && is_in_charge_in_course($_SESSION['usr_id'], $_GET['cours_id']))
+
+    $calendar_look_up = array(
+    array(
+    'QUERY_STRING' => "".__INICROND_INCLUDE_PATH__."modules/marks/main.php?",
+    'TITLE' => $_LANG['marks']
+    )
+
+    , array(
+    'QUERY_STRING' => "".__INICROND_INCLUDE_PATH__."modules/seSSi/one.php?",
+    'TITLE' => $_LANG['seSSi']
+    )
+    , array(
+    'QUERY_STRING' => "".__INICROND_INCLUDE_PATH__."modules/tests-results/results.php?",
+    'TITLE' => $_LANG['tests-results']
+    )
+    );
+
+
+    if (isset($_GET['year']) && is_in_charge_in_course($_SESSION['usr_id'], $_GET['cours_id']))
     {
-        $calendar_look_up = array(
-        array(
-        'QUERY_STRING' => "../../modules/marks/main.php?",
-        'TITLE' => $_LANG['marks']
-        )
-
-        , array(
-        'QUERY_STRING' => "../../modules/seSSi/one.php?",
-        'TITLE' => $_LANG['seSSi']
-        )
-        , array(
-        'QUERY_STRING' => "../../modules/tests-results/results.php?",
-        'TITLE' => $_LANG['tests-results']
-        )
-        );
-
         foreach($calendar_look_up AS  $value)
         {
             $module_content .= "<a href=\"".
             $value['QUERY_STRING']."&start=$start&end=$end&cours_id=".$_GET['cours_id']."\">".
+            $value['TITLE'].'</a><br />';
+        }
+    }
+    elseif (isset ($_GET['year']))
+    {
+        foreach($calendar_look_up AS  $value)
+        {
+            $module_content .= "<a href=\"".
+            $value['QUERY_STRING']."&start=$start&end=$end&cours_id=".$_GET['cours_id']."&usr_id=".$_SESSION['usr_id']."\">".
             $value['TITLE'].'</a><br />';
         }
     }
