@@ -188,11 +188,11 @@ else//all marks for this exercice
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].",
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
     WHERE
-    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".session_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."session_id
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".session_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id
     and
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".test_id=".$_GET['test_id']."
     AND
-    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".usr_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].".usr_id
     AND
     time_GMT_start<time_GMT_end
     AND

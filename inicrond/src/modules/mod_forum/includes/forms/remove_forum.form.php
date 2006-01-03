@@ -49,7 +49,7 @@ include __INICROND_INCLUDE_PATH__."includes/class/form/Select.class.php";
 include __INICROND_INCLUDE_PATH__."includes/class/form/Option.class.php";
 include __INICROND_INCLUDE_PATH__."includes/class/form/sql/Select_with_sql.class.php";
 
-forum_2_section($forum_discussion_id)
+$forum_section_id = forum_2_section($_GET["forum_discussion_id"]) ;
 
 $select = new Select_with_sql();
 

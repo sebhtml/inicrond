@@ -47,7 +47,7 @@ if(isset($_GET["test_id"]) && $_GET["test_id"] != "" && (int) $_GET["test_id"]
     SELECT
     test_name,
     cours_name,
-    ".$_OPTIONS["table_prefix"].$_OPTIONS["tables"]["tests"].".cours_id,
+    ".$_OPTIONS["table_prefix"].$_OPTIONS["tables"]["inode_elements"].".cours_id as cours_id,
     q_rand_flag,
     available_results,
     available_sheet,

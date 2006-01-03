@@ -3,7 +3,7 @@
     $Id$
 
     Inicrond : Network of Interactive Courses Registred On a Net Domain
-    Copyright (C) 2004, 2005  Sébastien Boisvert
+    Copyright (C) 2004, 2005, 2006  Sébastien Boisvert
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -28,80 +28,60 @@ include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 $is_teacher_of_cours = is_teacher_of_cours($_SESSION['usr_id'],$_GET['cours_id']);
 
 
-include __INICROND_INCLUDE_PATH__."modules/courses/includes/functions/transfert_cours.function.php";//transfer IDs
-if(isset($_GET['cours_id']) AND
-$_GET['cours_id'] != "" AND
-(int) $_GET['cours_id'] AND
+include __INICROND_INCLUDE_PATH__."modules/courses/includes/functions/transfert_cours.function.php";
 
-isset($_GET['inode_id_location']) AND
-$_GET['inode_id_location'] != "" AND
-//(int) $_GET['inode_id_location'] AND
-
-$is_teacher_of_cours AND
-
-(
-inode_to_course($_GET['inode_id_location']) == $_GET['cours_id']
-OR
-$_GET['inode_id_location'] == 0
-
-)
-
-
-
-
-
-
-)
+if(isset($_GET['cours_id']) && $_GET['cours_id'] != "" && (int) $_GET['cours_id']
+&& isset($_GET['inode_id_location']) && $_GET['inode_id_location'] != ""
+&& $is_teacher_of_cours
+&& (inode_to_course($_GET['inode_id_location']) == $_GET['cours_id'] || $_GET['inode_id_location'] == 0))
 {
+    $query = "INSERT INTO
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
+    (inode_id_location, cours_id)
+    VALUES
+    (".$_GET['inode_id_location'].", ".$_GET['cours_id'].")
+    " ;
 
-        $gmt_ts = inicrond_mktime();
+    $inicrond_db->Execute($query);
 
-        $query = "INSERT INTO
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests']."
-        (
-        test_name,
-        cours_id,
+    $order_id = $inicrond_db->Insert_ID();
 
-        time_GMT_add,
-        time_GMT_edit
-        )
-        VALUES
-        (
-        \"".$_LANG['new']."\",
-        ".$_GET['cours_id'].",
+    $inode_id = $order_id ;
 
-        $gmt_ts,
-        $gmt_ts
-        )
+    $query = "UPDATE
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
+    SET
+    order_id=$order_id
+    WHERE
+    inode_id=$order_id
+    " ;
 
-        ";
-        $inicrond_db->Execute($query);
+    $inicrond_db->Execute($query);
 
-        $test_id = $inicrond_db->Insert_ID();
+    $gmt_ts = inicrond_mktime();
 
-        $inicrond_db->Execute("INSERT INTO
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
-        (inode_id_location, content_type, content_id, cours_id)
-        VALUES
-        (".$_GET['inode_id_location'].", 2, ".$test_id.", ".$_GET['cours_id'].")
-        ");
-        $order_id=$inicrond_db->Insert_ID();
+    $query = "INSERT INTO
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests']."
+    (
+    test_name,
+    time_GMT_add,
+    time_GMT_edit,
+    inode_id
+    )
+    VALUES
+    (
+    \"".$_LANG['new']."\",
+    $gmt_ts,
+    $gmt_ts,
+    $inode_id
+    )
 
-        $inicrond_db->Execute("UPDATE
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
-        SET
-        order_id=$order_id
-        WHERE
-        inode_id=$order_id
-        ");
-        include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
-        js_redir(__INICROND_INCLUDE_PATH__."modules/courses/inode.php?&cours_id=".$_GET['cours_id']."&inode_id_location=".$_GET['inode_id_location']."");
+    ";
+    $inicrond_db->Execute($query);
 
+    include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
 
-
-
+    js_redir(__INICROND_INCLUDE_PATH__."modules/courses/inode.php?&cours_id=".$_GET['cours_id']."&inode_id_location=".$_GET['inode_id_location']."");
 }
-
-
 
 ?>

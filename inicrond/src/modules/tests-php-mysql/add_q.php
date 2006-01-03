@@ -39,17 +39,17 @@ if(is_teacher_of_cours($_SESSION['usr_id'],$_GET['cours_id']))
         //questions...
         $add_qs = array();
         //ajouter une question choix multiples
-        $add_qs []= array("", retournerHref("../../modules/tests-php-mysql/add_q.php?q_type=0&cours_id=".$_GET['cours_id'], $_LANG['add_q_0']));
+        $add_qs []= array("", retournerHref("".__INICROND_INCLUDE_PATH__."modules/tests-php-mysql/add_q.php?q_type=0&cours_id=".$_GET['cours_id'], $_LANG['add_q_0']));
 
         //ajouter une question r�onse courte
-        $add_qs []= array("", retournerHref("../../modules/tests-php-mysql/add_q.php?q_type=1&cours_id=".$_GET['cours_id'], $_LANG['add_q_1']));
+        $add_qs []= array("", retournerHref("".__INICROND_INCLUDE_PATH__."modules/tests-php-mysql/add_q.php?q_type=1&cours_id=".$_GET['cours_id'], $_LANG['add_q_1']));
 
         //ajouter une question FLASH
-        $add_qs []= array("", retournerHref("../../modules/tests-php-mysql/add_q.php?q_type=2&cours_id=".$_GET['cours_id'], $_LANG['add_q_2']));
+        $add_qs []= array("", retournerHref("".__INICROND_INCLUDE_PATH__."modules/tests-php-mysql/add_q.php?q_type=2&cours_id=".$_GET['cours_id'], $_LANG['add_q_2']));
 
 
         //add a multiple short answer question
-        $add_qs []= array("", retournerHref("../../modules/tests-php-mysql/add_q.php?q_type=3&cours_id=".$_GET['cours_id'], $_LANG['add_q_3']));
+        $add_qs []= array("", retournerHref("".__INICROND_INCLUDE_PATH__."modules/tests-php-mysql/add_q.php?q_type=3&cours_id=".$_GET['cours_id'], $_LANG['add_q_3']));
 
         $module_content .= retournerTableauXY($add_qs);
     }
@@ -78,7 +78,7 @@ if(is_teacher_of_cours($_SESSION['usr_id'],$_GET['cours_id']))
 
         include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
 
-        js_redir(__INICROND_INCLUDE_PATH__.'modules/courses/list_questions.php?&cours_id='.$_GET['cours_id']);
+        js_redir(__INICROND_INCLUDE_PATH__.'modules/course_admin/list_questions.php?&cours_id='.$_GET['cours_id']);
     }
 }
 

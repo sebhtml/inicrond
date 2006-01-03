@@ -351,6 +351,12 @@ function can_usr_admin_section($usr_id, $forum_section_id)
         return TRUE;
     }
 
+    if (!isset ($forum_section_id))
+    {
+        echo '$forum_section_id is not set!' ;
+        return false ;
+    }
+
     $query = "
     SELECT
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs'].".usr_id  AS OK

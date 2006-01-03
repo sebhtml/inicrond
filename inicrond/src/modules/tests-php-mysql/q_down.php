@@ -76,7 +76,7 @@ if(isset($_GET["question_id"]) && $_GET["question_id"] != "" && (int) $_GET["que
     if(isset($fetch_result["MIN(q_order_id)"]))//est-ce qu'il y a quelque chose avant.
     {
         //on va chercher la question avant
-        .
+
         $query = "
         SELECT
         question_id

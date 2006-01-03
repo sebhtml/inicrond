@@ -26,7 +26,9 @@ include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 include "includes/functions/conversion.function.php";//conversions...
 
-if(is_teacher_of_cours($_SESSION['usr_id'],test_2_cours($_GET['test_id']))
+include __INICROND_INCLUDE_PATH__.'modules/tests-php-mysql/includes/functions/undohtmlentities.php' ;
+
+if(is_teacher_of_cours($_SESSION['usr_id'],test_2_cours($_GET['test_id'])))
 {
     /*
     $_GET['test_id']

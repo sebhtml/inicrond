@@ -72,7 +72,7 @@ function score_that_you_obtained($result_id, $standard = TRUE)
 
         if($fetch_result['q_type'] == 0)//choix multiples..
         {
-            if($fetch_result["correcting_method"] == 0)
+            if($fetch_result["correcting_method"] == MODULE_TEST_PHP_MYSQL_Q_TYPE_MULTIPLE_CHOICES_QUESTION)
 
             {
                 $count_questions += $fetch_result["good_points"];//points pour la question.
@@ -115,7 +115,7 @@ function score_that_you_obtained($result_id, $standard = TRUE)
                     }
                 }//end while
             }
-            elseif($fetch_result["correcting_method"] == 1)//correct for each answer...
+            elseif($fetch_result["correcting_method"] == MODULE_TEST_PHP_MYSQL_Q_TYPE_SHORT_ANSWER_QUESTION)//correct for each answer...
             {
                 $query = "
                 SELECT
@@ -159,7 +159,7 @@ function score_that_you_obtained($result_id, $standard = TRUE)
                 }
             }
         }
-        elseif($fetch_result['q_type'] == 3)//multiple short answers
+        elseif($fetch_result['q_type'] == MODULE_TEST_PHP_MYSQL_Q_TYPE_MULTIPLE_SHORT_ANSWERS_QUESTION)//multiple short answers
         {
             //get the student's answer...
 
@@ -194,7 +194,13 @@ function score_that_you_obtained($result_id, $standard = TRUE)
 
                 while($fetch_result411 = $query_result_212->FetchRow())//pop un # num�o d'exercice...
                 {
-                    if(!preg_match($fetch_result411["short_answer_name"], $short_answer))
+                    /*
+                        the undohtmlentities is called because inicrond is all in utf-8 since 3.3.2
+                        it is for backward compatibility.
+                    */
+
+                    if(!(preg_match($fetch_result411["short_answer_name"], $short_answer)
+                    || preg_match (undohtmlentities($fetch_result411["short_answer_name"]), $short_answer)))
                     {
                         $count_good_question -= $fetch_result["good_points"];
                         $count_good_question += $fetch_result["bad_points"];
@@ -219,7 +225,8 @@ function score_that_you_obtained($result_id, $standard = TRUE)
 
                 while($fetch_result_2 = $query_result_2->FetchRow())//pop un # num�o d'exercice...
                 {
-                    if(preg_match($fetch_result_2["short_answer_name"], $short_answer))
+                    if(preg_match($fetch_result_2["short_answer_name"], $short_answer)
+                    || preg_match(undohtmlentities($fetch_result_2["short_answer_name"]), $short_answer))
                     {
                         $count_good_question += $fetch_result_2['pts_amount_for_good_answer'];
                     }
@@ -249,7 +256,8 @@ function score_that_you_obtained($result_id, $standard = TRUE)
             $query_result_3 = $inicrond_db->Execute($query);
             $fetch_result_2 = $query_result_3->FetchRow();
 
-            if(preg_match($fetch_result["short_answer"], $fetch_result_2["short_answer"]))
+            if(preg_match($fetch_result["short_answer"], $fetch_result_2["short_answer"])
+            || preg_match(undohtmlentities($fetch_result["short_answer"]), $fetch_result_2["short_answer"]))
             {
                 $count_good_question +=  $fetch_result["good_points"];//bonne r�onse.
             }
@@ -258,7 +266,7 @@ function score_that_you_obtained($result_id, $standard = TRUE)
                 $count_good_question +=  $fetch_result["bad_points"];//bonne r�onse.
             }
         }
-        elseif($fetch_result['q_type'] == 2)//flash
+        elseif($fetch_result['q_type'] == MODULE_TEST_PHP_MYSQL_Q_TYPE_MEDIA_QUESTION)//flash
         {
             $count_questions += $fetch_result["good_points"];//points pour la question.
 

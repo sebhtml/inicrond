@@ -32,6 +32,9 @@ include __INICROND_INCLUDE_PATH__.'modules/members/includes/functions/access.inc
 include __INICROND_INCLUDE_PATH__."modules/tests-php-mysql/includes/functions/score_Xtract.func.php";
 include __INICROND_INCLUDE_PATH__."modules/tests-php-mysql/includes/functions/access.function.php";//fonction pour savoir si un �udiant peut faire un test.
 include "includes/functions/conversion.function.php";//conversions
+include __INICROND_INCLUDE_PATH__.'modules/tests-php-mysql/includes/functions/undohtmlentities.php' ;
+
+include __INICROND_INCLUDE_PATH__.'modules/tests-php-mysql/includes/constants/q_type.php' ;
 
 $is_in_charge_of_user=is_in_charge_of_user($_SESSION['usr_id'], result_2_usr($_GET['result_id']));
 
@@ -195,7 +198,7 @@ if($is_in_charge_of_user && can_usr_check_sheet($_SESSION['usr_id'], $_GET['resu
                 $is_good = $fetch_result["good_points"];//les points pour la question.
                 $question['points'] =  $fetch_result["good_points"];
 
-                if($fetch_result['q_type'] == 0)//multiple choices
+                if($fetch_result['q_type'] == MODULE_TEST_PHP_MYSQL_Q_TYPE_MULTIPLE_CHOICES_QUESTION)//multiple choices
                 {
                     if($fetch_result["correcting_method"] == 1)//with each answer
                     {
@@ -320,7 +323,7 @@ if($is_in_charge_of_user && can_usr_check_sheet($_SESSION['usr_id'], $_GET['resu
                     //FIN DE R�ONSES
                     //
                 }
-                elseif($fetch_result['q_type'] == 3)//multiple short answers
+                elseif($fetch_result['q_type'] == MODULE_TEST_PHP_MYSQL_Q_TYPE_MULTIPLE_SHORT_ANSWERS_QUESTION)//multiple short answers
                 {
                     //get the student's answer...
                     $query = "
@@ -387,7 +390,15 @@ if($is_in_charge_of_user && can_usr_check_sheet($_SESSION['usr_id'], $_GET['resu
                     {
                         $answer = array();
 
-                        $answer["is_good"] = preg_match($fetch_result_2["short_answer_name"], $short_answer);
+                        if (preg_match($fetch_result_2["short_answer_name"], $short_answer)
+                        || preg_match(undohtmlentities ($fetch_result_2["short_answer_name"]), $short_answer))
+                        {
+                            $answer["is_good"] = true;
+                        }
+                        else
+                        {
+                            $answer["is_good"] = false;
+                        }
 
                         if($fetch_result["correcting_method"] == 1)//with each answer
                         {
@@ -428,7 +439,7 @@ if($is_in_charge_of_user && can_usr_check_sheet($_SESSION['usr_id'], $_GET['resu
 
                     $question['answers'] =$answers_tpl ;
                 }
-                elseif($fetch_result['q_type'] == 1)//r�onse courte...
+                elseif($fetch_result['q_type'] == MODULE_TEST_PHP_MYSQL_Q_TYPE_SHORT_ANSWER_QUESTION)//r�onse courte...
                 {
                     $query = "
                     SELECT
@@ -442,8 +453,16 @@ if($is_in_charge_of_user && can_usr_check_sheet($_SESSION['usr_id'], $_GET['resu
                     $query_result_2 = $inicrond_db->Execute($query);
                     $fetch_result_2 = $query_result_2->FetchRow();
 
+                    /*
+                    echo "--<br />\n" ;
+                    echo '$fetch_result["short_answer"] '.$fetch_result["short_answer"]. "<br />\n" ;
+                    echo '$fetch_result_2["short_answer"] '. $fetch_result_2["short_answer"]."<br />\n" ;
+                    echo 'undohtmlentities ($fetch_result["short_answer"] '.undohtmlentities ($fetch_result["short_answer"]). "<br />\n" ;
+                    */
+
                     //preg_match correction...
-                    if(preg_match($fetch_result["short_answer"], $fetch_result_2["short_answer"]))//r�onse mauvaise
+                    if(preg_match($fetch_result["short_answer"], $fetch_result_2["short_answer"])
+                    || preg_match(undohtmlentities ($fetch_result["short_answer"]), $fetch_result_2["short_answer"]))//r�onse mauvaise
                     {
                         $question["is_good"] = 1;
                         $question["your_points"] = $fetch_result["good_points"];
@@ -463,7 +482,7 @@ if($is_in_charge_of_user && can_usr_check_sheet($_SESSION['usr_id'], $_GET['resu
                         $question["short_answer"] = $fetch_result["short_answer"];
                     }
                 }
-                elseif($fetch_result['q_type'] == 2)//question flashiii
+                elseif($fetch_result['q_type'] == MODULE_TEST_PHP_MYSQL_Q_TYPE_MEDIA_QUESTION)//question flashiii
                 {
                     $question["flash"] =  retournerHref("javascript:popup('flash.php?chapitre_media_id=".$fetch_result['chapitre_media_id']."', 790, 590)",
                     $_LANG['animation']);//lien vers l'animation

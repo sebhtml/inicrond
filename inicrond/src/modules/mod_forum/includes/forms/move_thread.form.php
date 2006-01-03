@@ -54,7 +54,7 @@ if(__INICROND_INCLUDED__)
     $my_select->name="forum_discussion_id";//nom de la liste d�oulante
     $my_select->default_VALUE=$forum_discussion_id;//valeur par d�aut
     $my_select->text=$_LANG['move'];
-
+    $my_select->inicrond_db = &$inicrond_db ;
 
 
     $my_form->add_base($my_select->OUTPUT());

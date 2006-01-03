@@ -1,16 +1,19 @@
 {* Smarty *}
 {* $Id$ *}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <html>
         <head>
-                <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1" />
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 <title>{$module_title|strip_tags}</title>
+
 <link type="text/css" rel="stylesheet" href="../../templates/inicrond_default/css/styles.css" />
 
 {if isset($extra_css)}
     {$extra_css}
 {/if}
-
 
 {if isset($extra_js)}
     {$extra_js}
@@ -27,16 +30,6 @@
         </td>
 
         <td>
-
-
-
-
-
-
-
-
-
-
 
 {if isset($courses)}
     {$courses}
@@ -83,9 +76,9 @@
 {$app_link}
 
 </p>
-
-</body>
-</html>
 {if isset($debug_mod_content)}
 {$debug_mod_content}
 {/if}
+
+</body>
+</html>
