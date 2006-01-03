@@ -23,14 +23,14 @@
 Changes :
 
 december 15, 2005
-	I formated the code correctly.
-	
-		--sebhtml
+        I formated the code correctly.
+
+                --sebhtml
 
 */
 if(!__INICROND_INCLUDED__)
 {
-	die();
+    die();
 }
 
 
@@ -41,22 +41,24 @@ if(!__INICROND_INCLUDED__)
  * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
  * @version      1.0.0
  */
-function filter($string)
+
+function
+filter($string)
 {
-	global $_OPTIONS;
+    global $_OPTIONS;
 
+    if($_OPTIONS['htmlEntities'])
+    {
+        $string = htmlEntities($string) ;
+    }
 
-	if($_OPTIONS['htmlEntities'])
-	{
-		$string = htmlEntities($string) ;
-	}
+    if(!get_magic_quotes_gpc())//MAGIC QUOTES
+    {
+        //$string = addCSlashes($string);
+        $string = strstr ("'", "\'", $string) ;
+    }
 
-	if(!get_magic_quotes_gpc())//MAGIC QUOTES
-	{
-		$string = addSlashes($string);
-	}
-
-	return $string ;
+    return $string ;
 }
 
 /**
@@ -66,33 +68,34 @@ function filter($string)
  * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
  * @version      1.0.0
  */
-function filter_html_preserve($string)
+
+function
+filter_html_preserve($string)
 {
-	$tmp = get_html_translation_table(HTML_ENTITIES);
- 
-	//$tmp = array_flip ($tmp);
+    /*
+    $tmp = get_html_translation_table(HTML_ENTITIES);
 
-	$tmp2 = array();
+    $tmp2 = array();
 
-	foreach($tmp AS $key => $value)
-	{ 
-		if($value != '&quot;' && $value != '&lt;' && $value != '&gt;' && $value != '&amp;')
-		{
-			$tmp2[$key] = $value;
-		}
-	}
+    foreach($tmp AS $key => $value)
+    {
+        if($value != '&quot;' && $value != '&lt;' && $value != '&gt;' && $value != '&amp;')
+        {
+            $tmp2[$key] = $value;
+        }
+    }
 
-	
-	if(!get_magic_quotes_gpc())//MAGIC QUOTES
-	{
-		
-		$string = addSlashes($string);
-	}
-	
-	$string = strtr ($string, $tmp2);
-	
-	return $string ;
+    if(!get_magic_quotes_gpc())//MAGIC QUOTES
+    {
+        $string = addSlashes($string);
+    }
+
+    $string = strtr ($string, $tmp2);
+    */
+
+    //$string = addCSlashes($string);
+    $string = filter($string) ;
+    return $string ;
 }
-
 
 ?>

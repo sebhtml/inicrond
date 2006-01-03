@@ -23,53 +23,56 @@
 Changes :
 
 december 15, 2005
-	I formated the code correctly.
-	
-		--sebhtml
+        I formated the code correctly.
+
+                --sebhtml
 
  */
 
 class Select extends Base
 {
-	var $tableau;
-	/**
-	* constructor
-	*
-	* @author       Sebastien Boisvert sebhtml@users.sourceforge.net
-	* @version      1.0.0
-	*/	
-	function Select()
-	{
-		$this->tableau = array();
-	}
-	
-	/**
-	* add a option in the select
-	*
-	* @param        object  $option  an option for the select
-	* @author       Sebastien Boisvert sebhtml@users.sourceforge.net
-	* @version      1.0.0
-	*/		
-	function add_option($option)
-	{
-		$this->tableau []= array($option->get_text(), $option->get_value(), $option->get_selected());
-	}
-	
-	/**
-	* validate the form object
-	*
-	* @author       Sebastien Boisvert sebhtml@users.sourceforge.net
-	* @version      1.0.0
-	*/		
-	function validate()
-	{
-		$this->form_o = "<select name=\"".$this->name."\">";
-		foreach($this->tableau AS $objet)
-		{
-			$this->form_o .= "<option ".$objet[2]." value=\"".$objet[1]."\">".$objet[0]."</option>";
-		}
-		$this->form_o .= "</select>";
-	}
+    var $tableau;
+
+    /**
+    * constructor
+    *
+    * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
+    * @version      1.0.0
+    */
+    function Select()
+    {
+        $this->tableau = array();
+    }
+
+    /**
+    * add a option in the select
+    *
+    * @param        object  $option  an option for the select
+    * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
+    * @version      1.0.0
+    */
+    function add_option($option)
+    {
+        $this->tableau []= array($option->get_text(), $option->get_value(), $option->get_selected());
+    }
+
+    /**
+    * validate the form object
+    *
+    * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
+    * @version      1.0.0
+    */
+    function validate()
+    {
+        $this->form_o = "<select name=\"".$this->name."\">";
+
+        foreach($this->tableau AS $objet)
+        {
+            $this->form_o .= "<option ".$objet[2]." value=\"".$objet[1]."\">".$objet[0]."</option>";
+        }
+
+        $this->form_o .= "</select>";
+    }
 }
 
 

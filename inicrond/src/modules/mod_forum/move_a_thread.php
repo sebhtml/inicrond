@@ -32,9 +32,10 @@ include "includes/functions/access.php";
 include "includes/functions/conversion.inc.php";
 
 if(isset($_GET["forum_sujet_id"]) && $_GET["forum_sujet_id"] != ""
-&& (int) $_GET["forum_sujet_id"] && $forum_discussion_id = sujet_2_discussion($_GET["forum_sujet_id"])
+&& (int) $_GET["forum_sujet_id"] && ($forum_discussion_id = sujet_2_discussion($_GET["forum_sujet_id"]))
 && is_mod($_SESSION['usr_id'], $forum_discussion_id)) //changer de forum...
 {
+
     if(!isset($_POST["envoi"]))//forumulaire
     {
         //---------------
@@ -62,6 +63,12 @@ if(isset($_GET["forum_sujet_id"]) && $_GET["forum_sujet_id"] != ""
         include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";
 
         js_redir("thread_inc.php?forum_sujet_id=".$_GET["forum_sujet_id"]);
+    }
+    else
+    {
+        $module_content .= $_LANG['MOD_FORUMS_move_a_thread_failed'] ;
+
+        $module_content .= '<br /><a href="thread_inc.php?forum_sujet_id='.$_GET["forum_sujet_id"].'">'.$_LANG['return'].'</a>' ;
     }
 }
 

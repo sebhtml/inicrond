@@ -1,5 +1,5 @@
 {* Smarty *}
-
+ 
 {* $Id$ *}
 
 {smarty_array_to_html_function php_array=$course_infos}

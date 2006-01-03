@@ -33,8 +33,8 @@ if(isset($_GET['group_id']) && $_GET['group_id'] != "" && (int) $_GET['group_id'
 {
     $module_title =  $_LANG['get_group_emails'];
 
-
     //show some informations.
+
     $query = "
     SELECT
     group_id,
@@ -78,9 +78,27 @@ if(isset($_GET['group_id']) && $_GET['group_id'] != "" && (int) $_GET['group_id'
 
     $rs = $inicrond_db->Execute($query) ;
 
+    $person = array () ;
+
     while($fetch_result = $rs->FetchRow())
     {
-            $module_content .= "\"".$fetch_result['usr_nom'].", ".$fetch_result['usr_prenom']."\" &lt;".$fetch_result['usr_email']."&gt;,<br />";
+        $person []= array ($fetch_result['usr_nom'], $fetch_result['usr_prenom'], $fetch_result['usr_email']) ;
+    }
+
+    $count_person = count ($person) ;
+
+    for ($i = 0 ; $i <= $count_person -1 ; $i ++)
+    {
+        $module_content .= "\"".$person[$i][0].", ".$person[$i][1]."\" &lt;".$person[$i][2]."&gt;";
+
+        if ($i != $count_person -1)
+        {
+            $module_content .= ',<br />' ;
+        }
+        else // it is the last one...
+        {
+            $module_content .= '<br />' ;
+        }
     }
 }
 

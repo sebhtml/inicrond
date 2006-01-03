@@ -114,6 +114,8 @@ if (!isset($_GET['stage']))
 {
     if (!isset($_POST['count_sub_groups']))
     {
+        $module_content .= $_LANG['MOD_GROUPS_groups_how_many_sub_groups_do_you_wish_to_create'] ;
+        $module_content .= '<br />' ;
         $module_content .= '<form method="post">' ;
         $module_content .= '<select name="count_sub_groups">' ;
 
@@ -142,18 +144,18 @@ elseif ($_GET['stage'] == 2)
 {
     if (!isset($_POST['submit_phase_2']))
     {
-            $module_content .= '<form method="post"><table>' ;
-            $module_content .= $number_of_students . '<br / >';
+        $module_content .= sprintf ($_LANG['MOD_GROUPS_please_fill_the_fields'], $number_of_students) ;
+        $module_content .= '<br />' ;
+        $module_content .= '<form method="post"><table>' ;
 
-            for ($i = 1 ; $i <= $_SESSION['count_sub_groups'] ; $i ++)
-            {
-                    $module_content .= '<tr><td><b>'.$i.'</b></td><td><input type="text" name="amount_'.$i.
-                        '" /></td></tr>' ;
-            }
+        for ($i = 1 ; $i <= $_SESSION['count_sub_groups'] ; $i ++)
+        {
+                $module_content .= '<tr><td><b>'.$i.'</b></td><td><input type="text" name="amount_'.$i.
+                    '" /></td></tr>' ;
+        }
 
-            $module_content .= '<tr><td></td><td><input type="submit" name="submit_phase_2" /></td></tr>' ;
-            $module_content .= '</table></form>' ;
-
+        $module_content .= '<tr><td></td><td><input type="submit" name="submit_phase_2" /></td></tr>' ;
+        $module_content .= '</table></form>' ;
     }
     else // populate $_SESSION['array_of_count_student_in_each_sub_groups']
     {
@@ -198,12 +200,10 @@ elseif ($_GET['stage'] == 3)
             values
             (\''.$group_name.' '.date('YmdHis').' '.$key.'\', '.$cours_id.' , \'1\')' ;
 
-            $module_content .= '<pre>'.$sql.'</pre>' ;
             $rs = $inicrond_db->Execute($sql);
 
             $group_id = $inicrond_db->Insert_ID () ;
 
-            //$module_content .=  $group_id ;
             // insert the new group
 
             // foreach entry for the group in the db
@@ -239,6 +239,9 @@ elseif ($_GET['stage'] == 3)
 
             $amount_inserted_already += $value ;
         }
+
+    include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
+    js_redir("course_groups_listing.php?cours_id=".$cours_id);
     }
 }
 

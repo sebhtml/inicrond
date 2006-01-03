@@ -30,7 +30,7 @@ include "includes/functions/access.php";
 include "includes/functions/conversion.inc.php";
 
 if(isset($_GET["forum_sujet_id"]) && $_GET["forum_sujet_id"] != ""
-&& (int) $_GET["forum_sujet_id"] && $forum_discussion_id = sujet_2_discussion($_GET["forum_sujet_id"])
+&& (int) $_GET["forum_sujet_id"] && ($forum_discussion_id = sujet_2_discussion($_GET["forum_sujet_id"]))
 && is_mod($_SESSION['usr_id'], $forum_discussion_id))
 {
     $query = "

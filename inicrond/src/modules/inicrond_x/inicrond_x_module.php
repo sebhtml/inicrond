@@ -199,7 +199,7 @@ if(isset($_GET['group_id']) && $_GET['group_id'] != "")//analysis all groups que
         array(
         "name" => 'marks_scores_count',
         "query" => "\$query = \"SELECT
-        COUNT(".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".usr_id)  AS stat_value
+        COUNT(".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id)  AS stat_value
         FROM
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].",
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].",
@@ -224,7 +224,7 @@ if(isset($_GET['group_id']) && $_GET['group_id'] != "")//analysis all groups que
         array(
         "name" => 'marks_scores_data_mean',
         "query" => "\$query = \"SELECT
-        SUM(points_obtenu/points_max*100)/COUNT(".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".usr_id) AS stat_value
+        SUM(points_obtenu/points_max*100)/COUNT(".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id) AS stat_value
         FROM
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].",
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].",
@@ -233,7 +233,7 @@ if(isset($_GET['group_id']) && $_GET['group_id'] != "")//analysis all groups que
         WHERE
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".inode_id
         and
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
         AND
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".chapitre_media_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id
         AND
@@ -258,7 +258,7 @@ if(isset($_GET['group_id']) && $_GET['group_id'] != "")//analysis all groups que
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
         WHERE
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".inode_id
-        and ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
+        and ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
         AND
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".session_id
         and
@@ -277,7 +277,7 @@ if(isset($_GET['group_id']) && $_GET['group_id'] != "")//analysis all groups que
         array(
         "name" => 'marks_scores_time_mean',
         "query" => "\$query = \"SELECT
-        SUM(time_stamp_end-time_stamp_start)/COUNT(".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".usr_id) AS stat_value
+        SUM(time_stamp_end-time_stamp_start)/COUNT(".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id) AS stat_value
         FROM
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].",
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].",
@@ -285,7 +285,7 @@ if(isset($_GET['group_id']) && $_GET['group_id'] != "")//analysis all groups que
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
         WHERE
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".inode_id and
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
         AND
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".chapitre_media_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id
         AND
@@ -309,7 +309,7 @@ if(isset($_GET['group_id']) && $_GET['group_id'] != "")//analysis all groups que
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
         WHERE
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".inode_id and
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
         AND
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['scores'].".chapitre_media_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['chapitre_media'].".chapitre_media_id
         AND
@@ -326,7 +326,7 @@ if(isset($_GET['group_id']) && $_GET['group_id'] != "")//analysis all groups que
         array(
         "name" => 'tests_scores_count',
         "query" => "\$query = \"SELECT
-        COUNT(".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".usr_id)  AS stat_value
+        COUNT(".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id)  AS stat_value
         FROM
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].",
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].",
@@ -334,7 +334,7 @@ if(isset($_GET['group_id']) && $_GET['group_id'] != "")//analysis all groups que
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
         WHERE
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".inode_id and
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
         AND
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".session_id
         and
@@ -349,7 +349,7 @@ if(isset($_GET['group_id']) && $_GET['group_id'] != "")//analysis all groups que
         array(
         "name" => 'tests_scores_data_mean',
         "query" => "\$query = \"SELECT
-        SUM(your_points/max_points*100)/COUNT(".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".usr_id) AS stat_value
+        SUM(your_points/max_points*100)/COUNT(".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id) AS stat_value
         FROM
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].",
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].",
@@ -357,7 +357,7 @@ if(isset($_GET['group_id']) && $_GET['group_id'] != "")//analysis all groups que
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
         WHERE
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".inode_id and
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
         AND
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".test_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".test_id
         AND
@@ -381,7 +381,7 @@ if(isset($_GET['group_id']) && $_GET['group_id'] != "")//analysis all groups que
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
         WHERE
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".inode_id and
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
         AND
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".test_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".test_id
         AND
@@ -397,14 +397,14 @@ if(isset($_GET['group_id']) && $_GET['group_id'] != "")//analysis all groups que
         array(
         "name" => 'tests_scores_time_mean',
         "query" => "\$query = \"SELECT
-        SUM(time_GMT_end-time_GMT_start)/COUNT(".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".usr_id) AS stat_value
+        SUM(time_GMT_end-time_GMT_start)/COUNT(".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id) AS stat_value
         FROM
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].",
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].",
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].",
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
         WHERE
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".inode_id and ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".inode_id and ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
         AND
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".test_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".test_id
         AND
@@ -427,7 +427,7 @@ if(isset($_GET['group_id']) && $_GET['group_id'] != "")//analysis all groups que
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].",
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
         WHERE
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".inode_id and ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".inode_id and ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
         AND
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".session_id
         and
@@ -444,7 +444,7 @@ if(isset($_GET['group_id']) && $_GET['group_id'] != "")//analysis all groups que
         array(
         "name" => 'downloads_count',
         "query" => "\$query = \"SELECT
-        COUNT(".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].".usr_id)  AS stat_value
+        COUNT(".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id)  AS stat_value
         FROM
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].",
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].",
@@ -452,7 +452,7 @@ if(isset($_GET['group_id']) && $_GET['group_id'] != "")//analysis all groups que
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
         WHERE
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".inode_id and
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
+        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id=\".\$fetch_result[\"usr_id\"].\"
         AND
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].".session_id
         and
@@ -674,6 +674,7 @@ if(isset($_GET['group_id']) && $_GET['group_id'] != "")//analysis all groups que
         $usrs_statistics = array_merge($usrs_statistics2, $usrs_statistics);
 
         $course_infos =  get_cours_infos($cours_id);
+        $smarty->assign ('_LANG', $_LANG) ;
         $smarty->assign('course_infos', $course_infos);
         $smarty->assign('usrs_statistics', $usrs_statistics);
         //echo nl2br(print_r($courses, TRUE));

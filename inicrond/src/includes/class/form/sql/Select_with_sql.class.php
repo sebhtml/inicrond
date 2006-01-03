@@ -23,51 +23,52 @@
 Changes :
 
 december 15, 2005
-	I formated the code correctly.
-	
-		--sebhtml
+        I formated the code correctly.
+
+                --sebhtml
 
 */
 
 
-	
+
 class Select_with_sql
 {
-	var $sql;//requeete
-	var $name;//nom de la liste d�oulante
-	var $default_VALUE;//valeur par d�aut
-	var $text;//le txte �c��                var $inicrond_db;//le lien vers la base de donn�s.
+    var $sql;//requeete
+    var $name;//nom de la liste d�oulante
+    var $default_VALUE;//valeur par d�aut
+    var $text;//le txte �c��                var $inicrond_db;//le lien vers la base de donn�s.
+    var $inicrond_db ;
 
-	function OUTPUT()
-	{
-		$inicrond_db = $this->inicrond_db;
-	
-		$select = new Select();
-		$select->set_name($this->name);
-		$select->set_text($this->text);
-		
-		//$queries["SELECT"] ++; // comptage
-			
-		$rs = $inicrond_db->Execute($this->sql);
-		while ($fetch_result = $rs->FetchRow())
-		{
-			$my_option = new Option();
-			
-			$my_option->set_value($fetch_result["VALUE"]);
-			$my_option->set_text($fetch_result["TEXT"]);
-			
-			if($fetch_result["VALUE"] == $this->default_VALUE)
-			{
-				$my_option->selected();//SELECTED
-			}
-			
-			$select->add_option($my_option);			
-		}		
-		
-		$select->validate();
-		
-		return $select;		
-	}	
+    function OUTPUT()
+    {
+        $inicrond_db = $this->inicrond_db;
+
+        $select = new Select();
+        $select->set_name($this->name);
+        $select->set_text($this->text);
+
+        //$queries["SELECT"] ++; // comptage
+
+        $rs = $inicrond_db->Execute($this->sql);
+        while ($fetch_result = $rs->FetchRow())
+        {
+            $my_option = new Option();
+
+            $my_option->set_value($fetch_result["VALUE"]);
+            $my_option->set_text($fetch_result["TEXT"]);
+
+            if($fetch_result["VALUE"] == $this->default_VALUE)
+            {
+                $my_option->selected();//SELECTED
+            }
+
+            $select->add_option($my_option);
+        }
+
+        $select->validate();
+
+        return $select;
+    }
 }
 
 ?>

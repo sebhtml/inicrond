@@ -67,6 +67,8 @@ if(isset($_GET["forum_discussion_id"]) && $_GET["forum_discussion_id"] != ""
     $my_groups->cours_id = $cours_id;
     $my_groups->group_elm_table = 'sebhtml_moderators';
     $my_groups->elm_field_name = "forum_discussion_id";
+    $my_groups->text = $_LANG['MOD_FORUMS_forum_moderators'] ;
+
     $module_content .= $my_groups->run_this();
 
     $module_content .= "<h3><a href=\"".__INICROND_INCLUDE_PATH__."modules/mod_forum/main_inc.php?&cours_id=$cours_id\">".$_LANG['mod_forum']."</a></h3>";

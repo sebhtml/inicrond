@@ -23,16 +23,16 @@
 Changes :
 
 december 15, 2005
-	I formated the code correctly.
-	
-		--sebhtml
+        I formated the code correctly.
+
+                --sebhtml
 
 */
 
 $_OPTIONS["log_in_redirection"] = __INICROND_INCLUDE_PATH__."modules/courses/courses.php";
 $_OPTIONS["log_out_redirection"] = __INICROND_INCLUDE_PATH__."modules/user/connect.php";
 $_OPTIONS['usr_id']['nobody'] = 1;//oflline people
-$_OPTIONS["htmlEntities"] = TRUE;
+$_OPTIONS["htmlEntities"] = false ;
 
 
 ?>

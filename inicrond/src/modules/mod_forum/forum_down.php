@@ -32,9 +32,10 @@ include "includes/functions/conversion.inc.php";
 if(isset($_GET["forum_discussion_id"]) //on demande-tu ??
 && $_GET["forum_discussion_id"] != "" //pas de chaine vide
 && (int) $_GET["forum_discussion_id"]//chagnement de type
-&& $forum_section_id=forum_2_section($_GET["forum_discussion_id"])
-&& can_usr_admin_section($_SESSION['usr_id'], $forum_section_id))
+&& can_usr_admin_section($_SESSION['usr_id'], forum_2_section($_GET["forum_discussion_id"])))
 {
+    $forum_section_id = forum_2_section($_GET["forum_discussion_id"]) ;
+
     //------------
     //on trouve dans quelle section est la discussion demandée.
     //----------

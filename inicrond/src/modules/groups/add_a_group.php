@@ -59,7 +59,7 @@ if(isset($_GET['cours_id']) && $_GET['cours_id'] != "" && (int) $_GET['cours_id'
         $inicrond_db->Execute($query);
 
         include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
-        //js_redir("course_groups_listing.php?cours_id=".$_GET['cours_id']);
+        js_redir("course_groups_listing.php?cours_id=".$_GET['cours_id']);
     }
 }
 

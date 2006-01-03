@@ -37,10 +37,10 @@ class Group_permission_manager
     var $cours_id;
     var $group_elm_table;
     var $elm_field_name;
+    var $text;
 
     function run_this()
     {
-
         $module_content = "";
         $_OPTIONS = $this->_OPTIONS;
         $cours_id = $this->cours_id;
@@ -50,6 +50,12 @@ class Group_permission_manager
         $course_infos =  get_cours_infos($cours_id);
 
         $module_content .= retournerTableauXY($course_infos);
+
+        $module_content .= '<span style="color: #ff0000 ;">' ;
+
+        $module_content .= $this->text ;
+        $module_content .= '</span>' ;
+        $module_content .= '<br />' ;
 
         if(isset($_POST["envoi"]))//update the database if there is a submission
         {
@@ -113,26 +119,25 @@ class Group_permission_manager
         $module_content .= "<form method=\"POST\"><table>";
         while($fetch_result = $rs->FetchRow())
         {
-                //do I check the box???
-                $query = "SELECT
-                group_id
-                FROM
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables'][$this->group_elm_table]."
-                WHERE
-                ".$this->elm_field_name."=".$_GET[$this->elm_field_name]."
-                AND
-                group_id=".$fetch_result['group_id']."
-                ";
-                $rs2 = $inicrond_db->Execute($query);
-                $fetch_result2 = $rs2->FetchRow();
+            //do I check the box???
+            $query = "SELECT
+            group_id
+            FROM
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables'][$this->group_elm_table]."
+            WHERE
+            ".$this->elm_field_name."=".$_GET[$this->elm_field_name]."
+            AND
+            group_id=".$fetch_result['group_id']."
+            ";
+            $rs2 = $inicrond_db->Execute($query);
+            $fetch_result2 = $rs2->FetchRow();
 
-                $checked = isset($fetch_result2['group_id']) ? "CHECKED":"" ;
+            $checked = isset($fetch_result2['group_id']) ? "CHECKED":"" ;
 
-                $module_content .= "<tr><td><input  $checked  type=\"checkbox\"  name=\"group_id=".$fetch_result['group_id']."\" value=\"".$fetch_result['group_id']."\"  /></td><td>".$fetch_result['group_name']."</td></tr>";
+            $module_content .= "<tr><td><input  $checked  type=\"checkbox\"  name=\"group_id=".$fetch_result['group_id']."\" value=\"".$fetch_result['group_id']."\"  /></td><td>".$fetch_result['group_name']."</td></tr>";
         }
 
         $module_content .= "</table><input type=\"submit\" name=\"envoi\"/></form>";
-
 
         return $module_content;
     }

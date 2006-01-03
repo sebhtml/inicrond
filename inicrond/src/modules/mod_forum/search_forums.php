@@ -42,50 +42,86 @@ if(is_numeric($_GET['cours_id']) && is_student_of_cours($_SESSION['usr_id'], $_G
     }
     else//search in authorised forums for this course.
     {
-        //get all forum_sujet_id && forum_message_id
-        //from the table.
-
-        $query = "
-        SELECT
-        DISTINCT
-        forum_message_id,
-        forum_message_titre,
-        forum_message_contenu,
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sujets'].".forum_sujet_id as forum_sujet_id,
-        forum_message_add_gmt_timestamp,
-        forum_discussion_name,
-        forum_section_name,
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_discussions'].".forum_discussion_id AS forum_discussion_id,
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].".usr_id AS usr_id,
-        usr_nom,
-        usr_name,
-        usr_prenom,
-        usr_signature
-        FROM
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_messages'].",
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_discussions'].",
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sections'].",
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['forums_groups_view'].",
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs'].",
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].",
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sujets']."
-        WHERE
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs'].".usr_id = ".$_SESSION['usr_id']."
-        and
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['forums_groups_view'].".group_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs'].".group_id
-        and
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_discussions'].".forum_discussion_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['forums_groups_view'].".forum_discussion_id
-        and
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sections'].".cours_id = ".$_GET['cours_id']."
-        and
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sections'].".forum_section_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_discussions'].".forum_section_id
-        and
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sujets'].".forum_discussion_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_discussions'].".forum_discussion_id
-        and
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_messages'].".forum_sujet_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sujets'].".forum_sujet_id
-        and
-        ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_messages'].".usr_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].".usr_id
-        ";
+        if (is_teacher_of_cours ($_SESSION['usr_id'], $_GET['cours_id']))
+        {
+            $query = "
+            SELECT
+            DISTINCT
+            forum_message_id,
+            forum_message_titre,
+            forum_message_contenu,
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sujets'].".forum_sujet_id as forum_sujet_id,
+            forum_message_add_gmt_timestamp,
+            forum_discussion_name,
+            forum_section_name,
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_discussions'].".forum_discussion_id AS forum_discussion_id,
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].".usr_id AS usr_id,
+            usr_nom,
+            usr_name,
+            usr_prenom,
+            usr_signature
+            FROM
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_messages'].",
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_discussions'].",
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sections'].",
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].",
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sujets']."
+            WHERE
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sections'].".cours_id = ".$_GET['cours_id']."
+            and
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sections'].".forum_section_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_discussions'].".forum_section_id
+            and
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sujets'].".forum_discussion_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_discussions'].".forum_discussion_id
+            and
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_messages'].".forum_sujet_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sujets'].".forum_sujet_id
+            and
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_messages'].".usr_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].".usr_id
+            ";
+        }
+        else
+        {
+            $query = "
+            SELECT
+            DISTINCT
+            forum_message_id,
+            forum_message_titre,
+            forum_message_contenu,
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sujets'].".forum_sujet_id as forum_sujet_id,
+            forum_message_add_gmt_timestamp,
+            forum_discussion_name,
+            forum_section_name,
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_discussions'].".forum_discussion_id AS forum_discussion_id,
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].".usr_id AS usr_id,
+            usr_nom,
+            usr_name,
+            usr_prenom,
+            usr_signature
+            FROM
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_messages'].",
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_discussions'].",
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sections'].",
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['forums_groups_view'].",
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs'].",
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].",
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sujets']."
+            WHERE
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs'].".usr_id = ".$_SESSION['usr_id']."
+            and
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['forums_groups_view'].".group_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs'].".group_id
+            and
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_discussions'].".forum_discussion_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['forums_groups_view'].".forum_discussion_id
+            and
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sections'].".cours_id = ".$_GET['cours_id']."
+            and
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sections'].".forum_section_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_discussions'].".forum_section_id
+            and
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sujets'].".forum_discussion_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_discussions'].".forum_discussion_id
+            and
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_messages'].".forum_sujet_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_sujets'].".forum_sujet_id
+            and
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['sebhtml_forum_messages'].".usr_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].".usr_id
+            ";
+        }
 
         //split the string_to_search in words.
 
