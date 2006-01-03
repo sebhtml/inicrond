@@ -58,4 +58,8 @@ $_LANG['changer_de_discussion'] = 'Move this thread' ;
 $_LANG['MOD_FORUMS_move_a_thread_failed'] = 'This thread cannot be moved there. You have to be a moderator of the destination forum too.' ;
 $_LANG['MOD_FORUMS_forum_moderators'] = 'Please choose the moderators groups. A moderator can move a thread into another forum. A moderator can also lock or unlock a thread. To move a thread from a forum to another, the person has to be a moderator in both forums.' ;
 
+$_LANG['new_posts_since_last_visit'] = 'See the new posts since your last visit on this site';
+$_LANG['MOD_FORUMS_the_date_of_your_last_visit_is'] = 'The date of your last visit is %s.';
+
+
 ?>

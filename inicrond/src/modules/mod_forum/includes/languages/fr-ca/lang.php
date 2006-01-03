@@ -55,7 +55,9 @@ $_LANG['changer_de_discussion'] = 'Changer cette discussion de forum' ;
 
 $_LANG['MOD_FORUMS_move_a_thread_failed'] = 'La discussion ne peut pas être envoyée dans ce forum parce que vous n\'êtes pas un modérateur du forum de destination.' ;
 
-
 $_LANG['MOD_FORUMS_forum_moderators'] = 'Sélectionner les groupes dont les membres sont autorisés à modérer ce forum. La modération consiste en deux choses: fermer une discussion et changer une discussion de forum. Pour pouvoir changer une discussion de forum, la personne doit être modérateur du forum de départ et du forum de destination.' ;
+
+$_LANG['new_posts_since_last_visit'] = 'Voir les nouveaux envois depuis votre dernière visite';
+$_LANG['MOD_FORUMS_the_date_of_your_last_visit_is'] = 'La date de votre dernière visite sur le site est %s';
 
 ?>

@@ -255,6 +255,9 @@ isset($_GET['cours_id']) && $_GET['cours_id'] != ""  && (int) $_GET['cours_id']
         $cours =  get_cours_infos($_GET['cours_id']);
         $smarty->assign('cours', $cours);
 
+        $smarty->assign('cours_id', $_GET['cours_id']);
+        $smarty->assign('_LANG', $_LANG);
+
         if($is_teacher_of_cours)//admin seulement
         {
             $smarty->assign('add_section_link', retournerHref("add_edit_section_inc.php?&mode_id=0&cours_id=".$_GET['cours_id']."", $_LANG['add']));

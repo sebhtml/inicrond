@@ -20,18 +20,14 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-$_OPTIONS["tables"]["sebhtml_forum_discussions"] = "sebhtml_forum_discussions";
-$_OPTIONS["tables"]["views_of_threads"] = "views_of_threads";
-$_OPTIONS["tables"]["sebhtml_forum_messages"] = "sebhtml_forum_messages";
-$_OPTIONS["tables"]["sebhtml_forum_sections"] = "sebhtml_forum_sections";
-$_OPTIONS["tables"]["sebhtml_forum_sujets"] = "sebhtml_forum_sujets";
-$_OPTIONS["tables"]["sebhtml_moderators"] = "sebhtml_moderators";
-$_OPTIONS["tables"]["forums_groups_view"] = "forums_groups_view";
-$_OPTIONS["tables"]["forums_groups_start"] = "forums_groups_start";
-$_OPTIONS["tables"]["forums_groups_reply"] = "forums_groups_reply";
-$_OPTIONS["tables"]["sections_groups_view"] = "sections_groups_view";
-$_OPTIONS["tables"]["thread_subscription"] = "thread_subscription";
-$_OPTIONS["tables"]["forum_subscription"] = "forum_subscription";
+/*
+    inputs : $_SESSION['usr_id'], $_GET['forum_discussion_id']
+*/
 
+define ('__INICROND_INCLUDED__', TRUE) ;
+define ('__INICROND_INCLUDE_PATH__', '../../') ;
+include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php' ;
+
+include __INICROND_INCLUDE_PATH__.'includes/kernel/post_modulation.php' ;
 
 ?>
