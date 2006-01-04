@@ -134,7 +134,8 @@ function can_usr_start_thread($usr_id, $forum_discussion_id)
 * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
 * @version      1.0.0
 */
-function can_usr_view_forum($usr_id, $forum_discussion_id)
+function
+can_usr_view_forum($usr_id, $forum_discussion_id)
 {//ouverture de la fonction peut_il_replier
 
     global $_OPTIONS, $_RUN_TIME, $inicrond_db;

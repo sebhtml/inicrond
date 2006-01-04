@@ -57,7 +57,8 @@ function message2sujet($forum_message_id)
 * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
 * @version      1.0.0
 */
-function sujet_2_discussion($forum_sujet_id)
+function
+sujet_2_discussion($forum_sujet_id)
 {
     global $_OPTIONS, $_RUN_TIME, $inicrond_db;
 

@@ -122,9 +122,32 @@ if(isset($_GET["forum_discussion_id"]) && $_GET["forum_discussion_id"] != ""
 
             $ligne = array();
 
-            $threads[$i]['sujet'] =
+            $query = '
+            select
+            usr_id
+            from
+            '.$_OPTIONS['table_prefix'].'thread_subscription
+            where
+            usr_id = '.$_SESSION['usr_id'].'
+            and
+            forum_sujet_id = '.$forum_sujet_id.'
+            ' ;
 
-            retournerHref("thread_inc.php?forum_sujet_id=$forum_sujet_id", $fetch_result["forum_message_titre"]."");
+            $rs_for_subscription = $inicrond_db->Execute ($query) ;
+            $row = $rs_for_subscription->FetchRow () ;
+
+            if (isset ($row['usr_id']))
+            {
+                $script = 'unsubscribe_from_a_thread' ;
+            }
+            else
+            {
+                $script = 'subscribe_to_a_thread' ;
+            }
+
+            $threads[$i]['sujet'] =
+            retournerHref("thread_inc.php?forum_sujet_id=$forum_sujet_id", $fetch_result["forum_message_titre"]."").'<br />'.'
+            <a href="'.$script.'.php?forum_sujet_id='.$forum_sujet_id.'"><small>'.$_LANG[$script].'</small></a>';
 
             $threads[$i]['status'] = ($etat == 1) ? $_LANG['closed'] :  $_LANG['open']  ;
 

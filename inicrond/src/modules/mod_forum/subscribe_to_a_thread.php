@@ -28,6 +28,62 @@ define ('__INICROND_INCLUDED__', TRUE) ;
 define ('__INICROND_INCLUDE_PATH__', '../../') ;
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php' ;
 
-include __INICROND_INCLUDE_PATH__.'includes/kernel/post_modulation.php' ;
+include 'includes/functions/access.php' ;
+include "includes/functions/conversion.inc.php";
 
+/*
+    if the user can view the forum, the person can subscribe
+*/
+
+if (isset ($_SESSION['usr_id']) && isset ($_GET['forum_sujet_id']) && $_GET['forum_sujet_id'] != ''
+&& is_numeric ($_GET['forum_sujet_id']))
+{
+    // check if the user is allowed to subscribe
+
+    if (can_usr_view_forum($_SESSION['usr_id'], sujet_2_discussion($_GET['forum_sujet_id'])))
+    {
+        $query = '
+        delete from
+        '.$_OPTIONS['table_prefix'].'thread_subscription
+        where
+        usr_id = '.$_SESSION['usr_id'].'
+        and
+        forum_sujet_id = '.$_GET['forum_sujet_id'].'
+        ' ;
+
+        $inicrond_db->Execute ($query) ;
+
+        $query = '
+        insert into
+        '.$_OPTIONS['table_prefix'].'thread_subscription
+        (usr_id, forum_sujet_id)
+        values
+        ('.$_SESSION['usr_id'].', '.$_GET['forum_sujet_id'].')
+        ' ;
+
+        $inicrond_db->Execute ($query) ;
+    }
+
+    // get the cours_id and redirect to the forum main page
+
+    $query = '
+    select
+    forum_discussion_id
+    from
+    '.$_OPTIONS['table_prefix'].'sebhtml_forum_sujets
+    where
+    forum_sujet_id = '.$_GET['forum_sujet_id'].'
+    ' ;
+
+    $rs = $inicrond_db->Execute ($query) ;
+    $row = $rs->FetchRow () ;
+
+    $forum_discussion_id = $row['forum_discussion_id'] ;
+
+    include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";
+
+    js_redir('forum_inc.php?&forum_discussion_id='.$forum_discussion_id);
+}
+
+include __INICROND_INCLUDE_PATH__.'includes/kernel/post_modulation.php' ;
 ?>

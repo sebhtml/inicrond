@@ -1,5 +1,25 @@
 <?php
-//$Id$
+/*
+    $Id$
+
+    Inicrond : Network of Interactive Courses Registred On a Net Domain
+    Copyright (C) 2004, 2005, 2006  Sébastien Boisvert
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
+
 
 /*
 put this file in the inicrond root installation.
@@ -350,6 +370,33 @@ add add_time_t int unsigned
 
 $inicrond_db->Execute($query);
 
+$query = "
+drop table
+".$_OPTIONS["table_prefix"].'lang_dev'."
+" ;
 
+$inicrond_db->Execute($query);
+
+$query = "
+CREATE TABLE ".$_OPTIONS["table_prefix"]."forum_subscription (
+  usr_id int(10) unsigned default NULL,
+  forum_discussion_id int(10) unsigned default NULL,
+  KEY usr_id (usr_id),
+  KEY forum_discussion_id (forum_discussion_id)
+) TYPE=MyISAM;
+" ;
+
+$inicrond_db->Execute($query);
+
+$query = "
+CREATE TABLE ".$_OPTIONS["table_prefix"]."thread_subscription (
+  usr_id int(10) unsigned default NULL,
+  forum_sujet_id int(10) unsigned default NULL,
+  KEY usr_id (usr_id),
+  KEY forum_sujet_id (forum_sujet_id)
+) TYPE=MyISAM;
+" ;
+
+$inicrond_db->Execute($query);
 
 ?>

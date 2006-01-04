@@ -1,9 +1,3 @@
-* email notification of thread and/or forums
-* new posts since last visit
+* try a clean install and check schema
 
-* try a clean install
-* patch a 3.2.1 installation to 3.2.2
-
-* remove lang from calendar
-* remove lang_dev module + the table that go with it..
-* commit with utf-8 message
+* sf.net todo

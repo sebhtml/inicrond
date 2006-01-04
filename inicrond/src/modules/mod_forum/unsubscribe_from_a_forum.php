@@ -30,6 +30,43 @@ define ('__INICROND_INCLUDED__', TRUE) ;
 define ('__INICROND_INCLUDE_PATH__', '../../') ;
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php' ;
 
-include __INICROND_INCLUDE_PATH__.'includes/kernel/post_modulation.php' ;
+if (isset ($_SESSION['usr_id']) && isset ($_GET['forum_discussion_id']) && $_GET['forum_discussion_id'] != ''
+&& is_numeric ($_GET['forum_discussion_id']))
+{
+    $query = '
+    delete from
+    '.$_OPTIONS['table_prefix'].'forum_subscription
+    where
+    usr_id = '.$_SESSION['usr_id'].'
+    and
+    forum_discussion_id = '.$_GET['forum_discussion_id'].'
+    ' ;
+
+    $inicrond_db->Execute ($query) ;
+
+    // get the cours_id and redirect to the forum main page
+
+    $query = '
+    select
+    cours_id
+    from
+    '.$_OPTIONS['table_prefix'].'sebhtml_forum_sections,
+    '.$_OPTIONS['table_prefix'].'sebhtml_forum_discussions
+    where
+    '.$_OPTIONS['table_prefix'].'sebhtml_forum_sections.forum_section_id = '.$_OPTIONS['table_prefix'].'sebhtml_forum_discussions.forum_section_id
+    and
+    forum_discussion_id = '.$_GET['forum_discussion_id'].'
+    ' ;
+
+    $rs = $inicrond_db->Execute ($query) ;
+    $row = $rs->FetchRow () ;
+
+    $cours_id = $row['cours_id'] ;
+
+    include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";
+
+    js_redir("main_inc.php?cours_id=$cours_id");
+
+}
 
 ?>

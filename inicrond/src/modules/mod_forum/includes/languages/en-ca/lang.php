@@ -61,5 +61,9 @@ $_LANG['MOD_FORUMS_forum_moderators'] = 'Please choose the moderators groups. A 
 $_LANG['new_posts_since_last_visit'] = 'See the new posts since your last visit on this site';
 $_LANG['MOD_FORUMS_the_date_of_your_last_visit_is'] = 'The date of your last visit is %s.';
 
+$_LANG['subscribe_to_a_thread'] = 'Subscribe to this thread' ;
+$_LANG['subscribe_to_a_forum'] = 'Subscribe to this forum' ;
+$_LANG['unsubscribe_from_a_thread'] = 'Unsubscribe from this thread' ;
+$_LANG['unsubscribe_from_a_forum'] = 'Unsubscribe from this forum' ;
 
 ?>

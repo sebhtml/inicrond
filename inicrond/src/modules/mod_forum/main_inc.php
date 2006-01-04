@@ -28,9 +28,9 @@ include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 include "includes/functions/access.php";
 include "includes/functions/conversion.inc.php";
 
-//PAS DE ELSE, CELA AFFICHE LE FORUM ARGH!!
-if(
-isset($_GET['cours_id']) && $_GET['cours_id'] != ""  && (int) $_GET['cours_id']
+// PAS DE ELSE, CELA AFFICHE LE FORUM ARGH!!
+
+if(isset($_GET['cours_id']) && $_GET['cours_id'] != ""  && (int) $_GET['cours_id']
 && is_student_of_cours($_SESSION['usr_id'],$_GET['cours_id']))
 {
     $_SESSION['cours_id'] = $_GET['cours_id'];
@@ -133,6 +133,35 @@ isset($_GET['cours_id']) && $_GET['cours_id'] != ""  && (int) $_GET['cours_id']
                 $fetch_result["forum_discussion_name"]);
 
                 $forum['description'] = BBcode_parser($fetch_result["forum_discussion_description"]);
+
+                // check if the user have a subscription
+
+                $query = '
+                select
+                usr_id
+                from
+                '.$_OPTIONS['table_prefix'].'forum_subscription
+                where
+                usr_id = '.$_SESSION['usr_id'].'
+                and
+                forum_discussion_id = '.$forum_discussion_id.'
+                ' ;
+
+                $rs_for_subscription = $inicrond_db->Execute ($query) ;
+                $row = $rs_for_subscription->FetchRow () ;
+
+                if (isset ($row['usr_id']))
+                {
+                    $script = 'unsubscribe_from_a_forum' ;
+                }
+                else
+                {
+                    $script = 'subscribe_to_a_forum' ;
+                }
+
+                $forum['sub_or_unsub_link'] = '<a href="'.$script.'.php?forum_discussion_id='.$forum_discussion_id.'">'.$_LANG[$script].'</a>' ;
+
+                // end of the unsubscribe or subscribe link.
 
                 if(can_usr_admin_section($_SESSION['usr_id'],
                 forum_2_section($fetch_result["forum_discussion_id"])))//éditer une discussion

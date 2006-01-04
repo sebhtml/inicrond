@@ -63,6 +63,10 @@
                 {$sections[section].forums[forum].link}
                 <br />{$sections[section].forums[forum].description}
 
+                {* the subscription link *}
+
+                <small>{$sections[section].forums[forum].sub_or_unsub_link}</small>
+
                 {if $sections[section].forums[forum].edit != ""}
                 <br />{$sections[section].forums[forum].edit}
                 {/if}

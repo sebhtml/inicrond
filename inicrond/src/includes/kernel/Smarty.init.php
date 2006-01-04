@@ -23,14 +23,14 @@
 Changes :
 
 december 15, 2005
-	I formated the code correctly.
-	
-		--sebhtml
+        I formated the code correctly.
+
+                --sebhtml
 
 */
 if(!__INICROND_INCLUDED__)
 {
-	exit();
+        exit();
 }
 
 define('SMARTY_DIR', __INICROND_INCLUDE_PATH__."libs/Smarty-2.6.9/libs/");

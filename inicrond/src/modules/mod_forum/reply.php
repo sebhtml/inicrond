@@ -28,6 +28,7 @@ include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 include "includes/functions/access.php";
 include "includes/functions/conversion.inc.php";
 
+include __INICROND_INCLUDE_PATH__."includes/functions/inicrond_mail.php";
 
 $forum_sujet_id = message2sujet($_GET["forum_message_id"]);
 
@@ -114,6 +115,33 @@ if(isset($_GET["forum_message_id"]) && $_GET["forum_message_id"] != ""
         ";
 
         $inicrond_db->Execute($query);
+
+        // forum_subscription
+
+        $query = '
+        select
+        usr_email
+        from
+        '.$_OPTIONS['table_prefix'].'usrs,
+        '.$_OPTIONS['table_prefix'].'thread_subscription
+        where
+        forum_sujet_id = '.$forum_sujet_id.'
+        and
+        '.$_OPTIONS['table_prefix'].'thread_subscription.usr_id = '.$_OPTIONS['table_prefix'].'usrs.usr_id
+        ' ;
+
+        $rs = $inicrond_db->Execute ($query);
+
+        while($fetch_result = $rs->FetchRow())
+        {
+            $mail = $fetch_result['usr_email'];
+
+            $object = $forum_message_titre;
+
+            $body = $forum_message_contenu."<br />".$_RUN_TIME['usr_signature'];
+
+            inicrond_mail($mail, $object, $body);
+        }
 
         include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
 

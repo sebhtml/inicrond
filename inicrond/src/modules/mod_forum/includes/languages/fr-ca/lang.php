@@ -60,4 +60,9 @@ $_LANG['MOD_FORUMS_forum_moderators'] = 'Sélectionner les groupes dont les memb
 $_LANG['new_posts_since_last_visit'] = 'Voir les nouveaux envois depuis votre dernière visite';
 $_LANG['MOD_FORUMS_the_date_of_your_last_visit_is'] = 'La date de votre dernière visite sur le site est %s';
 
+$_LANG['subscribe_to_a_thread'] = 'Je veux m\'abonner à cette discussion' ;
+$_LANG['subscribe_to_a_forum'] = 'Je veux m\'abonner à ce forum' ;
+$_LANG['unsubscribe_from_a_thread'] = 'Je veux me désabonner de cette discussion' ;
+$_LANG['unsubscribe_from_a_forum'] = 'Je veux me désabonner de ce forum' ;
+
 ?>

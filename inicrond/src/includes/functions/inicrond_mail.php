@@ -62,7 +62,7 @@ function inicrond_mail($to, $subject, $message)
     }
 
     $headers  = "MIME-Version: 1.0\r\n";
-    $headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
+    $headers .= "Content-type: text/html; charset=utf-8\r\n";
     $headers .= "X-Mailer: PHP/" . phpversion().""."\r\n";
 
     /* D'autres en-t�es */
@@ -72,7 +72,6 @@ function inicrond_mail($to, $subject, $message)
     $headers .= "Return-Path: ".$_RUN_TIME["inicrond_mail"]['usr_email']."\r\n";
 
     $message = $message."<br />".$_RUN_TIME['inicrond_mail']['usr_signature'];
-
 
     mail($to, $subject, $message, $headers);
 

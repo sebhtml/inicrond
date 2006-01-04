@@ -141,12 +141,39 @@ if(isset($_GET["forum_discussion_id"]) && $_GET["forum_discussion_id"] != ""
 
                             $object = filter($_POST["forum_message_titre"]);
 
-                            $body = filter(strip_tags($_POST['forum_message_contenu']))."\n\r".$_RUN_TIME['usr_signature'];
+                            $body = filter(strip_tags($_POST['forum_message_contenu']))."<br />".$_RUN_TIME['usr_signature'];
 
                             inicrond_mail($mail, $object, $body);
                         }
                     }//end of if
                 }//end for foreach
+            }
+
+            // forum_subscription
+
+            $query = '
+            select
+            usr_email
+            from
+            '.$_OPTIONS['table_prefix'].'usrs,
+            '.$_OPTIONS['table_prefix'].'forum_subscription
+            where
+            forum_discussion_id = '.$_GET["forum_discussion_id"].'
+            and
+            '.$_OPTIONS['table_prefix'].'forum_subscription.usr_id = '.$_OPTIONS['table_prefix'].'usrs.usr_id
+            ' ;
+
+            $rs = $inicrond_db->Execute ($query);
+
+            while($fetch_result = $rs->FetchRow())
+            {
+                $mail = $fetch_result['usr_email'];
+
+                $object = filter($_POST["forum_message_titre"]);
+
+                $body = filter(strip_tags($_POST['forum_message_contenu']))."<br />".$_RUN_TIME['usr_signature'];
+
+                inicrond_mail($mail, $object, $body);
             }
 
             include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
