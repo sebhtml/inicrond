@@ -24,15 +24,11 @@ define('__INICROND_INCLUDED__', TRUE);
 define('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
-include __INICROND_INCLUDE_PATH__."modules/lang_dev/includes/languages/".$_SESSION['language'].'/lang.php';
 
 if($_SESSION['SUID'])
 {
         //membres
         $smarty->assign('CAN_VIEW_USRS',  retournerHref(__INICROND_INCLUDE_PATH__."modules/members/members.php", $_LANG['members']));
-
-        //membres
-        $smarty->assign('lang_dev',  retournerHref(__INICROND_INCLUDE_PATH__."modules/lang_dev/", $_LANG['lang_dev']));
 
         $smarty->assign('CAN_SEE_GRPS',  retournerHref(__INICROND_INCLUDE_PATH__."modules/groups/grps.php", $_LANG['groups']));
 

@@ -21,7 +21,7 @@
 */
 
 
-$_OPTIONS["tables"]["java_identification"] = "java_identification";
+$_OPTIONS["tables"]["java_identification_on_a_figure_label"] = "java_identification_on_a_figure_label";
 $_OPTIONS["tables"]["java_identifications_on_a_figure"] = "java_identifications_on_a_figure";
 $_OPTIONS["tables"]["java_identifications_on_a_figure_result_association"] = "java_identifications_on_a_figure_result_association";
 $_OPTIONS["tables"]["java_identifications_on_a_figure_result"] = "java_identifications_on_a_figure_result";
