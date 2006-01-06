@@ -1,0 +1,46 @@
+january 4, 2006 by sebhtml
+
+    add_a_java_identifications_on_a_figure.php
+
+        It will add an entry and redirect to the edit script with thee good id.
+
+    drop_a_java_identifications_on_a_figure.php
+
+        Delete one. it deletes its labels too and all results associated with it..
+
+    edit_a_java_identifications_on_a_figure.php
+
+        Add a new java identification. You can change the title, the labels, the picture. Each label has a name, an (x, y) point. The labels can be ordered. There is an option to put stuff at random.
+
+    get_xml_informations_for_a_java_identifications_on_a_figure.php
+
+        xml stuff, see the file for informations.
+
+    get_xml_informations_for_a_java_identifications_on_a_figure_result.php
+
+        same here ..
+
+    list_java_identifications_on_a_figure_result.php
+
+        list the results.
+
+            possible inputs :
+                $_GET['usr_id']
+                $_GET['group_id']
+                $_GET['inode_id']
+                $_GET['usr_id'] + $_GET['inode_id']
+                $_GET['group_id'] + $_GET['inode_id']
+                $_GET['usr_id'] + $_GET['start'] + $_GET['end']
+
+    try_a_java_identifications_on_a_figure.php
+
+        try it for fun dude ..
+
+    view_a_java_identifications_on_a_figure_result_sheet.php
+
+        view the actual result for it ...
+
+    activities_report_for_a_java_identifications_on_a_figure.php
+
+        inputs :
+            $_GET['group_id'] + $_GET['inode_id']

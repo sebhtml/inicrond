@@ -11,7 +11,7 @@ import java.io.*;
 
 //x 0 is left
 //y 0 is top
-public class Identification_img extends Applet
+public class JavaIdenficicationsOnAFigure extends Applet
 {
     //constantes
   static final int NB_BUTTON_ON_BOTH_SIDE = 8;
