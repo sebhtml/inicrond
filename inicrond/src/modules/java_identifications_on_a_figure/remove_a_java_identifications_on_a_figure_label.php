@@ -20,11 +20,14 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
+define('__INICROND_INCLUDED__', true) ;
+define('__INICROND_INCLUDE_PATH__', '../../') ;
+include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php' ;
+include 'includes/languages/'.$_SESSION['language'].'/lang.php' ;
 
-$_OPTIONS["tables"]["java_identifications_on_a_figure_label"] = "java_identifications_on_a_figure_label";
-$_OPTIONS["tables"]["java_identifications_on_a_figure"] = "java_identifications_on_a_figure";
-$_OPTIONS["tables"]["java_identifications_on_a_figure_result_association"] = "java_identifications_on_a_figure_result_association";
-$_OPTIONS["tables"]["java_identifications_on_a_figure_result"] = "java_identifications_on_a_figure_result";
 
+
+
+include __INICROND_INCLUDE_PATH__.'includes/kernel/post_modulation.php' ;
 
 ?>
