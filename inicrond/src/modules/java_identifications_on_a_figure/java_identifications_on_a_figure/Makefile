@@ -1,4 +1,5 @@
 CC=javac
+#CC=gcj -C
 
 all: JavaIdentificationsOnAFigureJarFile.jar
 

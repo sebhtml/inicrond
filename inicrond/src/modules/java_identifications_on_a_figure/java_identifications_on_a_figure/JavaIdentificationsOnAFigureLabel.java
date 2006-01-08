@@ -19,71 +19,121 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-import javax.swing.JButton;
+import javax.swing.JButton ;
+// import javax.swing.plaf.basic.BasicArrowButton ;
 
 public class
 JavaIdentificationsOnAFigureLabel
+/* extends nothind dude */
 {
     String label_name ;
+
+    // for the destination :
     int x_position ;
     int y_position ;
+
     int java_identifications_on_a_figure_label_id ;
 
     int java_identifications_on_a_figure_label_id_destination ;
 
-    JButton button ;
+    JButton button_source ;
+    JButton button_destination ;
 
-    public int get_java_identifications_on_a_figure_label_id_destination ()
+    public
+    JavaIdentificationsOnAFigureLabel
+    ()
+    {
+        button_source = new JButton () ;
+        button_destination = new JButton () ;
+    }
+
+    public JButton
+    get_button_source
+    ()
+    {
+        return button_source ;
+    }
+
+    public JButton
+    get_button_destination
+    ()
+    {
+        return button_destination ;
+    }
+
+    public int
+    get_java_identifications_on_a_figure_label_id_destination
+    ()
     {
         return java_identifications_on_a_figure_label_id_destination ;
     }
 
-    public void set_java_identifications_on_a_figure_label_id_destination (int new_java_identifications_on_a_figure_label_id_destination)
+    public void
+    set_java_identifications_on_a_figure_label_id_destination
+    (int new_java_identifications_on_a_figure_label_id_destination)
     {
         java_identifications_on_a_figure_label_id_destination = new_java_identifications_on_a_figure_label_id_destination ;
     }
 
-        public int get_java_identifications_on_a_figure_label_id ()
+    public int
+    get_java_identifications_on_a_figure_label_id
+    ()
     {
         return java_identifications_on_a_figure_label_id ;
     }
 
-    public void set_java_identifications_on_a_figure_label_id (int new_java_identifications_on_a_figure_label_id)
+    public void
+    set_java_identifications_on_a_figure_label_id
+    (int new_java_identifications_on_a_figure_label_id)
     {
         java_identifications_on_a_figure_label_id = new_java_identifications_on_a_figure_label_id ;
     }
 
-    public int get_x_position ()
+    public int
+    get_x_position
+    ()
     {
         return x_position ;
     }
 
-    public void set_x_position (int new_x_position)
+    public void
+    set_x_position
+    (int new_x_position)
     {
         x_position = new_x_position ;
     }
 
-    public int get_y_position ()
+    public int
+    get_y_position
+    ()
     {
         return y_position ;
     }
 
-    public void set_y_position (int new_y_position)
+    public void
+    set_y_position
+    (int new_y_position)
     {
         y_position = new_y_position ;
     }
 
-    public String get_label_name ()
+    public String
+    get_label_name
+    ()
     {
         return label_name ;
     }
 
-    public void set_label_name (String new_label_name)
+    public void
+    set_label_name
+    (String new_label_name)
     {
         label_name = new_label_name ;
     }
 
-    public void print_debug ()
+    public void
+    print_debug
+    ()
     {
         /*
             String label_name ;
@@ -94,11 +144,22 @@ JavaIdentificationsOnAFigureLabel
             int java_identifications_on_a_figure_label_id_destination ;
 
         */
+
+        System.out.println ("java_identifications_on_a_figure_label_id_destination : " + java_identifications_on_a_figure_label_id_destination) ;
         System.out.println ("label_name : " + label_name) ;
         System.out.println ("x_position : " + x_position) ;
         System.out.println ("y_position : " + y_position) ;
         System.out.println ("java_identifications_on_a_figure_label_id : " + java_identifications_on_a_figure_label_id) ;
-        System.out.println ("java_identifications_on_a_figure_label_id_destination : " + java_identifications_on_a_figure_label_id_destination) ;
+
+
+        System.out.println ("button_source.getX () : " + button_source.getX ()) ;
+        System.out.println ("button_source.getY () : " + button_source.getY ()) ;
+
+        System.out.println ("button_source.getWidth () : " + button_source.getWidth ()) ;
+        System.out.println ("button_source.getHeight () : " + button_source.getHeight ()) ;
+        System.out.println ("button_source.getText () : " + button_source.getText ()) ;
+
+
         System.out.println ("--") ;
     }
 }
