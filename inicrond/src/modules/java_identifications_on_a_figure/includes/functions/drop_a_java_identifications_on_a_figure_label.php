@@ -3,7 +3,7 @@
     $Id$
 
     Inicrond : Network of Interactive Courses Registred On a Net Domain
-    Copyright (C) 2004, 2005  Sébastien Boisvert
+    Copyright (C) 2004, 2005, 2006  Sébastien Boisvert
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,43 +19,19 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
-/*
-Changes :
 
-december 15, 2005
-        I formated the code correctly.
-
-                --sebhtml
-
-*/
-
-
-/**
- * generate an hexadecimal string with 32 chars
- *
- * @author       Sebastien Boisvert sebhtml@users.sourceforge.net
- * @version      1.0.0
- */
-function hex_gen_32()
+function
+drop_a_java_identifications_on_a_figure_label
+($java_identifications_on_a_figure_label_id, $_OPTIONS, $inicrond_db)
 {
-    global $_OPTIONS ;
+    $query = '
+    delete from
+    '.$_OPTIONS['table_prefix'].'java_identifications_on_a_figure_label
+    where
+    java_identifications_on_a_figure_label_id = '.$java_identifications_on_a_figure_label_id.'
+    ' ;
 
-    $i = 32;//number of digit
-    $out = '';
-
-    while($i)
-    {
-            $out .= dechex(rand(0, 15));
-            $i--;//decrementation
-    }
-
-    if (is_file ($_OPTIONS["file_path"]["uploads"].'/'.$out))
-    {
-        // recursive call to have a new one...
-        $out = hex_gen_32() ;
-    }
-
-    return $out;//give out the answer
+    $inicrond_db->Execute ($query) ;
 }
 
 ?>

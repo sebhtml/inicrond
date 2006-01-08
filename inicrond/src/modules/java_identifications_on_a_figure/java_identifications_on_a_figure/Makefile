@@ -1,11 +1,16 @@
-CC=gcj -C
-CLASS_NAME=JavaIdenficicationsOnAFigure
+CC=javac
 
+all: JavaIdentificationsOnAFigureJarFile.jar
 
-all: $(CLASS_NAME).class
+JavaIdentificationsOnAFigureJarFile.jar: JavaIdentificationsOnAFigure.class JavaIdentificationsOnAFigureLabel.class
+	jar -cf JavaIdentificationsOnAFigureJarFile.jar *.class
+	cp JavaIdentificationsOnAFigureJarFile.jar ..
 
-$(CLASS_NAME).class: $(CLASS_NAME).java
-	$(CC)  $(CLASS_NAME).java
-	cp $(CLASS_NAME).class ..
+JavaIdentificationsOnAFigure.class: JavaIdentificationsOnAFigure.java
+	$(CC)  JavaIdentificationsOnAFigure.java
+
+JavaIdentificationsOnAFigureLabel.class: JavaIdentificationsOnAFigureLabel.java
+	$(CC)  JavaIdentificationsOnAFigureLabel.java
+
 clean:
-	rm *.class
+	rm *.class *.jar

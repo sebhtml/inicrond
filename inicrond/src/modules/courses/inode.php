@@ -25,6 +25,8 @@ define ('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
+include __INICROND_INCLUDE_PATH__.'modules/java_identifications_on_a_figure/includes/languages/fr-ca/lang.php' ;
+
 include "includes/functions/transfert_cours.function.php";      //transfer IDs
 include "includes/functions/inode_full_path.php";       //transfer IDs
 
@@ -816,6 +818,140 @@ if ($ok && $is_student_of_cours = is_student_of_cours ($_SESSION['usr_id'], $cou
 
             $texts[] = $anim;
         }
+
+
+        /*
+            java_identifications_on_a_figure
+        */
+
+        if ($is_teacher_of_cours)       //the teacher query.
+        {
+
+            $smarty->assign ('add_a_java_identifications_on_a_figure', __INICROND_INCLUDE_PATH__.'modules/java_identifications_on_a_figure/add_a_java_identifications_on_a_figure.php?cours_id='.$cours_id.'&inode_id_location='.$inode_id_location) ;
+
+            //text
+            $query = "
+            SELECT
+            title,
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id as inode_id,
+            add_time_t,
+            edit_time_t,
+            image_file_name
+            FROM
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].",
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['java_identifications_on_a_figure']."
+            WHERE
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=$cours_id
+            AND
+            inode_id_location=$inode_id_location
+            AND
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['java_identifications_on_a_figure'].".inode_id
+            ORDER BY order_id ASC
+            ";
+        }
+        else                    //the student query
+        {
+            $query = "
+            SELECT DISTINCT
+            title,
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id AS inode_id,
+            add_time_t,
+            edit_time_t,
+            image_file_name
+            FROM
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].",
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['java_identifications_on_a_figure'].",
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_groups'].",
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs']."
+            WHERE
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=$cours_id
+            AND
+            inode_id_location=$inode_id_location
+            AND
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['java_identifications_on_a_figure'].".inode_id
+            AND
+            usr_id = ".$_SESSION['usr_id']."
+            AND
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_groups'].".group_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs'].".group_id
+            AND
+            ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_groups'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id
+            ORDER BY order_id ASC
+            ";
+        }
+
+        $java_identifications_on_a_figure = array () ;
+
+        $rs_for_java_identifications_on_a_figure = $inicrond_db->Execute ($query) ;
+
+        while ($fetch_result = $rs_for_java_identifications_on_a_figure->FetchRow ())
+        {
+            /*
+                inode_id
+                title
+                add_time_t
+                edit_time_t
+                inode_up
+                inode_down
+                edit
+                drop
+            */
+
+            $this_item = array ();
+            $this_item['inode_id'] = $fetch_result['inode_id'];
+            $this_item['image_file_name'] = $fetch_result['image_file_name'];
+            $this_item['title'] = $fetch_result['title'];
+            $this_item['add_time_t'] = format_time_stamp ($fetch_result["add_time_t"]);
+            $this_item['edit_time_t'] = format_time_stamp ($fetch_result["edit_time_t"]);
+
+            /*
+                get_xml_informations_for_a_java_identifications_on_a_figure [done]
+                list_java_identifications_on_a_figure_result
+                try_a_java_identifications_on_a_figure
+                my_results
+            */
+
+            $this_item['try_a_java_identifications_on_a_figure'] = __INICROND_INCLUDE_PATH__. "modules/java_identifications_on_a_figure/try_a_java_identifications_on_a_figure.php?inode_id=". $fetch_result["inode_id"] ;
+
+            if ($is_teacher_of_cours)
+            {
+
+                $this_item['get_xml_informations_for_a_java_identifications_on_a_figure'] = __INICROND_INCLUDE_PATH__. "modules/java_identifications_on_a_figure/get_xml_informations_for_a_java_identifications_on_a_figure.php?inode_id=". $fetch_result["inode_id"] ;
+
+                $this_item['list_java_identifications_on_a_figure_result'] = __INICROND_INCLUDE_PATH__. "modules/java_identifications_on_a_figure/list_java_identifications_on_a_figure_result.php?inode_id=". $fetch_result["inode_id"] ;
+
+                $this_item['inode_up'] = __INICROND_INCLUDE_PATH__. "modules/courses/inode_up.php?inode_id=". $fetch_result['inode_id']."";
+
+                $this_item['inode_down'] = __INICROND_INCLUDE_PATH__. "modules/courses/inode_down.php?inode_id=". $fetch_result['inode_id']."";
+
+                $this_item['edit'] = __INICROND_INCLUDE_PATH__. "modules/java_identifications_on_a_figure/edit_a_java_identifications_on_a_figure.php?inode_id=". $fetch_result["inode_id"];
+
+                $this_item['drop'] = __INICROND_INCLUDE_PATH__. "modules/courses/drop_inode.php?inode_id=". $fetch_result['inode_id']."";
+            }
+
+            if ($is_in_charge_in_course)
+            {
+                $this_item['list_java_identifications_on_a_figure_result'] = __INICROND_INCLUDE_PATH__.'modules/java_identifications_on_a_figure/list_java_identifications_on_a_figure_result.php?inode_id='.$fetch_result['inode_id'].'' ;
+
+                $this_item['activities_report_for_a_java_identifications_on_a_figure'] = __INICROND_INCLUDE_PATH__.'modules/java_identifications_on_a_figure/activities_report_for_a_java_identifications_on_a_figure.php?inode_id='.$fetch_result['inode_id'].'' ;
+            }
+
+            $this_item['list_java_identifications_on_a_figure_result_with_user_id'] = __INICROND_INCLUDE_PATH__.'modules/java_identifications_on_a_figure/list_java_identifications_on_a_figure_result.php?inode_id='.$fetch_result['inode_id'].'&usr_id='.$_SESSION['usr_id'].'' ;
+
+            $this_item['get_java_identifications_on_a_figure_image'] = __INICROND_INCLUDE_PATH__.'modules/java_identifications_on_a_figure/get_java_identifications_on_a_figure_image.php?inode_id='.$fetch_result['inode_id'] ;
+
+            $this_item['get_xml_informations_for_a_java_identifications_on_a_figure'] = __INICROND_INCLUDE_PATH__.'modules/java_identifications_on_a_figure/get_xml_informations_for_a_java_identifications_on_a_figure.php?inode_id='.$fetch_result['inode_id'] ;
+
+            $this_item['try_a_java_identifications_on_a_figure'] = __INICROND_INCLUDE_PATH__.'modules/java_identifications_on_a_figure/try_a_java_identifications_on_a_figure.php?inode_id='.$fetch_result['inode_id'] ;
+
+
+            $java_identifications_on_a_figure[] = $this_item;
+        }
+
+        $smarty->assign ('java_identifications_on_a_figure', $java_identifications_on_a_figure) ;
+
+        /*
+            end of java_identifications_on_a_figure
+        */
 
         if (!isset ($_GET['inode_id_location']) || $_GET['inode_id_location'] == 0)        //show those thing only for inode 0
         {

@@ -20,14 +20,23 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-define('__INICROND_INCLUDED__', true) ;
-define('__INICROND_INCLUDE_PATH__', '../../') ;
-include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php' ;
-include 'includes/languages/'.$_SESSION['language'].'/lang.php' ;
+function
+java_identifications_on_a_figure_label_id_to_inode_id
+($java_identifications_on_a_figure_label_id, $_OPTIONS, $inicrond_db)
+{
+    $query = '
+    select
+    inode_id
+    from
+    '.$_OPTIONS["table_prefix"].'java_identifications_on_a_figure_label
+    where
+    java_identifications_on_a_figure_label_id = '.$java_identifications_on_a_figure_label_id.'
+    ' ;
 
+    $rs = $inicrond_db->Execute ($query) ;
+    $row = $rs->FetchRow () ;
 
-
-
-include __INICROND_INCLUDE_PATH__.'includes/kernel/post_modulation.php' ;
+    return $row['inode_id'] ;
+}
 
 ?>

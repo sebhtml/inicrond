@@ -49,12 +49,12 @@ create table java_identifications_on_a_figure_label
 create table java_identifications_on_a_figure_result_association
 (
     java_identifications_on_a_figure_result_id int unsigned not null,
-    java_identification_on_a_figure_label_id_source int unsigned not null,
-    java_identification_on_a_figure_label_id_destination int unsigned not null,
+    java_identifications_on_a_figure_label_id_source int unsigned not null,
+    java_identifications_on_a_figure_label_id_destination int unsigned not null,
     order_id int unsigned not null,
     key java_identifications_on_a_figure_result_id (java_identifications_on_a_figure_result_id),
-    key java_identification_on_a_figure_label_id_source (java_identification_on_a_figure_label_id_source),
-    key java_identification_on_a_figure_label_id_destination (java_identification_on_a_figure_label_id_destination)
+    key java_identifications_on_a_figure_label_id_source (java_identifications_on_a_figure_label_id_source),
+    key java_identifications_on_a_figure_label_id_destination (java_identifications_on_a_figure_label_id_destination)
 ) ;
 
 create table java_identifications_on_a_figure_result

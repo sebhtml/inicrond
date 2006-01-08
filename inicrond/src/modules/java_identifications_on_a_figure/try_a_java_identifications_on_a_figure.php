@@ -25,9 +25,16 @@ define('__INICROND_INCLUDE_PATH__', '../../') ;
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php' ;
 include 'includes/languages/'.$_SESSION['language'].'/lang.php' ;
 
+include __INICROND_INCLUDE_PATH__."modules/courses/includes/functions/is_in_inode_group.php";
 
+if(isset($_GET['inode_id']) && $_GET['inode_id'] != "" && (int) $_GET['inode_id']
+&& is_in_inode_group ($_SESSION['usr_id'], $_GET['inode_id']))
+{
+    $smarty->assign ('xml_file', $_OPTIONS['virtual_addr'].'modules/java_identifications_on_a_figure/get_xml_informations_for_a_java_identifications_on_a_figure.php?inode_id='.$_GET['inode_id']) ;
 
+    $smarty->display ($_OPTIONS['theme'].'/try_a_java_identifications_on_a_figure.tpl') ;
 
-include __INICROND_INCLUDE_PATH__.'includes/kernel/post_modulation.php' ;
+    die () ;
+}
 
 ?>

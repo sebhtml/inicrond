@@ -442,3 +442,107 @@
 
 {/if}
 
+{*
+    java_identifications_on_a_figure
+*}
+
+{if isset ($add_a_java_identifications_on_a_figure) || count ($java_identifications_on_a_figure) > 0}
+
+<h2>{$_LANG.java_identifications_on_a_figure}</h2>
+
+    {if isset ($add_a_java_identifications_on_a_figure)}
+
+        <a href="{$add_a_java_identifications_on_a_figure}">
+            <img src="templates/inicrond_default/images/b_newdb.png" title="{$_LANG.add_a_java_identifications_on_a_figure}" border="0" />
+        </a>
+        <br />
+    {/if}
+
+<br />
+    {*
+        inode_id not need I guest ...
+        title [done]
+        add_time_t [done]
+        edit_time_t [done]
+        inode_up [done]
+        inode_down [done]
+        edit [done]
+        drop [done]
+    *}
+
+    {section name=one loop=$java_identifications_on_a_figure}
+
+    <table border="0">
+    <tr><td valign="top">
+        <a href="javascript:popup('{$java_identifications_on_a_figure[one].try_a_java_identifications_on_a_figure}', 790, 590)" >{$java_identifications_on_a_figure[one].title}</a>
+
+
+        {if isset ($java_identifications_on_a_figure[one].edit)}
+            <a href="{$java_identifications_on_a_figure[one].edit}" >
+                <img  border="0" title="{$_LANG.edit}" src="templates/inicrond_default/images/b_edit.png" />
+            </a>
+        {/if}
+
+        {if isset ($java_identifications_on_a_figure[one].drop)}
+            <a href="{$java_identifications_on_a_figure[one].drop}" >
+                <img  border="0" title="{$_LANG.remove}" src="templates/inicrond_default/images/b_drop.png" />
+            </a>
+        {/if}
+
+        {if isset ($java_identifications_on_a_figure[one].inode_up)}
+            <a href="{$java_identifications_on_a_figure[one].inode_up}" >
+                <img  border="0" title="{$_LANG.inode_up}" src="templates/inicrond_default/images/inode_up.png" />
+            </a>
+        {/if}
+
+        {if isset ($java_identifications_on_a_figure[one].inode_down)}
+            <a href="{$java_identifications_on_a_figure[one].inode_down}" >
+                <img  border="0" title="{$_LANG.inode_down}" src="templates/inicrond_default/images/inode_down.png" />
+            </a>
+
+            <a href="inode_groups.php?&inode_id={$java_identifications_on_a_figure[one].inode_id}" >
+                <img  border="0" title="{$_LANG.authorized_groups}" src="templates/inicrond_default/images/group.gif" />
+            </a>
+
+            <a href="inode_location.php?&inode_id={$java_identifications_on_a_figure[one].inode_id}">
+                <img  border="0"  title="{$_LANG.inode_location}" src="templates/inicrond_default/images/inode_location.gif" />
+            </a>
+
+
+        {/if}
+
+        {if isset ($java_identifications_on_a_figure[one].list_java_identifications_on_a_figure_result)}
+            <a href="{$java_identifications_on_a_figure[one].list_java_identifications_on_a_figure_result}" >
+                <img  border="0" title="{$_LANG.list_java_identifications_on_a_figure_result}" src="templates/inicrond_default/images/download_acts.png" />
+            </a>
+        {/if}
+
+        {if isset ($java_identifications_on_a_figure[one].activities_report_for_a_java_identifications_on_a_figure)}
+            <a href="{$java_identifications_on_a_figure[one].activities_report_for_a_java_identifications_on_a_figure}" >
+                <img  border="0" title="{$_LANG.activities_report_for_a_java_identifications_on_a_figure}" src="templates/inicrond_default/images/dl_report.png" />
+            </a>
+        {/if}
+
+        {if isset ($java_identifications_on_a_figure[one].list_java_identifications_on_a_figure_result_with_user_id)}
+            <a href="{$java_identifications_on_a_figure[one].list_java_identifications_on_a_figure_result_with_user_id}">{$_LANG.my_results}</a>
+        {/if}
+
+
+        <br />
+
+        {$java_identifications_on_a_figure[one].image_file_name}<br  />
+        {$_LANG.add_gmt} : {$java_identifications_on_a_figure[one].add_time_t} <br  />
+        {$_LANG.edit_gmt} : {$java_identifications_on_a_figure[one].edit_time_t} <br /><br  />
+        <a href="{$java_identifications_on_a_figure[one].get_xml_informations_for_a_java_identifications_on_a_figure}">{$_LANG.get_xml_informations_for_a_java_identifications_on_a_figure}</a><br />
+        </td>
+
+        <td valign="top">
+
+        <img src="{$java_identifications_on_a_figure[one].get_java_identifications_on_a_figure_image}" width="200" />
+        </td>
+        </tr>
+        </table>
+    {/section}
+
+{/if}
+

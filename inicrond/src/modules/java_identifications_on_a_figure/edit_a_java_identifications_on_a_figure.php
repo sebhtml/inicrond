@@ -31,51 +31,8 @@ include __INICROND_INCLUDE_PATH__."modules/courses/includes/functions/transfert_
 if (isset ($_GET['inode_id']) && $_GET['inode_id'] != "" && (int) $_GET['inode_id']
 && is_teacher_of_cours ($_SESSION['usr_id'], inode_to_course ($_GET['inode_id'])))
 {
-    if (!isset ($_POST['title']))
-    {
-        $query = '
-        select
-        title,
-        at_random,
-        available_result,
-        available_sheet
-        from
-        '.$_OPTIONS['table_prefix'].'java_identifications_on_a_figure
-        where
-        inode_id = '.$_GET['inode_id'].'
-        ' ;
 
-        $rs = $inicrond_db->Execute ($query) ;
-        $row = $rs->FetchRow () ;
-
-        $smarty->assign ('title', $row['title']) ;
-
-        $smarty->assign ('at_random', array (
-                                        1 => $_LANG['yes'],
-                                        0 => $_LANG['no']
-                                         )) ;
-
-        $smarty->assign ('at_random_value', $row['at_random']) ;
-
-        $smarty->assign ('available_result', array (
-                                        1 => $_LANG['yes'],
-                                        0 => $_LANG['no']
-                                         )) ;
-
-        $smarty->assign ('available_result_value', $row['available_result']) ;
-
-        $smarty->assign ('available_sheet', array (
-                                        1 => $_LANG['yes'],
-                                        0 => $_LANG['no']
-                                         )) ;
-
-        $smarty->assign ('available_sheet_value', $row['available_sheet']) ;
-
-        $smarty->assign ('_LANG', $_LANG) ;
-
-        $module_content .= $smarty->fetch ($_OPTIONS['theme'].'/edit_a_java_identifications_on_a_figure_form.tpl') ;
-    }
-    else
+    if (isset ($_POST['title']))
     {
         include __INICROND_INCLUDE_PATH__."includes/functions/fonctions_validation.function.php";
 
@@ -123,24 +80,159 @@ if (isset ($_GET['inode_id']) && $_GET['inode_id'] != "" && (int) $_GET['inode_i
             $inicrond_db->Execute ($query) ;
         }
 
-        $query = '
-        select
-        cours_id,
-        inode_id_location
-        from
-        '.$_OPTIONS['table_prefix'].'inode_elements
-        where
-        inode_id = '.$_GET['inode_id'].'
-        ' ;
 
-        $rs = $inicrond_db->Execute ($query) ;
-        $row = $rs->FetchRow () ;
+        include 'includes/functions/java_identifications_on_a_figure_label_id_to_inode_id.php' ;
 
-        include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
+        foreach ($_POST AS $key => $value)//pour chaque donn�ss.
+        {
+            if(preg_match("/java_identifications_on_a_figure_label_id=(.+)&label_name/", $key, $tokens) //les txt pour questions
+            && (java_identifications_on_a_figure_label_id_to_inode_id ($tokens["1"], $_OPTIONS, $inicrond_db) == $_GET['inode_id']))
+            {
+                $query = "
+                UPDATE
+                ".$_OPTIONS["table_prefix"]."java_identifications_on_a_figure_label
+                SET
+                label_name='".filter($value)."'
+                WHERE
+                java_identifications_on_a_figure_label_id=".$tokens["1"]."
+                ";
 
-        js_redir (__INICROND_INCLUDE_PATH__."modules/courses/inode.php?inode_id_location=".
-            $row['inode_id_location']."&cours_id=".$row['cours_id']);
+                $inicrond_db->Execute($query);
+            }
+            elseif(preg_match("/java_identifications_on_a_figure_label_id=(.+)&x_position/", $key, $tokens) //les txt pour questions
+            && (java_identifications_on_a_figure_label_id_to_inode_id ($tokens["1"], $_OPTIONS, $inicrond_db) == $_GET['inode_id']))
+            {
+                $query = "
+                UPDATE
+                ".$_OPTIONS["table_prefix"]."java_identifications_on_a_figure_label
+                SET
+                x_position='".filter($value)."'
+                WHERE
+                java_identifications_on_a_figure_label_id=".$tokens["1"]."
+                ";
+
+                $inicrond_db->Execute($query);
+            }
+            elseif(preg_match("/java_identifications_on_a_figure_label_id=(.+)&y_position/", $key, $tokens) //les txt pour questions
+            && (java_identifications_on_a_figure_label_id_to_inode_id ($tokens["1"], $_OPTIONS, $inicrond_db) == $_GET['inode_id']))
+            {
+                $query = "
+                UPDATE
+                ".$_OPTIONS["table_prefix"]."java_identifications_on_a_figure_label
+                SET
+                y_position='".filter($value)."'
+                WHERE
+                java_identifications_on_a_figure_label_id=".$tokens["1"]."
+                ";
+
+                $inicrond_db->Execute($query);
+            }
+        }
     }
+
+    // shwo the form
+
+    $query = '
+    select
+    title,
+    at_random,
+    available_result,
+    available_sheet,
+    file_name_in_uploads,
+    image_file_name
+    from
+    '.$_OPTIONS['table_prefix'].'java_identifications_on_a_figure
+    where
+    inode_id = '.$_GET['inode_id'].'
+    ' ;
+
+    $rs = $inicrond_db->Execute ($query) ;
+    $row = $rs->FetchRow () ;
+
+    $file_name_in_uploads = $row['file_name_in_uploads'] ;
+    $image_file_name = $row['image_file_name'] ;
+
+    $smarty->assign ('inode_id', $_GET['inode_id']) ;
+
+    $smarty->assign ('title', $row['title']) ;
+
+    $smarty->assign ('at_random', array (
+                                    1 => $_LANG['yes'],
+                                    0 => $_LANG['no']
+                                        )) ;
+
+    $smarty->assign ('at_random_value', $row['at_random']) ;
+
+    $smarty->assign ('available_result', array (
+                                    1 => $_LANG['yes'],
+                                    0 => $_LANG['no']
+                                        )) ;
+
+    $smarty->assign ('available_result_value', $row['available_result']) ;
+
+    $smarty->assign ('available_sheet', array (
+                                    1 => $_LANG['yes'],
+                                    0 => $_LANG['no']
+                                        )) ;
+
+    $smarty->assign ('available_sheet_value', $row['available_sheet']) ;
+
+    $smarty->assign ('_LANG', $_LANG) ;
+
+    // get the labels...
+
+    $query = '
+    select
+    java_identifications_on_a_figure_label_id,
+    label_name,
+    x_position,
+    y_position
+    from
+    '.$_OPTIONS['table_prefix'].'java_identifications_on_a_figure_label
+    where
+    inode_id = '.$_GET['inode_id'].'
+    order by order_id asc
+    ' ;
+
+    $rs = $inicrond_db->Execute ($query) ;
+
+    $java_identifications_on_a_figure_label = array () ;
+
+    while ($row = $rs->FetchRow ())
+    {
+        $java_identifications_on_a_figure_label [] = $row ;
+    }
+
+    $smarty->assign ('java_identifications_on_a_figure_label', $java_identifications_on_a_figure_label) ;
+
+    $query = '
+    select
+    cours_id,
+    inode_id_location
+    from
+    '.$_OPTIONS['table_prefix'].'inode_elements
+    where
+    inode_id = '.$_GET['inode_id'].'
+    ' ;
+
+    $rs = $inicrond_db->Execute ($query) ;
+    $row = $rs->FetchRow () ;
+
+
+    $infos  = getimagesize($_OPTIONS["file_path"]["uploads"]."/".$file_name_in_uploads);
+
+    $image_width = $infos[0];
+
+    $image_height = $infos[1];
+
+    $smarty->assign ('image_width', $image_width) ;
+    $smarty->assign ('image_height', $image_height) ;
+
+    $smarty->assign ('image_file_name', $image_file_name) ;
+
+    $module_title = $_LANG['edit_a_java_identifications_on_a_figure'] ;
+
+    $module_content .= $smarty->fetch ($_OPTIONS['theme'].'/edit_a_java_identifications_on_a_figure_form.tpl') ;
 }
 
 include __INICROND_INCLUDE_PATH__.'includes/kernel/post_modulation.php' ;

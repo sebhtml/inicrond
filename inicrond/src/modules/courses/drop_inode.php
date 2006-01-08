@@ -44,12 +44,14 @@ if (isset ($_GET['inode_id']) && $_GET['inode_id'] != "" && (int) $_GET['inode_i
         We first have to find if it is a directory, flash, text, test, file
         */
 
-        $relation_to_search_in = array ('virtual_directories', 'courses_files', 'tests', 'chapitre_media', 'inicrond_images', 'inicrond_texts') ;
+        $relation_to_search_in = array ('virtual_directories', 'courses_files', 'tests', 'chapitre_media', 'inicrond_images', 'inicrond_texts', 'java_identifications_on_a_figure') ;
 
         $relation_that_refer_to_the_current_inode = '' ;
         $the_row_have_been_found = false ;
 
-        for ($i = 0 ; ($i <= 5) && $the_row_have_been_found == false ; $i ++)
+        $amount = count ($relation_to_search_in) ;
+
+        for ($i = 0 ; ($i <= $amount) && $the_row_have_been_found == false ; $i ++)
         {
             $query = "
             select
@@ -306,6 +308,30 @@ if (isset ($_GET['inode_id']) && $_GET['inode_id'] != "" && (int) $_GET['inode_i
 
             $inicrond_db->Execute ($query);
         }
+        elseif ($relation_that_refer_to_the_current_inode == 'java_identifications_on_a_figure')
+        {
+            include __INICROND_INCLUDE_PATH__.'modules/java_identifications_on_a_figure/includes/functions/drop_a_java_identifications_on_a_figure.php' ;
+
+            drop_a_java_identifications_on_a_figure ($_GET['inode_id'], $_OPTIONS, $inicrond_db) ;
+        }
+
+        $query = '
+        delete from
+        '.$_OPTIONS['table_prefix'].'inode_elements
+        where
+        inode_id = '.$_GET['inode_id'].'
+        ' ;
+
+        $inicrond_db->Execute ($query) ;
+
+        $query = '
+        delete from
+        '.$_OPTIONS['table_prefix'].'inode_groups
+        where
+        inode_id = '.$_GET['inode_id'].'
+        ' ;
+
+        $inicrond_db->Execute ($query) ;
 
         $module_content .= "<a href=\"".__INICROND_INCLUDE_PATH__. "modules/courses/inode.php?cours_id=".$cours_id.
         "&inode_id_location=".$inode_id_location."\">".$_LANG['return']. "</a>";

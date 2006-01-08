@@ -33,12 +33,14 @@ if (is_teacher_of_cours ($_SESSION['usr_id'], inode_to_course ($_GET['inode_id']
         We first have to find if it is a directory, flash, text, test, file
     */
 
-    $relation_to_search_in = array ('virtual_directories', 'courses_files', 'tests', 'chapitre_media', 'inicrond_images', 'inicrond_texts') ;
+    $relation_to_search_in = array ('virtual_directories', 'courses_files', 'tests', 'chapitre_media', 'inicrond_images', 'inicrond_texts', 'java_identifications_on_a_figure') ;
 
     $relation_that_refer_to_the_current_inode = '' ;
     $the_row_have_been_found = false ;
 
-    for ($i = 0 ; ($i <= 5) && $the_row_have_been_found == false ; $i ++)
+    $amount = count ($relation_to_search_in) ;
+
+    for ($i = 0 ; ($i <= $amount) && $the_row_have_been_found == false ; $i ++)
     {
         $query = "
         select
