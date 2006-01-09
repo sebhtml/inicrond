@@ -20,6 +20,10 @@
 */
 
 import javax.swing.JButton ;
+// import java.awt.* ;
+import javax.swing.plaf.basic.BasicArrowButton ;
+
+
 // import javax.swing.plaf.basic.BasicArrowButton ;
 
 public class
@@ -43,8 +47,17 @@ JavaIdentificationsOnAFigureLabel
     JavaIdentificationsOnAFigureLabel
     ()
     {
+        int button_margin = 1 ;
+
         button_source = new JButton () ;
-        button_destination = new JButton () ;
+
+        //button_source.setVisible (true) ;
+
+        //button_source.setMargin (new Insets (button_margin, button_margin, button_margin, button_margin)) ;
+
+        //button_source.setModel () ;
+
+        button_destination = new BasicArrowButton (0) ;
     }
 
     public JButton

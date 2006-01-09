@@ -4,7 +4,7 @@ CC=javac
 all: JavaIdentificationsOnAFigureJarFile.jar
 
 JavaIdentificationsOnAFigureJarFile.jar: JavaIdentificationsOnAFigure.class JavaIdentificationsOnAFigureLabel.class
-	jar -cf JavaIdentificationsOnAFigureJarFile.jar *.class
+	jar -cf JavaIdentificationsOnAFigureJarFile.jar JavaIdentificationsOnAFigure.class JavaIdentificationsOnAFigureLabel.class
 	cp JavaIdentificationsOnAFigureJarFile.jar ..
 
 JavaIdentificationsOnAFigure.class: JavaIdentificationsOnAFigure.java

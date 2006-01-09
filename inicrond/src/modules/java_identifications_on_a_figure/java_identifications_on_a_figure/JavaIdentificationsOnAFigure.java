@@ -33,19 +33,36 @@
 
 /*
 
+from : http://www.ictp.trieste.it/~manuals/programming/Java/tutorial/uiswing/overview/hierarchy.html
+
+Tip:  To view the containment hierarchy for any frame or dialog, click its border to select it, and then press Control-Shift-F1. A list of the containment hierarchy will be written to the standard output stream.
+*/
+/*
 TODO
     place the buttons source
+        they are placed, but they seems to disappear ... lol [fixed]
     place the buttons destinations
+        done
 
     show the title
+        accepted 20050108 -- sebhtml
 
+    add the path for the edit menu
+        accepted 20050108 -- sebhtml
+
+    background color
+        rejected 20050108 -- sebhtml
+
+    find an image and add it to the jar file to represent the arrow
+    find a way to get the image is background ..
+    auto set the dimensions of the button source
 */
 
 /*
     Imports
 */
 
-import java.io.* ;
+import java.io.InputStream ;
 import javax.xml.parsers.DocumentBuilder ;
 import javax.xml.parsers.DocumentBuilderFactory ;
 import java.io.File ;
@@ -62,14 +79,23 @@ import java.applet.* ;
 import javax.swing.* ;
 // import java.awt.Graphics ;
 // import java.awt.Color ;
-import java.awt.* ;
+import java.awt.Dimension ;
+import java.awt.Graphics ;
+import java.awt.Image ;
+import java.awt.Container ;
+import java.awt.Color ;
 
+import java.awt.FlowLayout ;
+
+import java.awt.Insets ;
 
 public class
 JavaIdentificationsOnAFigure
 extends JApplet
 {
     Image the_figure ;
+
+    Container container ;
 
     String image_file_url ;
     String title ;
@@ -87,8 +113,18 @@ extends JApplet
     ()
     {
         /*
+        Container content = getContentPane();
+        content.setBackground(Color.white);
+        content.setLayout(new FlowLayout());
+        content.add(new JButton("Button 1"));
+        content.add(new JButton("Button 2"));
+        content.add(new JButton("Button 3"));
+        */
+
+        /*
             the order of the methods call is very important!!
         */
+
 
         parse_html_parameters () ;
 
@@ -101,6 +137,10 @@ extends JApplet
             System.out.println ("doh") ;
         }
 
+        setSize(width, height);
+
+        init_container () ;
+
         show_the_figure () ;
         set_background_color () ;
         place_the_title () ;
@@ -112,6 +152,8 @@ extends JApplet
 
         place_the_source_buttons () ;
         place_the_destination_buttons () ;
+
+        //getContentPane ().add (new JButton ("popo34")) ;
     }
 
     private void
@@ -262,24 +304,42 @@ extends JApplet
         }
     }
 
+/*
     public void
     stop
     ()
     {
 
     }
+*/
+
+    /*
+        from : http://forum.java.sun.com/thread.jspa?threadID=691177&tstart=30
+
+        Hello,
+        I built a JApplet with J-components (JButton, JTextField, JList...). When I don't write any paint method, there is no problem, but as soon as I add a paint method, my components appear only when the mouse comes over them ! Here is a simplified class which illustrate my problem, to try with and without paint method...
+
+        In your paint method, make a call to :
+        super.paint( Graphics g );
+    */
 
     public void
     paint
     (Graphics g)
     {
+        super.paint(g);
+
+        //g.drawString ("22", 50, 50) ;
+
+        //getContentPane ().add (new JButton ("9")) ;
+
         int image_left_x ;
         int image_top_y ;
 
         image_left_x = width / 2 - the_figure.getWidth (this) / 2;
         image_top_y = height / 2 - the_figure.getHeight (this) / 2;
 
-        g.drawImage (the_figure, image_left_x, image_top_y, this);
+        //g.drawImage (the_figure, image_left_x, image_top_y, this);
 
     }
 
@@ -304,9 +364,8 @@ extends JApplet
 
         number_of_button_on_the_right = total_amount_of_buttons - number_of_button_on_the_left ;
 
-        button_height = 30 ;
-
-        button_width = 50 ;
+        button_width = 120 ;
+        button_height = 80 ;
 
         System.out.println ("total_amount_of_buttons : " + total_amount_of_buttons) ;
         System.out.println ("number_of_button_on_the_left : " + number_of_button_on_the_left) ;
@@ -324,13 +383,12 @@ extends JApplet
         int button_on_the_left_x_location ;
         int button_on_the_left_y_location ;
 
+
         button_on_the_left_x_location = 10 ;
         button_on_the_left_y_location = 10 ;
 
-        Container contentPane = getContentPane();
-        contentPane.setLayout(new FlowLayout());
+       // JFrame jframe_that_holds_buttons = new JFrame () ;
 
-        // 0 to 1
         for (int i = 0 ; i <= number_of_button_on_the_left -1 ; i ++)
         {
             System.out.println ("i : " + i) ;
@@ -341,15 +399,25 @@ extends JApplet
             // set the  label too ...
 
             button_tmp.get_button_source ().setText (button_tmp.get_label_name ());
+
             button_tmp.get_button_source ().setLocation (button_on_the_left_x_location, button_on_the_left_y_location);
-            button_tmp.get_button_source ().setSize (button_width, button_height);
 
-            button_on_the_left_y_location += 60 ;
+            button_tmp.get_button_source ().setSize (new Dimension (button_width, button_height));
+            button_tmp.get_button_source ().setMinimumSize (new Dimension (button_width, button_height));
+            button_tmp.get_button_source ().setMaximumSize (new Dimension (button_width, button_height));
+            button_tmp.get_button_source ().setPreferredSize (new Dimension (button_width, button_height));
 
+            //button_tmp.get_button_source ().setOpaque(false) ;
+
+            //button_tmp.get_button_source ().setBounds (button_on_the_left_x_location, button_on_the_left_y_location, button_width, button_height) ;
+
+            button_on_the_left_y_location += button_height + 10 ;
 
             button_tmp.print_debug () ;
 
-            contentPane.add (button_tmp.get_button_source ()) ;
+            //jframe_that_holds_buttons.getContentPane ().add (button_tmp.get_button_source ()) ;
+
+            container.add (button_tmp.get_button_source ()) ;
         }
 
         int button_on_the_right_x_location ;
@@ -359,33 +427,99 @@ extends JApplet
         button_on_the_right_y_location = 10 ;
 
 
-        // 2 to 3
         for (int i = number_of_button_on_the_left ; i <= total_amount_of_buttons - 1 ; i ++)
         {
             System.out.println ("i : " + i) ;
 
             button_tmp = (JavaIdentificationsOnAFigureLabel)java_identifications_on_a_figure_label.elementAt (i) ;
 
+
+            button_tmp.get_button_source ().setSize (new Dimension (button_width, button_height));
+            button_tmp.get_button_source ().setMinimumSize (new Dimension (button_width, button_height));
+            button_tmp.get_button_source ().setMaximumSize (new Dimension (button_width, button_height));
+            button_tmp.get_button_source ().setPreferredSize (new Dimension (button_width, button_height));
+
+            //button_tmp.get_button_source ().setOpaque(false) ;
+
             // set the width, height, x and y of the button ...
             // set the  label too ...
 
             button_tmp.get_button_source ().setText (button_tmp.get_label_name ());
-            button_tmp.get_button_source ().setLocation (button_on_the_right_x_location, button_on_the_right_y_location);
-            button_tmp.get_button_source ().setSize (button_width, button_height);
 
-            button_on_the_left_y_location += 60 ;
+            button_tmp.get_button_source ().setLocation (button_on_the_right_x_location, button_on_the_right_y_location);
+            /*
+
+            */
+
+            //button_tmp.get_button_source ().setBounds (button_on_the_right_x_location, button_on_the_right_y_location, button_width, button_height) ;
+
+            button_on_the_right_y_location += button_height + 10 ;
 
             button_tmp.print_debug () ;
 
-            contentPane.add (button_tmp.get_button_source ()) ;
+            //jframe_that_holds_buttons.getContentPane ().add (button_tmp.get_button_source ()) ;
+
+            container.add (button_tmp.get_button_source ()) ;
         }
+
+        /*
+        System.out.println ("adding the container_for_left_buttons in the main container") ;
+
+        container.add (jframe_that_holds_buttons) ;
+
+        System.out.println ("adding the container_for_right_buttons in the main container") ;
+
+        container.add (container_for_right_buttons) ;
+        */
+
+        System.out.println ("container.getComponentCount () " + container.getComponentCount ()) ;
+
     }
 
     private void
     place_the_destination_buttons
     ()
     {
+        int delta_from_top ;
+        int delta_from_left ;
 
+
+        int button_width = 10 ;
+        int button_height = 10 ;
+
+        delta_from_left = (width - the_figure.getWidth (this)) / 2;
+
+        delta_from_top = (height - the_figure.getHeight (this)) / 2;
+
+        JavaIdentificationsOnAFigureLabel button_tmp ;
+
+        int total_amount_of_buttons ;
+
+        total_amount_of_buttons = java_identifications_on_a_figure_label.size () ;
+
+        for (int i = 0 ; i <= total_amount_of_buttons - 1 ; i ++)
+        {
+            button_tmp = (JavaIdentificationsOnAFigureLabel)java_identifications_on_a_figure_label.elementAt (i) ;
+
+            button_tmp.get_button_destination ().setLocation (button_tmp.get_x_position () + delta_from_left, button_tmp.get_y_position () + delta_from_top);
+
+            button_tmp.get_button_destination ().setSize (new Dimension (button_width, button_height));
+            button_tmp.get_button_destination ().setMinimumSize (new Dimension (button_width, button_height));
+            button_tmp.get_button_destination ().setMaximumSize (new Dimension (button_width, button_height));
+            button_tmp.get_button_destination ().setPreferredSize (new Dimension (button_width, button_height));
+            // button_tmp.get_button_destination ().setText ("2");
+
+            //button_tmp.get_button_destination ().setOpaque(false) ;
+
+            Insets noInsets = new Insets (0,0,0,0) ;
+            // store the icon you want to display in imageIcon
+
+            button_tmp.get_button_destination ().setMargin(noInsets);
+            button_tmp.get_button_destination ().setBorder(null);
+            button_tmp.get_button_destination ().setContentAreaFilled(false);
+
+            container.add (button_tmp.get_button_destination ()) ;
+        }
     }
 
     private void
@@ -413,6 +547,9 @@ extends JApplet
     {
         JLabel title_label = new JLabel (title) ;
 
+        title_label.setLocation (width / 2 - 15, 5) ;
+        title_label.setSize (new Dimension (200, 20)) ;
+
         getContentPane ().add (title_label) ;
     }
 
@@ -420,8 +557,6 @@ extends JApplet
     debug_xml_parser_activities
     ()
     {
-        setBackground (bg_color);
-
         System.out.println (xml_file) ;
 
         int size_of_vector = java_identifications_on_a_figure_label.size () ;
@@ -438,12 +573,6 @@ extends JApplet
 
             tmp_label.print_debug () ;
         }
-
-        JavaIdentificationsOnAFigureLabel tmp2 = (JavaIdentificationsOnAFigureLabel)java_identifications_on_a_figure_label.elementAt (2) ;
-        tmp2.print_debug () ;
-
-        JavaIdentificationsOnAFigureLabel tmp3 = (JavaIdentificationsOnAFigureLabel)java_identifications_on_a_figure_label.elementAt (3) ;
-        tmp3.print_debug () ;
     }
 
     private void
@@ -462,6 +591,27 @@ extends JApplet
     set_background_color
     ()
     {
-            Color bg_color = new Color (225, 225, 250);
+        // Color bg_color = new Color (0, 225, 250);
+
+        // getContentPane ().setBackground (bg_color) ;
+    }
+
+    private void
+    init_container
+    ()
+    {
+        container = getContentPane () ;
+
+        // set null if you want to..
+
+        container.setLayout(null) ;
+
+        //container.setBackground(Color.red) ;
+
+        //container.setLayout(new FlowLayout ());
+        //container.setLayout (new FlowLayout ()) ;
+        //container.setLayout (new BorderLayout()) ;
+
+        //container.setLayout (new GridBagLayout ()) ;
     }
 }
