@@ -28,7 +28,6 @@
 
     foreach label
         show the label and the target...
-
 */
 
 /*
@@ -55,9 +54,22 @@ TODO
 
     find an image and add it to the jar file to represent the arrow
     find a way to get the image is background ..
+        Use Layers..
 
     auto set the dimensions of the button source
         done 20050108
+
+    place the arrows over the image ...
+*/
+
+/*
+    There is three layers :
+
+    layer 1
+        contains the image and the title
+
+    layer 2
+        contains the source and destination buttons
 */
 
 /*
@@ -84,6 +96,9 @@ import javax.swing.JButton ;
 import javax.swing.JApplet ;
 import javax.swing.JPanel ;
 import javax.swing.ImageIcon ;
+import javax.swing.JLayeredPane ;
+import javax.swing.BorderFactory ;
+import javax.swing.BoxLayout ;
 
 import java.awt.Dimension ;
 import java.awt.Graphics ;
@@ -91,6 +106,7 @@ import java.awt.Image ;
 import java.awt.Container ;
 import java.awt.Color ;
 import java.awt.Insets ;
+import java.awt.GridBagLayout ;
 
 import java.awt.FlowLayout ;
 import java.awt.BorderLayout ;
@@ -104,11 +120,15 @@ extends JApplet
 
     private Container container ;
 
+    private JLayeredPane layers ;
+
     private String image_file_url ;
     private String title ;
     private int image_width ;
     private int image_height ;
     private String xml_file ;
+
+    private ImageIcon imageIcon ;
 
     private int width ;
     private int height ;
@@ -117,17 +137,18 @@ extends JApplet
 
     private Vector java_identifications_on_a_figure_label ;
 
-    private JPanel west ;
+    private JPanel buttons_source_panel_north ;
 
-    private JPanel east ;
+    private JPanel buttons_source_panel_south ;
 
-    private JPanel center_panel ;
+    private JLayeredPane myJLayeredPane ;
+
+    private JLabel imageLabel ;
 
     public void
     init
     ()
     {
-
         java_identifications_on_a_figure_label = new Vector () ;
 
         /*
@@ -150,17 +171,21 @@ extends JApplet
 
         init_container () ;
 
-        show_the_figure () ;
 
-        place_the_title () ;
-        debug_xml_parser_activities () ;
+        //place_the_title () ; // uncomment to see the title in the JApplet
+
+        //debug_xml_parser_activities () ; // uncomment to see the debug ouput for xml parsing
 
         // to this point, I have parsed the xml file correctly!!!
         // plus, java seems to like utf-8 or maybe iso-8859-15 or even iso-8859-1
         // because the xml file is in utf-8 of course...
 
         place_the_source_buttons () ;
-        place_the_destination_buttons () ;
+
+        showTheFigure () ;
+
+        placeDestinationButtons () ;
+
     }
 
     private void
@@ -334,9 +359,6 @@ extends JApplet
         int number_of_button_on_the_left ;
         int number_of_button_on_the_right ;
 
-        int button_width ;
-        int button_height ;
-
         int total_amount_of_buttons ;
 
         total_amount_of_buttons = java_identifications_on_a_figure_label.size () ;
@@ -344,9 +366,6 @@ extends JApplet
         number_of_button_on_the_left = total_amount_of_buttons / 2 ;
 
         number_of_button_on_the_right = total_amount_of_buttons - number_of_button_on_the_left ;
-
-        button_width = 120 ;
-        button_height = 80 ;
 
         System.out.println ("total_amount_of_buttons : " + total_amount_of_buttons) ;
         System.out.println ("number_of_button_on_the_left : " + number_of_button_on_the_left) ;
@@ -360,10 +379,10 @@ extends JApplet
 
         // set the size of all buttons ...
 
-        JavaIdentificationsOnAFigureLabel button_tmp ;
-
         for (int i = 0 ; i <= number_of_button_on_the_left -1 ; i ++)
         {
+            JavaIdentificationsOnAFigureLabel button_tmp ;
+
             System.out.println ("i : " + i) ;
 
             button_tmp = (JavaIdentificationsOnAFigureLabel)java_identifications_on_a_figure_label.elementAt (i) ;
@@ -375,14 +394,13 @@ extends JApplet
 
             button_tmp.print_debug () ;
 
-            rowPanel = new JPanel( new FlowLayout() );
-
-            rowPanel.add( button_tmp.get_button_source ());
-            west.add( rowPanel );
+            buttons_source_panel_south.add (button_tmp.get_button_source ()) ;
         }
 
         for (int i = number_of_button_on_the_left ; i <= total_amount_of_buttons - 1 ; i ++)
         {
+            JavaIdentificationsOnAFigureLabel button_tmp ;
+
             System.out.println ("i : " + i) ;
 
             button_tmp = (JavaIdentificationsOnAFigureLabel)java_identifications_on_a_figure_label.elementAt (i) ;
@@ -394,30 +412,27 @@ extends JApplet
 
             button_tmp.print_debug () ;
 
-            rowPanel = new JPanel( new FlowLayout() );
-
-            rowPanel.add( button_tmp.get_button_source () );
-            east.add( rowPanel );
+            buttons_source_panel_north.add (button_tmp.get_button_source ()) ;
         }
 
         System.out.println ("container.getComponentCount () " + container.getComponentCount ()) ;
     }
 
     private void
-    place_the_destination_buttons
+    placeDestinationButtons
     ()
     {
         int delta_from_top ;
         int delta_from_left ;
 
-        int button_width = 10 ;
-        int button_height = 10 ;
+        final int DESTINATION_Z_INDEX = 400 ;
+        final int DEFAULT_MARGIN = 0 ;
+        final int BUTTON_WIDTH = 10 ;
+        final int BUTTON_HEIGHT = 10 ;
 
         delta_from_left = (width - the_figure.getWidth (this)) / 2;
 
         delta_from_top = (height - the_figure.getHeight (this)) / 2;
-
-        JavaIdentificationsOnAFigureLabel button_tmp ;
 
         int total_amount_of_buttons ;
 
@@ -425,16 +440,28 @@ extends JApplet
 
         for (int i = 0 ; i <= total_amount_of_buttons - 1 ; i ++)
         {
+            JavaIdentificationsOnAFigureLabel button_tmp ;
+
             button_tmp = (JavaIdentificationsOnAFigureLabel)java_identifications_on_a_figure_label.elementAt (i) ;
 
             button_tmp.get_button_destination ().setLocation (button_tmp.get_x_position () + delta_from_left, button_tmp.get_y_position () + delta_from_top);
 
-            button_tmp.get_button_destination ().setSize (new Dimension (button_width, button_height));
-            button_tmp.get_button_destination ().setMinimumSize (new Dimension (button_width, button_height));
-            button_tmp.get_button_destination ().setMaximumSize (new Dimension (button_width, button_height));
-            button_tmp.get_button_destination ().setPreferredSize (new Dimension (button_width, button_height));
+            button_tmp.get_button_destination ().setSize (new Dimension (BUTTON_WIDTH, BUTTON_HEIGHT));
+            button_tmp.get_button_destination ().setMinimumSize (new Dimension (BUTTON_WIDTH, BUTTON_HEIGHT));
+            button_tmp.get_button_destination ().setMaximumSize (new Dimension (BUTTON_WIDTH, BUTTON_HEIGHT));
+            button_tmp.get_button_destination ().setPreferredSize (new Dimension (BUTTON_WIDTH, BUTTON_HEIGHT));
 
-            Insets noInsets = new Insets (0,0,0,0) ;
+            //button_tmp.setBound (button_tmp.get_x_position () + delta_from_left, button_tmp.get_y_position () + delta_from_top, BUTTON_WIDTH, BUTTON_HEIGHT) ;
+
+            Insets noInsets = new Insets (DEFAULT_MARGIN, DEFAULT_MARGIN, DEFAULT_MARGIN, DEFAULT_MARGIN) ;
+
+            System.out.println ("button_tmp.get_x_position () + delta_from_left : " + (button_tmp.get_x_position () + delta_from_left)) ;
+
+            System.out.println ("button_tmp.get_y_position () + delta_from_top : " + (button_tmp.get_y_position () + delta_from_top)) ;
+
+            System.out.println ("BUTTON_WIDTH : " + BUTTON_WIDTH) ;
+
+            System.out.println ("BUTTON_HEIGHT : " + BUTTON_HEIGHT) ;
 
             // store the icon you want to display in imageIcon
 
@@ -442,15 +469,17 @@ extends JApplet
             button_tmp.get_button_destination ().setBorder(null);
             button_tmp.get_button_destination ().setContentAreaFilled(false);
 
-            container.add (button_tmp.get_button_destination ()) ;
+            myJLayeredPane.add (button_tmp.get_button_destination (), DESTINATION_Z_INDEX + i) ;
         }
     }
 
     private void
-    show_the_figure
+    showTheFigure
     ()
     {
         URL the_figure_url ;
+
+        final int IMAGE_ICON_Z_INDEX = 1 ;
 
         try
         {
@@ -463,21 +492,56 @@ extends JApplet
             System.out.println (e.getMessage ()) ;
         }
 
-        ImageIcon imageIcon = new ImageIcon( the_figure );
-        JLabel imageLabel = new JLabel(imageIcon);
-        center_panel.add( imageLabel );
+        imageIcon = new ImageIcon( the_figure );
+        imageLabel = new JLabel(imageIcon);
+        imageLabel.setBounds((width - imageIcon.getIconWidth ())/ 2, ((height ) / 2  - imageIcon.getIconHeight () / 2 -30)  , imageIcon.getIconWidth (), imageIcon.getIconHeight ());
+
+
+        //debugShowTheFigure () ;
+
+        myJLayeredPane.add (imageLabel, IMAGE_ICON_Z_INDEX) ;
+
+    }
+
+    private void
+    debugShowTheFigure
+    ()
+    {
+        JLabel label = new JLabel("2122");
+        label.setVerticalAlignment(JLabel.TOP);
+        label.setHorizontalAlignment(JLabel.CENTER);
+        label.setOpaque(true);
+        label.setBackground(new Color (44, 55, 66));
+        label.setForeground(Color.black);
+        label.setBorder(BorderFactory.createLineBorder(Color.black));
+        label.setBounds(30, 40, 140, 140);
+
+        System.out.println ("imageLabel.getY () + imageIcon.getIconHeight () / 2 : " + (imageLabel.getY () + imageIcon.getIconHeight () / 2)) ;
+        System.out.println ("imageIcon.getIconHeight () / 2 : " + imageIcon.getIconHeight () / 2) ;
+        System.out.println ("imageLabel.getY (): " + imageLabel.getY () ) ;
+
+        JLabel label2 = new JLabel(""+imageLabel.getY ());
+        label2.setVerticalAlignment(JLabel.TOP);
+        label2.setHorizontalAlignment(JLabel.CENTER);
+        label2.setOpaque(true);
+        label2.setBackground(new Color (44, 55, 66));
+        label2.setForeground(Color.black);
+        label2.setBorder(BorderFactory.createLineBorder(Color.black));
+        label2.setBounds(40, 50, 140, 140);
+
+
+        myJLayeredPane.add (label, 20022) ;
+
+        myJLayeredPane.add (label2, 20330) ;
     }
 
     private void
     place_the_title
     ()
     {
-        JLabel title_label = new JLabel (title) ;
+        JLabel label = new JLabel(title);
 
-        title_label.setLocation (width / 2 - 15, 5) ;
-        title_label.setSize (new Dimension (200, 20)) ;
-
-        getContentPane ().add (title_label) ;
+        container.add (label, BorderLayout.CENTER) ;
     }
 
     private void
@@ -518,19 +582,25 @@ extends JApplet
     init_container
     ()
     {
+        buttons_source_panel_north = new JPanel () ;
+        buttons_source_panel_north.setLayout (new FlowLayout ()) ;
+
+        buttons_source_panel_north.setBorder(BorderFactory.createLineBorder(Color.black));
+
+        buttons_source_panel_south = new JPanel () ;
+        buttons_source_panel_south.setLayout (new FlowLayout ()) ;
+
+        buttons_source_panel_south.setBorder(BorderFactory.createLineBorder(Color.black));
+
         container = getContentPane () ;
 
-        // set null if you want to..
+        container.add (buttons_source_panel_north, BorderLayout.NORTH) ;
+        container.add (buttons_source_panel_south, BorderLayout.SOUTH) ;
 
-        container.setLayout(new BorderLayout ()) ;
+        myJLayeredPane = new JLayeredPane () ;
 
-        west = new JPanel( new GridLayout( 0,1 ));
-        container.add( west, BorderLayout.WEST );
+        myJLayeredPane.setBorder(BorderFactory.createLineBorder(Color.black));
 
-        east = new JPanel( new GridLayout( 0,1 ));
-        container.add( east, BorderLayout.EAST );
-
-        center_panel = new JPanel (new GridLayout( 0,1 )) ;
-        container.add( center_panel, BorderLayout.CENTER );
+        getContentPane ().add (myJLayeredPane) ;
     }
 }

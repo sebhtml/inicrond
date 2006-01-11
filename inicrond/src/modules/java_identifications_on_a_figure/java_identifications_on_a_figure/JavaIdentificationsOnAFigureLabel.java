@@ -23,6 +23,8 @@ import javax.swing.JButton ;
 // import java.awt.* ;
 import javax.swing.plaf.basic.BasicArrowButton ;
 
+import java.awt.Font ;
+import java.awt.Insets ;
 
 // import javax.swing.plaf.basic.BasicArrowButton ;
 
@@ -30,30 +32,35 @@ public class
 JavaIdentificationsOnAFigureLabel
 /* extends nothind dude */
 {
-    String label_name ;
+    private static final int BUTTON_MARGIN = 1 ;
+
+    private String label_name ;
 
     // for the destination :
-    int x_position ;
-    int y_position ;
+    private int x_position ;
+    private int y_position ;
 
-    int java_identifications_on_a_figure_label_id ;
+    private int java_identifications_on_a_figure_label_id ;
 
-    int java_identifications_on_a_figure_label_id_destination ;
+    private int java_identifications_on_a_figure_label_id_destination ;
 
-    JButton button_source ;
-    JButton button_destination ;
+    private JButton button_source ;
+    private JButton button_destination ;
 
     public
     JavaIdentificationsOnAFigureLabel
     ()
     {
-        int button_margin = 1 ;
-
         button_source = new JButton () ;
 
         //button_source.setVisible (true) ;
 
-        //button_source.setMargin (new Insets (button_margin, button_margin, button_margin, button_margin)) ;
+        button_source.setMargin (new Insets (BUTTON_MARGIN, BUTTON_MARGIN, BUTTON_MARGIN, BUTTON_MARGIN)) ;
+
+
+        Font myFont = new Font ("", 0, 11) ;
+
+        button_source.setFont (myFont) ;
 
         //button_source.setModel () ;
 
