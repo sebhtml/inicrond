@@ -933,13 +933,18 @@ if ($ok && $is_student_of_cours = is_student_of_cours ($_SESSION['usr_id'], $cou
                 $this_item['list_java_identifications_on_a_figure_result'] = __INICROND_INCLUDE_PATH__.'modules/java_identifications_on_a_figure/list_java_identifications_on_a_figure_result.php?inode_id='.$fetch_result['inode_id'].'' ;
 
                 $this_item['activities_report_for_a_java_identifications_on_a_figure'] = __INICROND_INCLUDE_PATH__.'modules/java_identifications_on_a_figure/activities_report_for_a_java_identifications_on_a_figure.php?inode_id='.$fetch_result['inode_id'].'' ;
+
+                /*
+                    this page can actually be viewed by anyone in the inode_groups,
+                    but it is hidden from student so they don't use the answer in it..
+                */
+
+                $this_item['get_xml_informations_for_a_java_identifications_on_a_figure'] = __INICROND_INCLUDE_PATH__.'modules/java_identifications_on_a_figure/get_xml_informations_for_a_java_identifications_on_a_figure.php?inode_id='.$fetch_result['inode_id'] ;
             }
 
             $this_item['list_java_identifications_on_a_figure_result_with_user_id'] = __INICROND_INCLUDE_PATH__.'modules/java_identifications_on_a_figure/list_java_identifications_on_a_figure_result.php?inode_id='.$fetch_result['inode_id'].'&usr_id='.$_SESSION['usr_id'].'' ;
 
             $this_item['get_java_identifications_on_a_figure_image'] = __INICROND_INCLUDE_PATH__.'modules/java_identifications_on_a_figure/get_java_identifications_on_a_figure_image.php?inode_id='.$fetch_result['inode_id'] ;
-
-            $this_item['get_xml_informations_for_a_java_identifications_on_a_figure'] = __INICROND_INCLUDE_PATH__.'modules/java_identifications_on_a_figure/get_xml_informations_for_a_java_identifications_on_a_figure.php?inode_id='.$fetch_result['inode_id'] ;
 
             $this_item['try_a_java_identifications_on_a_figure'] = __INICROND_INCLUDE_PATH__.'modules/java_identifications_on_a_figure/try_a_java_identifications_on_a_figure.php?inode_id='.$fetch_result['inode_id'] ;
 

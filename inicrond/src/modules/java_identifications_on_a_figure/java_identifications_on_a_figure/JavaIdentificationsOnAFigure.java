@@ -76,6 +76,7 @@ TODO
     Imports
 */
 
+package org.sourceforge.inicrond.javaidentficationsonafigure ;
 
 import java.io.InputStream ;
 import javax.xml.parsers.DocumentBuilder ;

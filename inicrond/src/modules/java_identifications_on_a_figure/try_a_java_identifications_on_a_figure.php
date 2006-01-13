@@ -30,6 +30,20 @@ include __INICROND_INCLUDE_PATH__."modules/courses/includes/functions/is_in_inod
 if(isset($_GET['inode_id']) && $_GET['inode_id'] != "" && (int) $_GET['inode_id']
 && is_in_inode_group ($_SESSION['usr_id'], $_GET['inode_id']))
 {
+    $query = '
+    select
+    title
+    from
+    '.$_OPTIONS['table_prefix'].'java_identifications_on_a_figure
+    where
+    inode_id = '.$_GET['inode_id'].'
+    ' ;
+
+    $rs = $inicrond_db->Execute ($query) ;
+    $row = $rs->FetchRow () ;
+
+    $smarty->assign ('title', $row['title']) ;
+
     $smarty->assign ('xml_file', $_OPTIONS['virtual_addr'].'modules/java_identifications_on_a_figure/get_xml_informations_for_a_java_identifications_on_a_figure.php?inode_id='.$_GET['inode_id']) ;
 
     $smarty->display ($_OPTIONS['theme'].'/try_a_java_identifications_on_a_figure.tpl') ;

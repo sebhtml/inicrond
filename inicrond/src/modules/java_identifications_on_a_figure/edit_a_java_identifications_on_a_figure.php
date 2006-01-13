@@ -232,6 +232,10 @@ if (isset ($_GET['inode_id']) && $_GET['inode_id'] != "" && (int) $_GET['inode_i
 
     $module_title = $_LANG['edit_a_java_identifications_on_a_figure'] ;
 
+    include __INICROND_INCLUDE_PATH__."modules/courses/includes/functions/inode_full_path.php";
+
+    $smarty->assign ('inode_full_path', inode_full_path ($_GET['inode_id'])) ;
+
     $module_content .= $smarty->fetch ($_OPTIONS['theme'].'/edit_a_java_identifications_on_a_figure_form.tpl') ;
 }
 

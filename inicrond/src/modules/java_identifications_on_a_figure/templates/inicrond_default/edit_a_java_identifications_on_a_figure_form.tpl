@@ -1,3 +1,5 @@
+{$inode_full_path}
+
 <form method="post" enctype="multipart/form-data">
 
 <table>
@@ -46,7 +48,14 @@
 
 {$image_file_name}<br />
 {$image_width} x {$image_height} <br />
-<img src="get_java_identifications_on_a_figure_image.php?inode_id={$inode_id}" /><br />
+
+<!--<MAP NAME="my_map"><AREA SHAPE="RECT" COORDS="497, 84, 541, 99" HREF=""></MAP>-->
+
+
+<a href="">
+    <img src="get_java_identifications_on_a_figure_image.php?inode_id={$inode_id}" ismap usemap="#my_map" />
+</a>
+<br />
 {$_LANG.informations_on_origin}<br  />
 
 <h2>{$_LANG.java_identifications_on_a_figure_label}</h2>

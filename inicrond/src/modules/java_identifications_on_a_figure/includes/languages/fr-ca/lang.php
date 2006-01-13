@@ -49,7 +49,7 @@ $_LANG['move_down_a_java_identifications_on_a_figure_label'] = 'Descendre' ;
 $_LANG['add_a_java_identifications_on_a_figure_label'] = 'Ajouter une étiquette' ;
 $_LANG['drop_a_java_identifications_on_a_figure_label'] = 'Enlever' ;
 
-$_LANG['informations_on_origin'] = 'Le point (0, 0) est en bas à gauche. Les étiquettes sont réparties des deux côtés de l\'image. Les premières sont en haut à gauche et les dernières sont en bas à droite.' ;
+$_LANG['informations_on_origin'] = 'Le point (0, 0) est en haut à gauche. Les étiquettes sont réparties des deux côtés de l\'image. Les premières sont en haut à gauche et les dernières sont en bas à droite. Pour placer les étiquettes, regarder dans la barre d\'état de votre navigateur lorsque votre curseur est au dessus de l\'image. La position est alors inscrite. (par exemple : ?233,783)' ;
 
 $_LANG['cannot_remove_java_identifications_on_a_figure_label_id'] = 'Cette étiquette ne peut pas être enlevée parce que des résultats l\'utilisent. En effet, si cette étiquette est enlevée, il se peut que des résultats qui l\'utilisent n\'aient plus aucun sens.' ;
 $_LANG['java_identifications_on_a_figure_label_id_removed'] = 'L\'étiquette a été enlevée' ;
