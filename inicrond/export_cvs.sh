@@ -59,7 +59,7 @@ rmdir export #remove the export dir
 
 cd $PROG_NAME-$VERSION #go in to the exported version
 
-mv ../$CHANGE_LOG_FILE docs/ #move the change log
+mv ../$CHANGE_LOG_FILE documentation/en-ca/ #move the change log
 
 LINES_COUNT_FILE="documentation/en-ca/Lines_count.txt"
 

@@ -1,9 +1,12 @@
-* try a test
+* module to list inode that are not referenced in admin ...
+
 * java :
 
 to be done :
 
     languages ...
+
+    debug function
 
     activities_report_for_a_java_identifications_on_a_figure.php
     get_xml_informations_for_a_java_identifications_on_a_figure.php

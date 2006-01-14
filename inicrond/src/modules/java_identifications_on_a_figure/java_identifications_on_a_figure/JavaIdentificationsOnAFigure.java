@@ -122,7 +122,7 @@ extends JApplet
     private Container container ;
 
     private JLayeredPane layers ;
-
+    private static final int DEBUG = 0 ;
     private String image_file_url ;
     private String title ;
     private int image_width ;

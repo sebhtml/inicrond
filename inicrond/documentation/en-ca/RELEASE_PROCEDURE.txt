@@ -16,6 +16,8 @@ This is my release procedure.
 
 * export the files
         sh export_cvs.sh <tag_name>
+* sign the 3 files ...
 
 * sourceforge release
+* compare the file size to be sure ...
 * freshmeat release
