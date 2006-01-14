@@ -8,7 +8,6 @@
 CREATE TABLE results (
   result_id int(10) unsigned NOT NULL auto_increment,
   session_id int(10) unsigned default NULL,
-  usr_id int(10) unsigned default NULL,
   time_GMT_start int(10) unsigned default NULL,
   time_GMT_end int(10) unsigned default NULL,
   test_id int(10) unsigned default NULL,
@@ -16,7 +15,6 @@ CREATE TABLE results (
   max_points smallint(5) unsigned NOT NULL default '0',
   PRIMARY KEY  (result_id),
   KEY session_id (session_id),
-  KEY usr_id (usr_id),
   KEY test_id (test_id)
 ) TYPE=MyISAM;
 

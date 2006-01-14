@@ -29,7 +29,6 @@ CREATE TABLE online_time (
 
 CREATE TABLE page_views (
   page_id int(10) unsigned NOT NULL auto_increment,
-  usr_id int(10) unsigned NOT NULL default '0',
   session_id int(10) unsigned NOT NULL default '0',
   gmt_timestamp int(10) unsigned NOT NULL default '0',
   requested_url varchar(255) default NULL,
@@ -39,7 +38,6 @@ CREATE TABLE page_views (
   HTTP_KEEP_ALIVE varchar(32) NOT NULL default '',
   HTTP_CONNECTION varchar(255) NOT NULL default '',
   PRIMARY KEY  (page_id),
-  KEY usr_id (usr_id),
   KEY session_id (session_id)
 ) TYPE=MyISAM;
 

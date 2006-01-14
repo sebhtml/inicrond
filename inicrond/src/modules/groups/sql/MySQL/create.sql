@@ -1,8 +1,8 @@
 #$Id$
 
--- 
+--
 -- Table structure for table `ooo_inode_groups`
--- 
+--
 
 CREATE TABLE inode_groups (
   group_id int(10) unsigned default NULL,
@@ -16,9 +16,9 @@ CREATE TABLE inode_groups (
 
 
 
--- 
+--
 -- Table structure for table `ooo_groups`
--- 
+--
 
 CREATE TABLE groups (
   group_id int(10) unsigned NOT NULL auto_increment,
@@ -29,15 +29,16 @@ CREATE TABLE groups (
   is_student_group char(1) NOT NULL default '0',
   is_teacher_group char(1) NOT NULL default '0',
   md5_pw_to_join varchar(32) NOT NULL default '',
+  add_time_t int unsigned,
   PRIMARY KEY  (group_id),
   KEY cours_id (cours_id)
 ) TYPE=MyISAM COMMENT='the formula are in blue master clone';
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `ooo_groups_usrs`
--- 
+--
 
 CREATE TABLE groups_usrs (
   group_id int(10) unsigned default NULL,
@@ -48,9 +49,9 @@ CREATE TABLE groups_usrs (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `ooo_course_group_in_charge`
--- 
+--
 
 CREATE TABLE course_group_in_charge (
   group_id int(10) unsigned default NULL,

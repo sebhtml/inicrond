@@ -1,0 +1,21 @@
+This is my release procedure.
+
+
+* update the schema on the front page web site
+* check the patch entry and check if the schema is equal to it.
+* try a clean install.
+* patch a production dataset in local.
+        source <sql_file>
+* update the version constants.
+
+* update the tag file.
+
+* commit with release announcement
+* tag the files
+        cvs tag <tag_name> *
+
+* export the files
+        sh export_cvs.sh <tag_name>
+
+* sourceforge release
+* freshmeat release

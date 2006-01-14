@@ -1,8 +1,25 @@
 <?php
+/*
+    $Id$
 
-// lang_file : modules/user/includes/languages/en-ca/lang.php
-// language : en-ca
-// Fri,  9 Sep 2005 19:12:41 +0000
+    Inicrond : Network of Interactive Courses Registred On a Net Domain
+    Copyright (C) 2004, 2005, 2006  Sébastien Boisvert
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
+
 
 $_LANG['AccesDenied'] = 'Access denied. Possible reasons : the user name does not exists or the password is wrong';
 $_LANG['account_information'] = 'Your account on \'%s\'.';
@@ -16,6 +33,8 @@ $_LANG['click_here_to_get_your_password'] = 'Click on the link to get a new pass
 $_LANG['click_here_to_validate'] = 'Click on the hyper link to validate your subsription.<br /> %s';
 $_LANG['connected'] = 'You are loggued in';
 $_LANG['deconnected'] = 'You are disconnected.';
+$_LANG['delete_old_useless_scores'] = 'The old useless animations marks have been deleted.';
+$_LANG['delete_old_useless_test_results'] = 'The old tests results that were not used have been deleted.';
 $_LANG['doublePass'] = 'You must write the same password twice';
 $_LANG['email_account_validation'] = 'Sign in validation';
 $_LANG['error_email'] = 'Invalid email.';
@@ -24,6 +43,9 @@ $_LANG['hi_ppl_you_can_connect'] = 'Hi \'%s\', your account has been activated.'
 $_LANG['invalid_request'] = 'Invalid request';
 $_LANG['invalid_usr_name'] = 'Invalid user name';
 $_LANG['join_a_group_with_the_drop_list'] = 'Join a group';
+$_LANG['maintenance_delete_old_not_activated_accounts'] = 'The old accounts that are not activated have been deleted.';
+$_LANG['maintenance_opt_tab'] = 'The tables in the database were optimized.';
+$_LANG['maintenance_start'] = 'Beginning of the maintenance';
 $_LANG['name_already_took'] = 'This user name is already took.';
 $_LANG['new_password'] = 'New password';
 $_LANG['new_password_confirm'] = 'New password (confirmation)';
@@ -53,4 +75,4 @@ $_LANG['you_are_already_in_this_group'] = 'You are already in this group.';
 $_LANG['you_can_connect'] = 'Your account is created.';
 $_LANG['you_received_an_email_to_validate_your_registration'] = 'You will receive an email to validate your inscription.';
 
-?>
+                        ?>

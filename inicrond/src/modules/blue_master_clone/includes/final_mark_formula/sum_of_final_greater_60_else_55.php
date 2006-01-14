@@ -1,47 +1,48 @@
 <?php
-/*---------------------------------------------------------------------
-
-$Id$
-
-sebastien boisvert <sebhtml at yahoo dot ca> <http://inicrond.sourceforge.net/>
-
-inicrond Copyright (C) 2004-2005  Sebastien Boisvert
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
------------------------------------------------------------------------*/
-if(!__INICROND_INCLUDED__){exit;}
 /*
+    $Id$
 
-pour accéder au ynthèse, il faut 60%.
-sinon, cumulatif.
+    Inicrond : Network of Interactive Courses Registred On a Net Domain
+    Copyright (C) 2004, 2005  SÃ©bastien Boisvert
 
-si la somme des synthèses passe, alors retourner le cumulative,
-sinon, retourner la note si <=55 sinon retourner 55.
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
 
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
-//vérifier si il y a au moins 60% sans les synthèses.
+
+if(!__INICROND_INCLUDED__)
+{
+    die();
+}
+
+/*
+    pour accï¿½er au ynthï¿½e, il faut 60%.
+    sinon, cumulatif.
+
+    si la somme des synthï¿½es passe, alors retourner le cumulative,
+    sinon, retourner la note si <=55 sinon retourner 55.
+*/
+
+//vï¿½ifier si il y a au moins 60% sans les synthï¿½es.
+
 $point_obtenus = 0 ;
 $points_max = 0 ;
-$query = "SELECT 
+
+$query = "SELECT
 ev_score,
 ev_weight,
 ev_max
-
-
-
-FROM 
+FROM
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['user_evaluation_scores'].",
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['evaluations']."
 WHERE
@@ -56,48 +57,94 @@ AND
 available = '1'
 ";
 
-
 $rs = $inicrond_db->Execute($query);
 
 while($fetch_result = $rs->FetchRow())//foreach evaluation I got.
 {
-        
-        //if all synthesis pass 60, then return the ponderated mark.
-        //else return the ponderate before the synthesis.
-        //add the resultat pondere here to add the last column.
-        
-	
-	
-	$point_obtenus += ($fetch_result['ev_score']/$fetch_result['ev_max']*$fetch_result['ev_weight']);
-	
-	$points_max += $fetch_result['ev_weight'];
-	
-	
-	
-	
+    //if all synthesis pass 60, then return the ponderated mark.
+    //else return the ponderate before the synthesis.
+    //add the resultat pondere here to add the last column.
+
+    $point_obtenus += ($fetch_result['ev_score']/$fetch_result['ev_max']*$fetch_result['ev_weight']);
+
+    $points_max += $fetch_result['ev_weight'];
 }//end of loop for all none synthesis tests.
-if(!$points_max)//do do anything because there is no evaluations.
+
+if($points_max == 0)//do do anything because there is no evaluations.
 {
-	
+
 }
 elseif($point_obtenus/$points_max < 0.6)//the cumulative is leseer than 60%...
 {
-        
+
 }//end of if to check is the person down not have the right to do the synthesis.
-else//he can do synthesis dude, 
+
+else//he can do synthesis dude,
 {
-	//
-	//check the sum of synthesiss.
+    //check the sum of synthesiss.
+    $point_obtenus = 0 ;
+    $points_max = 0 ;
+
+    $query = "SELECT
+    ev_score,
+    ev_weight,
+    ev_max
+    FROM
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['user_evaluation_scores'].",
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['evaluations']."
+    WHERE
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['evaluations'].".ev_id=  ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['user_evaluation_scores'].".ev_id
+    AND
+    usr_id=$usr_id
+    AND
+    group_id=$group_id
+    AND
+    ev_final = '1'
+    AND
+    available = '1'
+    ";
+
+    $rs = $inicrond_db->Execute($query);
+
+    while($fetch_result = $rs->FetchRow())//foreach evaluation I got.
+    {
+        ///if the evaluation is failed, give the failed one.
+
+        $point_obtenus += ($fetch_result['ev_score']/$fetch_result['ev_max']*$fetch_result['ev_weight']);
+
+        $points_max += $fetch_result['ev_weight'];
+    }//end of loop for synthesis tests.
+
+    //analyse the synthesis results.
+
+    if(($points_max != 0) && ($point_obtenus/$points_max < 0.6))///!= 0
+    //the cumulative is leseer than 60%...
+    {
+        if($point_obtenus/$points_max > 0.55)//grater than 55% but lesser than 60%.
+        {
+            //return 55% for no revision of marks.
+            $point_obtenus = 55;
+            $points_max = 100;
+
+        }//end of between 55 - 60 check.
+    }//end of synthesis fail check.
+
+    else//the student is good, the force is with him
+    {
+        /////////////////
+        //at this point, the student is courageous and has beated all synthesis exam,
+        //according to this fact, give him his ccumulative and enjoy it.
+        /////
+        //first off, get all final examens...
+
         $point_obtenus = 0 ;
-        $points_max = 0 ;	
-	$query = "SELECT 
+        $points_max = 0 ;
+
+        $query = "SELECT
         ev_score,
         ev_weight,
         ev_max
-        
-        
-        
-        FROM 
+        FROM
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['user_evaluation_scores'].",
         ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['evaluations']."
         WHERE
@@ -107,95 +154,27 @@ else//he can do synthesis dude,
         AND
         group_id=$group_id
         AND
-        ev_final = '1'
-        AND
         available = '1'
         ";
-        
-        
+
         $rs = $inicrond_db->Execute($query);
-        
+
         while($fetch_result = $rs->FetchRow())//foreach evaluation I got.
         {
-                
-                ///if the evaluation is failed, give the failed one.
-                
-                
-                $point_obtenus += ($fetch_result['ev_score']/$fetch_result['ev_max']*$fetch_result['ev_weight']);
-                
-                $points_max += $fetch_result['ev_weight'];
-                
-                
-                
-                
-        }//end of loop for synthesis tests.
-        
-        //analyse the synthesis results.
-        
-	if($points_max AND ///!= 0
-	$point_obtenus/$points_max < 0.6)//the cumulative is leseer than 60%...
-	{
-                if($point_obtenus/$points_max > 0.55)//grater than 55% but lesser than 60%.
-                {
-                        //return 55% for no revision of marks.
-                        $point_obtenus = 55;
-                        $points_max = 100;
-                }//end of between 55 - 60 check.
-	}//end of synthesis fail check.
-	
-        else//the student is good, the force is with him
-        {                         
-                /////////////////
-                //at this point, the student is courageous and has beated all synthesis exam,
-                //according to this fact, give him his ccumulative and enjoy it.
-                /////
-                //first off, get all final examens...
-                $point_obtenus = 0 ;
-                $points_max = 0 ;
-                
-                $query = "SELECT 
-		ev_score,
-		ev_weight,
-		ev_max	
-		
-                FROM 
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['user_evaluation_scores'].",
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['evaluations']."
-                WHERE
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['evaluations'].".ev_id=  ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['user_evaluation_scores'].".ev_id
-		AND
-		usr_id=$usr_id
-                AND
-                group_id=$group_id
-                AND
-                available = '1'
-                ";
-                
-                
-                $rs = $inicrond_db->Execute($query);
-                
-                while($fetch_result = $rs->FetchRow())//foreach evaluation I got.
-                {
-                        
-                        //if all synthesis pass 60, then return the ponderated mark.
-                        //else return the ponderate before the synthesis.
-                        //add the resultat pondere here to add the last column.
-                        
-                        
-                        
-                        $point_obtenus += ($fetch_result['ev_score']/$fetch_result['ev_max']*$fetch_result['ev_weight']);
-                        
-                        $points_max += $fetch_result['ev_weight'];
-                        
-                        //there is at last one stuff that is not ok.
-                        
-                        
-                        
-                }//end of loop for all tests.
-                
-                
-	}//the student can do synthesis.
-	
+            //if all synthesis pass 60, then return the ponderated mark.
+            //else return the ponderate before the synthesis.
+            //add the resultat pondere here to add the last column.
+
+            $point_obtenus += ($fetch_result['ev_score']/$fetch_result['ev_max']*$fetch_result['ev_weight']);
+
+            $points_max += $fetch_result['ev_weight'];
+
+            //there is at last one stuff that is not ok.
+
+        }//end of loop for all tests.
+
+    }//the student can do synthesis.
+
 }//end of code for the synthesis analysis because the student has been able to do it...
 
 ?>
