@@ -1,47 +1,29 @@
 <?php
-//$Id$
+/*
+    $Id$
+
+    Inicrond : Network of Interactive Courses Registred On a Net Domain
+    Copyright (C) 2004, 2005  Sébastien Boisvert
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
 
 if(!__INICROND_INCLUDED__)
 {
-        die("hacking attempt!!");
+    die("hacking attempt!!");
 }
-/*
-//----- ----------------------------------------------------------------
-//
-//
-//Fonction du fichier : formulaire ad d / edit section forum
-//
-//
-//Auteur : sebastien boisvert
-//email : sebhtml@users.sourceforge.net
-//site web : http://inicrond.sourceforge.net/
-//Projet : inicrond
-//
-//---------------------------------------------------------------------
-*/
-/*
-
-
-http://www.gnu.org/copyleft/gpl.html
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-
-
-*/
-// filtrage des données
-//include "includes/fonctions/fonctions_validation_inc.php";
 
 include __INICROND_INCLUDE_PATH__."includes/class/form/Form.class.php";
 
@@ -65,6 +47,6 @@ $my_text->set_text("&nbsp;");
 $my_text->validate();
 $my_form->add_base($my_text);
 
-$module_content .= $my_form->output();   
+$module_content .= $my_form->output();
 
 ?>

@@ -9,7 +9,7 @@
 	</head>
 
 
-	<frameset border="0" rows="60%,*">
+	<frameset border="0" rows="100%,*">
 		<frame noresize  src="flash2.php?chapitre_media_id={$chapitre_media_id}" />
 
   		<frame name="mytarget" src="includes/index.html" />

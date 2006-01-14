@@ -1,50 +1,67 @@
 <?php
+/*
+    $Id$
 
+    Inicrond : Network of Interactive Courses Registred On a Net Domain
+    Copyright (C) 2004, 2005  Sébastien Boisvert
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
+/*
+Changes :
+
+december 15, 2005
+        I formated the code correctly.
+
+                --sebhtml
+
+*/
 //error_reporting(E_ALL & ~E_NOTICE);
 
-function userErrorHandler($errno, $errmsg, $filename, $linenum, $vars)
+function
+user_error_handler ($errno, $errmsg, $filename, $linenum, $vars)
 {
-global $_RUN_TIME;
+    $errors[E_ERROR] = "E_ERROR";
+    $errors[E_WARNING] = "E_WARNING";
+    $errors[E_PARSE] = "E_PARSE";
+    $errors[E_NOTICE] = "E_NOTICE";
+    $errors[E_CORE_ERROR] = "E_CORE_ERROR";
+    $errors[E_CORE_WARNING] = "E_CORE_WARNING";
+    $errors[E_COMPILE_ERROR] = "E_COMPILE_ERROR";
+    $errors[E_COMPILE_WARNING] = "E_COMPILE_WARNING";
+    $errors[E_USER_WARNING] = "E_USER_WARNING";
+    $errors[E_USER_ERROR] = "E_USER_ERROR";
+    $errors[E_USER_NOTICE] = "E_USER_NOTICE";
+    $errors[E_ALL] = "E_ALL";
+    //$errors[E_STRICT] = "E_STRICT";
 
-    $errors[1] = "E_ERROR";
-  $errors[2] = "E_WARNING";
-   $errors[4] = "E_PARSE";
-    $errors[8] = "E_NOTICE";
-     $errors[16] = "E_CORE_ERROR";
-  $errors[32] = "E_CORE_WARNING";
-   $errors[64] = "E_COMPILE_ERROR";
-$errors[128] = "E_COMPILE_WARNING";
-    $errors[256] = "E_USER_WARNING";
-     $errors[512] = "E_USER_ERROR";
-      $errors[1024] = "E_USER_NOTICE";   
-       $errors[2047] = "E_ALL";
-   $errors[2048] = "E_STRICT";
-
- 
-   
-   if($errno != 2048//E_STRICT
-    AND $errno != 8//E_NOTICE
-    )
-   {
-
-echo "
-Error type : ".$errors[$errno]."<br />
-Error # : $errno<br />
-Error msg : $errmsg<br />
-File : $filename<br />
-Line $linenum<br />
-Variables : $vars<br />
-<hr />";
-
-
-/*
- error_log($err, 3, __INICROND_INCLUDE_PATH__."php_errors/".date("Y-m-d_H:i:s_(T)").md5(rand(0, 1000)).".log");
-   */   
-   
-       }
-
+    if ($errno != E_NOTICE)
+    {
+        echo "
+        <span style=\"color: red;\">
+        <h1>Error type : ".$errors[$errno]." (".$errno.")</h1>
+        Error # : $errno<br />
+        <i>Error msg : $errmsg</i><br />
+        File : $filename<br />
+        Line $linenum<br />
+        Variables : $vars<br />
+        </span>
+        <hr />";
+    }
 }
 
-$old_error_handler = set_error_handler("userErrorHandler");
+$old_error_handler = set_error_handler("user_error_handler");
 
 ?>

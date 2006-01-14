@@ -1,20 +1,35 @@
 <?php
+/*
+    $Id$
 
-// lang_file : modules/course_admin/includes/languages/fr-ca/lang.php
-// language : fr-ca
-// Fri,  9 Sep 2005 23:57:26 +0000
+    Inicrond : Network of Interactive Courses Registred On a Net Domain
+    Copyright (C) 2004, 2005, 2006  SÃ©bastien Boisvert
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
 
 $_LANG['allow_all_inodes'] = 'Activer tout le contenu';
-$_LANG['bdcf008ac5fd7b4a21b0ca57b1cfaa36'] = '';
 $_LANG['count_course_elements'] = 'Nombre de choses';
-$_LANG['course_admin_check_signin_error'] = 'Éléments non uniques';
-$_LANG['course_admin_listing'] = 'Énumération des éléments';
-$_LANG['disallow_all_inodes'] = 'Désactiver tout le contenu';
+$_LANG['course_admin_check_signin_error'] = 'Ã‰lÃ©ments non uniques';
+$_LANG['course_admin_listing'] = 'Ã‰numÃ©ration des Ã©lÃ©ments';
+$_LANG['disallow_all_inodes'] = 'DÃ©sactiver tout le contenu';
 $_LANG['do_you_want_to_proceed'] = 'Voulez-vous vraiment continuer?';
 $_LANG['list_directories'] = 'Sections';
-$_LANG['list_double_emails'] = 'Énumérer les utilisateurs avec un courriel non unique';
-$_LANG['list_double_firstnames'] = 'Énumérer les utilisateurs avec un prénom non unique';
-$_LANG['list_double_lastnames'] = 'Énumérer les utilisateurs avec un nom non unique';
+$_LANG['list_double_emails'] = 'Ã‰numÃ©rer les utilisateurs avec un courriel non unique';
+$_LANG['list_double_firstnames'] = 'Ã‰numÃ©rer les utilisateurs avec un prÃ©nom non unique';
+$_LANG['list_double_lastnames'] = 'Ã‰numÃ©rer les utilisateurs avec un nom non unique';
 $_LANG['list_files'] = 'Fichiers';
 $_LANG['list_flashes'] = 'Animations Flash';
 $_LANG['list_images'] = 'Images';

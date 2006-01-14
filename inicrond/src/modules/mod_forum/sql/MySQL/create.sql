@@ -1,10 +1,24 @@
 # $Id$
 
 
+CREATE TABLE forum_subscription (
+  usr_id int(10) unsigned default NULL,
+  forum_discussion_id int(10) unsigned default NULL,
+  KEY usr_id (usr_id),
+  KEY forum_discussion_id (forum_discussion_id)
+) TYPE=MyISAM;
 
--- 
+CREATE TABLE thread_subscription (
+  usr_id int(10) unsigned default NULL,
+  forum_sujet_id int(10) unsigned default NULL,
+  KEY usr_id (usr_id),
+  KEY forum_sujet_id (forum_sujet_id)
+) TYPE=MyISAM;
+
+
+--
 -- Table structure for table `ooo_sections_groups_view`
--- 
+--
 
 CREATE TABLE sections_groups_view (
   forum_section_id int(10) unsigned default NULL,
@@ -15,9 +29,9 @@ CREATE TABLE sections_groups_view (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `ooo_sebhtml_moderators`
--- 
+--
 
 CREATE TABLE sebhtml_moderators (
   forum_discussion_id int(10) unsigned default NULL,
@@ -29,9 +43,9 @@ CREATE TABLE sebhtml_moderators (
 -- --------------------------------------------------------
 
 
--- 
+--
 -- Table structure for table `ooo_sebhtml_forum_discussions`
--- 
+--
 
 CREATE TABLE sebhtml_forum_discussions (
   forum_discussion_id int(10) unsigned NOT NULL auto_increment,
@@ -45,9 +59,9 @@ CREATE TABLE sebhtml_forum_discussions (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `ooo_sebhtml_forum_messages`
--- 
+--
 
 CREATE TABLE sebhtml_forum_messages (
   forum_message_id int(10) unsigned NOT NULL auto_increment,
@@ -66,9 +80,9 @@ CREATE TABLE sebhtml_forum_messages (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `ooo_sebhtml_forum_sections`
--- 
+--
 
 CREATE TABLE sebhtml_forum_sections (
   forum_section_id int(10) unsigned NOT NULL auto_increment,
@@ -81,9 +95,9 @@ CREATE TABLE sebhtml_forum_sections (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `ooo_sebhtml_forum_sujets`
--- 
+--
 
 CREATE TABLE sebhtml_forum_sujets (
   forum_sujet_id int(10) unsigned NOT NULL auto_increment,
@@ -96,10 +110,9 @@ CREATE TABLE sebhtml_forum_sujets (
 -- --------------------------------------------------------
 
 
-
--- 
+--
 -- Table structure for table `ooo_views_of_threads`
--- 
+--
 
 CREATE TABLE views_of_threads (
   forum_sujet_id int(10) unsigned default NULL,
@@ -110,9 +123,9 @@ CREATE TABLE views_of_threads (
 ) TYPE=MyISAM;
 
 
--- 
+--
 -- Table structure for table `ooo_forums_groups_reply`
--- 
+--
 
 CREATE TABLE forums_groups_reply (
   forum_discussion_id int(10) unsigned default NULL,
@@ -123,9 +136,9 @@ CREATE TABLE forums_groups_reply (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `ooo_forums_groups_start`
--- 
+--
 
 CREATE TABLE forums_groups_start (
   forum_discussion_id int(10) unsigned default NULL,
@@ -136,9 +149,9 @@ CREATE TABLE forums_groups_start (
 
 -- --------------------------------------------------------
 
--- 
+--
 -- Table structure for table `ooo_forums_groups_view`
--- 
+--
 
 CREATE TABLE forums_groups_view (
   forum_discussion_id int(10) unsigned default NULL,

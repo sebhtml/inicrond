@@ -1,0 +1,4 @@
+How to prune directories with cvs ?
+
+cvs update -P <directory to prune>
+
