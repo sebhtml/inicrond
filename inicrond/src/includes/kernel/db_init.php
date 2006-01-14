@@ -23,14 +23,14 @@
 Changes :
 
 december 15, 2005
-	I formated the code correctly.
-	
-		--sebhtml
+        I formated the code correctly.
+
+                --sebhtml
 
 */
 if(!__INICROND_INCLUDED__)
 {
-	exit () ;
+        exit () ;
 }
 
 include __INICROND_INCLUDE_PATH__.$_OPTIONS["file_path"]["db_config"];
@@ -45,7 +45,7 @@ Officially, inicrond only supports MySQL
 On the other hand, you can try at your own risks postgreSQL or sqLITE
 I just don't think that the create queries will do the job...
 
-	-- sebhtml, december 15, 2005
+        -- sebhtml, december 15, 2005
 */
 /*
 //adodb here...
@@ -53,7 +53,7 @@ I just don't think that the create queries will do the job...
 include __INICROND_INCLUDE_PATH__.'libs/adodb/adodb.inc.php';
 
 
-      
+
 $inicrond_db = &ADONewConnection($_OPTIONS['SGBD']);  # create a connection
 $inicrond_db->$connect_type(
 $_OPTIONS['sql_server_name'],
@@ -65,19 +65,19 @@ $inicrond_db->SetFetchMode(ADODB_FETCH_ASSOC);
 */
 
 //my own class that are mysql only, but faster...
-//////////////////////////////////////////////////////////BEGIN FOR INICROND_DB		//$$$_+___--
-											//$$$_+___--
-include __INICROND_INCLUDE_PATH__.'includes/class/Inicrond_mysql_db.class.php';      	//$$$_+___--
-											//$$$_+___--
-$inicrond_db = new Inicrond_mysql_db ;							//$$$_+___--
-											//$$$_+___--
-$inicrond_db->$connect_type(								//$$$_+___--
-$_OPTIONS['sql_server_name'],								//$$$_+___--
-$_OPTIONS['sql_user_name'],								//$$$_+___--
-$_OPTIONS['sql_user_password'],								//$$$_+___--
-$_OPTIONS['sql_database_name']								//$$$_+___--
-);											//$$$_+___--
-											//$$$_+___--
-//////////////////////////////////////////////////////////END FOR INICROND_DB		//$$$_+___--
+
+//////////////////////////////////////////////////////////BEGIN FOR INICROND_DB
+
+include __INICROND_INCLUDE_PATH__.'includes/class/Inicrond_mysql_db.class.php';
+
+$inicrond_db = new Inicrond_mysql_db ;
+
+$inicrond_db->$connect_type(
+$_OPTIONS['sql_server_name'],
+$_OPTIONS['sql_user_name'],
+$_OPTIONS['sql_user_password'],
+$_OPTIONS['sql_database_name']
+);
+
 
 ?>

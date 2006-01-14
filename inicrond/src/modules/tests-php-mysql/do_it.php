@@ -30,7 +30,7 @@ $smarty->assign("_LANG", $_LANG);
 include "includes/functions/random.func.php";
 include "includes/functions/access.function.php";//fonction pour savoir si un edutiant peut faire un test
 include "includes/functions/conversion.function.php";//conversions...
-include __INICROND_INCLUDE_PATH__'modules/tests-php-mysql/includes/constants/q_type.php' ;
+include __INICROND_INCLUDE_PATH__.'modules/tests-php-mysql/includes/constants/q_type.php' ;
 
 //conversions...
 //peut faire un test.
