@@ -76,7 +76,7 @@ drop_a_java_identifications_on_a_figure ($inode_id, $_OPTIONS, $inicrond_db)
 
     $query = '
     delete from
-    '.$_OPTIONS['table_prefix'].'java_identification_on_a_figure_label
+    '.$_OPTIONS['table_prefix'].'java_identifications_on_a_figure_label
     where
     inode_id = '.$inode_id.'
     ' ;

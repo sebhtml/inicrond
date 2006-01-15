@@ -21,3 +21,4 @@ This is my release procedure.
 * sourceforge release
 * compare the file size to be sure ...
 * freshmeat release
+* add the new version to the sourceforge trackers
