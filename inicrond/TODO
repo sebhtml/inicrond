@@ -1,6 +1,5 @@
 * module to list inode that are not referenced in admin ...
-* add foreign keys
-* add  ENGINE=InnoDB DEFAULT ; to all tables ...
+
 * add CHARSET=utf8 to all tables.
 
 * java :

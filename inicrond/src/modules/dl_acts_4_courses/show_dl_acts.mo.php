@@ -125,8 +125,11 @@ if(isset($_GET['usr_id']) && $_GET['usr_id'] != "" && (int) $_GET['usr_id'] && !
     FROM
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].",
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].",
-    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time']."
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].",
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
     WHERE
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['courses_files'].".inode_id
+    and
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].".session_id
     and
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id=".$_GET['usr_id']."
@@ -136,7 +139,7 @@ if(isset($_GET['usr_id']) && $_GET['usr_id'] != "" && (int) $_GET['usr_id'] && !
 
     if(isset($_GET['cours_id']) && $_GET['cours_id'] != "" && (int) $_GET['cours_id'])
     {
-            $query .= " AND ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=".$_GET['cours_id'];
+        $query .= " AND ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=".$_GET['cours_id'];
     }
 
     $tableX = array(array($_LANG['file_name']));
@@ -183,14 +186,11 @@ elseif(isset($_GET['group_id']) && $_GET['group_id'] != "" && (int) $_GET['group
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs'].".usr_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id
     AND
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".usr_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs'].".usr_id
-    AND
-    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].".usr_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['groups_usrs'].".usr_id
     and
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['acts_of_downloading'].".session_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['online_time'].".session_id
     ";
 
     $base .= "&group_id=".$_GET['group_id'];
-
 
     $query = "
     SELECT

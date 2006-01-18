@@ -47,7 +47,7 @@ test_2_cours($test_id)
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].",
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements']."
     WHERE
-    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id
+    ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id
     and
     test_id=$test_id
     ";

@@ -85,7 +85,6 @@ if(isset($_GET['join']))//join the query with a usr or a group...
 
         $module_content .= "<a href=\"".__INICROND_INCLUDE_PATH__."modules/tests-results/attempts_graphic.php?usr_id=".$_GET['usr_id']."&test_id=".$_GET['test_id']."\" >".$_LANG['attempts_graphic']."</a><br />";
 
-
         $query_result33 = $inicrond_db->Execute($query33);
         $fetch_result33 = $query_result33->FetchRow();
 
@@ -97,7 +96,7 @@ if(isset($_GET['join']))//join the query with a usr or a group...
         //end of : the name of the usr that you want...
 
         $WHERE_CLAUSE .= "
-        AND ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results'].".usr_id=".$_GET['usr_id']."
+        AND ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].".usr_id=".$_GET['usr_id']."
         ";
     }
     elseif(isset($_GET['group_id']) && $_GET['group_id'] != "" && (int) $_GET['group_id']

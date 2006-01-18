@@ -74,6 +74,8 @@ Activities_report
             ".$_OPTIONS['table_prefix'].$_OPTIONS['tables'][$this->elements_table_name].".inode_id
             AND
             ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".cours_id=".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['cours'].".cours_id
+            and
+            ".$this->field_id_name."=".$_GET[$this->field_id_name]."
             ";
 
             $query_result = $inicrond_db->Execute($query);
@@ -156,6 +158,7 @@ Activities_report
                             ".$this->extra_where_clause_for_check."
                             ";
                     }
+
 
                     $query_result2 = $inicrond_db->Execute($query);
                     $fetch_result2 = $query_result2->FetchRow();

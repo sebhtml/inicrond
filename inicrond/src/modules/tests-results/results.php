@@ -94,7 +94,6 @@ FROM
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].",
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests']."";
 
-
 $WHERE_CLAUSE = "
 WHERE
 ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['tests'].".inode_id = ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['inode_elements'].".inode_id
