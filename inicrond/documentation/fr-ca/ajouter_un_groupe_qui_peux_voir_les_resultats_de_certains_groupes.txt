@@ -17,3 +17,12 @@ Sélectionner le bon groupe
 Voilà!!
 
 Pour qu'une personne puisse s'ajouter dans ce groupe, elle doit utiliser le lien Mes groupes en haut dans le menu.
+
+
+POUR PERMETTRE DE VOIR LES RÉSULTATS DES ÉTUDIANTS :
+
+Retourner dans la page principale du cours
+Utilisateurs dans ce cours
+Dans la section "Personnes étudiantes", pour le groupe d'étudiantes et d'étudiants concernés.
+Cliquer sur modifier (voir l'image groupes_en_charge-inicrond-v_3_3_3_XXXXXXXX.png)
+Ensuite, choisir les groupes...
