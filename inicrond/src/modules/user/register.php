@@ -248,16 +248,16 @@ if(!isset($_SESSION['usr_id']))//création de personnages
                 $register_random_validation = hex_gen_32();//hexadecimal string
 
                 $query = "UPDATE
-                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs']."
+                using
+                ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].",
                 SET
-                register_random_validation='$register_random_validation',
-                usr_activation=0
+                usr_activation = '0'
                 WHERE
                 usr_id=$usr_id";
 
                 $query = '
                 insert into
-                '.$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].'
+                '.$_OPTIONS['table_prefix'].$_OPTIONS['tables']['register_random_validation'].'
                 (usr_id, register_random_validation)
                 values
                 ('.$usr_id.', \''.$register_random_validation.'\')
