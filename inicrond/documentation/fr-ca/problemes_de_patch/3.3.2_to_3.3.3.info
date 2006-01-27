@@ -1,0 +1,13 @@
+# Les problèmes de migration à l'unicode sous MySQL sont les suivants :
+
+##############
+# les ’ ne sont pas affichés, le code n'est probablement pas le bon
+#pour régler les ’, il faut faire cela :
+
+update `ooo_answers`
+set
+answer_name = replace (answer_name, '’', '\'')
+where
+answer_id = 6
+
+##############
