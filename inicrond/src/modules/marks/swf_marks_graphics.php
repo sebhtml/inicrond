@@ -28,7 +28,7 @@ include 'includes/languages/'.$_SESSION['language'].'/lang.php';//include lang f
 //require lang variables.
 include __INICROND_INCLUDE_PATH__."modules/courses/includes/functions/transfert_cours.function.php";
 
-if(is_teacher_of_cours($_SESSION['usr_id'],chapitre_media_to_cours($_GET['chapitre_media_id'])s))
+if(is_teacher_of_cours($_SESSION['usr_id'],chapitre_media_to_cours($_GET['chapitre_media_id'])))
 {
         $module_title =  $_LANG['swf_marks_graphics'];
         $module_content = "";
