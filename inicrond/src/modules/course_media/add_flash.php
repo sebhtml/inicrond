@@ -28,7 +28,8 @@ include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 include __INICROND_INCLUDE_PATH__."modules/marks/includes/languages/".$_SESSION['language'].'/lang.php';
 include __INICROND_INCLUDE_PATH__."modules/courses/includes/functions/transfert_cours.function.php";//transfer IDs
 
-if (isset($_GET['cours_id']) && $_GET['cours_id'] != "" && (int) $_GET['cours_id'] && isset($_GET['inode_id_location']) && $_GET['inode_id_location'] != ""
+if (isset($_GET['cours_id']) && $_GET['cours_id'] != "" && (int) $_GET['cours_id']
+&& isset($_GET['inode_id_location']) && $_GET['inode_id_location'] != ''
 && (inode_to_course($_GET['inode_id_location']) == $_GET['cours_id'] || $_GET['inode_id_location'] == 0)
 && is_teacher_of_cours($_SESSION['usr_id'], $_GET['cours_id']))//ajouter
 {

@@ -3,7 +3,7 @@
     $Id$
 
     Inicrond : Network of Interactive Courses Registred On a Net Domain
-    Copyright (C) 2004, 2005, 2006  Sébastien Boisvert
+    Copyright (C) 2004, 2005  Sébastien Boisvert
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,26 +19,36 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
-/*
-Changes :
 
-december 15, 2005
-        I formated the code correctly.
+function
+list_lost_inodes_lost_virtual_directories ($_OPTIONS, $inicrond_db)
+{
+    $query = 'SELECT
+    dir_id as id,
+    dir_name as title
+    FROM '.$_OPTIONS['table_prefix'].'virtual_directories AS t1
+    WHERE  NOT
+    EXISTS (
+    SELECT inode_id
+    FROM '.$_OPTIONS['table_prefix'].'inode_elements
+    WHERE '.$_OPTIONS['table_prefix'].'inode_elements.inode_id = t1.inode_id
+    )' ;
 
-                --sebhtml
 
-*/
-define('APPLICATION_UNIX_NAME', 'inicrond');
-define('APPLICATION_MAJOR_VERSION', 3);
-define('APPLICATION_MINOR_VERSION', 3);
-define('APPLICATION_RELEASE_NUMBER', 3);
-define('APPLICATION_EXTRA_VERSION_TEXT', '');
-define('APPLICATION_DEVEL_WEB_SITE', 'http://'.APPLICATION_UNIX_NAME.'.sourceforge.net/');
+    $output = array () ;
 
-/*
-define('APPLICATION_COMPLETE_RELEASE_NAME', APPLICATION_UNIX_NAME.' '.APPLICATION_MAJOR_VERSION.'.'.APPLICATION_MINOR_VERSION.'.'.APPLICATION_RELEASE_NUMBER.APPLICATION_EXTRA_VERSION_TEXT);
-*/
+    $rs = $inicrond_db->Execute ($query) ;
 
-define ('APPLICATION_COMPLETE_RELEASE_NAME', 'inicrond-3_3_3_20060128-spockcorgis') ;
+    $i = 0 ;
+
+    while ($row = $rs->fetchRow ())
+    {
+        $output[$i] = $row ;
+
+        ++ $i ;
+    }
+
+    return $output ;
+}
 
 ?>

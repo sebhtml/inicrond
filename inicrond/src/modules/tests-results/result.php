@@ -194,6 +194,8 @@ if($is_in_charge_of_user && can_usr_check_sheet($_SESSION['usr_id'], $_GET['resu
 
                 $question["q_num"] = $q_num ;
 
+                $question["question_id"] = $fetch_result["question_id"] ;
+
                 //la question
 
                 $question["correcting_method"] =        ($fetch_result["correcting_method"]);
@@ -365,7 +367,6 @@ if($is_in_charge_of_user && can_usr_check_sheet($_SESSION['usr_id'], $_GET['resu
                         $question["your_points"] = 0 ;
                         while($it = $query_result_2->FetchRow())
                         {
-
                                 $question['points'] += $it['pts_amount_for_good_answer'];
                         }
                     }
@@ -396,7 +397,8 @@ if($is_in_charge_of_user && can_usr_check_sheet($_SESSION['usr_id'], $_GET['resu
                         $answer = array();
 
                         if (preg_match($fetch_result_2["short_answer_name"], $short_answer)
-                        || preg_match(undohtmlentities ($fetch_result_2["short_answer_name"]), $short_answer))
+                        || preg_match(undohtmlentities ($fetch_result_2["short_answer_name"]), $short_answer)
+                        || preg_match($fetch_result_2["short_answer_name"], undohtmlentities($short_answer)))
                         {
                             $answer["is_good"] = true;
                         }
@@ -463,11 +465,13 @@ if($is_in_charge_of_user && can_usr_check_sheet($_SESSION['usr_id'], $_GET['resu
                     echo '$fetch_result["short_answer"] '.$fetch_result["short_answer"]. "<br />\n" ;
                     echo '$fetch_result_2["short_answer"] '. $fetch_result_2["short_answer"]."<br />\n" ;
                     echo 'undohtmlentities ($fetch_result["short_answer"] '.undohtmlentities ($fetch_result["short_answer"]). "<br />\n" ;
+                    echo 'undohtmlentities ($fetch_result_2["short_answer"] '.undohtmlentities ($fetch_result_2["short_answer"]). "<br />\n" ;
                     */
 
                     //preg_match correction...
                     if(preg_match($fetch_result["short_answer"], $fetch_result_2["short_answer"])
-                    || preg_match(undohtmlentities ($fetch_result["short_answer"]), $fetch_result_2["short_answer"]))//r�onse mauvaise
+                    || preg_match(undohtmlentities ($fetch_result["short_answer"]), $fetch_result_2["short_answer"])
+                    || preg_match($fetch_result["short_answer"], undohtmlentities($fetch_result_2["short_answer"])))
                     {
                         $question["is_good"] = 1;
                         $question["your_points"] = $fetch_result["good_points"];

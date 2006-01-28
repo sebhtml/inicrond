@@ -1,4 +1,4 @@
-ADOdb 
+ADOdb
 V4.62 2 Apr 2005
 http://adodb.sourceforge.net/
 BSD license and Lesser GPL library license
@@ -18,7 +18,6 @@ http://smarty.php.net/
 GNU Lesser General Public
 Andrei Zmievski and Monte Ohrt
 copyright 2001-2005 New Digital Group, Inc
-
 
 PEAR
 http://pear.php.net/
@@ -47,9 +46,9 @@ Laurent Laville
 Math_Stats (PEAR)
 http://pear.php.net/
 PHP license
-Jesus M. Castagnetto 
+Jesus M. Castagnetto
 
 Math_Histogram (PEAR)
 http://pear.php.net/
 PHP license
-Jesus M. Castagnetto 
+Jesus M. Castagnetto

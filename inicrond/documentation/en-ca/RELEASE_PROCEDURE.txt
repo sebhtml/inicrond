@@ -9,16 +9,20 @@ This is my release procedure.
 * update the version constants.
 
 * update the tag file.
+* do a cvs update to see what is not in the cvs tree
 
-* commit with release announcement
+* commit with release announcement (including the tag name)
 * tag the files
         cvs tag <tag_name> *
 
 * export the files
         sh export_cvs.sh <tag_name>
-* sign the 3 files ...
+* sign the 3 files ... (.tar.bz2, .tar.gz, .zip)
+
+        <command here lol>
 
 * sourceforge release
 * compare the file size to be sure ...
 * freshmeat release
 * add the new version to the sourceforge trackers
+* publish the new schema in htdocs

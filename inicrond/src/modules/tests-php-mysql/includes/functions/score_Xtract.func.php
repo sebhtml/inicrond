@@ -205,7 +205,8 @@ function score_that_you_obtained($result_id)
                     */
 
                     if(!(preg_match($fetch_result411["short_answer_name"], $short_answer)
-                    || preg_match (undohtmlentities($fetch_result411["short_answer_name"]), $short_answer)))
+                    || preg_match (undohtmlentities($fetch_result411["short_answer_name"]), $short_answer)
+                    || preg_match ($fetch_result411["short_answer_name"], undohtmlentities ($short_answer))))
                     {
                         $count_good_question -= $fetch_result["good_points"];
                         $count_good_question += $fetch_result["bad_points"];
@@ -232,7 +233,8 @@ function score_that_you_obtained($result_id)
                 while($fetch_result_2 = $query_result_2->FetchRow())//pop un # num�o d'exercice...
                 {
                     if(preg_match($fetch_result_2["short_answer_name"], $short_answer)
-                    || preg_match(undohtmlentities($fetch_result_2["short_answer_name"]), $short_answer))
+                    || preg_match(undohtmlentities($fetch_result_2["short_answer_name"]), $short_answer)
+                    || preg_match ($fetch_result411["short_answer_name"], undohtmlentities ($short_answer)))
                     {
                         $count_good_question += $fetch_result_2['pts_amount_for_good_answer'];
                     }
@@ -263,7 +265,8 @@ function score_that_you_obtained($result_id)
             $fetch_result_2 = $query_result_3->FetchRow();
 
             if(preg_match($fetch_result["short_answer"], $fetch_result_2["short_answer"])
-            || preg_match(undohtmlentities($fetch_result["short_answer"]), $fetch_result_2["short_answer"]))
+            || preg_match(undohtmlentities($fetch_result["short_answer"]), $fetch_result_2["short_answer"])
+            || preg_match ($fetch_result["short_answer"], undohtmlentities ($fetch_result_2["short_answer"])))
             {
                 $count_good_question +=  $fetch_result["good_points"];//bonne r�onse.
             }

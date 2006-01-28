@@ -71,4 +71,17 @@ $_LANG['UtilisateurExistePas'] = 'L\'utilisateur n\'est pas valide';
 $_LANG['virtual_addr'] = 'Adresse du site avec le slash à la fin';
 $_LANG['weeks'] = 'semaines';
 
+$_LANG['list_lost_inodes'] = 'Énumérer les noeuds perdus';
+
+$_LANG['list_lost_inodes_lost_chapitre_media'] = 'Énumérer les animations flash perdues';
+$_LANG['list_lost_inodes_lost_courses_files'] = 'Énumérer les fichiers perdus';
+$_LANG['list_lost_inodes_lost_inicrond_images'] = 'Énumérer les images perdus';
+$_LANG['list_lost_inodes_lost_inicrond_texts'] = 'Énumérer les textes perdus';
+$_LANG['list_lost_inodes_lost_java_identifications_on_a_figure'] = 'Énumérer les identifications sur figure java perdus';
+$_LANG['list_lost_inodes_lost_tests'] = 'Énumérer les tests en php perdus';
+$_LANG['list_lost_inodes_lost_virtual_directories'] = 'Énumérer les sections perdues';
+
+$_LANG['id'] = 'ID';
+$_LANG['title'] = 'Titre';
+
 ?>

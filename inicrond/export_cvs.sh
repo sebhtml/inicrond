@@ -1,25 +1,16 @@
 #$Id$
-#
-# how to release a new version ::
-#
-#  cvs tag <tag_name> *
-# sh export_cvs.sh <tag_name>
-#
-#
-#update the version in php file and here...
-#
-#
+
 VERSION=$1
 
 export CVSROOT=":ext:sebhtml@cvs.sf.net:/cvsroot/inicrond" #the root for cvs
 
-CHANGE_LOG_FILE="Changelog.txt" #change log path
+CHANGE_LOG_FILE="ChangeLog" #change log path
 
 date > $CHANGE_LOG_FILE # jI put the date in it.
 
 PROG_NAME="inicrond" #prog name
 
-echo "$PROG_NAME $VERSION" >> $CHANGE_LOG_FILE
+echo "$VERSION" >> $CHANGE_LOG_FILE
 
 ./cvs2cl.pl --hide-filenames --tags --stdout >> $CHANGE_LOG_FILE #do the Changelog
 
@@ -47,34 +38,33 @@ cvs export -r $VERSION $PROG_NAME  #export the tag
 
  #la version.
 
-if test -d ../$PROG_NAME-$VERSION ; then #if the dir exists
-rm -R ../$PROG_NAME-$VERSION #remove it
+DIR_NAME=$VERSION
+
+if test -d ../$DIR_NAME ; then #if the dir exists
+rm -R ../$DIR_NAME #remove it
 fi
 
-mv $PROG_NAME ../$PROG_NAME-$VERSION #move it back.
+mv $PROG_NAME ../$DIR_NAME #move it back.
 
 cd .. #go back
 
 rmdir export #remove the export dir
 
-cd $PROG_NAME-$VERSION #go in to the exported version
+cd $DIR_NAME #go in to the exported version
 
-mv ../$CHANGE_LOG_FILE documentation/en-ca/ #move the change log
+mv ../$CHANGE_LOG_FILE . #move the change log
 
-LINES_COUNT_FILE="documentation/en-ca/Lines_count.txt"
-
-/usr/bin/php linescounter.php   --project . > $LINES_COUNT_FILE #to the linecount for fun.
 
 cd .. # exit the new version directory.
 
 #create the archives
-tar cvf $PROG_NAME-$VERSION".tar" $PROG_NAME-$VERSION #tar the fdir
-gzip -9 $PROG_NAME-$VERSION".tar" #gzip the file.
-md5sum $PROG_NAME-$VERSION".tar.gz" > $PROG_NAME-$VERSION".tar.gz.md5"
+tar cvf $DIR_NAME".tar" $DIR_NAME #tar the fdir
+gzip -9 $DIR_NAME".tar" #gzip the file.
+md5sum $DIR_NAME".tar.gz" > $DIR_NAME".tar.gz.md5"
 
-tar cvf $PROG_NAME-$VERSION".tar" $PROG_NAME-$VERSION #tar the fdir
-bzip2 -9 $PROG_NAME-$VERSION".tar" #bzip2 the file.
-md5sum $PROG_NAME-$VERSION".tar.bz2" > $PROG_NAME-$VERSION".tar.bz2.md5"
+tar cvf $DIR_NAME".tar" $DIR_NAME #tar the fdir
+bzip2 -9 $DIR_NAME".tar" #bzip2 the file.
+md5sum $DIR_NAME".tar.bz2" > $DIR_NAME".tar.bz2.md5"
 
-zip -r $PROG_NAME-$VERSION $PROG_NAME-$VERSION
-md5sum $PROG_NAME-$VERSION".zip" > $PROG_NAME-$VERSION".zip.md5"
+zip -r $DIR_NAME $DIR_NAME
+md5sum $DIR_NAME".zip" > $DIR_NAME".zip.md5"

@@ -39,6 +39,12 @@ include __INICROND_INCLUDE_PATH__."modules/tests-results/includes/functions/conv
 include __INICROND_INCLUDE_PATH__."modules/courses/includes/functions/is_in_inode_group.php";//transfer IDs
 include __INICROND_INCLUDE_PATH__."modules/tests-php-mysql/includes/functions/test_id_2_inode_id.php";//transfer IDs
 
+include __INICROND_INCLUDE_PATH__.'modules/tests-results/includes/classes/TestResult.php' ;
+
+include __INICROND_INCLUDE_PATH__.'modules/tests-php-mysql/includes/constants/q_type.php' ;
+include __INICROND_INCLUDE_PATH__.'modules/tests-php-mysql/includes/constants/correcting_method.php' ;
+
+
 if(isset($_GET['test_id']) && $_GET['test_id']!="" && (int)$_GET['test_id']
 && is_in_inode_group($_SESSION['usr_id'], test_id_2_inode_id($_GET['test_id'])))//verify here...
 {
@@ -431,6 +437,8 @@ if(isset($_GET['test_id']) && $_GET['test_id']!="" && (int)$_GET['test_id']
         //send the result to the database.
         include "includes/functions/score_Xtract.func.php";
         //end of it...
+
+        //echo $_POST['result_id'] ;
 
         update_result($_POST['result_id']);//update the marks in the database...
 

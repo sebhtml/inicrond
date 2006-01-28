@@ -3,7 +3,7 @@
     $Id$
 
     Inicrond : Network of Interactive Courses Registred On a Net Domain
-    Copyright (C) 2004, 2005, 2006  Sébastien Boisvert
+    Copyright (C) 2004, 2005  Sébastien Boisvert
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,26 +19,38 @@
     along with this program; if not, write to the Free Software
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
-/*
-Changes :
 
-december 15, 2005
-        I formated the code correctly.
+function
+list_lost_inodes_lost_java_identifications_on_a_figure ($_OPTIONS, $inicrond_db)
+{
+    $query = '
+    SELECT
+    inode_id as id,
+    title
+    FROM '.$_OPTIONS['table_prefix'].'java_identifications_on_a_figure AS t1
+    WHERE  NOT
+    EXISTS (
 
-                --sebhtml
+    SELECT inode_id
+    FROM '.$_OPTIONS['table_prefix'].'inode_elements
+    WHERE '.$_OPTIONS['table_prefix'].'inode_elements.inode_id = t1.inode_id
+    )' ;
 
-*/
-define('APPLICATION_UNIX_NAME', 'inicrond');
-define('APPLICATION_MAJOR_VERSION', 3);
-define('APPLICATION_MINOR_VERSION', 3);
-define('APPLICATION_RELEASE_NUMBER', 3);
-define('APPLICATION_EXTRA_VERSION_TEXT', '');
-define('APPLICATION_DEVEL_WEB_SITE', 'http://'.APPLICATION_UNIX_NAME.'.sourceforge.net/');
 
-/*
-define('APPLICATION_COMPLETE_RELEASE_NAME', APPLICATION_UNIX_NAME.' '.APPLICATION_MAJOR_VERSION.'.'.APPLICATION_MINOR_VERSION.'.'.APPLICATION_RELEASE_NUMBER.APPLICATION_EXTRA_VERSION_TEXT);
-*/
+    $output = array () ;
 
-define ('APPLICATION_COMPLETE_RELEASE_NAME', 'inicrond-3_3_3_20060128-spockcorgis') ;
+    $rs = $inicrond_db->Execute ($query) ;
+
+    $i = 0 ;
+
+    while ($row = $rs->fetchRow ())
+    {
+        $output[$i] = $row ;
+
+        ++ $i ;
+    }
+
+    return $output ;
+}
 
 ?>

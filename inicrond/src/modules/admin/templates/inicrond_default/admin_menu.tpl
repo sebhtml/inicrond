@@ -25,6 +25,8 @@
 {$CAN_SEE_GRPS}<br />
 {/if}
 
+<a href="list_lost_inodes.php">{$_LANG.list_lost_inodes}</a><br />
+
 {if $CAN_VIEW_USRS != ""}
 {$CAN_VIEW_USRS}<br />
 {/if}

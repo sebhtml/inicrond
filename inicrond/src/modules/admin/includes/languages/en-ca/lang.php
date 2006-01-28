@@ -71,4 +71,17 @@ $_LANG['UtilisateurExistePas'] = 'Invalid user';
 $_LANG['virtual_addr'] = 'Web adress';
 $_LANG['weeks'] = 'weeks';
 
-                        ?>
+$_LANG['list_lost_inodes'] = 'List lost inodes';
+
+$_LANG['list_lost_inodes_lost_chapitre_media'] = 'List lost flashes';
+$_LANG['list_lost_inodes_lost_courses_files'] = 'List lost files';
+$_LANG['list_lost_inodes_lost_inicrond_images'] = 'List lost images';
+$_LANG['list_lost_inodes_lost_inicrond_texts'] = 'List lost texts';
+$_LANG['list_lost_inodes_lost_java_identifications_on_a_figure'] = 'List lost java identifications on a figure';
+$_LANG['list_lost_inodes_lost_tests'] = 'List lost tests';
+$_LANG['list_lost_inodes_lost_virtual_directories'] = 'List lost sections';
+
+$_LANG['id'] = 'ID';
+$_LANG['title'] = 'Title';
+
+?>
