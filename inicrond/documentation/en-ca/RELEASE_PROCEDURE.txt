@@ -19,7 +19,9 @@ This is my release procedure.
         sh export_cvs.sh <tag_name>
 * sign the 3 files ... (.tar.bz2, .tar.gz, .zip)
 
-        <command here lol>
+        gpg -b <tag>.tar.bz2
+        gpg -b <tag>.tar.gz
+        gpg -b <tag>.zip
 
 * sourceforge release
 * compare the file size to be sure ...
