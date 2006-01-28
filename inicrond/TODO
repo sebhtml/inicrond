@@ -1,7 +1,5 @@
 * module to list inode that are not referenced in admin ...
 
-* Salut
-* add CHARSET=utf8 to all tables.
 
 * utilisateurs pour ce cours -> ordonner par date.
 
@@ -16,6 +14,9 @@
     Résultats de tests : 2306
     Évaluations : 13
     Nombre de personne dans le groupe
+
+
+* sf TODO..
 
 * java :
 

@@ -11,7 +11,7 @@ create table java_identifications_on_a_figure
     add_time_t int unsigned not null,
     edit_time_t int unsigned not null,
     primary key (inode_id)
-) ;
+) CHARSET=utf8 type=myisam ;
 
 create table java_identifications_on_a_figure_label
 (
@@ -23,7 +23,7 @@ create table java_identifications_on_a_figure_label
     order_id int unsigned not null,
     primary key (java_identifications_on_a_figure_label_id),
     key inode_id (inode_id)
-) ;
+) CHARSET=utf8 type=myisam ;
 
 create table java_identifications_on_a_figure_result_association
 (
@@ -34,7 +34,7 @@ create table java_identifications_on_a_figure_result_association
     key java_identifications_on_a_figure_result_id (java_identifications_on_a_figure_result_id),
     key java_identifications_on_a_figure_label_id_source (java_identifications_on_a_figure_label_id_source),
     key java_identifications_on_a_figure_label_id_destination (java_identifications_on_a_figure_label_id_destination)
-) ;
+) CHARSET=utf8 type=myisam ;
 
 create table java_identifications_on_a_figure_result
 (
@@ -45,7 +45,7 @@ create table java_identifications_on_a_figure_result
     key inode_id (inode_id),
     key java_identifications_on_a_figure_result_id (java_identifications_on_a_figure_result_id),
     key usr_id (usr_id)
-) ;
+) CHARSET=utf8 type=myisam ;
 
 
 

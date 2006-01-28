@@ -11,7 +11,7 @@ CREATE TABLE user_evaluation_scores (
   comments varchar(255) NOT NULL default '',
   KEY usr_id (usr_id),
   KEY ev_id (ev_id)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -31,6 +31,6 @@ CREATE TABLE evaluations (
   order_id int(10) unsigned NOT NULL default '0',
   PRIMARY KEY  (ev_id),
   KEY group_id (group_id)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 -- --------------------------------------------------------

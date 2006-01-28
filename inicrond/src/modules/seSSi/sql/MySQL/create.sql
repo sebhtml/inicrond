@@ -19,7 +19,7 @@ CREATE TABLE online_time (
   PRIMARY KEY  (session_id),
   KEY usr_id (usr_id),
   KEY cours_id (cours_id)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -39,7 +39,7 @@ CREATE TABLE page_views (
   HTTP_CONNECTION varchar(255) NOT NULL default '',
   PRIMARY KEY  (page_id),
   KEY session_id (session_id)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 -- --------------------------------------------------------
 

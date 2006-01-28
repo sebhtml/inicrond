@@ -13,7 +13,7 @@ CREATE TABLE thread_subscription (
   forum_sujet_id int(10) unsigned default NULL,
   KEY usr_id (usr_id),
   KEY forum_sujet_id (forum_sujet_id)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 
 --
@@ -25,7 +25,7 @@ CREATE TABLE sections_groups_view (
   group_id int(10) unsigned default NULL,
   KEY forum_section_id (forum_section_id),
   KEY group_id (group_id)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -38,7 +38,7 @@ CREATE TABLE sebhtml_moderators (
   group_id int(10) unsigned default NULL,
   KEY forum_discussion_id (forum_discussion_id),
   KEY group_id (group_id)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -55,7 +55,7 @@ CREATE TABLE sebhtml_forum_discussions (
   order_id int(10) unsigned default '0',
   PRIMARY KEY  (forum_discussion_id),
   KEY forum_section_id (forum_section_id)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -76,7 +76,7 @@ CREATE TABLE sebhtml_forum_messages (
   KEY forum_sujet_id (forum_sujet_id),
   KEY usr_id (usr_id),
   KEY forum_message_id_reply_to (forum_message_id_reply_to)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -91,7 +91,7 @@ CREATE TABLE sebhtml_forum_sections (
   cours_id int(10) unsigned NOT NULL default '1',
   PRIMARY KEY  (forum_section_id),
   KEY cours_id (cours_id)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -105,7 +105,7 @@ CREATE TABLE sebhtml_forum_sujets (
   locked char(1) NOT NULL default '0',
   PRIMARY KEY  (forum_sujet_id),
   KEY forum_discussion_id (forum_discussion_id)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -120,7 +120,7 @@ CREATE TABLE views_of_threads (
   usr_id int(10) unsigned NOT NULL default '0',
   KEY forum_sujet_id (forum_sujet_id),
   KEY usr_id (usr_id)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 
 --
@@ -132,7 +132,7 @@ CREATE TABLE forums_groups_reply (
   group_id int(10) unsigned default NULL,
   KEY forum_discussion_id (forum_discussion_id),
   KEY group_id (group_id)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -145,7 +145,7 @@ CREATE TABLE forums_groups_start (
   group_id int(10) unsigned default NULL,
   KEY forum_discussion_id (forum_discussion_id),
   KEY group_id (group_id)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -158,7 +158,7 @@ CREATE TABLE forums_groups_view (
   group_id int(10) unsigned default NULL,
   KEY forum_discussion_id (forum_discussion_id),
   KEY group_id (group_id)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 -- --------------------------------------------------------
 

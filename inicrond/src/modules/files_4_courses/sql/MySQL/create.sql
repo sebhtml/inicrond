@@ -17,7 +17,7 @@ CREATE TABLE courses_files (
   PRIMARY KEY  (file_id),
   inode_id int unsigned,
   key inode_id (inode_id)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 -- --------------------------------------------------------
 

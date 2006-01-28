@@ -18,6 +18,6 @@ CREATE TABLE scores (
   PRIMARY KEY  (score_id),
   KEY session_id (session_id),
   KEY chapitre_media_id (chapitre_media_id)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 -- --------------------------------------------------------

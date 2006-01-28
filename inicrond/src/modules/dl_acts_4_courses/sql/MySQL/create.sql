@@ -12,6 +12,6 @@ CREATE TABLE acts_of_downloading (
   PRIMARY KEY  (act_id),
   KEY session_id (session_id),
   KEY file_id (file_id)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 -- --------------------------------------------------------

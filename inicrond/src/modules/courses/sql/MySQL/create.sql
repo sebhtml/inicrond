@@ -12,7 +12,7 @@ CREATE TABLE inode_elements (
   PRIMARY KEY  (inode_id),
   KEY inode_id_location (inode_id_location),
   KEY cours_id (cours_id)
-) TYPE=MyISAM ;
+) CHARSET=utf8  TYPE=MyISAM ;
 
 -- --------------------------------------------------------
 -- 
@@ -25,7 +25,7 @@ CREATE TABLE virtual_directories (
   PRIMARY KEY  (dir_id),
   inode_id int unsigned,
   key inode_id (inode_id)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 
 -- --------------------------------------------------------
@@ -40,7 +40,7 @@ CREATE TABLE cours (
   cours_name varchar(64) NOT NULL default '',
   cours_description varchar(255) NOT NULL default '',
   PRIMARY KEY  (cours_id)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 -- --------------------------------------------------------
 
