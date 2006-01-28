@@ -20,10 +20,22 @@ CREATE TABLE usrs (
   SUID char(1) NOT NULL default '0',
   usr_number varchar(16) NOT NULL default '',
   usr_picture_file_name varchar(32) default 'default1',
-  register_random_validation varchar(32) default NULL,
-  new_password_secure_str varchar(32) default NULL,
+
   PRIMARY KEY  (usr_id),
   UNIQUE KEY usr_name (usr_name)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 -- --------------------------------------------------------
+
+create table register_random_validation (
+	usr_id int unsigned,
+	register_random_validation varchar(32) default NULL,
+	key usr_id (usr_id)
+)  CHARSET=utf8  type=myisam;
+
+create table new_password_secure_str (
+	usr_id int unsigned,
+	new_password_secure_str varchar(32) default NULL,
+	key usr_id (usr_id)
+) CHARSET=utf8 type=myisam ;
+

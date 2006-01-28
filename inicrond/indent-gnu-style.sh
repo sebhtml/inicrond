@@ -18,6 +18,21 @@
 #synopsis :
 #indent-gnu-style.sh  
 
-php generate_script.php
-./script.sh
+indent_files_in_dir()
+{
+cd $1 #go to the asked directory
+
+indent -gnu-style *.php #indent stuff
+
+perl -p -i -e 's/^< \? php$/<?php/g' *.php #change < ? php to <?php
+perl -p -i -e 's/^\? >$/?>/g' *.php #   change ? > to ?>
+perl -p -i -e 's/\. =/ .= /g' *.php #   . = to .=
+
+
+rm *~ #remove those ugly files
+}
+
+
+indent_files_in_dir $1
+
 

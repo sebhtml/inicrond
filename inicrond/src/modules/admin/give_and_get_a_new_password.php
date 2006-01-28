@@ -1,45 +1,31 @@
 <?php
-//$Id$
-
-
 /*
-//---------------------------------------------------------------------
-//
-//
-//Fonction du fichier : l'index du site
-//
-//
-//Auteur : sebastien boisvert
-//email : sebhtml@users.sourceforge.net
-//site web : http://inicrond.sourceforge.net/
-//Projet : inicrond
+    $Id$
 
-Copyright (C) 2004  Sebastien Boisverthttp://www.gnu.org/copyleft/gpl.html
+    Inicrond : Network of Interactive Courses Registred On a Net Domain
+    Copyright (C) 2004, 2005  Sébastien Boisvert
 
-This program is free software; you can redistribute it and/or
-modify it under the terms of the GNU General Public License
-as published by the Free Software Foundation; either version 2
-of the License, or (at your option) any later version.
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
-You should have received a copy of the GNU General Public License
-along with this program; if not, write to the Free Software
-Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
-
-//
-//---------------------------------------------------------------------
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
+
 define('__INICROND_INCLUDED__', TRUE);
 define('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
-if($_SESSION['SUID']
-)
+if($_SESSION['SUID'])
 {		
         $module_content .= "<h2><a href=\"admin_menu.php\">".$_LANG['admin']."</a></h2>";
 	
@@ -48,16 +34,12 @@ if($_SESSION['SUID']
 	//---------------------
         $module_title =  $_LANG['give_and_get_a_new_password'];
         
-        
-	
 	if(!isset($_POST["envoi"]))
 	{
                 include "includes/forms/pwd.form.php";
 	}
 	else//analyse des données
 	{
-                
-                
                 $query = "SELECT
                 usr_id
 		FROM
@@ -65,8 +47,7 @@ if($_SESSION['SUID']
 		WHERE
 		usr_name='".$_POST['usr_name']."'
 		AND
-		SUID=0
-                
+		SUID='0'
 		";
 		
                 $rs = $inicrond_db->Execute($query);
@@ -74,13 +55,10 @@ if($_SESSION['SUID']
                 
 		if(!isset($fetch_result['usr_id']))
 		{
-                        
-                        
                         $module_content .=  $_LANG['UtilisateurExistePas'];
 		}
 		else//usr valide
 		{
-                        
                         include __INICROND_INCLUDE_PATH__."includes/functions/hex.function.php";
                         $password = hex_gen_32();//hexadecimal string
 			
@@ -91,25 +69,17 @@ if($_SESSION['SUID']
                         WHERE
                         usr_name='".$_POST['usr_name']."'
                         AND
-                        SUID=0
+                        SUID='0'
                         ";
-                        $inicrond_db->Execute($query);
                         
+                        $inicrond_db->Execute($query);
                         
                         //	$module_content .=$query;
                         $module_content .=  $_LANG['usr_name']." : ".$_POST['usr_name'];
                         $module_content .=  "<br />";
                         $module_content .=  $_LANG['usr_password']." : ".$password;
-                        
-                        
-                        
-                        
 		}
-                
 	}
-        
-        
-        
 }
 
 include __INICROND_INCLUDE_PATH__.'includes/kernel/post_modulation.php';

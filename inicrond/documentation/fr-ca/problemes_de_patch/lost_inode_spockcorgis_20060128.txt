@@ -1,0 +1,74 @@
+            1 101-FA7-LL Anatomie et physiologie humaines I
+
+
+
+
+
+
+            2 Ã©Ã©Ã©Ã© Ã©sasaÃ©.
+
+
+
+
+
+
+            3 101-FB7-LL Anatomie et physiologie humaines II
+
+
+
+
+
+
+            4 420-2A6-LL Le monde de l'informatique
+
+
+
+
+
+Énumérer les animations flash perdues
+ ID : 186 Titre : lost in jungle
+ ID : Titre :
+
+
+
+Énumérer les fichiers perdus
+ ID : 12 Titre : Les vaisseaux sanguins -> inode 406
+ ID : 14 Titre : dddd
+ ID : Titre :
+
+
+
+Énumérer les images perdus
+ ID : Titre :
+
+
+
+Énumérer les textes perdus
+ ID : Titre :
+
+
+
+Énumérer les identifications sur figure java perdus
+ ID : Titre :
+
+
+
+Énumérer les tests en php perdus
+ ID : 10 Titre : new 408
+ ID : 16 Titre : new 409
+ ID : 21 Titre : Les vaisseaux sanguins 2 410
+ ID : 27 Titre : Nouveau 411
+ ID : 28 Titre : Le système tégumentaire 412
+ ID : 31 Titre : Nouveau 413
+ ID : 32 Titre : Nouveau 414
+ ID : 33 Titre : Nouveau 415
+ ID : 41 Titre : Nouveau 416
+ ID : Titre :
+
+
+
+Énumérer les sections perdues
+ ID : 2 Titre : Identifications sur photographies 417
+ ID : 19 Titre : Photographies de la cellule 418
+ ID : 44 Titre : Nouveau 419
+ ID : Titre :

@@ -1,0 +1,375 @@
+Fri Jan 13 19:14:20 EST 2006
+inicrond v_3_3_2_20060113
+2006-01-13 19:10  sebhtml
+
+        * Inicrond version 3.3.2 is now available.
+
+2006-01-13 18:00  sebhtml
+
+        * The schema on the inicrond web page has been updated.
+
+2006-01-11 09:46  sebhtml
+
+        * The destination buttons are being debugged...
+
+2006-01-08 22:44  sebhtml
+
+        * The BorderLayout is now used to place buttons on west and east.
+
+2006-01-08 21:11  sebhtml
+
+        * The destination arrow for JavaIdentificationsOnAFigure are now
+          showing..
+
+2006-01-08 12:51  sebhtml
+
+        * JavaIdentificationsOnAFigure.java : The image is showing, the xml
+          file is totally parsed with success.
+
+2006-01-07 21:48  sebhtml
+
+        * The JavaIdentificationsOnAFigureJarFile is now int development!!.
+
+2006-01-06 21:35  sebhtml
+
+        * The java_identifications_on_a_figure can now be added. The
+          features are remove, add, edit, move up, move down, inode groups,
+          move in another place, see the results for the inode_id, see the
+          activities report for a group_id and the inode_id, see my results
+          for a inode_id and $_SESSION['usr_id'].  The picture of the
+          figure is at the right in the listing.
+
+2006-01-06 14:32  sebhtml
+
+        * The link to lang_dev was removed from the administration menu
+          because this module no longer exists.
+
+2006-01-06 14:27  sebhtml
+
+        * Added some infos in documentation/
+
+2006-01-06 14:26  sebhtml
+
+        * The java_identifications_on_a_figure is in progress ..
+
+2006-01-03 20:12  sebhtml
+
+        * Two new features have been added in the forums : the forums
+          notifications for a thread and  for a forum and of course the new
+          posts since last visit.
+
+2006-01-03 18:09  sebhtml
+
+        * A script have been added in the mod_forums module to see which
+          new posts have been posted since the last visit of a person.
+
+2006-01-03 16:28  sebhtml
+
+        * The lang_dev module have been removed.
+
+2006-01-03 16:11  sebhtml
+
+        * [no log message]
+
+2006-01-03 16:09  sebhtml
+
+        * Inicrond now supports utf-8 for i18n. The utf8_general_ci
+          collation can also be used in MySQL to store multilanguage
+          characters.
+
+2005-12-31 21:20  sebhtml
+
+        * [no log message]
+
+2005-12-29 12:53  sebhtml
+
+        * The java_identifications_on_a_figure is now in the source tree,
+          but it is not yet operational.  The flashes marks and tests
+          results pages are now working with  group.  A documentation on
+          the coding style and used encoding have been added.
+
+2005-12-26 22:22  sebhtml
+
+        * Some informations were added in the coding standard file.  The
+          modules user, members, tests-results, test-php-mysql, seSSi,
+          mod_forum were modified to fit the new sql schema.
+
+2005-12-26 15:31  sebhtml
+
+        * [no log message]
+
+2005-12-26 15:28  sebhtml
+
+        * The modules courses, files_4_courses, groups, inicrond_x, marks,
+          dl_acts_4_courses were modified to fit the sql schema.
+
+2005-12-24 16:48  sebhtml
+
+        * The following modules are supposed to be ok with the new sql
+          schema : admin, blue_master_clone, calendar, course_admin,
+          course_media.
+
+2005-12-21 09:45  sebhtml
+
+        * [no log message]
+
+2005-12-21 09:44  sebhtml
+
+        * The TODO was updated..
+
+2005-12-21 09:37  sebhtml
+
+        * The script from the kernel have been corrected to match the new
+          database schema�
+
+2005-12-20 22:16  sebhtml
+
+        * [no log message]
+
+2005-12-20 21:40  sebhtml
+
+        * [no log message]
+
+2005-12-20 21:21  sebhtml
+
+        * A table to validate  new subscription was added A table to ask
+          for a new password was added The usr_id was removed from
+          page_views, results, scores and acts_of_downloading The inode_id
+          reference was added in chapitre_media, inicrond_image, tests,
+          inicrond_texts, courses_files and virtual_directories The
+          content_id and content_type were removed from inode_elements
+
+2005-12-19 20:21  sebhtml
+
+        * [no log message]
+
+2005-12-19 20:18  sebhtml
+
+        * The schema in png format was added for inicrond-3.3.2
+
+2005-12-19 16:49  sebhtml
+
+        * The relational diagram in UML was added for the inicrond-3.3.2
+          release.
+
+2005-12-15 21:08  sebhtml
+
+        * The core libraries have been indented more beautifully.  The user
+          module and the member module have been indented. (includes)
+
+2005-12-15 12:38  sebhtml
+
+        * A lots of E_NOTICE have been fixed.  All the sql queries that
+          uses the cours_id not from the inode_elements relation have to be
+          edited. This is still to be done for a few module. See TODO for
+          more details. Those things will be done before 2006.
+
+2005-11-21 09:54  sebhtml
+
+        * Started to clean db structure by removing cours_id from the
+          files, dirs, flashes, tests, img, and texts tables
+
+2005-11-16 21:47  sebhtml
+
+        * The cours_id attribute was removed from directories, flashes,
+          images, tests, texts, files
+
+2005-11-16 20:56  sebhtml
+
+        * added a function to remove a group, now the removal of a groupe
+          remove the entry in online evaluations too...
+
+2005-11-16 20:45  sebhtml
+
+        * Updated MySQL dependency to >=4.1
+
+2005-11-15 21:49  sebhtml
+
+        * Removed old grp modules
+
+2005-11-15 21:29  sebhtml
+
+        * The divide a group script was added
+
+2005-11-13 09:12  sebhtml
+
+        * Added a README in modules directory
+
+2005-11-01 11:16  sebhtml
+
+        * The version was updated to 3.3.2
+
+2005-10-28 22:04  sebhtml
+
+        * A en-ca directory have been added for the documentation.
+
+2005-10-28 22:02  sebhtml
+
+        * [no log message]
+
+2005-10-28 21:58  sebhtml
+
+        * [no log message]
+
+2005-10-28 21:46  sebhtml
+
+        *
+          The feature #1330408 have been approved. Now the courses are
+          listed in a cute table.
+
+2005-10-28 21:41  sebhtml
+
+        * [ 1330407 ] Option to put html on one line This feature is now
+          available!
+
+2005-10-28 21:33  sebhtml
+
+        * Un dossier sur les mises à jour a été�ajouté dans la
+          documentation fr-ca.
+
+2005-10-28 21:32  sebhtml
+
+        * An option to put all the html content on one line have been
+          added.
+
+2005-10-28 21:26  sebhtml
+
+        * A patch was added to update te database for the 3.3.2
+          requirements.
+
+          ----------------------------------------------------------------------
+
+2005-10-28 21:21  sebhtml
+
+        * [ 1330406 ] Check the maintenance script and seek for errors
+
+2005-10-28 21:20  sebhtml
+
+        * When the maintenance script is run, there is not redirection on
+          login.
+
+2005-10-28 20:39  sebhtml
+
+        * The feature request labelled #1330405 on sourceforge have \ The
+          string 'Code d'administration' becomes 'Sigle'
+
+2005-10-28 20:36  sebhtml
+
+        * The bug labelled #1330049 on sourceforge have been fixed this bug
+          was that the courses were listed even if the user did not send a
+          cookie to the server causing a php fatal error.
+
+2005-10-28 20:20  sebhtml
+
+        * The (old) search module was removed
+
+2005-10-28 20:18  sebhtml
+
+        * The default virtual addr have been updated
+
+2005-10-20 13:00  sebhtml
+
+        * [no log message]
+
+2005-10-20 12:55  sebhtml
+
+        * [no log message]
+
+2005-10-20 12:16  sebhtml
+
+        * The documentation idrectory have been reorganised
+
+2005-10-14 21:24  sebhtml
+
+        * [no log message]
+
+2005-10-14 21:21  sebhtml
+
+        * The regular expression to validate user name have been updated
+          with ^ and $.
+
+2005-10-14 21:15  sebhtml
+
+        * A bug concerning adding texts, animations and image in the root
+          directory on any course has been fixed. In fact, this bug would
+          bring up a fatal error in the page. Because of this error, the
+          addition of animations, texts and images was impossible on the
+          first page of a course.
+
+2005-10-07 16:43  sebhtml
+
+        * [no log message]
+
+2005-09-20 21:00  sebhtml
+
+        * The CVSROOT was updated in the export script.
+
+2005-09-20 20:40  sebhtml
+
+        * [no log message]
+
+2005-09-20 19:43  sebhtml
+
+        * [no log message]
+
+2005-09-20 19:33  sebhtml
+
+        * [no log message]
+
+2005-09-20 19:29  sebhtml
+
+        * [no log message]
+
+2005-09-20 19:23  sebhtml
+
+        * [no log message]
+
+2005-09-20 19:20  sebhtml
+
+        * [no log message]
+
+2005-09-20 11:40  sebhtml
+
+        * Some files have been removed
+
+2005-09-16 21:56  sebhtml
+
+        * Some script were added in tests-php-mysql
+
+2005-09-16 21:45  sebhtml
+
+        * The old question_linking module have been re-added due to the
+          queries of spockcorgis.
+
+2005-09-13 14:13  sebhtml
+
+        * Some file have been cleared
+
+2005-09-13 13:59  sebhtml
+
+        * The CVS tree is now on sourceforge!!!!!!!!!!!!!!!!!!! The
+          elements can be view with a session_id if a user is in charge  of
+          another user The one session page view is working, it was not
+          working because of the php_session_id that is deprecated.  A
+          Smarty tpl prefilter have been added to remove blank characters
+          All the file have been indented.  Some indentation have been
+          added to some scripts An indent.txt file was added a coding
+          standard file have been added in docs the export script now do
+          bz2 too
+
+2005-09-13 13:44  sebhtml
+
+        * Initial revision
+
+2005-09-13 13:44  sebhtml
+
+        * initial sf import
+
+2005-01-03 12:55  sebhtml
+
+        * Initial revision
+
+2005-01-03 12:55  sebhtml
+
+        * initial import.
+

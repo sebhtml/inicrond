@@ -8,7 +8,6 @@
 CREATE TABLE results (
   result_id int(10) unsigned NOT NULL auto_increment,
   session_id int(10) unsigned default NULL,
-  usr_id int(10) unsigned default NULL,
   time_GMT_start int(10) unsigned default NULL,
   time_GMT_end int(10) unsigned default NULL,
   test_id int(10) unsigned default NULL,
@@ -16,9 +15,8 @@ CREATE TABLE results (
   max_points smallint(5) unsigned NOT NULL default '0',
   PRIMARY KEY  (result_id),
   KEY session_id (session_id),
-  KEY usr_id (usr_id),
   KEY test_id (test_id)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -36,7 +34,7 @@ CREATE TABLE question_ordering (
   PRIMARY KEY  (question_ordering_id),
   KEY result_id (result_id),
   KEY question_id (question_id)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 -- --------------------------------------------------------
 
@@ -54,7 +52,7 @@ CREATE TABLE answer_ordering (
   PRIMARY KEY  (answer_ordering_id),
   KEY question_ordering_id (question_ordering_id),
   KEY answer_id (answer_id)
-) TYPE=MyISAM;
+) CHARSET=utf8  TYPE=MyISAM;
 
 -- --------------------------------------------------------
 
