@@ -35,6 +35,7 @@ include "includes/functions/conversion.function.php";//conversions
 include __INICROND_INCLUDE_PATH__.'modules/tests-php-mysql/includes/functions/undohtmlentities.php' ;
 
 include __INICROND_INCLUDE_PATH__.'modules/tests-php-mysql/includes/constants/q_type.php' ;
+include __INICROND_INCLUDE_PATH__.'modules/tests-php-mysql/includes/constants/correcting_method.php' ;
 
 $is_in_charge_of_user=is_in_charge_of_user($_SESSION['usr_id'], result_2_usr($_GET['result_id']));
 

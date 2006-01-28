@@ -27,7 +27,7 @@ define('__INICROND_INCLUDE_PATH__', '../../');
 include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 
-if(isset($_GET["register_random_validation"]) && $_GET["register_random_validation"] != '')
+if (isset($_GET["register_random_validation"]) && $_GET["register_random_validation"] != '')
 {
     $module_title =  $_LANG['email_account_validation'];
 

@@ -26,6 +26,9 @@ include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 include "includes/functions/conversion.function.php";//conversions...
 
+include __INICROND_INCLUDE_PATH__.'modules/tests-php-mysql/includes/constants/q_type.php' ;
+include __INICROND_INCLUDE_PATH__.'modules/tests-php-mysql/includes/constants/correcting_method.php' ;
+
 include __INICROND_INCLUDE_PATH__.'modules/tests-php-mysql/includes/functions/undohtmlentities.php' ;
 
 if(is_teacher_of_cours($_SESSION['usr_id'],test_2_cours($_GET['test_id'])))
@@ -74,7 +77,7 @@ if(is_teacher_of_cours($_SESSION['usr_id'],test_2_cours($_GET['test_id'])))
     $fetch_result = $rs->FetchRow();
 
     include __INICROND_INCLUDE_PATH__."includes/functions/js_redir.function.php";//javascript redirection
-    //js_redir(__INICROND_INCLUDE_PATH__."modules/courses/inode.php?&cours_id=".$fetch_result['cours_id']."&inode_id_location=".$fetch_result['inode_id_location']."");
+    js_redir(__INICROND_INCLUDE_PATH__."modules/courses/inode.php?&cours_id=".$fetch_result['cours_id']."&inode_id_location=".$fetch_result['inode_id_location']."");
 }
 
 include __INICROND_INCLUDE_PATH__.'includes/kernel/post_modulation.php';

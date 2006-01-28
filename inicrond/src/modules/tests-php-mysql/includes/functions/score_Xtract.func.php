@@ -34,9 +34,9 @@ function score_that_you_obtained($result_id)
 //standard is if you want a string or an array that conaint the two value.
 {
     global $_OPTIONS;
-    global $_RUN_TIME, $inicrond_db;//mysql
+    global $inicrond_db;//mysql
 
-    echo 'score_that_you_obtained $result_id : '.$result_id.'<br /> ' ;
+    // echo 'score_that_you_obtained $result_id : '.$result_id.'<br /> ' ;
 
     if(!isset($result_id))
     {
@@ -72,7 +72,8 @@ function score_that_you_obtained($result_id)
         $question_ordering_id = $fetch_result["question_ordering_id"];
         $question_id = $fetch_result["question_id"];
 
-        if($fetch_result['q_type'] == 0)//choix multiples..
+        if($fetch_result['q_type'] ==
+        MODULE_TEST_PHP_MYSQL_CORRECTING_METHOD_WITH_QUESTION_POINTS)//choix multiples..
         {
             if($fetch_result["correcting_method"] == MODULE_TEST_PHP_MYSQL_Q_TYPE_MULTIPLE_CHOICES_QUESTION)
 
@@ -305,7 +306,9 @@ function score_that_you_obtained($result_id)
 
     $myTestResult->init ($count_good_question, $count_questions) ;
 
-    print_r ($myTestResult) ;
+    //echo 'in the calculus : <br />' ;
+    //print_r ($myTestResult) ;
+    //echo '<br />' ;
 
     return $myTestResult ;
 }
@@ -326,11 +329,11 @@ function update_result($result_id)
     $stuff = score_that_you_obtained($result_id);//return an array.
 
     global $_OPTIONS;
-    global $_RUN_TIME, $inicrond_db;//mysql
+    global $inicrond_db;//mysql
 
-    echo '$result_id : '.$result_id.'<br />' ;
+    //echo '$result_id : '.$result_id.'<br />' ;
 
-    print_r ($stuff) ;
+    //print_r ($stuff) ;
 
     $query = "
     UPDATE
