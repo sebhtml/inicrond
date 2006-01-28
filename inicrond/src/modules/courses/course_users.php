@@ -72,6 +72,7 @@ if (isset ($_SESSION['usr_id']) && isset ($_GET['cours_id']) &&  (int) $_GET['co
     cours_id=".$_GET['cours_id']."
     AND
     is_teacher_group='1'
+    order by add_time_t desc
     ";
 
     $i = 0;
@@ -131,6 +132,7 @@ if (isset ($_SESSION['usr_id']) && isset ($_GET['cours_id']) &&  (int) $_GET['co
     cours_id=".$_GET['cours_id']."
     AND
     is_student_group = '1'
+    order by add_time_t desc
     ";
 
     $i = 0;
