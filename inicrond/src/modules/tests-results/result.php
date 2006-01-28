@@ -38,6 +38,8 @@ include __INICROND_INCLUDE_PATH__.'modules/tests-php-mysql/includes/constants/q_
 
 $is_in_charge_of_user=is_in_charge_of_user($_SESSION['usr_id'], result_2_usr($_GET['result_id']));
 
+include 'includes/classes/TestResult.php' ;
+
 if($is_in_charge_of_user && can_usr_check_sheet($_SESSION['usr_id'], $_GET['result_id']))
 {
     //voir une examen...
@@ -126,7 +128,9 @@ if($is_in_charge_of_user && can_usr_check_sheet($_SESSION['usr_id'], $_GET['resu
             $smarty->assign("length", format_time_length($fetch_result['time_GMT_end-time_GMT_start']));
             $smarty->assign("usr_link", retournerHref(__INICROND_INCLUDE_PATH__."modules/members/one.php?usr_id=".$fetch_result['usr_id'], $fetch_result['usr_name']));
 
-            $smarty->assign("score", score_that_you_obtained($_GET['result_id']));
+            $score = score_that_you_obtained($_GET['result_id']) ;
+
+            $smarty->assign("score", $score->toString ());
 
             include __INICROND_INCLUDE_PATH__."includes/class/form/Base.class.php";
             include __INICROND_INCLUDE_PATH__."includes/class/form/Checkbox.class.php";

@@ -1,0 +1,28 @@
+Ajouter un groupe qui peux voir les résultats de certains groupes
+
+Se connecter
+Aller dans le bon cours
+Liste des groupes de votre cours
+Ajouter un groupe
+Remplir le formulaire
+Éditer le groupe
+Voulez vous fermer la période d'inscriptions pour ce groupe : >Non<
+Ensuite, cliquer sur le nom du groupe dans la liste
+Mettre à jour le mot de passe pour joindre ce groupe
+Mettre un mot de passe
+Retourner dans la page principale du cours
+Administration de votre cours
+Gestion des droits -> Activer tout le contenu
+Sélectionner le bon groupe
+Voilà!!
+
+Pour qu'une personne puisse s'ajouter dans ce groupe, elle doit utiliser le lien Mes groupes en haut dans le menu.
+
+
+POUR PERMETTRE DE VOIR LES RÉSULTATS DES ÉTUDIANTS :
+
+Retourner dans la page principale du cours
+Utilisateurs dans ce cours
+Dans la section "Personnes étudiantes", pour le groupe d'étudiantes et d'étudiants concernés.
+Cliquer sur modifier (voir l'image groupes_en_charge-inicrond-v_3_3_3_XXXXXXXX.png)
+Ensuite, choisir les groupes...

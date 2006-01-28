@@ -30,16 +30,18 @@
 * @version      1.0.0
 */
 
-function score_that_you_obtained($result_id, $standard = TRUE)
+function score_that_you_obtained($result_id)
 //standard is if you want a string or an array that conaint the two value.
 {
+    global $_OPTIONS;
+    global $_RUN_TIME, $inicrond_db;//mysql
+
+    echo 'score_that_you_obtained $result_id : '.$result_id.'<br /> ' ;
+
     if(!isset($result_id))
     {
         return FALSE;
     }
-
-    global $_OPTIONS;
-    global $_RUN_TIME, $inicrond_db;//mysql
 
     $query = "
     SELECT
@@ -176,7 +178,9 @@ function score_that_you_obtained($result_id, $standard = TRUE)
             $fetch_result_2 = $query_result_2->FetchRow();
             $short_answer = $fetch_result_2["short_answer"];
 
-            if($fetch_result["correcting_method"] == 0)
+
+            if($fetch_result["correcting_method"] ==
+             MODULE_TEST_PHP_MYSQL_CORRECTING_METHOD_WITH_QUESTION_POINTS)
             {
                 $count_questions += $fetch_result["good_points"];//points pour la question.
                 $count_good_question += $fetch_result["good_points"];
@@ -208,7 +212,8 @@ function score_that_you_obtained($result_id, $standard = TRUE)
                     }
                 }//end while
             }
-            elseif($fetch_result["correcting_method"] == 1)//correct for each answer...
+            elseif($fetch_result["correcting_method"] ==
+             MODULE_TEST_PHP_MYSQL_CORRECTING_METHOD_WITH_QUESTION_ANSWERS_POINTS)//correct for each answer...
             {
                 $query = "
                 SELECT
@@ -239,7 +244,7 @@ function score_that_you_obtained($result_id, $standard = TRUE)
                 }
             }
         }
-        elseif($fetch_result['q_type'] == 1)//r�onse courte
+        elseif($fetch_result['q_type'] == MODULE_TEST_PHP_MYSQL_Q_TYPE_SHORT_ANSWER_QUESTION)//r�onse courte
         {
             $count_questions += $fetch_result["good_points"];//points pour la question.
             //obtenir la r�onse.
@@ -294,26 +299,15 @@ function score_that_you_obtained($result_id, $standard = TRUE)
             }
         }
     }
-    if($standard)
-    {
-        if(!$count_questions)//if it equals 0
-        {
-            return "--";
-        }
-        else
-        {
-            return $count_good_question."/".$count_questions." = ".(sprintf(__SPRINTF_SIGNIFICANTS_DIGITS_FORMAT__,$count_good_question/$count_questions*100))."%";
-        }
-    }
-    else//return an array
-    {
-        if(!$count_questions)//if it equals 0
-        {
-            $count_questions = 1;
-        }
 
-        return array("your_points" => $count_good_question, "max_points" => $count_questions);
-    }
+
+    $myTestResult = new TestResult () ;
+
+    $myTestResult->init ($count_good_question, $count_questions) ;
+
+    print_r ($myTestResult) ;
+
+    return $myTestResult ;
 }
 /**
 * update a test result
@@ -329,17 +323,21 @@ function update_result($result_id)
         return FALSE;
     }
 
-    $stuff = score_that_you_obtained($result_id, FALSE);//return an array.
+    $stuff = score_that_you_obtained($result_id);//return an array.
 
     global $_OPTIONS;
     global $_RUN_TIME, $inicrond_db;//mysql
+
+    echo '$result_id : '.$result_id.'<br />' ;
+
+    print_r ($stuff) ;
 
     $query = "
     UPDATE
     ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['results']."
     SET
-    your_points=".$stuff["your_points"].",
-    max_points=".$stuff["max_points"]."
+    your_points=".$stuff->get_your_points ().",
+    max_points=".$stuff->get_max_points ()."
     WHERE
     result_id=".$result_id."
     ";
