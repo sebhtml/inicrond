@@ -36,4 +36,15 @@ $_LANG['update_group_password'] = 'Update group password';
 $_LANG['MOD_GROUPS_groups_how_many_sub_groups_do_you_wish_to_create'] = 'How many sub-groups do you wish to create?' ;
 $_LANG['MOD_GROUPS_please_fill_the_fields'] = 'Please specify how many persons you want in each sub group. The total must be %s.' ;
 
+$_LANG['COUNT_groups_usrs'] = 'Amount of users' ;
+$_LANG['COUNT_online_time'] = 'Amount of visits'  ;
+$_LANG['COUNT_acts_of_downloading']  = 'Amount of downloads' ;
+$_LANG['COUNT_scores']  = 'Amount of flash scores' ;
+$_LANG['COUNT_results']  = 'Amount of php tests results' ;
+$_LANG['COUNT_evaluations']  = 'Amount of online evaluations' ;
+$_LANG['COUNT_user_evaluation_scores'] = 'Amount of marks related to online evaluations'  ;
+
+$_LANG['count_stuff_for_a_group'] = 'Amount of stuff for a group'  ;
+$_LANG['count_stuff_for_each_group'] = 'Amount of stuff for each group'  ;
+
 ?>

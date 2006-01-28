@@ -1,5 +1,5 @@
 {* Smarty *}
- 
+
 {* $Id$ *}
 
 {smarty_array_to_html_function php_array=$course_infos}
@@ -14,6 +14,10 @@
 
 <h3>{$_LANG.admin}</h3>
 {$group.edit}, {$group.remove_group}, {$group.update_group_password}, {$group.course_groups_listing}, {$group.divide_a_group}<br />
+
+<h3>{$_LANG.count_stuff_for_a_group}</h3>
+
+{$count_stuff_for_a_group}
 
 <h3>{$_LANG.group_users}</h3>
 

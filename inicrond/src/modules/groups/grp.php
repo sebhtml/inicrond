@@ -132,6 +132,14 @@ if(isset($_GET['group_id']) && $_GET['group_id'] != "" && (int) $_GET['group_id'
         );
     }
 
+    include __INICROND_INCLUDE_PATH__.'modules/groups/includes/functions/count_stuff_for_a_group.php' ;
+
+
+    $count_stuff_for_a_group = count_stuff_for_a_group ($_GET['group_id'], $_OPTIONS, $inicrond_db, $_LANG) ;
+
+    $smarty->assign("count_stuff_for_a_group", $count_stuff_for_a_group);
+
+
     $smarty->assign("group", $group);
     $smarty->assign("_LANG", $_LANG);
     $module_content .= $smarty->fetch($_OPTIONS['theme']."/group_informations.tpl");

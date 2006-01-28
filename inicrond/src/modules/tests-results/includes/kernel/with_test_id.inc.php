@@ -99,7 +99,7 @@ if(isset($_GET['join']))//join the query with a usr or a group...
         AND ".$_OPTIONS['table_prefix'].$_OPTIONS['tables']['usrs'].".usr_id=".$_GET['usr_id']."
         ";
     }
-    elseif(isset($_GET['group_id']) && $_GET['group_id'] != "" && (int) $_GET['group_id']
+    else if(isset($_GET['group_id']) && $_GET['group_id'] != "" && (int) $_GET['group_id']
     && $is_in_charge_of_group)//for a group...
     {
         $base .= "&join&group_id=".$_GET['group_id']."&"."test_id=".$_GET['test_id'];

@@ -389,6 +389,30 @@ if(isset($_GET['cours_id']) && $_GET['cours_id'] != "" && (int) $_GET['cours_id'
         $module_content .= $_LANG[$stuff_to_count["lang_index"]]." : ".$fetch_result['count_course_elements']."<br />";
     }
 
+    $module_content .= '<br /><br />' ;
+
+    $query = '
+    select group_id
+    from
+    '.$_OPTIONS['table_prefix'].'groups
+    where
+    cours_id = '.$_GET['cours_id'].'
+    order by add_time_t desc
+    ' ;
+
+    $rs = $inicrond_db->Execute ($query) ;
+
+
+    include __INICROND_INCLUDE_PATH__.'modules/groups/includes/languages/'.$_SESSION['language'].'/lang.php' ;
+    include __INICROND_INCLUDE_PATH__.'modules/groups/includes/functions/count_stuff_for_a_group.php' ;
+
+    $module_content .= '<h2>'.$_LANG['count_stuff_for_each_group'].'</h2>' ;
+
+    while ($row = $rs->FetchRow ())
+    {
+        $module_content .= count_stuff_for_a_group ($row['group_id'], $_OPTIONS, $inicrond_db, $_LANG) ;
+    }
+
     $module_content .= "<h3><a href=\"course_admin_menu.php?cours_id=".$_GET['cours_id']."\">".$_LANG['course_admin_menu']."</a></h3>";
 
 }//end of is_teacher
