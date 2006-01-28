@@ -6,7 +6,7 @@ CREATE TABLE forum_subscription (
   forum_discussion_id int(10) unsigned default NULL,
   KEY usr_id (usr_id),
   KEY forum_discussion_id (forum_discussion_id)
-) TYPE=MyISAM;
+) CHARSET=utf8 TYPE=MyISAM;
 
 CREATE TABLE thread_subscription (
   usr_id int(10) unsigned default NULL,

@@ -176,7 +176,7 @@ else
     else
     {
         $module_content .=  "
-        <form method=\"POST\">
+        <form method=\"post\">
         ".  $_LANG['usr_name']." : <input type=\"text\" name=\"usr_name\"  />
         ".  $_LANG['usr_password']." <input type=\"password\" name=\"usr_password\"  />
         <input type=\"submit\"  />
