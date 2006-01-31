@@ -234,7 +234,7 @@ function score_that_you_obtained($result_id)
                 {
                     if(preg_match($fetch_result_2["short_answer_name"], $short_answer)
                     || preg_match(undohtmlentities($fetch_result_2["short_answer_name"]), $short_answer)
-                    || preg_match ($fetch_result411["short_answer_name"], undohtmlentities ($short_answer)))
+                    || preg_match ($fetch_result_2["short_answer_name"], undohtmlentities ($short_answer)))
                     {
                         $count_good_question += $fetch_result_2['pts_amount_for_good_answer'];
                     }
