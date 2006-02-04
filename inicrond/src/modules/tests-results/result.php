@@ -26,6 +26,8 @@ include __INICROND_INCLUDE_PATH__.'includes/kernel/pre_modulation.php';
 include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 include __INICROND_INCLUDE_PATH__."modules/tests-php-mysql/includes/languages/".$_SESSION['language'].'/lang.php';
 
+include __INICROND_INCLUDE_PATH__.'modules/tests-php-mysql/includes/functions/inicrond_preg_match_tests_php_mysql.php' ;
+
 $smarty->assign("_LANG", $_LANG);
 include __INICROND_INCLUDE_PATH__.'modules/members/includes/functions/access.inc.php';
 
@@ -469,9 +471,7 @@ if($is_in_charge_of_user && can_usr_check_sheet($_SESSION['usr_id'], $_GET['resu
                     */
 
                     //preg_match correction...
-                    if(preg_match($fetch_result["short_answer"], $fetch_result_2["short_answer"])
-                    || preg_match(undohtmlentities ($fetch_result["short_answer"]), $fetch_result_2["short_answer"])
-                    || preg_match($fetch_result["short_answer"], undohtmlentities($fetch_result_2["short_answer"])))
+                    if(inicrond_preg_match_tests_php_mysql($fetch_result["short_answer"], $fetch_result_2["short_answer"]))
                     {
                         $question["is_good"] = 1;
                         $question["your_points"] = $fetch_result["good_points"];

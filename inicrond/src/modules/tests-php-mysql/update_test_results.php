@@ -27,6 +27,9 @@ include 'includes/languages/'.$_SESSION['language'].'/lang.php';
 include "includes/functions/conversion.function.php";//conversions...
 
 include __INICROND_INCLUDE_PATH__.'modules/tests-php-mysql/includes/constants/q_type.php' ;
+
+include __INICROND_INCLUDE_PATH__.'modules/tests-php-mysql/includes/functions/inicrond_preg_match_tests_php_mysql.php' ;
+
 include __INICROND_INCLUDE_PATH__.'modules/tests-php-mysql/includes/constants/correcting_method.php' ;
 
 include __INICROND_INCLUDE_PATH__.'modules/tests-php-mysql/includes/functions/undohtmlentities.php' ;

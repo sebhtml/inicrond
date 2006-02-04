@@ -112,6 +112,7 @@ is_in_inode_group($_SESSION['usr_id'], chapitre_media_id_2_inode_id($_GET['chapi
         $module_title = $f['chapitre_media_title'] ;
 
         include __INICROND_INCLUDE_PATH__."includes/kernel/page_view.php";
+header("Content-type: text/html; charset=utf-8");
 
         $smarty->display($_OPTIONS['theme']."/flash.tpl", $cache_id);
 

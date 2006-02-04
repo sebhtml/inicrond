@@ -73,9 +73,10 @@ function score_that_you_obtained($result_id)
         $question_id = $fetch_result["question_id"];
 
         if($fetch_result['q_type'] ==
-        MODULE_TEST_PHP_MYSQL_CORRECTING_METHOD_WITH_QUESTION_POINTS)//choix multiples..
+        MODULE_TEST_PHP_MYSQL_Q_TYPE_MULTIPLE_CHOICES_QUESTION
+        )//choix multiples..
         {
-            if($fetch_result["correcting_method"] == MODULE_TEST_PHP_MYSQL_Q_TYPE_MULTIPLE_CHOICES_QUESTION)
+            if($fetch_result["correcting_method"] == MODULE_TEST_PHP_MYSQL_CORRECTING_METHOD_WITH_QUESTION_POINTS)
 
             {
                 $count_questions += $fetch_result["good_points"];//points pour la question.
@@ -118,7 +119,7 @@ function score_that_you_obtained($result_id)
                     }
                 }//end while
             }
-            elseif($fetch_result["correcting_method"] == MODULE_TEST_PHP_MYSQL_Q_TYPE_SHORT_ANSWER_QUESTION)//correct for each answer...
+            elseif($fetch_result["correcting_method"] == MODULE_TEST_PHP_MYSQL_CORRECTING_METHOD_WITH_QUESTION_ANSWERS_POINTS)//correct for each answer...
             {
                 $query = "
                 SELECT
@@ -264,9 +265,7 @@ function score_that_you_obtained($result_id)
             $query_result_3 = $inicrond_db->Execute($query);
             $fetch_result_2 = $query_result_3->FetchRow();
 
-            if(preg_match($fetch_result["short_answer"], $fetch_result_2["short_answer"])
-            || preg_match(undohtmlentities($fetch_result["short_answer"]), $fetch_result_2["short_answer"])
-            || preg_match ($fetch_result["short_answer"], undohtmlentities ($fetch_result_2["short_answer"])))
+            if(inicrond_preg_match_tests_php_mysql ($fetch_result["short_answer"], $fetch_result_2["short_answer"]))
             {
                 $count_good_question +=  $fetch_result["good_points"];//bonne r�onse.
             }
@@ -275,7 +274,7 @@ function score_that_you_obtained($result_id)
                 $count_good_question +=  $fetch_result["bad_points"];//bonne r�onse.
             }
         }
-        elseif($fetch_result['q_type'] == MODULE_TEST_PHP_MYSQL_Q_TYPE_MEDIA_QUESTION)//flash
+        else if($fetch_result['q_type'] == MODULE_TEST_PHP_MYSQL_Q_TYPE_MEDIA_QUESTION)//flash
         {
             $count_questions += $fetch_result["good_points"];//points pour la question.
 
