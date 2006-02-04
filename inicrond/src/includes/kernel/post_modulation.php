@@ -31,7 +31,7 @@ december 15, 2005
 
 if(!__INICROND_INCLUDED__)
 {
-        exit();
+    exit();
 }
 
 $smarty->assign('app_link', "<a href=\"".APPLICATION_DEVEL_WEB_SITE."\" target=\"_blank\">".APPLICATION_COMPLETE_RELEASE_NAME."</a>");
@@ -40,7 +40,7 @@ $smarty->assign('module_title', $module_title);
 $smarty->assign("module_content", $module_content);
 $smarty->assign('title', $_OPTIONS['titre']);
 
-if(isset($_GET["print"]) && is_teacher_of_at_least_one_course($_SESSION['usr_id']))
+if(isset($_GET["print"]))
 {
         $smarty->template_dir = __INICROND_INCLUDE_PATH__."/".'templates/';
 
@@ -48,19 +48,20 @@ if(isset($_GET["print"]) && is_teacher_of_at_least_one_course($_SESSION['usr_id'
         {
                 include __INICROND_INCLUDE_PATH__."includes/kernel/page_view.php";
         }
+header("Content-type: text/html; charset=utf-8");
 
         $smarty->display($_OPTIONS['theme']."/print.tpl");
         exit();
 }
 else
 {
-        if($_OPTIONS['save_page_view'])//save page view.
+        if($_OPTIONS['save_page_view']) //save page view.
         {
                 include __INICROND_INCLUDE_PATH__."includes/kernel/page_view.php";
         }
 }
 
-if (isset ($_SESSION['usr_id']) && is_teacher_of_at_least_one_course($_SESSION['usr_id']))
+if (isset ($_SESSION['usr_id']))
 {
         $smarty->assign("print_link", "<a href=\"?".$_SERVER['QUERY_STRING']."&print\" target=\"_blank\">".$_LANG['printable_format']."</a>");
 }

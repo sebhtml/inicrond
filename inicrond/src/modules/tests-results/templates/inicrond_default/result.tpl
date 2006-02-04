@@ -11,6 +11,9 @@
 {$_LANG.elapsed_time} : {$length}<br />
 {$_LANG.points} : {$score}<br />
 <br />
+<i>
+{$_LANG.explanation_of_the_colors_code}<br />
+</i>
 <table >
 {section name=question loop=$questions_list}
 

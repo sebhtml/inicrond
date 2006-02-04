@@ -20,7 +20,6 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 
-
 $_LANG['does_this_members_did_the_test'] = 'Est-ce que cette personne a essayé cet examen formatif?';
 $_LANG['msg_all_result_for_this_test'] = 'Voici toutes les notes pour ce test.';
 $_LANG['please_choose_a_group_for_the_test_report'] = 'Vous devez choisir un groupe pour générer le rapport d\'activités pour un examen formatif.';
@@ -37,5 +36,12 @@ $_LANG['test_time_vs_score_correlation'] = 'correlation_temps_notes_pour_test';
 $_LANG['the_good_answer'] = 'La bonne réponse';
 $_LANG['waiting_to_get_result'] = 'Non disponible';
 $_LANG['your_answer'] = 'Votre réponse';
+
+$_LANG['explanation_of_the_colors_code'] = '
+Pour "Question à réponse courte" et "Question à plusieurs éléments de réponse" :
+<br />
+<span style="color: green;">Vert</a> : Bonne réponse  (ex.: 2/2, 4/4, 64/64)<br />
+<span style="color: red;">Rouge</a> : Mauvaise réponse (ex.: 0/4, 0/5, 0/8)<br />
+<span style="color: blue;">Bleu</a> : Réponse partielle (ex.: 1/2, 4/5)<br />';
 
 ?>

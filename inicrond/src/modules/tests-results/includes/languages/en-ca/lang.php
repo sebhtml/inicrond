@@ -38,4 +38,11 @@ $_LANG['the_good_answer'] = 'The good answer';
 $_LANG['waiting_to_get_result'] = 'Not available';
 $_LANG['your_answer'] = 'Your answer';
 
-                        ?>
+$_LANG['explanation_of_the_colors_code'] = '
+For "Short answer question" and "Multiple short answers question" :
+<br />
+<span style="color: green;">Green</a> : Good answer (ex.: 2/2, 4/4, 64/64)<br />
+<span style="color: red;">Red</a> : Bad answer (ex.: 0/4, 0/5, 0/8) <br />
+<span style="color: blue;">Blue</a> : Partial answer (ex.: 1/2, 4/5)<br />';
+
+?>

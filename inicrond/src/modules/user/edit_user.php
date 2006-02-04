@@ -167,8 +167,14 @@ if(isset($_GET['usr_id']) && $_GET['usr_id'] != "" && (int) $_GET['usr_id']
 
         $fetch_result = $rs->FetchRow();
 
-        if(isset($_FILES['usr_picture']["tmp_name"])
-        && $info = getimagesize($_FILES['usr_picture']['tmp_name'])
+        if (isset($_FILES['usr_picture']["tmp_name"]))
+        {
+            $info = getimagesize($_FILES['usr_picture']['tmp_name']) ;
+        }
+
+        // print_r ($info) ;
+
+        if(isset ($info)
         && $info[0] <= $_OPTIONS['usr_pic_max_width']  //dimensions
         && $info[1] <= $_OPTIONS['usr_pic_max_height'])//remove the picture and add a new one...
         {
