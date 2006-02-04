@@ -73,6 +73,7 @@ class Inicrond_mysql_db//a abstration class, mysql only, call it like adodb.
         {
                 $this->connexion_ressource=mysql_pconnect($server_name, $user_name, $password);//connect
                 mysql_select_db($database_name, $this->connexion_ressource);//select the db
+                mysql_query ('set name utf8', $this->connexion_ressource) ;
         }
 
         //normal connexion
@@ -80,6 +81,7 @@ class Inicrond_mysql_db//a abstration class, mysql only, call it like adodb.
         {
                 $this->connexion_ressource=mysql_connect($server_name, $user_name, $password);//connect
                 mysql_select_db($database_name, $this->connexion_ressource);//select the db
+                mysql_query ('set name utf8', $this->connexion_ressource) ;
         }
 
 
