@@ -1,0 +1,9 @@
+//$Id: how_to_upgrade_those_great_libs.txt 8 2005-09-13 17:44:21Z sebhtml $
+
+* To upgrade those libraries, move the current release in the Attic directory in the CVS repository.
+* Then and only then, remove the line of the lib in CVS/Entries
+* After that, download and paste de last release.
+* Do a cvs add
+* Do a cvs commit
+
+

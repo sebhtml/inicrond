@@ -1,0 +1,199 @@
+<?php
+//$Id: grep_php 143 2006-08-17 22:34:17Z sebhtml $
+
+/*
+//---------------------------------------------------------------------
+//
+
+//Auteur : sebastien boisvert
+//email : admin@oloko.cjb.net
+//site web : http://oloko.cjb.net
+//Projet :new_sebhtml
+//
+//---------------------------------------------------------------------
+*/
+
+
+$words_to_replace = array(
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+'',
+
+);
+
+/*
+define('__INICROND_INCLUDED__', TRUE);
+	
+//include all lang files.
+
+include 'src/modules/admin/includes/languages/en-ca/lang.php';
+include 'src/modules/blue_master_clone/includes/languages/en-ca/lang.php';
+include 'src/modules/calendar/includes/languages/en-ca/lang.php';
+include 'src/modules/course_media/includes/languages/en-ca/lang.php';
+include 'src/modules/courses/includes/languages/en-ca/lang.php';
+include 'src/modules/dl_acts_4_courses/includes/languages/en-ca/lang.php';
+include 'src/modules/files_4_courses/includes/languages/en-ca/lang.php';
+include 'src/modules/groups/includes/languages/en-ca/lang.php';
+include 'src/modules/inicrond_x/includes/languages/en-ca/lang.php';
+include 'src/modules/lang_dev/includes/languages/en-ca/lang.php';
+include 'src/modules/marks/includes/languages/en-ca/lang.php';
+include 'src/modules/members/includes/languages/en-ca/lang.php';
+include 'src/modules/mod_forum/includes/languages/en-ca/lang.php';
+include 'src/modules/seSSi/includes/languages/en-ca/lang.php';
+include 'src/modules/tests-php-mysql/includes/languages/en-ca/lang.php';
+include 'src/modules/tests-results/includes/languages/en-ca/lang.php';
+include 'src/modules/user/includes/languages/en-ca/lang.php';
+include 'src/includes/languages/en-ca/lang.php';
+
+foreach($_LANG AS $key => $value)
+{
+
+$words_to_replace []= $key;
+
+
+}
+
+//include all options.
+include 'src/includes/etc/ro/db_config_inc.php';
+include 'src/includes/etc/compiled/tables.config.php';
+include 'src/includes/etc/compiled/available_langs.php';
+include 'src/includes/etc/compiled/options_variable.php';
+include 'src/includes/etc/compiled/smarty_cache_config.conf.php';
+include 'src/includes/etc/compiled/themes.php';
+
+
+foreach($_OPTIONS AS $key => $value)
+{
+
+$words_to_replace []= $key;
+
+
+}
+
+foreach($_OPTIONS['tables'] AS $key => $value)
+{
+
+$words_to_replace []= $key;
+
+
+}
+
+foreach($_OPTIONS['languages'] AS $key => $value)
+{
+
+$words_to_replace []= $key;
+
+
+}
+foreach($_OPTIONS['smarty_cache_config'] AS $key => $value)
+{
+
+
+$words_to_replace []= $key;
+
+
+}
+foreach($_OPTIONS['themes'] AS $key => $value)
+{
+
+
+$words_to_replace []= $key;
+
+
+}
+*/
+function modify_stuff($dir)
+{
+global $_OPTIONS, $words_to_replace;
+
+echo "opendir $dir"."\n";
+$fp = openDir($dir);
+	echo "readdir $dir"."\n";
+	while($fichier = readDir($fp))
+	{
+	
+		if(is_file($dir."/".$fichier) AND
+		!is_dir($dir."/".$fichier) AND
+		$fichier != "grep_php" AND
+		//$fichier != "options_inc.php" AND
+		
+		//$fichier != "insert.sql" AND
+		//$fichier != "create.sql" AND
+		//$fichier != "drop.sql" AND
+		$fichier != "tables.php" AND
+		
+		$fichier != ".." AND
+		$fichier != "." AND
+		$fichier != ".directory" AND
+		//$fichier != "CVS" AND//I can not edit CVS files.
+		fileSize($dir."/".$fichier) != 0
+		  )
+		{
+		echo "opening in r ".$dir."/".$fichier."-"."\n";
+		$fp2 = fopen($dir."/".$fichier, "r");
+	echo "fread ".$dir."/".$fichier."\n";
+		$contenu = fread($fp2, fileSize($dir."/".$fichier));
+		echo "closing ".$dir."/".$fichier."\n";
+		fclose($fp2);
+		
+		
+		 
+		//////////////////////////////////////////////
+
+
+
+foreach($words_to_replace AS $word)
+{
+$contenu = str_replace(
+	"\"$word\"",
+	"'$word'",
+	$contenu);
+
+}
+				
+				
+				/////////////////////////////////////////////
+		
+		echo "opening in w+ ".$dir."/".$fichier."\n";
+		$fp2 = fopen($dir."/".$fichier, "w+");
+		
+		echo "writing ".$dir."/".$fichier."\n";
+		fwrite($fp2, $contenu);
+	echo "closing ".$dir."/".$fichier."\n";
+		fclose($fp2);
+		}
+		elseif(is_dir($dir."/".$fichier ) AND
+		$fichier != ".." AND 
+		$fichier != "." 
+		)
+		{
+		modify_stuff($dir."/".$fichier);//appele récursif...
+		//echo $dir."/".$fichier."\n";
+		}
+	}
+	echo "closing ".$dir."\n";
+closeDir($fp);	
+
+}
+
+
+//$count = 0;
+
+modify_stuff("src")
+?>

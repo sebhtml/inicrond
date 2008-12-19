@@ -1,0 +1,78 @@
+<?php
+//$Id: find_strings_in_inicrond_php 143 2006-08-17 22:34:17Z sebhtml $
+
+	
+
+function find($dir)
+{
+
+global $output;
+
+$fp = openDir($dir);
+
+	while($fichier = readDir($fp))
+	{
+	
+		if(is_file($dir."/".$fichier) AND
+		!is_dir($dir."/".$fichier) AND
+		$fichier != "grep_php" AND
+	
+		$fichier != "tables.php" AND
+		
+		$fichier != ".." AND
+		$fichier != "." AND
+		$fichier != ".directory" AND
+
+		fileSize($dir."/".$fichier) != 0
+		  )
+		{
+
+		$fp2 = fopen($dir."/".$fichier, "r");
+
+		$contenu = fread($fp2, fileSize($dir."/".$fichier));
+
+		fclose($fp2);
+		
+		
+		 
+		//////////////////////////////////////////////
+
+
+if(strstr($contenu, "inode_name"))
+{
+$output .= $dir."/".$fichier."\n";
+}
+
+
+			/////////////////////////////////////////////
+		
+
+		$fp2 = fopen($dir."/".$fichier, "w+");
+		
+
+		fwrite($fp2, $contenu);
+
+		fclose($fp2);
+		}
+		elseif(is_dir($dir."/".$fichier ) AND
+		$fichier != ".." AND 
+		$fichier != "." 
+		)
+		{
+		find($dir."/".$fichier);//appele récursif...
+		//echo $dir."/".$fichier."\n";
+		}
+	}
+
+closeDir($fp);	
+
+}
+
+
+//$count = 0;
+
+find("src");
+
+echo $output;
+
+?>

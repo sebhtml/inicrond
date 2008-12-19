@@ -1,0 +1,31 @@
+#$Id: create.sql 122 2006-01-28 15:56:48Z sebhtml $
+
+
+
+
+
+-- 
+-- Table structure for table `ooo_sebhtml_options`
+-- 
+
+CREATE TABLE sebhtml_options (
+  opt_name varchar(64) default NULL,
+  opt_value varchar(255) default NULL
+) CHARSET=utf8  TYPE=MyISAM;
+
+-- --------------------------------------------------------
+
+
+-- 
+-- Table structure for table `ooo_smarty_cache_config`
+-- 
+
+CREATE TABLE smarty_cache_config (
+  mod_dir varchar(32) default NULL,
+  tpl_file varchar(32) default NULL,
+  cache_lifetime int(10) unsigned default '0'
+) CHARSET=utf8  TYPE=MyISAM;
+
+-- --------------------------------------------------------
+
+

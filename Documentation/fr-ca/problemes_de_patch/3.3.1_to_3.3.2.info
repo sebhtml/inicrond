@@ -1,0 +1,54 @@
+# Les problèmes de migration à l'unicode sous MySQL sont les suivants :
+
+##############
+# les ’ ne sont pas affichés, le code n'est probablement pas le bon
+#pour régler les ’, il faut faire cela :
+
+update `ooo_answers`
+set
+answer_name = replace (answer_name, '’', '\'')
+where
+answer_id = 6
+
+É -> marche pas
+
+##############
+checker apostrophes
+
+    ok ...
+
+##############
+pointage non correct
+
+    Régler en faisant une classe.
+    Les constantes n'étaient pas définies.
+
+##############
+nouvelle question dans un test ?? num�o 1 dans t�umentaire
+
+    Étrange ...
+
+##############
+
+mettre à jour les accents dans la db pour les tests
+
+update `ooo_short_answers`
+set
+short_answer = replace (short_answer, '&eacute;', 'é')
+where
+question_ordering_id = 129
+
+Pointage : �iderme accent?
+http://spockcorgis.com/biologie/modules/tests-results/result.php?result_id=11914
+http://spockcorgis.com/biologie/modules/tests-results/result.php?result_id=1495
+    Ce problème, je ne le trouve pas..
+
+##############
+ordre compte dans ��ents multiples
+
+    Exemple ?
+
+##############
+demande invalide bizzare?
+
+    Il faut change le message ?

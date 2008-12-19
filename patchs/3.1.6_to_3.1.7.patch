@@ -1,0 +1,51 @@
+#$Id: 3.1.6_to_3.1.7.patch 8 2005-09-13 17:44:21Z sebhtml $
+
+# . backup your database. 
+# . run those queries. (#change the prefix if it is not ooo_.)
+# update language on freshmeat and sourceforge.
+
+ALTER TABLE `ooo_online_time` ADD `cours_id` INT UNSIGNED NOT NULL ;
+
+ALTER TABLE `ooo_online_time` ADD INDEX ( `cours_id` ) ;
+
+update `ooo_online_time` set cours_id = 1 ;
+
+delete FROM `ooo_page_views` WHERE 1 ;
+
+ALTER TABLE `ooo_usrs` ADD UNIQUE (
+`usr_name`
+) ;
+
+ALTER TABLE `ooo_chapitre_media` CHANGE `chapitre_media_description` `chapitre_media_description` TEXT NOT NULL ;
+
+
+CREATE TABLE `ooo_evaluations` (
+  `ev_id` int(10) unsigned NOT NULL auto_increment,
+  `available` enum('0','1') NOT NULL default '0',
+  `ev_name` varchar(64) NOT NULL default '',
+  `ev_weight` float unsigned NOT NULL default '0',
+  `group_id` int(10) unsigned NOT NULL default '0',
+  `ev_max` float unsigned NOT NULL default '0',
+  `comments` varchar(255) NOT NULL default '',
+  `ev_final` enum('0','1') NOT NULL default '0',
+  `order_id` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`ev_id`),
+  KEY `group_id` (`group_id`)
+) TYPE=MyISAM ;
+
+CREATE TABLE `ooo_user_evaluation_scores` (
+  `ev_id` int(10) unsigned NOT NULL default '0',
+  `usr_id` int(10) unsigned NOT NULL default '0',
+  `ev_score` float unsigned NOT NULL default '0',
+    `comments` varchar(255) NOT NULL default '',
+  KEY `usr_id` (`usr_id`),
+  KEY `ev_id` (`ev_id`)
+) TYPE=MyISAM;
+
+UPDATE `ooo_smarty_cache_config` SET `mod_dir` = 'course_media' WHERE `mod_dir` = 'courses' AND `tpl_file` = 'flash.tpl'  LIMIT 1 ;
+
+UPDATE `ooo_smarty_cache_config` SET `mod_dir` = 'course_media' WHERE `mod_dir` = 'courses' AND `tpl_file` = 'flash2.tpl'  LIMIT 1 ;
+
+ALTER TABLE `ooo_groups` ADD `final_mark_formula` ENUM( '0', '1', '2' ) NOT NULL ;
+
+update  `ooo_evaluations` set order_id=ev_id ;

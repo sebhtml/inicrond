@@ -1,0 +1,22 @@
+
+This the development environnement in which inicrond is maintened.
+
+Text editor : kate
+Windows manager : KDE
+Linux distribution : Slackware 10
+Kernel : linux 2.4
+
+cvs Front-end : gcvs
+Version manager : cvs
+Browsers : Mozilla, Firefox, Konqueror
+
+php : php 4.3
+apache : apache 1
+MySQL : MySQL 4
+
+phpmyadmin : 2.6.0-pl3
+
+MUSIC : XMMS
+Terminal : Terminal
+
+Command line interpretor : Bash

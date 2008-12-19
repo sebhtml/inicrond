@@ -1,0 +1,9 @@
+$Id: 3.3.1_a_3.3.2.txt 58 2005-10-29 01:33:00Z sebhtml $
+
+Mettre à jour tout le programme en copiant/collant le dossier src dans votre racine inicrond.
+
+Appliquer la patch en copiant le fichier ./patchs/3.3.1_to_3.3.2.php à la racine de votre installation et aller à <votre installation inicrond>/3.3.1_to_3.3.2.php
+
+Ensuite, supprimer le fichier 3.3.1_to_3.3.2.php de votre racine.
+
+        Sébastien Boisvert

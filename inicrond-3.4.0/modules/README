@@ -1,0 +1,23 @@
+$Id: README 70 2005-11-21 14:54:43Z sebhtml $
+
+Stable modules :
+
+	admin
+	blue_master_clone
+	calendar
+	course_admin
+	course_media
+	courses
+	dl_acts_4_courses
+	files_4_courses
+	groups
+	inicrond_x
+	lang_dev
+	marks
+	members
+	mod_forum
+	seSSi
+	tests-php-mysql
+	tests-results
+	user
+

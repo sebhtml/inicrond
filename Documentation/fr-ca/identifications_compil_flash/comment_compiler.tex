@@ -1,0 +1,80 @@
+%$Id: comment_compiler.tex 46 2005-10-20 16:16:33Z sebhtml $
+
+\documentclass[letterpaper]{article}
+\usepackage[utf8]{inputenc}
+
+\begin{document}
+
+\begin{center}
+Comment compiler différemment avec Flash selon une variable?\\
+(Remplissage de blancs ou Associations sur image)\\
+
+Sébastien Boisvert \\
+sebhtml@yahoo.ca\\
+20050924\\
+\end{center}
+
+\pagebreak
+\section{Remplissage de blancs}
+
+\begin{enumerate}
+
+
+\item 
+Ouvrir le fichier "includes/identifications/c\_constants.as" et changer la valeur de la variable \_\_COMPILE\_TYPE\_\_ à 1 \\
+ex.: var \_\_COMPILE\_TYPE\_\_ = 1;
+
+\item 
+Ouvrir le fichier flash (*.fla) et aller dans la première image de l'étiquette "initialisation"
+
+\item 
+Commenter la ligne qui contient l'instruction suivante :\\
+\#include "../../includes/prototype\_image/prototype\_image\_func.as"
+
+\item 
+Enlever le // devant la ligne qui contient l'instruction suivante :\\
+\#include "../../includes/remplir\_bl/func.as"
+
+
+
+
+\item 
+Changer le nom du fichier swf (*.swf) avec un nom adéquat suivit de -multiple \\
+ex. : introduction\_1\_remplir\_bl-v200508-multiple.swf
+
+\item 
+Publier l'animation
+
+
+\end{enumerate}
+
+
+\section{Associations sur image}
+
+\begin{enumerate}
+\item Ouvrir le fichier "includes/identifications/c\_constants.as" et changer la valeur de la variable \_\_COMPILE\_TYPE\_\_ à 2 \\
+ex.: var \_\_COMPILE\_TYPE\_\_ = 2;
+
+\item Ouvrir le fichier flash (*.fla) et aller dans la première image de l'étiquette "initialisation"
+
+\item Commenter la ligne qui contient l'instruction suivante :\\
+\#include "../../includes/remplir\_bl/func.as"
+
+\item Enlever le // devant la ligne qui contient l'instruction suivante :\\
+\#include "../../includes/prototype\_image/prototype\_image\_func.as"
+
+\item 
+Changer le nom du fichier swf (*.swf) avec un nom adéquat suivit de -multiple \\
+ex. : introduction\_1\_identifications\_images-v200508-multiple.swf
+
+\item 
+Publier l'animation
+
+\end{enumerate}
+
+\vspace{1cm}
+\hrule
+Le suffixe -multiple indique que le swf a été généré avec le fichier flash source (*.fla) qui peut générer à la fois Remplissage de blancs et Associations sur image.
+
+\end{document}
+

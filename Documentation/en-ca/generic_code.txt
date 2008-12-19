@@ -1,0 +1,16 @@
+global $_OPTIONS, $_RUN_TIME, $inicrond_db;
+
+$inicrond_db->Execute($query);
+$inicrond_db->Insert_ID();
+
+  $rs = $inicrond_db->Execute($query);
+  $fetch_result = $rs->FetchRow();
+  
+$fetch_result = $rs->FetchRow()
+
+$rs = $inicrond_db->Execute($query);
+	while($fetch_result = $rs->FetchRow())
+	{
+	
+while($fetch_result = $rs->FetchRow())
+	{

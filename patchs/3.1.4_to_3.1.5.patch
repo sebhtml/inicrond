@@ -1,0 +1,284 @@
+#$Id: 3.1.4_to_3.1.5.patch 8 2005-09-13 17:44:21Z sebhtml $
+
+# . backup your database.
+# . run those queries.
+# set the db_Config file correctly using __INICROND_INCLUDED__ to check te inclusion.
+
+
+
+# .set that nobody cannot see module block.
+# set that nobody cannot see the calendar module.
+# mass update the usr_time_Decal to -5 or -4 in phpmyadmin.
+# try email in thread, forgot password and register to site. [email stuff.]
+# allow all stuff.
+
+DROP TABLE `ooo_wiki` ; 
+ALTER TABLE `ooo_inode_elements` DROP `IS_VISIBLE` ;
+ALTER TABLE `ooo_chapitre_media` DROP `IS_VISIBLE` ;
+ALTER TABLE `ooo_courses_files`
+  DROP `IS_DOWNLOADABLE`,
+  DROP `IS_VISIBLE`;
+ALTER TABLE `ooo_tests` DROP `IS_VISIBLE` ;
+DROP TABLE `ooo_groups_tests` ;
+
+CREATE TABLE ooo_inode_groups(
+group_id INT UNSIGNED,
+KEY group_id( group_id ) ,
+inode_id INT UNSIGNED,
+KEY inode_id( inode_id )
+);
+
+ALTER TABLE `ooo_groups` ADD `cours_id` INT UNSIGNED NOT NULL ;
+
+ALTER TABLE `ooo_groups` ADD INDEX ( `cours_id` ) ;
+
+UPDATE ooo_groups SET cours_id=1;
+
+UPDATE `ooo_groups` SET `cours_id` = '0' WHERE `group_id` = '1' LIMIT 1 ;
+
+UPDATE `ooo_groups` SET `cours_id` = '0' WHERE `group_id` = '2' LIMIT 1 ;
+ALTER TABLE `ooo_groups`
+  DROP `usr_id`;
+  
+  DROP TABLE `ooo_courses_sess_vars` ;
+  
+INSERT INTO ooo_sebhtml_options (opt_name, opt_value) VALUES ('disconnect_timeout_in_sec', '28800');
+
+ALTER TABLE `ooo_chapitre_media` CHANGE `chapitre_media_id` `chapitre_media_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `chapitre_media_title` `chapitre_media_title` VARCHAR( 128 ) NOT NULL ,
+CHANGE `chapitre_media_description` `chapitre_media_description` VARCHAR( 128 ) NOT NULL ,
+CHANGE `chapitre_media_type` `chapitre_media_type` TINYINT UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `chapitre_media_width` `chapitre_media_width` SMALLINT UNSIGNED DEFAULT '0',
+CHANGE `chapitre_media_height` `chapitre_media_height` SMALLINT UNSIGNED DEFAULT '0',
+CHANGE `chapitre_media_add_gmt_timestamp` `chapitre_media_add_gmt_timestamp` INT UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `chapitre_media_edit_gmt_timestamp` `chapitre_media_edit_gmt_timestamp` INT UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `cours_id` `cours_id` INT UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `file_name` `file_name` VARCHAR( 255 ) DEFAULT NULL ,
+CHANGE `HEXA_TAG` `HEXA_TAG` VARCHAR( 32 ) DEFAULT NULL ,
+CHANGE `usr_id` `usr_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `CHECK_FOR_TEST_LINKAGE` `CHECK_FOR_TEST_LINKAGE` TINYINT UNSIGNED DEFAULT '1' NOT NULL ;
+
+ALTER TABLE `ooo_cours` CHANGE `cours_id` `cours_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `cours_code` `cours_code` VARCHAR( 16 ) NOT NULL ,
+CHANGE `cours_name` `cours_name` VARCHAR( 64 ) NOT NULL ,
+CHANGE `cours_description` `cours_description` VARCHAR( 255 ) NOT NULL ;
+
+ALTER TABLE `ooo_course_group_in_charge` CHANGE `group_id` `group_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `course_group_id` `course_group_id` INT UNSIGNED DEFAULT NULL ;
+
+ALTER TABLE `ooo_courses_files` CHANGE `file_id` `file_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `file_name` `file_name` VARCHAR( 255 ) DEFAULT NULL ,
+CHANGE `file_infos` `file_infos` VARCHAR( 255 ) DEFAULT NULL ,
+CHANGE `usr_id` `usr_id` INT UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `file_title` `file_title` VARCHAR( 128 ) DEFAULT NULL ,
+CHANGE `cours_id` `cours_id` INT UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `md5_sum` `md5_sum` VARCHAR( 32 ) DEFAULT NULL ,
+CHANGE `filesize` `filesize` MEDIUMINT UNSIGNED DEFAULT NULL ,
+CHANGE `md5_path` `md5_path` VARCHAR( 32 ) DEFAULT NULL ,
+CHANGE `add_gmt` `add_gmt` INT UNSIGNED DEFAULT NULL ,
+CHANGE `edit_gmt` `edit_gmt` INT UNSIGNED DEFAULT NULL ;
+
+ALTER TABLE `ooo_forums_groups_reply` CHANGE `forum_discussion_id` `forum_discussion_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `group_id` `group_id` INT UNSIGNED DEFAULT NULL ;
+
+ALTER TABLE `ooo_forums_groups_start` CHANGE `forum_discussion_id` `forum_discussion_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `group_id` `group_id` INT UNSIGNED DEFAULT NULL ;
+
+ALTER TABLE `ooo_forums_groups_view` CHANGE `forum_discussion_id` `forum_discussion_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `group_id` `group_id` INT UNSIGNED DEFAULT NULL ;
+
+ALTER TABLE `ooo_groups` CHANGE `group_id` `group_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `group_name` `group_name` VARCHAR( 32 ) NOT NULL ,
+CHANGE `default_pending` `default_pending` TINYINT UNSIGNED DEFAULT '0',
+CHANGE `cours_id` `cours_id` INT UNSIGNED DEFAULT '0' NOT NULL ;
+
+ALTER TABLE `ooo_groups_actions` CHANGE `group_id` `group_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `action_id` `action_id` SMALLINT UNSIGNED DEFAULT NULL ;
+
+ALTER TABLE `ooo_groups_cours` CHANGE `group_id` `group_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `cours_id` `cours_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `course_group_id` `course_group_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ;
+
+ALTER TABLE `ooo_groups_cours_for_ensei` CHANGE `group_id` `group_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `cours_id` `cours_id` INT UNSIGNED DEFAULT NULL ;
+
+ALTER TABLE `ooo_groups_usrs` CHANGE `group_id` `group_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `usr_id` `usr_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `usr_pending` `usr_pending` TINYINT UNSIGNED DEFAULT '1';
+
+ALTER TABLE `ooo_inode_elements` CHANGE `inode_id` `inode_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `inode_id_location` `inode_id_location` INT UNSIGNED DEFAULT NULL ,
+CHANGE `inode_name` `inode_name` VARCHAR( 64 ) DEFAULT NULL ,
+CHANGE `content_type` `content_type` TINYINT UNSIGNED DEFAULT NULL ,
+CHANGE `content_id` `content_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `cours_id` `cours_id` INT UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `order_id` `order_id` INT UNSIGNED DEFAULT '0' NOT NULL ;
+
+ALTER TABLE `ooo_media_linkage` CHANGE `question_ordering_id` `question_ordering_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `score_id` `score_id` INT UNSIGNED DEFAULT '0';
+
+ALTER TABLE `ooo_multiple_short_answers` CHANGE `short_answer_id` `short_answer_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `short_answer_name` `short_answer_name` TEXT DEFAULT NULL ,
+CHANGE `question_id` `question_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `usr_id` `usr_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `pts_amount_for_good_answer` `pts_amount_for_good_answer` TINYINT DEFAULT '1',
+CHANGE `pts_amount_for_bad_answer` `pts_amount_for_bad_answer` TINYINT DEFAULT '0';
+
+ALTER TABLE `ooo_online_time` CHANGE `session_id` `session_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `usr_id` `usr_id` INT UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `start_gmt_timestamp` `start_gmt_timestamp` INT UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `end_gmt_timestamp` `end_gmt_timestamp` INT UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `php_session_id` `php_session_id` CHAR( 32 ) DEFAULT NULL ,
+CHANGE `dns` `dns` VARCHAR( 128 ) NOT NULL ,
+CHANGE `is_online` `is_online` TINYINT UNSIGNED DEFAULT '1',
+CHANGE `HTTP_USER_AGENT` `HTTP_USER_AGENT` VARCHAR( 255 ) DEFAULT NULL ,
+CHANGE `REMOTE_ADDR` `REMOTE_ADDR` VARCHAR( 16 ) NOT NULL ;
+
+ALTER TABLE `ooo_page_views` CHANGE `page_id` `page_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `usr_id` `usr_id` INT UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `session_id` `session_id` INT UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `gmt_timestamp` `gmt_timestamp` INT UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `requested_url` `requested_url` VARCHAR( 255 ) DEFAULT NULL ,
+CHANGE `usr_page_title` `usr_page_title` VARCHAR( 255 ) DEFAULT NULL ,
+CHANGE `REMOTE_PORT` `REMOTE_PORT` VARCHAR( 6 ) NOT NULL ,
+CHANGE `generate_delta_time` `generate_delta_time` FLOAT DEFAULT NULL ,
+CHANGE `HTTP_KEEP_ALIVE` `HTTP_KEEP_ALIVE` VARCHAR( 32 ) NOT NULL ,
+CHANGE `HTTP_CONNECTION` `HTTP_CONNECTION` VARCHAR( 255 ) NOT NULL ;
+
+ALTER TABLE `ooo_question_linking` CHANGE `test_id` `test_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `question_id` `question_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `q_order_id` `q_order_id` INT UNSIGNED DEFAULT NULL ;
+
+ALTER TABLE `ooo_question_ordering` CHANGE `question_ordering_id` `question_ordering_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `result_id` `result_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `question_id` `question_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `q_order_id` `q_order_id` INT UNSIGNED DEFAULT NULL ;
+
+ALTER TABLE `ooo_questions` CHANGE `question_id` `question_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `question_name` `question_name` TEXT DEFAULT NULL ,
+CHANGE `q_type` `q_type` TINYINT UNSIGNED DEFAULT '0',
+CHANGE `short_answer` `short_answer` VARCHAR( 255 ) DEFAULT NULL ,
+CHANGE `chapitre_media_id` `chapitre_media_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `a_rand_flag` `a_rand_flag` TINYINT UNSIGNED DEFAULT '1',
+CHANGE `usr_id` `usr_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `correcting_method` `correcting_method` TINYINT UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `good_points` `good_points` TINYINT DEFAULT '1' NOT NULL ,
+CHANGE `bad_points` `bad_points` TINYINT DEFAULT '0' NOT NULL ,
+CHANGE `cours_id` `cours_id` INT UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `question_CODE` `question_CODE` VARCHAR( 8 ) NOT NULL ;
+
+ALTER TABLE `ooo_results` CHANGE `result_id` `result_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `session_id` `session_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `usr_id` `usr_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `time_GMT_start` `time_GMT_start` INT UNSIGNED DEFAULT NULL ,
+CHANGE `time_GMT_end` `time_GMT_end` INT UNSIGNED DEFAULT NULL ,
+CHANGE `test_id` `test_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `your_points` `your_points` FLOAT DEFAULT NULL ,
+CHANGE `max_points` `max_points` TINYINT UNSIGNED DEFAULT NULL ;
+
+ALTER TABLE `ooo_scores` CHANGE `score_id` `score_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `session_id` `session_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `points_max` `points_max` TINYINT UNSIGNED DEFAULT '0',
+CHANGE `points_obtenu` `points_obtenu` TINYINT UNSIGNED DEFAULT '0',
+CHANGE `usr_id` `usr_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `chapitre_media_id` `chapitre_media_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `time_stamp_start` `time_stamp_start` INT UNSIGNED DEFAULT NULL ,
+CHANGE `time_stamp_end` `time_stamp_end` INT UNSIGNED DEFAULT NULL ,
+CHANGE `secure_str` `secure_str` CHAR( 32 ) ;
+
+ALTER TABLE `ooo_sebhtml_forum_discussions` CHANGE `forum_discussion_id` `forum_discussion_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `forum_discussion_name` `forum_discussion_name` VARCHAR( 64 ) NOT NULL ,
+CHANGE `forum_discussion_description` `forum_discussion_description` VARCHAR( 255 ) NOT NULL ,
+CHANGE `forum_section_id` `forum_section_id` INT UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `order_id` `order_id` INT UNSIGNED DEFAULT '0';
+
+ALTER TABLE `ooo_sebhtml_forum_messages` CHANGE `forum_message_id` `forum_message_id` INT( 20 ) UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `forum_sujet_id` `forum_sujet_id` INT( 20 ) UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `usr_id` `usr_id` INT( 20 ) UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `forum_message_titre` `forum_message_titre` VARCHAR( 64 ) NOT NULL ,
+CHANGE `forum_message_contenu` `forum_message_contenu` TEXT NOT NULL ,
+CHANGE `forum_message_add_gmt_timestamp` `forum_message_add_gmt_timestamp` INT UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `forum_message_edit_gmt_timestamp` `forum_message_edit_gmt_timestamp` INT UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `forum_message_id_reply_to` `forum_message_id_reply_to` INT UNSIGNED DEFAULT '0' NOT NULL ;
+
+ALTER TABLE `ooo_sebhtml_forum_sections` CHANGE `forum_section_id` `forum_section_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `forum_section_name` `forum_section_name` VARCHAR( 64 ) NOT NULL ,
+CHANGE `order_id` `order_id` INT UNSIGNED DEFAULT '0',
+CHANGE `cours_id` `cours_id` INT DEFAULT '1' NOT NULL ;
+
+ALTER TABLE `ooo_sebhtml_forum_sujets` CHANGE `forum_sujet_id` `forum_sujet_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `forum_discussion_id` `forum_discussion_id` INT UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `locked` `locked` TINYINT UNSIGNED DEFAULT '0';
+
+ALTER TABLE `ooo_sebhtml_moderators` CHANGE `forum_discussion_id` `forum_discussion_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `group_id` `group_id` INT UNSIGNED DEFAULT NULL ;
+
+ALTER TABLE `ooo_sebhtml_options` CHANGE `opt_name` `opt_name` VARCHAR( 64 ) DEFAULT NULL ,
+CHANGE `opt_value` `opt_value` VARCHAR( 255 ) DEFAULT NULL ;
+
+ALTER TABLE `ooo_sections_groups_view` CHANGE `forum_section_id` `forum_section_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `group_id` `group_id` INT UNSIGNED DEFAULT NULL ;
+
+ALTER TABLE `ooo_short_answers` CHANGE `question_ordering_id` `question_ordering_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `short_answer` `short_answer` VARCHAR( 255 ) DEFAULT NULL ;
+
+ALTER TABLE `ooo_tests` CHANGE `test_id` `test_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `test_name` `test_name` VARCHAR( 128 ) DEFAULT NULL ,
+CHANGE `test_info` `test_info` VARCHAR( 255 ) DEFAULT NULL ,
+CHANGE `cours_id` `cours_id` INT UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `available_results` `available_results` TINYINT( 3 ) UNSIGNED DEFAULT '0',
+CHANGE `available_sheet` `available_sheet` TINYINT( 3 ) UNSIGNED DEFAULT '0',
+CHANGE `q_rand_flag` `q_rand_flag` TINYINT( 3 ) UNSIGNED DEFAULT '1',
+CHANGE `usr_id` `usr_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `do_you_show_good_answers` `do_you_show_good_answers` TINYINT( 3 ) UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `time_GMT_add` `time_GMT_add` INT UNSIGNED DEFAULT '0' NOT NULL ,
+CHANGE `time_GMT_edit` `time_GMT_edit` INT UNSIGNED DEFAULT '0' NOT NULL ;
+
+ALTER TABLE `ooo_usrs` CHANGE `usr_id` `usr_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `usr_name` `usr_name` VARCHAR( 16 ) NOT NULL ,
+CHANGE `language` `language` VARCHAR( 8 ) DEFAULT 'fr-ca',
+CHANGE `usr_time_decal` `usr_time_decal` FLOAT DEFAULT '-5',
+CHANGE `usr_md5_password` `usr_md5_password` CHAR( 32 ) NOT NULL ,
+CHANGE `usr_add_gmt_timestamp` `usr_add_gmt_timestamp` INT UNSIGNED DEFAULT NULL ,
+CHANGE `usr_activation` `usr_activation` TINYINT( 3 ) UNSIGNED DEFAULT '1',
+CHANGE `usr_email` `usr_email` VARCHAR( 64 ) DEFAULT NULL ,
+CHANGE `usr_prenom` `usr_prenom` VARCHAR( 64 ) DEFAULT NULL ,
+CHANGE `usr_nom` `usr_nom` VARCHAR( 64 ) DEFAULT NULL ,
+CHANGE `usr_signature` `usr_signature` VARCHAR( 255 ) ,
+CHANGE `show_email` `show_email` TINYINT( 3 ) UNSIGNED DEFAULT '0',
+CHANGE `SUID` `SUID` TINYINT( 3 ) UNSIGNED DEFAULT '0',
+CHANGE `usr_number` `usr_number` VARCHAR( 16 ) NOT NULL ,
+CHANGE `usr_picture_file_name` `usr_picture_file_name` VARCHAR( 32 ) DEFAULT 'default1',
+CHANGE `register_random_validation` `register_random_validation` CHAR( 32 ) DEFAULT NULL ,
+CHANGE `new_password_secure_str` `new_password_secure_str` CHAR( 32 ) DEFAULT NULL ;
+
+ALTER TABLE `ooo_views_of_threads` CHANGE `session_id` `session_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `forum_sujet_id` `forum_sujet_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `gmt_timestamp` `gmt_timestamp` INT UNSIGNED DEFAULT NULL ;
+
+ALTER TABLE `ooo_acts_of_downloading` CHANGE `act_id` `act_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `usr_id` `usr_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `session_id` `session_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `file_id` `file_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `gmt_ts` `gmt_ts` INT UNSIGNED DEFAULT NULL ;
+
+ALTER TABLE `ooo_answer_ordering` CHANGE `answer_ordering_id` `answer_ordering_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `question_ordering_id` `question_ordering_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `answer_id` `answer_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `a_order_id` `a_order_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `a_checked_flag` `a_checked_flag` TINYINT( 3 ) UNSIGNED DEFAULT '0';
+
+ALTER TABLE `ooo_answers` CHANGE `answer_id` `answer_id` INT UNSIGNED NOT NULL AUTO_INCREMENT ,
+CHANGE `answer_name` `answer_name` VARCHAR( 255 ) DEFAULT NULL ,
+CHANGE `question_id` `question_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `a_order_id` `a_order_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `is_good_flag` `is_good_flag` TINYINT UNSIGNED DEFAULT '0',
+CHANGE `usr_id` `usr_id` INT UNSIGNED DEFAULT NULL ,
+CHANGE `pts_amount_for_good_answer` `pts_amount_for_good_answer` TINYINT DEFAULT '1' NOT NULL ,
+CHANGE `pts_amount_for_bad_answer` `pts_amount_for_bad_answer` TINYINT DEFAULT '0' NOT NULL ;
+
+DELETE FROM ooo_sebhtml_options WHERE opt_name='server_time_zone_adjustment_in_seconds';
+
+INSERT INTO ooo_sebhtml_options (opt_name, opt_value) VALUES ('admin_usr_id', '2');
+
+UPDATE ooo_usrs SET usr_time_decal=-5 ;

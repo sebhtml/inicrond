@@ -1,0 +1,5 @@
+to install the software, you have to take the schema from the db directory and dump it in your db.
+
+After that, you have to create a user by inserting it in the database manually using md5() in php to generate the password.
+
+You have to create thee db config file too.

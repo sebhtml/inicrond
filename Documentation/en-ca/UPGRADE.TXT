@@ -1,0 +1,16 @@
+//$Id: UPGRADE.TXT 61 2005-10-29 02:02:23Z sebhtml $
+
+FAST AND EASY
+
+You can simply paste the new files in the site root and apply the patch (back-up your db first data integrity ppurpose if something go wrong.).
+
+CLEAN
+
+* Copy the src of the new release in the same dir as the release you have.
+* Copy the upload dir from the old one to the new one.
+* Copy the db_config script from the old one to the new one.
+* php has to be able to write in upload, template_c and cache.
+* Do a backup of your database.
+* Run the appropriate patch.
+* The upgrade is done.
+

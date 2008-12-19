@@ -1,0 +1,9 @@
+/*$Id: print.css 8 2005-09-13 17:44:21Z sebhtml $*/
+
+td
+{
+
+border-width: 1;
+border-style: solid;
+border-color :  black;
+}

@@ -1,0 +1,13 @@
+\contentsline {section}{\numberline {1}Global analysis}{1}
+\contentsline {subsection}{\numberline {1.1}New data types}{1}
+\contentsline {subsection}{\numberline {1.2}Inputs}{1}
+\contentsline {subsection}{\numberline {1.3}Outputs}{1}
+\contentsline {subsection}{\numberline {1.4}Constants}{1}
+\contentsline {subsection}{\numberline {1.5}Formulas}{1}
+\contentsline {section}{\numberline {2}Unified Modeling Language}{1}
+\contentsline {subsection}{\numberline {2.1}Diagram of cases of use}{1}
+\contentsline {section}{\numberline {3}Classes}{1}
+\contentsline {subsection}{\numberline {3.1}Class name}{1}
+\contentsline {subsubsection}{\numberline {3.1.1}UML class diagram}{1}
+\contentsline {subsubsection}{\numberline {3.1.2}Class analysis}{1}
+\contentsline {subsubsection}{\numberline {3.1.3}Methods design}{1}

@@ -1,0 +1,8 @@
+indent file.php
+
+bugs :
+
+var .= 'fdf' become $var. = 'bgfgdf'
+
+<?php become < ? php
+
